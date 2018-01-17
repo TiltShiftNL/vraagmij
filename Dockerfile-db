@@ -1,3 +1,12 @@
 FROM postgres:9.6
 
+COPY create_local_db.sh /opt/
+
+ENV POSTGRES_DB=jeugdzorg
+ENV DB_NAME=jeugdzorg
+ENV POSTGRES_USER=notset
+ENV POSTGRES_PASSWORD=notset
+
+
+
 EXPOSE 5432

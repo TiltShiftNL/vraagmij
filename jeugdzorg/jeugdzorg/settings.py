@@ -9,8 +9,32 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+from django.core.exceptions import ImproperlyConfigured
 
 import os
+
+#
+DEBUG = True
+if os.getenv('DJANGO_ENV') == 'notset':
+    #raise exceptions.Exception()
+    DEBUG = True
+else:
+    DEBUG = True
+
+ENV_VARS = {}
+
+try:
+    DJANGO_ENV = os.environ['DJANGO_ENV']
+    POSTGRES_DB = os.environ['POSTGRES_DB']
+    POSTGRES_HOST = os.environ['POSTGRES_HOST']
+    POSTGRES_USER = os.environ['POSTGRES_USER']
+    POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
+except KeyError as e:
+    #raise EnvironmentError('Environment variable {} not set'.format(e.args[0]))
+    raise ImproperlyConfigured('Environment variable {} not set'.format(e.args[0]))
+print('settings')
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +47,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yg2u(g6zs*hz$q@+hwk_%_zr6sgdg1jn61z^v-tr)oxi^#igp4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
@@ -78,8 +102,12 @@ WSGI_APPLICATION = 'jeugdzorg.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': POSTGRES_DB,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': POSTGRES_HOST,  # <-- this is new
+        'PORT': '5432',
     }
 }
 
@@ -120,4 +148,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

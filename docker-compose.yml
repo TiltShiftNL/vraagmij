@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-
+    #image: postgres:9.6
     build:
       context: .
       dockerfile: Dockerfile-db
@@ -11,18 +11,39 @@ services:
       - pg_data:/var/lib/postgresql/data
       - pg_backups:/pg_backups
     environment:
+      - POSTGRES_DB=jeugdzorg
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - DB_NAME=jeugdzorg
+
+  dbadmin:
+    image: fenglc/pgadmin4
+    environment:
+      - POSTGRES_DB=jeugdzorg
+      - DEFAULT_USER=postgres
+      - DEFAULT_PASSWORD=postgres
+    ports:
+      - "5050:5050"
+    depends_on:
+      - db
+
   web:
-    restart: always
     build: .
+    restart: always
+    command: bash /usr/local/bin/docker-local-entrypoint.sh
     volumes:
       - ./jeugdzorg:/opt/app
-    command: python /opt/app/manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_ENV=dev
+      - POSTGRES_DB=jeugdzorg
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "8000:8000"
     depends_on:
       - db
+
 
 volumes:
   pg_data: {}
