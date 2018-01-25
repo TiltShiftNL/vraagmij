@@ -21,19 +21,16 @@ if os.getenv('DJANGO_ENV') == 'notset':
 else:
     DEBUG = True
 
-ENV_VARS = {}
+notset = [v for v in [
+    'DJANGO_ENV',
+    'POSTGRES_DB',
+    'POSTGRES_HOST',
+    'POSTGRES_USER',
+    'POSTGRES_PASSWORD',
+] if os.environ.get(v, 'notset') == 'notset']
 
-try:
-    DJANGO_ENV = os.environ['DJANGO_ENV']
-    POSTGRES_DB = os.environ['POSTGRES_DB']
-    POSTGRES_HOST = os.environ['POSTGRES_HOST']
-    POSTGRES_USER = os.environ['POSTGRES_USER']
-    POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
-except KeyError as e:
-    #raise EnvironmentError('Environment variable {} not set'.format(e.args[0]))
-    raise ImproperlyConfigured('Environment variable {} not set'.format(e.args[0]))
-print('settings')
-
+if notset:
+    raise ImproperlyConfigured('Environment variable {} not set'.format(', '.join(notset)))
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -103,10 +100,10 @@ WSGI_APPLICATION = 'jeugdzorg.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': POSTGRES_DB,
-        'USER': POSTGRES_USER,
-        'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': POSTGRES_HOST,  # <-- this is new
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': os.environ['POSTGRES_HOST'],  # <-- this is new
         'PORT': '5432',
     }
 }
@@ -164,3 +161,8 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+if os.getenv('DJANGO_ENV') == 'prod':
+    DEBUG = False
+else:
+    DEBUG = True
