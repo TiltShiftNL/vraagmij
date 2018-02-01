@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    #image: postgres:9.6
+    build:
+      context: ..
+      dockerfile: Dockerfile-db
+    environment:
+      - POSTGRES_DB=jeugdzorg
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DB_NAME=jeugdzorg
+
+  web:
+    build: ..
+    volumes:
+      - ../jeugdzorg:/opt/app
+    environment:
+      - DJANGO_ENV=dev
+      - POSTGRES_DB=jeugdzorg
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

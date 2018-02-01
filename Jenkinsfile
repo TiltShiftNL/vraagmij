@@ -3,7 +3,7 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
         block()
     }
     catch (Throwable t) {
-        slackSend message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}", channel: '#ci-channel', color: 'danger'
+//        slackSend message: "${env.JOB_NAME}: ${message} failure ${env.BUILD_URL}", channel: '#ci-channel', color: 'danger'
 
         throw t
     }
@@ -19,6 +19,15 @@ node {
     stage("Checkout") {
         checkout scm
     }
+
+//    stage("Test") {
+//        tryStep "testing", {
+//            sh "docker-compose -p jeugdzorg -f .jenkins-test/docker-compose.yml down"
+//            sh "docker-compose -p handelsregister -f .jenkins-test/docker-compose.yml build && " +
+//                    "docker-compose -p handelsregister -f .jenkins-test/docker-compose.yml run -u root --rm tests"
+//        }
+//
+//    }
 
     stage("Build image") {
         tryStep "build", {
