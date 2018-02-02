@@ -13,26 +13,6 @@ from django.core.exceptions import ImproperlyConfigured
 
 import os
 
-#
-DEBUG = True
-if os.getenv('DJANGO_ENV') == 'notset':
-    #raise exceptions.Exception()
-    DEBUG = True
-else:
-    DEBUG = True
-
-notset = [v for v in [
-    'DJANGO_ENV',
-    'POSTGRES_DB',
-    'POSTGRES_HOST',
-    'POSTGRES_USER',
-    'POSTGRES_PASSWORD',
-] if os.environ.get(v, 'notset') == 'notset']
-
-if notset:
-    raise ImproperlyConfigured('Environment variable {} not set'.format(', '.join(notset)))
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,8 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yg2u(g6zs*hz$q@+hwk_%_zr6sgdg1jn61z^v-tr)oxi^#igp4'
+DJANGO_ENV = os.getenv("DJANGO_ENV", "dev")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "jeugdzorg")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "db")
+POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
+SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
+
+DEBUG = SECRET_KEY == 'default-secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -162,7 +148,3 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-if os.getenv('DJANGO_ENV') == 'prod':
-    DEBUG = False
-else:
-    DEBUG = True
