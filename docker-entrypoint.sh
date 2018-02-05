@@ -8,6 +8,8 @@ python manage.py collectstatic --noinput
 echo "Apply database migrations"
 python manage.py migrate
 
+python manage.py createsuperuser_pw  --username ${ADMIN_USERNAME} --password ${ADMIN_PASSWORD} --noinput --email ${ADMIN_EMAIL}
+
 echo "Test nginx"
 nginx -t
 
@@ -16,10 +18,3 @@ echo "Start nginx"
 
 echo "Start supervisord"
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
-
-echo "DONE"
-
-# systemctl reload nginx
-
-# tail -F -n0 /etc/hosts
-# tail -f /var/log/nginx/access.log

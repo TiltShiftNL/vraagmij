@@ -26,21 +26,14 @@ RUN newgrp root
 COPY jeugdzorg/django_nginx.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-#COPY docker-local-entrypoint.sh /usr/local/bin/docker-local-entrypoint.sh
-#
+
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 RUN chmod 777 /etc/nginx/sites-enabled/django_nginx.conf
-#RUN chmod 777 /usr/local/bin/docker-local-entrypoint.sh
-#
+
 WORKDIR /opt/app
-#
+
 RUN pip3 install -r ./requirements.txt
 
 EXPOSE 80
 
-#CMD ["uwsgi", "--ini", "/opt/app/uwsgi.ini", "--py-autoreload", "1"]
-
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 CMD "/usr/local/bin/docker-entrypoint.sh"
-#RUN ["nginx", "-t"]
-#CMD ["systemctl", "reload", "nginx"]
