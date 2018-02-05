@@ -28,9 +28,11 @@ services:
       - db
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-development
     restart: always
-    command: bash /usr/local/bin/docker-local-entrypoint.sh
+    #command: bash /usr/local/bin/docker-local-entrypoint.sh
     volumes:
       - ./jeugdzorg:/opt/app
     environment:
