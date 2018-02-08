@@ -8,7 +8,7 @@ python manage.py collectstatic --noinput
 echo "Apply database migrations"
 python manage.py migrate
 
-python manage.py createsuperuser_pw  --username ${ADMIN_USERNAME} --password ${ADMIN_PASSWORD} --noinput --email ${ADMIN_EMAIL}
+python manage.py createsuperuser_pw  --username ${ADMIN_USERNAME} --password ${ADMIN_PASSWORD} --noinput --email 'admin@host.com'
 
 echo "Test nginx"
 nginx -t
