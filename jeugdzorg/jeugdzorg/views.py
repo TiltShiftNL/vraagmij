@@ -6,3 +6,6 @@ class Homepage(TemplateView):
 
 class Entry(TemplateView):
     template_name = 'entry.html'
+
+class Entries(TemplateView):
+    template_name = 'entries.html'

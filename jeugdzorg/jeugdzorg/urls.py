@@ -19,11 +19,13 @@ from django.urls import path
 from django.conf import settings
 from .views import Homepage
 from .views import Entry
+from .views import Entries
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Homepage.as_view(), name='homepage'),
-    path('entry', Entry.as_view(), name='entry')
+    path('entry', Entry.as_view(), name='entry'),
+    path('entries', Entries.as_view(), name='entries')
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
