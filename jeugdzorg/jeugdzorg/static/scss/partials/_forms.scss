@@ -94,10 +94,11 @@ form {
 }
 .form-list li {
   position: relative;
+  margin-bottom: 10px;
   button {
     position: absolute;
     right: 0;
     top: 0;
-
+    transition: all .3s;
   }
 }

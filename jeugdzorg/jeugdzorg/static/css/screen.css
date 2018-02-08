@@ -215,10 +215,12 @@ form label strong {
   color: #000; }
 
 .form-list li {
-  position: relative; }
+  position: relative;
+  margin-bottom: 10px; }
 .form-list li button {
   position: absolute;
   right: 0;
-  top: 0; }
+  top: 0;
+  transition: all .3s; }
 
 /*# sourceMappingURL=screen.css.map */
