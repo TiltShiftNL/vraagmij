@@ -4,14 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    
+    <!-- <link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/7cd4c080-5246-49b1-8f48-530e9d1829a6.css"/> -->
+    
     <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}"/>
 </head>
 <body>
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
+    </div>
+  </header>
+  <main class="main">
 {% block main %}
 hello world
 {% endblock %}
-
-<script type="text/javascript" defer src="{% static "js/scripts.js" %}"></script>
+  </main>
+  
+  <script type="text/javascript" defer src="{% static "js/scripts.js" %}"></script>
 
 </body>
 </html>

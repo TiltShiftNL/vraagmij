@@ -1,3 +1,224 @@
+html, body, h1, h2, h3, h4, h5, h6, fieldset, figure, blockquote, dl, dt, dd {
+  margin: 0;
+  padding: 0;
+  border: none; }
+
+html {
+  background-color: #e5e5e5;
+  overflow-x: hidden; }
+
+p, ol, ul, dl, figure {
+  margin-top: 0;
+  margin-bottom: 25.2px; }
+
+img {
+  vertical-align: top;
+  max-width: 100%;
+  height: auto;
+  border: none; }
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+.text-left {
+  text-align: left !important; }
+.text-left * {
+  text-align: left !important; }
+
+.text-right {
+  text-align: right; }
+
+.text-center {
+  text-align: center; }
+
+.nowrap {
+  white-space: nowrap; }
+
+.float-right {
+  float: right; }
+
+.float-left {
+  float: left; }
+
+.hidden, .js .js-hidden {
+  display: none !important; }
+
+html {
+  font-size: 62.5%; }
+@media (max-width: 700px) {
+  html {
+    font-size: 55%; } }
+
+body, [type="text"], [type="search"], [type="email"], [type="password"], [type="url"], [type="number"], [type="date"], [type="time"], [type="tel"], [type="datalist"], textarea, select {
+  font-size: 18px;
+  font-family: Helvetica, Arial; }
+
 body {
-    background: gold;
-}
+  line-height: 1.4; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+h1, .huge {
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 1em; }
+
+h2, .big {
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 1em; }
+
+h3, .large {
+  font-size: 20px;
+  line-height: 1.2; }
+
+a {
+  color: #000; }
+
+h1, h2, h3 {
+  color: #000; }
+
+h4, .normal {
+  font-size: 18px;
+  line-height: 1.4; }
+
+h5, .small {
+  font-size: 1.4rem;
+  line-height: 1.4; }
+
+h6, .tiny {
+  font-size: 1.2rem;
+  line-height: 1.4; }
+
+body {
+  padding: 30px; }
+
+.container {
+  max-width: 960px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto; }
+
+.main {
+  max-width: 1400px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  padding: 30px; }
+
+.icon-andreas {
+  display: inline-block;
+  vertical-align: top;
+  width: 20px;
+  height: 68px;
+  background-image: url("../images/ico_andreas.svg");
+  background-size: 100% auto; }
+
+.header {
+  max-width: 1400px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  padding: 30px; }
+
+.logo {
+  position: relative;
+  display: inline-block;
+  font-size: 23px;
+  line-height: 1;
+  color: #ec0000;
+  text-decoration: none;
+  width: 6em;
+  padding-left: 30px; }
+.logo i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-right: 10px; }
+
+.trigger-menu, .trigger-close {
+  display: none !important; }
+
+.button {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0 0 10px 0;
+  padding: 1.2em 2em 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ec0000;
+  color: #fff;
+  border: 1px solid #ec0000;
+  cursor: pointer; }
+.button.full {
+  text-align: center;
+  width: 100%; }
+
+input[type="text"], input[type="date"], input[type="email"], textarea {
+  width: 100%;
+  line-height: 1;
+  padding: 1em 1em .8em;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all .3s; }
+input[type="text"]:focus, input[type="date"]:focus, input[type="email"]:focus, textarea:focus {
+  border: 1px solid rgba(0, 0, 0, 0.8); }
+
+legend {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: 700; }
+
+fieldset {
+  border-bottom: 1px solid #f3f3f3;
+  padding-bottom: 25.2px;
+  margin-bottom: 25.2px; }
+
+form .row {
+  margin-bottom: 25.2px; }
+form .group {
+  display: flex; }
+form .group label {
+  margin-right: 1em; }
+form label {
+  display: block; }
+form label strong {
+  display: block; }
+
+.form-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: item; }
+.form-list li strong:after {
+  counter-increment: item;
+  content: " " counter(item); }
+
+.form-list button, .form-list + button {
+  padding: 0;
+  margin: 0;
+  color: #ec0000;
+  border: none;
+  font-size: 18px;
+  background-color: transparent;
+  cursor: pointer; }
+.form-list button:hover, .form-list + button:hover {
+  color: #000; }
+
+.form-list li {
+  position: relative; }
+.form-list li button {
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+/*# sourceMappingURL=screen.css.map */

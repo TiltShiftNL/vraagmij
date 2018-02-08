@@ -17,7 +17,7 @@
       var remove = document.createElement('button');
       remove.dataset.handler = 'list-remove';
       remove.type = 'button';
-      remove.innerHTML = '-';
+      remove.innerHTML = '[-] voorwaarde verwijderen';
 
       for (var i=0; i<this.children.length; i++) {
         this.children[i].appendChild(remove.cloneNode(true));
@@ -26,7 +26,7 @@
       var add = document.createElement('button');
       add.dataset.handler = 'list-add';
       add.type = 'button';
-      add.innerHTML = '+';
+      add.innerHTML = '[+] voorwaarde toevoegen';
 
       add.list = this;
 

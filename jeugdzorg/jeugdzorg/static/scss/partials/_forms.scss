@@ -1,0 +1,103 @@
+.button {
+  display: inline-block;
+  box-sizing: border-box;
+  
+  margin: 0 0 10px 0;
+  padding: 1.2em 2em 1em;
+  
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 500;
+  
+  background-color: $accentColor;
+  color: #fff;
+  
+  border: 1px solid $accentColor;
+  
+  cursor: pointer;
+  
+  &.full {
+    text-align: center;
+    width: 100%;
+  }
+  
+}
+input[type="text"],
+input[type="date"],
+input[type="email"],
+textarea {
+  width: 100%;
+  line-height: 1;
+  padding: 1em 1em .8em;
+  box-sizing: border-box;
+  border: 1px solid rgba(#000, .1);
+  transition: all .3s;
+  &:focus {
+    border: 1px solid rgba(#000, .8);
+  }
+}
+legend {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+  color: rgba(#000, .2);
+  font-weight: 700;
+}
+fieldset {
+  border-bottom: 1px solid #f3f3f3;
+  padding-bottom: $lineHeight;
+  margin-bottom: $lineHeight;
+}
+form {
+  .row {
+    margin-bottom: $lineHeight;
+  }
+  .group {
+    display: flex;
+    label {
+      margin-right: 1em;
+    }
+  }
+  label {
+    strong {
+      display: block;
+    }
+    
+    display: block;
+  }
+}
+.form-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: item;
+  li strong {
+    &:after {
+      counter-increment: item; 
+      content: ' ' counter(item);
+    }
+  }
+}
+.form-list button,
+.form-list + button {
+  padding: 0;
+  margin: 0;
+  color: $accentColor;
+  border: none;
+  font-size: $fontSize;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    color: #000;
+  }
+}
+.form-list li {
+  position: relative;
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+  }
+}

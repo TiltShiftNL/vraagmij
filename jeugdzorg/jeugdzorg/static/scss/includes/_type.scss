@@ -1,0 +1,63 @@
+html { 
+  font-size: 62.5%;
+  @include small {
+    font-size: 55%;
+  }
+}
+body,
+[type="text"],
+[type="search"],
+[type="email"],
+[type="password"],
+[type="url"],
+[type="number"],
+[type="date"],
+[type="time"],
+[type="tel"],
+[type="datalist"],
+textarea,
+select {
+  font-size: $fontSize;
+  font-family: Helvetica, Arial;
+} 
+body {
+  line-height: $lineHeightRelative;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .huge {
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 1em;
+} 
+h2, .big {
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+h3, .large {
+  font-size: 20px;
+  line-height: 1.2;
+}
+a {
+  color: $textColor;
+}
+h1, h2, h3 {
+  color: $brandColor2;
+}
+h4, .normal {
+  font-size: $fontSize;
+  line-height: $lineHeightRelative;
+}
+h5, .small {
+  font-size: 1.4rem;
+  line-height: $lineHeightRelative;
+}
+h6, .tiny {
+  font-size: 1.2rem;
+  line-height: $lineHeightRelative;
+}

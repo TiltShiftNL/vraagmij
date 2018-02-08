@@ -1,0 +1,26 @@
+.text-left {
+  text-align: left !important;
+  * {
+    text-align: left !important;
+  }
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+
+.hidden,
+.js .js-hidden {
+  display: none !important;
+}

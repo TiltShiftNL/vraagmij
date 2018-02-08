@@ -1,0 +1,20 @@
+$fontSize: 18px;
+$lineHeightRelative: 1.4;
+$lineHeight: $fontSize * $lineHeightRelative;
+
+// breakpoints
+$large: 1290px;
+$medium: 900px;
+$small: 700px;
+
+$brandColor1: #ec0000;
+$brandColor2: #000;
+
+$textColor: #000;
+$accentColor: $brandColor1;
+
+$padding: 30px;
+$unit: 80px;
+
+$maxContentWidth: 960px;
+$maxWidth: 1400px;

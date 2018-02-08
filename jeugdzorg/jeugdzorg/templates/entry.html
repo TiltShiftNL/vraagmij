@@ -1,50 +1,53 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<form method="post">
-  <fieldset>
-    <legend>Regeling</legend>
-    <h2>Meta info</h2>
-    <p class="row">
-      <label>
-        <strong>Titel</strong>
-        <input type="text" name="regeling[titel]" required>
-      </label>
-    <p class="row">
-      <label>
-        <strong>Samenvatting</strong>
-        <input type="text" name="regeling[samenvatting]" required>
-      </label>
-    </p>
-    <p class="row">
-      <label>
-        <strong>Bron</strong>
-        <input type="text" name="regeling[bron]" required>
-      </label>
-    </p>
-    <p class="row">
-      <label>
-        <strong>Startdatum</strong>
-        <input type="date" name="regeling[start]">
-      </label>
-      <label>
-        <strong>Einddatum</strong>
-        <input type="date" name="regeling[eind]">
-      </label>
-    </p>
-
-    <h2>Voorwaarden</h2>
-    <ol data-decorator="list">
-      <li>
+<div class="container">
+  <form method="post">
+    <fieldset>
+      <legend>Regeling</legend>
+      <p class="row">
         <label>
-          <strong>Voorwaarde</strong>
-          <textarea name="regeling[voorwaarden][]"></textarea>
+          <strong>Titel</strong>
+          <input type="text" name="regeling[titel]" required>
         </label>
-      </li>
-    </ol>
-  </fieldset>
-  <p class="buttons">
-    <input type="submit" name="regeling[actie]" value="opslaan">
-  </p>
-</form>
+      </p>
+      <p class="row">
+        <label>
+          <strong>Samenvatting</strong>
+          <textarea type="text" rows="10" name="regeling[samenvatting]" required></textarea>
+        </label>
+      </p>
+      <p class="row">
+        <label>
+          <strong>Bron</strong>
+          <input type="text" name="regeling[bron]" required>
+        </label>
+      </p>
+      <p class="row group">
+        <label>
+          <strong>Startdatum</strong>
+          <input type="date" name="regeling[start]">
+        </label>
+        <label>
+          <strong>Einddatum</strong>
+          <input type="date" name="regeling[eind]">
+        </label>
+      </p>
+    </fieldset>
+    <fieldset>
+      <legend>Voorwaarden</legend>
+      <ol class="form-list" data-decorator="list">
+        <li>
+          <label>
+            <strong>Voorwaarde</strong>
+            <textarea name="regeling[voorwaarden][]"></textarea>
+          </label>
+        </li>
+      </ol>
+    </fieldset>
+    <p class="buttons">
+      <input type="submit" class="button full" name="regeling[actie]" value="opslaan">
+    </p>
+  </form>
+</div>
 {% endblock %}
