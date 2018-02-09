@@ -1,19 +1,26 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    {% if user %}
-        User: {{ user }}<br><br>
+    {% if user.is_authenticated %}
+        User: {{ user }} <a href="/admin/logout/?next=/">Log uit</a><br><br>
         <a href="{% url 'create_regeling' %}">Regeling toevoegen</a>
     {% endif %}
 
     <ul>
     {% for regeling in regeling_list %}
     <li>
-        {% if user %}
+        {% if user.is_authenticated %}
         <a href="{% url 'update_regeling' regeling.id %}">
         {% endif %}
-        {{ regeling }}
-        {% if user %}
+        <span>{{ regeling.titel }}</span>
+        {% if regeling.voorwaarde_set.all %}
+        <ol>
+        {% for vw in regeling.voorwaarde_set.all %}
+            <li>{{ vw.titel }}</li>
+        {% endfor %}
+        </ol>
+        {% endif %}
+        {% if user.is_authenticated %}
         </a>
         {% endif %}
     </li>
