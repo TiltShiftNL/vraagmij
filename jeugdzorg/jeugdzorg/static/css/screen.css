@@ -162,7 +162,8 @@ body {
   text-align: center;
   width: 100%; }
 .button.secondary {
-  background-color: #000; }
+  background-color: #000;
+  border-color: #000; }
 
 input[type="text"], input[type="date"], input[type="email"], textarea {
   width: 100%;
