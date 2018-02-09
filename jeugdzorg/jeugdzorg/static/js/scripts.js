@@ -2,11 +2,27 @@
   
   var handlers = {
     'list-add': function(){
-      this.list.appendChild(this.template.cloneNode(true));
+      var 
+        template = this.template.cloneNode(true),
+        inputs = template.querySelectorAll('input');
+        
+      for (var i =0; i<inputs.length; i++) {
+        inputs[i].id = inputs[i].id.replace(/-\d-/, '-' + this.list.children.length + '-');
+        inputs[i].name = inputs[i].name.replace(/-\d-/, '-' + this.list.children.length + '-');
+      }
+      
+      this.list.appendChild(template);
+      
+      document.getElementById('id_voorwaarde_set-TOTAL_FORMS').value = this.list.children.length;
     }
     ,
     'list-remove': function(){
-      this.parentNode.parentNode.removeChild(this.parentNode);
+      var 
+        li = this.parentNode,
+        del = li.querySelectorAll('[name*="-DELETE"]');
+
+      if (del.length) del[0].checked = true;
+      li.classList.add('item-deleted');
     }
   };
   
@@ -29,11 +45,10 @@
       add.innerHTML = '[+] voorwaarde toevoegen';
 
       add.list = this;
+      
+      add.template = add.list.querySelectorAll("li:last-child")[0].cloneNode(true);
 
-      add.template = this.querySelector("li").cloneNode(true);
-      add.template.getElementsByTagName('input').value = '';
       this.parentNode.appendChild(add);
-      console.log(add.template.getElementsByTagName('input'));
     }
 
   };

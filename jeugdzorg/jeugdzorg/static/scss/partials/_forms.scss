@@ -63,6 +63,7 @@ form {
   label {
     strong {
       display: block;
+      margin-bottom: 5px;
     }
     
     display: block;
@@ -72,7 +73,7 @@ form {
   list-style: none;
   padding: 0;
   counter-reset: item;
-  li strong {
+  li:not(.item-deleted) strong {
     &:after {
       counter-increment: item; 
       content: ' ' counter(item);
@@ -95,10 +96,19 @@ form {
 .form-list li {
   position: relative;
   margin-bottom: 10px;
+  overflow: hidden;
+  transition: all .3s;
+  max-height: 1000px;
   button {
     position: absolute;
     right: 0;
     top: 0;
     transition: all .3s;
+  }
+  &.item-deleted {
+    max-height: 0;
+  }
+  [name*="-DELETE"] {
+    display: none;
   }
 }

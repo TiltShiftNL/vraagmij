@@ -193,13 +193,14 @@ form .group label {
 form label {
   display: block; }
 form label strong {
-  display: block; }
+  display: block;
+  margin-bottom: 5px; }
 
 .form-list {
   list-style: none;
   padding: 0;
   counter-reset: item; }
-.form-list li strong:after {
+.form-list li:not(.item-deleted) strong:after {
   counter-increment: item;
   content: " " counter(item); }
 
@@ -216,11 +217,18 @@ form label strong {
 
 .form-list li {
   position: relative;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all .3s;
+  max-height: 1000px; }
 .form-list li button {
   position: absolute;
   right: 0;
   top: 0;
   transition: all .3s; }
+.form-list li.item-deleted {
+  max-height: 0; }
+.form-list li [name*="-DELETE"] {
+  display: none; }
 
 /*# sourceMappingURL=screen.css.map */
