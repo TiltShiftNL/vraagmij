@@ -23,6 +23,10 @@
     width: 100%;
   }
   
+  &.secondary {
+    background-color: #000;
+  }
+  
 }
 input[type="text"],
 input[type="date"],
@@ -110,5 +114,14 @@ form {
   }
   [name*="-DELETE"] {
     display: none;
+  }
+}
+.buttons {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  > * {
+    margin-left: 1em;
   }
 }
