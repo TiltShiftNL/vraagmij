@@ -44,6 +44,7 @@ class Regeling(models.Model):
     class Meta:
         verbose_name = _('Regeling')
         verbose_name_plural = _('Regelingen')
+        ordering = ('-id', )
 
 
 class Voorwaarde(SortableMixin):
