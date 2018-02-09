@@ -23,6 +23,14 @@
 
       if (del.length) del[0].checked = true;
       li.classList.add('item-deleted');
+    },
+    
+    'toggle': function(e) {
+      var el = document.getElementById(this.hash.substr(1));
+      if (el) {
+        e.preventDefault();
+        el.classList[el.classList.contains('active') ? 'remove' : 'add']('active');
+      }
     }
   };
   
