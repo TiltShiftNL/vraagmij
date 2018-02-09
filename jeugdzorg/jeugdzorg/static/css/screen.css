@@ -161,6 +161,8 @@ body {
 .button.full {
   text-align: center;
   width: 100%; }
+.button.secondary {
+  background-color: #000; }
 
 input[type="text"], input[type="date"], input[type="email"], textarea {
   width: 100%;
@@ -230,5 +232,48 @@ form label strong {
   max-height: 0; }
 .form-list li [name*="-DELETE"] {
   display: none; }
+
+.buttons {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center; }
+.buttons > * {
+  margin-left: 1em; }
+
+.regeling {
+  margin-bottom: 25.2px;
+  border-bottom: 1px solid #f3f3f3; }
+
+.regeling-voorwaarden {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .3s;
+  margin-top: 12.6px;
+  margin-bottom: 12.6px;
+  padding-left: 1.2em; }
+.regeling-voorwaarden.active {
+  max-height: 4000px; }
+
+.regeling-edit {
+  opacity: .1;
+  transition: all .3s; }
+
+.regeling-title {
+  margin-bottom: 0;
+  font-size: 20px; }
+.regeling-title .regeling-edit {
+  position: relative;
+  top: .1em;
+  float: right;
+  margin-left: 1em;
+  font-size: .8em;
+  font-weight: 400; }
+.regeling-title .regeling-edit a {
+  text-decoration: none; }
+.regeling-title:hover .regeling-edit {
+  opacity: .6; }
+.regeling-title .regeling-edit:hover {
+  opacity: 1; }
 
 /*# sourceMappingURL=screen.css.map */
