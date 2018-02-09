@@ -5,55 +5,14 @@ from django.urls import reverse, reverse_lazy
 from django import forms
 from django.db import transaction
 from django.shortcuts import get_object_or_404
-
-class Homepage(TemplateView):
-    template_name = 'homepage.html'
-
-
-class Entry(TemplateView):
-    template_name = 'entry.html'
-
-
-class RegelingView(CreateView):
-    form_class = RegelingModelForm
-    template_name = 'entry.html'
-    regeling = None
-
-    success_url = '.'
-
-    voorwaarden = []
-
-    def add_voorwaarde(self, voorwaarde):
-        if self.regeling:
-            v = Voorwaarde(titel=voorwaarde, regeling=self.regeling)
-            return v.save()
-        return
-
-
-    def get_context_data(self, **kwargs):
-
-
-        return super().get_context_data(**kwargs)
-
-    def get_success_url(self):
-        return reverse('entry')
-
-    def form_valid(self, form):
-        #print(self.request.POST)
-        self.regeling = form.save(True)
-        #print(self.request.POST.getlist('voorwaarde', 'no voorwaarde'))
-        voorwaarden = self.request.POST.getlist('voorwaarde', [])
-        voorwaarden = [self.add_voorwaarde(v) for v in voorwaarden]
-        print(voorwaarden)
-
-        return super().form_valid(form)
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class RegelingList(ListView):
     model = Regeling
 
 
-class RegelingCreate(CreateView):
+class RegelingCreate(CreateView, LoginRequiredMixin):
     model = Regeling
     fields = ['titel', 'samenvatting', 'bron', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
@@ -81,7 +40,7 @@ class RegelingCreate(CreateView):
         return super(RegelingCreate, self).form_valid(form)
 
 
-class RegelingUpdate(UpdateView):
+class RegelingUpdate(UpdateView, LoginRequiredMixin):
     model = Regeling
     fields = ['titel', 'samenvatting', 'bron', 'startdatum', 'einddatum']
     #form_class = RegelingModelForm
