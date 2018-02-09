@@ -7,12 +7,12 @@
     
     <title>Jeugdzorg - {% block title %}Regelingen{% endblock %}</title>
     
-    <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?{% now "U" %}"/>
 </head>
 <body>
   <header class="header">
     <div class="container">
-      <a href="#" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
+      <a href="/" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
     </div>
   </header>
   <main class="main">
@@ -21,7 +21,7 @@ hello world
 {% endblock %}
   </main>
   
-  <script type="text/javascript" defer src="{% static "js/scripts.js" %}"></script>
+  <script type="text/javascript" defer src="{% static "js/scripts.js" %}?{% now "U" %}"></script>
 
 </body>
 </html>
