@@ -47,17 +47,16 @@ class RegelingUpdate(UpdateView, LoginRequiredMixin):
     success_url = reverse_lazy('regelingen')
 
     def get_success_url(self):
+        if self.request.POST.get('submit'):
+            return self.request.POST.get('submit')
         return reverse_lazy('update_regeling', kwargs={'pk': self.object.id})
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        print(self.object)
-        print(Voorwaarde.objects.filter(regeling=self.object))
         if self.request.POST:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
-        print(data)
         return data
 
     def form_valid(self, form):

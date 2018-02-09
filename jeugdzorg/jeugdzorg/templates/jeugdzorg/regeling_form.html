@@ -60,7 +60,9 @@
       </ol>
     </fieldset>
     <p class="buttons">
-      <button type="submit" class="button">Opslaan</button> <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
+      <button name="submit" type="submit" value="{% url 'regelingen' %}" class="button">Opslaan</button>
+      <button name="submit" type="submit" class="button secondary">Opslaan en doorgaan</button>
+      <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
     </p>
   </form>
 </div>
