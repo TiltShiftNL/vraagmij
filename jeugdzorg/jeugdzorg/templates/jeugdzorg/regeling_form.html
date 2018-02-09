@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+    <form action="" method="post">{% csrf_token %}
+{#        {{ form.as_p }}#}
+        <fieldset>
+            <legend>Regeling</legend>
+            <h2>Meta info</h2>
+            <p class="row">
+              <label>
+                <strong>Titel</strong>
+                {{ form.titel }}
+              </label>
+            </p>
+            <p class="row">
+              <label>
+                <strong>Samenvatting</strong>
+                {{ form.samenvatting }}
+              </label>
+            </p>
+            <p class="row">
+              <label>
+                <strong>Bron</strong>
+                {{ form.bron }}
+              </label>
+            </p>
+            <p class="row">
+              <label>
+                <strong>Startdatum</strong>
+                {{ form.startdatum }}
+              </label>
+              <label>
+                <strong>Einddatum</strong>
+                {{ form.einddatum }}
+              </label>
+            </p>
+            <h2>Voorwaarden</h2>
+            <ol data-decorator="list">
+
+            {{ voorwaarde.management_form }}
+            {% for form in voorwaarde.forms %}
+                <li class=" formset_row">
+                    <label>
+                      <strong>Voorwaarde</strong>
+                        {% for field in form.visible_fields %}
+                            <td>
+                                {% if forloop.first %}
+                                    {% for hidden in form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+                                {% endif %}
+                                {{ field.errors.as_ul }}
+                                {{ field }}
+                            </td>
+                        {% endfor %}
+                    </label>
+                </li>
+            {% endfor %}
+
+            </ol>
+        </fieldset>
+        <input type="submit" value="Save"/> <a href="{% url 'regelingen' %}">back to the list</a>
+    </form>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'admin/js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $('.formset_row').formset({
+        addText: 'add voorwaarde',
+        deleteText: 'remove',
+        prefix: 'voorwaarde_set'
+    });
+</script>
+{% endblock %}

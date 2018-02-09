@@ -43,7 +43,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'jeugdzorg',
 
-    'sortedm2m',
+    'adminsortable',
 
 
     'django.contrib.admin',

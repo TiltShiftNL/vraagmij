@@ -30,10 +30,10 @@
 
       add.list = this;
 
-      add.template = this.firstElementChild.cloneNode(true);
-      add.template.querySelector('textarea').value = '';
-
+      add.template = this.querySelector("li").cloneNode(true);
+      add.template.getElementsByTagName('input').value = '';
       this.parentNode.appendChild(add);
+      console.log(add.template.getElementsByTagName('input'));
     }
 
   };

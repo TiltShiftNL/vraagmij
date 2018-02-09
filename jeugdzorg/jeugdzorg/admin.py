@@ -1,16 +1,20 @@
 from django.contrib import admin
 from .models import *
+from adminsortable.admin import SortableAdmin
+from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
+
+
+
+class VoorwaardeInline(SortableStackedInline):
+    model = Voorwaarde
+    extra = 1
 
 
 @admin.register(Regeling)
-class RegelingAdmin(admin.ModelAdmin):
-    pass
-    #raw_id_fields = ('voorwaarde_lijst',)
+class RegelingAdmin(SortableAdmin):
+    inlines = [VoorwaardeInline]
+
 
 @admin.register(Voorwaarde)
-class VoorwaardeAdmin(admin.ModelAdmin):
+class VoorwaardeAdmin(SortableAdmin):
     pass
-
-
-#admin.register(MyModel, MyModelAdmin)
-#admin.site.register(MyModel, MyModelAdmin)

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {% if user %}
+        User: {{ user }}<br><br>
+        <a href="{% url 'create_regeling' %}">Regeling toevoegen</a>
+    {% endif %}
+
+    <ul>
+    {% for regeling in regeling_list %}
+    <li>
+        {% if user %}
+        <a href="{% url 'update_regeling' regeling.id %}">
+        {% endif %}
+        {{ regeling }}
+        {% if user %}
+        </a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

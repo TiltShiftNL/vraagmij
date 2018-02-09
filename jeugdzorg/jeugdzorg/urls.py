@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from .views import Homepage
-from .views import Entry
-from .views import Entries
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Homepage.as_view(), name='homepage'),
-    path('entry', Entry.as_view(), name='entry'),
-    path('entries', Entries.as_view(), name='entries')
+    # path('', Homepage.as_view(), name='homepage'),
+    path('', RegelingList.as_view(), name='regelingen'),
+    path('entry', RegelingView.as_view(), name='entry'),
+    path('regeling-maken/', RegelingCreate.as_view(), name='create_regeling'),
+    path('regeling/<int:pk>/', RegelingUpdate.as_view(), name='update_regeling'),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
