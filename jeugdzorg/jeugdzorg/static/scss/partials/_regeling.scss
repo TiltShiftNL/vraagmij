@@ -1,0 +1,40 @@
+.regeling {
+  margin-bottom: $lineHeight;
+  border-bottom: 1px solid #f3f3f3;
+}
+.regeling-voorwaarden {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .3s;
+  margin-top: $lineHeight / 2;
+  margin-bottom: $lineHeight / 2;
+  padding-left: 1.2em;
+  &.active {
+    max-height: 4000px;
+  }
+}
+.regeling-edit {
+  opacity: .1;
+  transition: all .3s;
+}
+.regeling-title {
+  margin-bottom: 0;
+  font-size: 20px;
+  .regeling-edit {
+    position: relative;
+    top: .1em;
+    float: right;
+    margin-left: 1em;
+    font-size: .8em;
+    font-weight: 400;
+    a {
+      text-decoration: none;
+    }
+  }
+  &:hover .regeling-edit {
+    opacity: .6;
+  }
+  .regeling-edit:hover {
+    opacity: 1;
+  }
+}
