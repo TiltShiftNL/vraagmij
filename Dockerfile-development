@@ -19,6 +19,8 @@ COPY jeugdzorg /opt/app
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-local-entrypoint.sh /usr/local/bin/docker-local-entrypoint.sh
 
+RUN mkdir /opt/file_upload/
+
 RUN chmod 777 /usr/local/bin/docker-local-entrypoint.sh
 
 WORKDIR /opt/app

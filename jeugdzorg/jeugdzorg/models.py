@@ -30,13 +30,6 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
-    # voorwaarde_lijst = SortableForeignKey(
-    #     to='Voorwaarde',
-    #     verbose_name=_('Voorwaarden'),
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.CASCADE,
-    # )
 
     def __str__(self):
         return '%s' % (self.titel)
@@ -61,7 +54,6 @@ class Voorwaarde(SortableMixin):
         blank=True,
         on_delete=models.CASCADE,
     )
-
 
     def __str__(self):
         return self.titel

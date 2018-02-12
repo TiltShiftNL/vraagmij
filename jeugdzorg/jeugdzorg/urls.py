@@ -24,6 +24,8 @@ urlpatterns = [
     path('regeling-maken/', RegelingCreate.as_view(), name='create_regeling'),
     path('regeling/<int:pk>/', RegelingUpdate.as_view(), name='update_regeling'),
     path('admin/', admin.site.urls),
+    path('dumpdata/', dump_jeugdzorg, name='dumpdata'),
+    path('loaddata/', load_jeugdzorg, name='loaddata'),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
