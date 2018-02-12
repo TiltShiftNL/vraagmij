@@ -17,12 +17,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from .views import *
 
 urlpatterns = [
     path('', RegelingList.as_view(), name='regelingen'),
     path('regeling-maken/', RegelingCreate.as_view(), name='create_regeling'),
     path('regeling/<int:pk>/', RegelingUpdate.as_view(), name='update_regeling'),
+    path('login/', auth_views.login, name='login'),
+    #path('logout/', auth_views.logout, name='logout'),
+    path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('admin/', admin.site.urls),
     path('dumpdata/', dump_jeugdzorg, name='dumpdata'),
     path('loaddata/', load_jeugdzorg, name='loaddata'),
