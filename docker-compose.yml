@@ -35,6 +35,7 @@ services:
     volumes:
       - ./jeugdzorg:/opt/app
     environment:
+      - ENV=develop
       - DJANGO_ENV=dev
       - POSTGRES_DB=jeugdzorg
       - POSTGRES_HOST=db

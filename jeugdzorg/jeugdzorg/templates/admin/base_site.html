@@ -3,11 +3,13 @@
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Jeugdzorg: {{ request.META.ENV }}</a></h1>
 
 {% endblock %}
 
 {% block nav-global %}
     <a class="btn button" href="{% url 'dumpjeugdzorg' %}">Download jeugdzorg.json</a>
+    {% if request.META.ENV != 'production' %}
     <a class="btn button" href="{% url 'loadjeugdzorg' %}">Upload jeugdzorg.json</a>
+    {% endif %}
 {% endblock %}
