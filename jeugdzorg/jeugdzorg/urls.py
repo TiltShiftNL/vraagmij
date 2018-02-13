@@ -27,8 +27,8 @@ urlpatterns = [
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('admin/', admin.site.urls),
-    path('dumpdata/', dump_jeugdzorg, name='dumpdata'),
-    path('loaddata/', load_jeugdzorg, name='loaddata'),
+    path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
+    path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

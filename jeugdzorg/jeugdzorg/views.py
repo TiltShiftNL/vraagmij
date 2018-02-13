@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.management import call_command
 import sys
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 class RegelingList(ListView):
@@ -75,11 +76,12 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
         return super(RegelingUpdate, self).form_valid(form)
 
 
+@staff_member_required
 def dump_jeugdzorg(request):
     sysout = sys.stdout
     fname = "%s.json" % ('jeugdzorg')
     response = HttpResponse(content_type='application/json')
-    response['Content-Disposition'] = 'attachment; filename=%s' %(fname)
+    response['Content-Disposition'] = 'attachment; filename=%s' % fname
 
     sys.stdout = response
     call_command('dumpdata', 'jeugdzorg', '--indent=4')
@@ -87,15 +89,16 @@ def dump_jeugdzorg(request):
     return response
 
 
+@staff_member_required
 def load_jeugdzorg(request):
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        form = UploadJeugdzorgFixtureFileForm(request.POST, request.FILES)
         if form.is_valid():
             handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
+            return HttpResponseRedirect('%s?success=1' % reverse('loadjeugdzorg'))
     else:
-        form = UploadFileForm()
-    return render(request, 'upload.html', {'form': form})
+        form = UploadJeugdzorgFixtureFileForm()
+    return render(request, 'snippets/upload_fixture.html', {'form': form})
 
 
 

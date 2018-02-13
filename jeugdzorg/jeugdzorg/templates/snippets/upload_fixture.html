@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<form>
+{% if request.META.ENV == 'production' %}
+    Vanuit deze omgeving kun je alleen data exporteren.
+{% elif request.GET.success %}
+    <p class="container">
+        <a href="{% url 'loadjeugdzorg' %}" class="button">Naar upload formulier</a>
+    </p>
+{% else %}
+<form action="{% url 'loadjeugdzorg' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Upload</button>
+    <small style="color:red">!!!Bestaande data kan overschreven worden!!!</small><br>
+    <p class="container">
+    <button type="submit" class="button">Upload</button>
+    </p>
 </form>
+{% endif %}
 {% endblock %}

@@ -27,6 +27,8 @@ COPY jeugdzorg/django_nginx.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
+RUN mkdir /opt/file_upload/
+
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 RUN chmod 777 /etc/nginx/sites-enabled/django_nginx.conf
 
