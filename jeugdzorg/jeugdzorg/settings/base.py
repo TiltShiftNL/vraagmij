@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
+ENV = os.getenv("ENV", "develop")
 DJANGO_ENV = os.getenv("DJANGO_ENV", "dev")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "jeugdzorg")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "db")
