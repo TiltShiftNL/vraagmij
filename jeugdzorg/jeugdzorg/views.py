@@ -12,6 +12,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 
 
+class ConfigView(LoginRequiredMixin, TemplateView):
+    template_name = 'snippets/config.html'
+
+
 class RegelingList(ListView):
     model = Regeling
 
