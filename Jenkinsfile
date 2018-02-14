@@ -33,6 +33,7 @@ node {
         tryStep "build", {
             def image = docker.build("build.app.amsterdam.nl:5000/fixxx/jeugdzorg:${env.BUILD_NUMBER}")
             image.push()
+            echo 'Build'
         }
     }
 }
