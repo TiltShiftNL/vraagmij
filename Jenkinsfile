@@ -33,7 +33,12 @@ node {
         tryStep "build", {
             def image = docker.build("build.app.amsterdam.nl:5000/fixxx/jeugdzorg:${env.BUILD_NUMBER}")
             image.push()
-            echo 'Build'
+            echo 'start git version'
+            sh "git rev-parse HEAD > commit-id"
+            def commit_id = readFile('commit-id').trim()
+            println commit_id
+            echo 'end git version'
+
         }
     }
 }
