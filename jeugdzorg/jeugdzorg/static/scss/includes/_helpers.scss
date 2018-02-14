@@ -24,3 +24,43 @@
 .js .js-hidden {
   display: none !important;
 }
+
+.version {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 5px;
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+  
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1;
+  transition: all .3s;
+  outline: 5000px solid rgba(#000, 0);
+  * {
+    display: inline-block;
+    color: #fff;
+    vertical-align: middle;
+  }
+  span {
+    &:before {
+      content: '-';
+      margin: 0 .2em 0 .5em;
+    }
+    max-width: 0;
+    overflow: hidden;
+    transition: all .3s;
+  }
+  
+  &:hover {
+    outline: 5000px solid rgba(#000, .2);
+    span {
+      max-width: 200px;
+    }
+  }
+  
+  
+  
+}

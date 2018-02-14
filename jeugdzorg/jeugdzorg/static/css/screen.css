@@ -44,6 +44,35 @@ button::-moz-focus-inner {
 .hidden, .js .js-hidden {
   display: none !important; }
 
+.version {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 5px;
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1;
+  transition: all .3s;
+  outline: 5000px solid transparent; }
+.version * {
+  display: inline-block;
+  color: #fff;
+  vertical-align: middle; }
+.version span {
+  max-width: 0;
+  overflow: hidden;
+  transition: all .3s; }
+.version span:before {
+  content: '-';
+  margin: 0 .2em 0 .5em; }
+.version:hover {
+  outline: 5000px solid rgba(0, 0, 0, 0.2); }
+.version:hover span {
+  max-width: 200px; }
+
 html {
   font-size: 62.5%; }
 @media (max-width: 700px) {
