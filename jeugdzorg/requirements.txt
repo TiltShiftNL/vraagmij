@@ -3,3 +3,4 @@ psycopg2==2.7.3.2
 Pillow==5.0.0
 django-admin-sortable
 django-sortedm2m
+django-taggit
