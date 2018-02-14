@@ -62,3 +62,6 @@ class Voorwaarde(SortableMixin):
         verbose_name = _('Voorwaarde')
         verbose_name_plural = _('Voorwaarden')
         ordering = ['order']
+
+
+

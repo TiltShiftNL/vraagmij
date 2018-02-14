@@ -1,4 +1,4 @@
-{% load static %}
+{% load static version_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +40,7 @@ hello world
   
   <script type="text/javascript" defer src="{% static "js/scripts.js" %}?{% now "U" %}"></script>
   <div class="version">
-    <strong>{{ ENV }}</strong><span> {{ BUILD_NUMBER }}</span>
+    <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>
 </body>
 </html>

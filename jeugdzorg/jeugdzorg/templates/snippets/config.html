@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
+{% load version_tags %}
 
 {% block main %}
-<h2>request META</h2>
-{{ request.META }}
+<h2>request</h2>
+    {% git_short_version as lines %}
+{% for l in lines %}
+{{ l }}<br>
+{% endfor %}
 {% endblock %}
