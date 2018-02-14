@@ -206,14 +206,14 @@ body {
   background-color: #000;
   border-color: #000; }
 
-input[type="text"], input[type="date"], input[type="email"], textarea {
+input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea {
   width: 100%;
   line-height: 1;
   padding: 1em 1em .8em;
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all .3s; }
-input[type="text"]:focus, input[type="date"]:focus, input[type="email"]:focus, textarea:focus {
+input[type="text"]:focus, input[type="date"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus {
   border: 1px solid rgba(0, 0, 0, 0.8); }
 
 legend {

@@ -5,10 +5,15 @@
 {% block login %}{% endblock %}
 
 {% block main %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="button">Login</button>
-  </form>
+  <div class="container">
+    <h1>Login</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p class="buttons">
+        <button type="submit" class="button">Login</button>
+        <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
+      </p>
+    </form>
+  </div>
 {% endblock %}
