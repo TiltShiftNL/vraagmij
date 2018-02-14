@@ -8,19 +8,27 @@
     <title>Jeugdzorg - {% block title %}Regelingen{% endblock %}</title>
     
     <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?{% now "U" %}"/>
+    
 </head>
 <body>
   <header class="header">
     <div class="container">
       <a href="/" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
       {% block login %}
-      <p class="buttons">
-      {% if user.is_authenticated %}
-      <a href="/logout/"  class="button secondary">Logout</a>
-      {% else %}
-      <a href="/login/"  class="button secondary">Login</a>
-      {% endif %}
-      </p>
+        <div class="nav-container">
+          <a href="#MENU" class="nav-open" data-handler="toggle">MENU<i class="icon-menu"></i></a>
+          <nav class="nav" id="MENU">
+            <ul class="menu">
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'create_regeling' %}">Regeling toevoegen</a></li>
+                <li><a href="/logout">Logout</a></li>
+              {% else %}
+                <li><a href="/login">Login</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+          <a href="#MENU" class="nav-close" data-handler="toggle"><i class="icon-close"></i></a>
+        </div>
       {% endblock %}
     </div>
   </header>

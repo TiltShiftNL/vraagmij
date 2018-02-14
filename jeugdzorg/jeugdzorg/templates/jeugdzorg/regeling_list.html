@@ -3,10 +3,6 @@
 {% block main %}
 <div class="container">
 
-  <p class="buttons">
-    <a class="button" href="{% url 'create_regeling' %}">Regeling toevoegen</a>
-  </p>
-
   <h1>Alle regelingen</h1>
   {% for regeling in regeling_list %}
     <article class="regeling" id="regeling-{{ regeling.id }}">
