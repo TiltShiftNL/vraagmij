@@ -2,44 +2,53 @@
 
 {% block main %}
 <div class="container">
-    
-    <p class="buttons">
-      <a class="button" href="{% url 'create_regeling' %}">Regeling toevoegen</a>
-    </p>
-    
-    <h1>Alle regelingen</h1>
-    {% for regeling in regeling_list %}
-      <article class="regeling">
-          
-        <header class="regeling-header">
-            <h1 class="regeling-title">
-              {% if user.is_authenticated %}
-                <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
-              {% endif %}
-              
-              {{ regeling.titel }}
-              {% if regeling.voorwaarde_set.all %}
-                (<a href="#voorwaarden-{{ regeling.id }}" data-handler="toggle">{{ regeling.voorwaarde_set.all|length }} voorwaarden</a>)
-              {% endif %}
-              
-            </h1>
-            {% if regeling.samenvatting %}
-              <p class="regeling-excerpt">
-                {{ regeling.samenvatting }}
-              </p>
-            {% endif %}
-            
-          </header>
-          
-          {% if regeling.voorwaarde_set.all %}
-          <ol class="regeling-voorwaarden" id="voorwaarden-{{ regeling.id }}">
+
+  <p class="buttons">
+    <a class="button" href="{% url 'create_regeling' %}">Regeling toevoegen</a>
+  </p>
+
+  <h1>Alle regelingen</h1>
+  {% for regeling in regeling_list %}
+    <article class="regeling" id="regeling-{{ regeling.id }}">
+
+      <header class="regeling-header">
+        <h1 class="regeling-title">
+          {% if user.is_authenticated %}
+            <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
+          {% endif %}
+
+          {{ regeling.titel }}
+
+        </h1>
+        
+        {% if regeling.samenvatting %}
+          <pre class="regeling-samenvatting">
+            {{ regeling.samenvatting }}
+          </pre>
+        {% endif %}
+
+      </header>
+      
+      <div class="regeling-details">
+        
+        {% if regeling.voorwaarde_set.all %}
+          <ol class="regeling-voorwaarden">
           {% for vw in regeling.voorwaarde_set.all %}
               <li>{{ vw.titel }}</li>
           {% endfor %}
           </ol>
-          {% endif %}
-        </article>
-      {% endfor %}
+        {% endif %}
+
+      </div>
+      
+      <p class="regeling-more">
+        <a class="more" href="#regeling-{{ regeling.id }}" data-handler="toggle" data-more="Meer " data-less="Verberg ">details en {{ regeling.voorwaarde_set.all|length }} voorwaarde{% if regeling.voorwaarde_set.all|length > 1 %}n{% endif %} <i class="icon-arrow"></i></a>
+      </p>
+      
+
+    </article>
+  {% endfor %}
+
 </div>
 
 {% endblock %}
