@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ENV = os.getenv("ENV", "develop")
 DJANGO_ENV = os.getenv("DJANGO_ENV", "dev")
+BUILD_NUMBER = os.getenv("BUILD_NUMBER", "no-build-number")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "jeugdzorg")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "db")
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")

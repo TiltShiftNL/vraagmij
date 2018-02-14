@@ -4,6 +4,7 @@
 {% if ENV == 'production' %}
     Vanuit deze omgeving kun je alleen data exporteren.
 {% elif request.GET.success %}
+{#{% if request.GET.success %}#}
     <p class="container">
         <a href="{% url 'loadjeugdzorg' %}" class="button">Naar upload formulier</a>
     </p>
