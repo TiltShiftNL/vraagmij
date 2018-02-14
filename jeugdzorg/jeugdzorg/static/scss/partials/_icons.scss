@@ -8,3 +8,16 @@
   background-image: url('../images/ico_andreas.svg');
   background-size: 100% auto;
 }
+
+.icon-arrow {
+  position: relative;
+  top: .4em;
+  display: inline-block;
+  vertical-align: top;
+  content: '';
+  width: .4em;
+  height: .4em;
+  transform: rotate(45deg);
+  border-top: .15em solid $textColor;
+  border-right: .15em solid $textColor;
+}
