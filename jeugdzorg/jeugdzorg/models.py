@@ -44,7 +44,10 @@ class Regeling(models.Model):
         through='TaggedRegeling',
         blank=True,
     )
-    doelen = SortedManyToManyField('Doel')
+    doelen = SortedManyToManyField(
+        to='Doel',
+        blank=True,
+    )
 
     datum_gecreeerd = models.DateTimeField(
         verbose_name=_('Datum gecreëerd'),
