@@ -7,6 +7,7 @@ ENV POSTGRES_DB=notset
 ENV POSTGRES_HOST=notset
 ENV POSTGRES_USER=notset
 ENV POSTGRES_PASSWORD=notset
+ENV RUNSERVER=yes
 
 RUN apt-get update
 RUN apt-get upgrade -y

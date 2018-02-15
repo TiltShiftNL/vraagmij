@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
+from taggit.managers import TaggableManager
+from taggit.models import TagBase, GenericTaggedItemBase
 
 
 class Regeling(models.Model):
@@ -30,6 +32,7 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    #tags = TaggableManager(through='TaggedRegeling')
 
     def __str__(self):
         return '%s' % (self.titel)
@@ -62,6 +65,27 @@ class Voorwaarde(SortableMixin):
         verbose_name = _('Voorwaarde')
         verbose_name_plural = _('Voorwaarden')
         ordering = ['order']
+
+
+# class RegelingTag(TagBase):
+#     omschrijving = models.TextField(
+#         verbose_name=_('Omschrijving'),
+#         null=True,
+#         blank=True,
+#     )
+
+
+# class TaggedRegeling(GenericTaggedItemBase):
+#     # TaggedWhatever can also extend TaggedItemBase or a combination of
+#     # both TaggedItemBase and GenericTaggedItemBase. GenericTaggedItemBase
+#     # allows using the same tag for different kinds of objects, in this
+#     # example Food and Drink.
+#
+#     # Here is where you provide your custom Tag class.
+#     tag = models.ForeignKey(
+#         to=RegelingTag,
+#         related_name="%(app_label)s_%(class)s_items"
+#     )
 
 
 
