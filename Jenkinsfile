@@ -36,7 +36,7 @@ node {
             def commit_id = readFile('.env').trim()
             println commit_id
             echo 'end git version'
-            def image = docker.build("build.app.amsterdam.nl:5000/fixxx/jeugdzorg:${env.BUILD_NUMBER}", "--build-arg SOURCE_COMMIT=commit_id")
+            def image = docker.build("build.app.amsterdam.nl:5000/fixxx/jeugdzorg:${env.BUILD_NUMBER}")
             image.push()
 
         }
