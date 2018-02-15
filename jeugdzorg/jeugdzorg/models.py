@@ -35,6 +35,11 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    bron_url = models.URLField(
+        verbose_name=_('Bron url'),
+        null=True,
+        blank=True,
+    )
     tags = TaggableManager(
         through='TaggedRegeling',
         blank=True,
