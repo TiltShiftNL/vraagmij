@@ -41,26 +41,19 @@
                     {{ form.einddatum }}
                 </label>
             </p>
-            <h2>Doelen</h2>
-            <ul>
-                {% for doel in doelen %}
-                <li>
-                    <h3>{{ doel.titel }}</h3>
-                    {% if doel.omschrijving %}<p>Omschrijving: {{ doel.omschrijving }}</p>{% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            
             <div class="row">
                 <strong>Doel</strong>
                 <ul class="regeling-doelen">
                     {% for doel in doelen %}
                     <li>
-                        <input id="regeling-doel-input-{{ doel.id }}5" type="checkbox" value="515">
+                        <input name="regeling-doel-input-{{ doel.id }}" type="hidden" value="false">
+                        <input id="regeling-doel-input-{{ doel.id }}" name="regeling-doel-input-{{ doel.id }}" type="checkbox" value="true">
                         <label for="regeling-doel-input-{{ doel.id }}">{{ doel.titel }}</label> <a href="#regeling-doel-{{ doel.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
-                        <label for="regeling-doel-input-{{ doel.id }}" id="regeling-doel-{{ doel.id }}" class="regeling-doel">
-                            {{ doel.omschrijving }}
-                        </label>
+                        {% if doel.omschrijving %}
+                            <label for="regeling-doel-input-{{ doel.id }}" id="regeling-doel-{{ doel.id }}" class="regeling-doel">
+                                {{ doel.omschrijving }}
+                            </label>
+                        {% endif %}
 
                     </li>
                     {% endfor %}
