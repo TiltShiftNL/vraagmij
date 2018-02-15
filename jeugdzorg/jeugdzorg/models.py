@@ -5,6 +5,7 @@ from adminsortable.fields import SortableForeignKey
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 from sortedm2m.fields import SortedManyToManyField
+from adminsortable.models import Sortable
 
 
 
@@ -31,6 +32,11 @@ class Regeling(models.Model):
     )
     einddatum = models.DateField(
         verbose_name=_('Eind datum'),
+        null=True,
+        blank=True,
+    )
+    bron_url = models.URLField(
+        verbose_name=_('Bron url'),
         null=True,
         blank=True,
     )
@@ -95,7 +101,7 @@ class TaggedRegeling(GenericTaggedItemBase):
     )
 
 
-class Doel(models.Model):
+class Doel(Sortable):
     titel = models.CharField(
         verbose_name=_('Titel'),
         max_length=255,
@@ -108,6 +114,10 @@ class Doel(models.Model):
 
     def __str__(self):
         return self.titel
+
+    class Meta(Sortable.Meta):
+        verbose_name = _('Doel')
+        verbose_name_plural = _('Doelen')
 
 
 
