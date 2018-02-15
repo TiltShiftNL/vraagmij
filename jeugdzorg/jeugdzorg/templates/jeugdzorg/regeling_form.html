@@ -46,8 +46,8 @@
                 <ul class="regeling-doelen">
                     {% for doel in doelen %}
                     <li>
-                        <input name="regeling-doel-input-{{ doel.id }}" type="hidden" value="false">
                         <input id="regeling-doel-input-{{ doel.id }}" name="regeling-doel-input-{{ doel.id }}" type="checkbox" value="true">
+                        <input name="regeling-doel-input-{{ doel.id }}" type="hidden" value="false">
                         <label for="regeling-doel-input-{{ doel.id }}">{{ doel.titel }}</label> <a href="#regeling-doel-{{ doel.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
                         {% if doel.omschrijving %}
                             <label for="regeling-doel-input-{{ doel.id }}" id="regeling-doel-{{ doel.id }}" class="regeling-doel">
