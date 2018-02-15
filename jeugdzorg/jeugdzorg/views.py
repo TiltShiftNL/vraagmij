@@ -22,7 +22,7 @@ class RegelingList(ListView):
 
 class RegelingCreate(LoginRequiredMixin, CreateView):
     model = Regeling
-    fields = ['titel', 'samenvatting', 'bron', 'startdatum', 'einddatum']
+    fields = ['titel', 'samenvatting', 'bron', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def get_context_data(self, **kwargs):
