@@ -42,13 +42,9 @@ class RegelingCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
-        tags = context['tags']
+        # tags = context['tags']
         with transaction.atomic():
             self.object = form.save()
-
-            if tags.is_valid():
-                tags.instance = self.object
-                tags.save()
 
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
@@ -73,11 +69,11 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
         if self.request.POST:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
             #data['tags'] = RegelingTagFormSet(self.request.POST, self.request.FILES, instance=self.object)
-            data['tags'] = RegelingTagFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            # data['tags'] = RegelingTagFormSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
             #data['tags'] = RegelingTagFormSet(instance=self.object)
-            data['tags'] = RegelingTagFormSet()
+            # data['tags'] = RegelingTagFormSet()
         return data
 
     def form_valid(self, form):
