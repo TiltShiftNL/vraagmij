@@ -29,7 +29,9 @@
       var el = document.getElementById(this.hash.substr(1));
       if (el) {
         e.preventDefault();
-        el.classList[el.classList.contains('active') ? 'remove' : 'add']('active');
+        var addRemove = el.classList.contains('active') ? 'remove' : 'add';
+        el.classList[addRemove]('active');
+        this.classList[addRemove]('active');
       }
     }
   };

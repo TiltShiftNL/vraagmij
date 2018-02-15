@@ -128,12 +128,17 @@ pre.regeling-samenvatting {
   label {
     display: inline-block;
   }
+  .regeling-doel {
+    display: block;
+  }
 }
 .regeling-doel {
+  display: block;
   max-height: 0;
   overflow: hidden;
   transition: all .3s;
   &.active {
     max-height: 2000px;
+    margin-bottom: $lineHeight;
   }
 }

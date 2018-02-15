@@ -470,12 +470,16 @@ pre.regeling-samenvatting:before {
   margin: 0; }
 .regeling-doelen label {
   display: inline-block; }
+.regeling-doelen .regeling-doel {
+  display: block; }
 
 .regeling-doel {
+  display: block;
   max-height: 0;
   overflow: hidden;
   transition: all .3s; }
 .regeling-doel.active {
-  max-height: 2000px; }
+  max-height: 2000px;
+  margin-bottom: 25.2px; }
 
 /*# sourceMappingURL=screen.css.map */
