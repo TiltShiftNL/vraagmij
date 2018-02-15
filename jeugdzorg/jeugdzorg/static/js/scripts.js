@@ -33,6 +33,13 @@
         el.classList[addRemove]('active');
         this.classList[addRemove]('active');
       }
+    },
+    
+    'scroll': function(e){
+      var target = document.getElementById(this.hash.substr(1));
+      if (!target) return;
+      e.preventDefault();
+      _scrollTo(target);
     }
   };
   
@@ -59,6 +66,14 @@
       add.template = add.list.querySelectorAll("li:last-child")[0].cloneNode(true);
 
       this.parentNode.appendChild(add);
+    },
+    
+    'scroll': function(){
+      if (document.getElementById(this.hash.substr(1))) {
+        this.dataset.handler = 'scroll';
+      } else {
+        this.classList.add('disabled');
+      }
     }
 
   };
@@ -68,6 +83,8 @@
   };
   
   d.addEventListener('click',function(t){var k,e,a=t&&t.target;if(a=_closest(a,'[data-handler]')){var r=a.getAttribute('data-handler').split(/\s+/);if('A'==a.tagName&&(t.metaKey||t.shiftKey||t.ctrlKey||t.altKey))return;for(e=0;e<r.length;e++){k=r[e].split(/[\(\)]/);handlers[k[0]]&&handlers[k[0]].call(a,t,k[1])}}});
+  
+  var _scrollTo=function(n,o){var e,i=window.pageYOffset,t=window.pageYOffset+n.getBoundingClientRect().top,r=(document.body.scrollHeight-t<window.innerHeight?document.body.scrollHeight-window.innerHeight:t)-i,w=function(n){return n<.5?4*n*n*n:(n-1)*(2*n-2)*(2*n-2)+1},o=o||1e3;r&&window.requestAnimationFrame(function n(t){e||(e=t);var d=t-e,a=Math.min(d/o,1);a=w(a),window.scrollTo(0,i+r*a),d<o&&window.requestAnimationFrame(n)})};
 
   var _decorate = function(){
     var k,i,j,decoratorString,el,els=d.querySelectorAll('[data-decorator]');for(i=0;i<els.length;i++){for(decoratorString=(el=els[i]).getAttribute('data-decorator').split(/\s+/),j=0;j<decoratorString.length;j++){k=decoratorString[j].split(/[\(\)]/);decorators[k[0]]&&decorators[k[0]].call(el,k[1]);el.removeAttribute('data-decorator')}}    
