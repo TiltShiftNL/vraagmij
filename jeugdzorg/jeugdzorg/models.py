@@ -4,6 +4,8 @@ from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
+from sortedm2m.fields import SortedManyToManyField
+
 
 
 class Regeling(models.Model):
@@ -32,7 +34,11 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
-    #tags = TaggableManager(through='TaggedRegeling')
+    tags = TaggableManager(
+        through='TaggedRegeling',
+        blank=True,
+    )
+    doelen = SortedManyToManyField('Doel')
 
     def __str__(self):
         return '%s' % (self.titel)
@@ -67,25 +73,41 @@ class Voorwaarde(SortableMixin):
         ordering = ['order']
 
 
-# class RegelingTag(TagBase):
-#     omschrijving = models.TextField(
-#         verbose_name=_('Omschrijving'),
-#         null=True,
-#         blank=True,
-#     )
+class RegelingTag(TagBase):
+    omschrijving = models.TextField(
+        verbose_name=_('Omschrijving'),
+        null=True,
+        blank=True,
+    )
 
 
-# class TaggedRegeling(GenericTaggedItemBase):
-#     # TaggedWhatever can also extend TaggedItemBase or a combination of
-#     # both TaggedItemBase and GenericTaggedItemBase. GenericTaggedItemBase
-#     # allows using the same tag for different kinds of objects, in this
-#     # example Food and Drink.
-#
-#     # Here is where you provide your custom Tag class.
-#     tag = models.ForeignKey(
-#         to=RegelingTag,
-#         related_name="%(app_label)s_%(class)s_items"
-#     )
+class TaggedRegeling(GenericTaggedItemBase):
+    # TaggedWhatever can also extend TaggedItemBase or a combination of
+    # both TaggedItemBase and GenericTaggedItemBase. GenericTaggedItemBase
+    # allows using the same tag for different kinds of objects, in this
+    # example Food and Drink.
+
+    # Here is where you provide your custom Tag class.
+    tag = models.ForeignKey(
+        to=RegelingTag,
+        related_name="%(app_label)s_%(class)s_items",
+        on_delete=models.CASCADE,
+    )
+
+
+class Doel(models.Model):
+    titel = models.CharField(
+        verbose_name=_('Titel'),
+        max_length=255,
+    )
+    omschrijving = models.TextField(
+        verbose_name=_('Omschrijving'),
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.titel
 
 
 

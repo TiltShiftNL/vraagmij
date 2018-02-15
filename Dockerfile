@@ -9,6 +9,8 @@ ENV POSTGRES_USER=notset
 ENV POSTGRES_PASSWORD=notset
 ENV STATIC_ROOT '/opt/static_root/'
 
+ENVFILE /opt/app/.env
+
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get dist-upgrade -y

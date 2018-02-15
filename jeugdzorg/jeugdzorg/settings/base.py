@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'jeugdzorg',
 
     'adminsortable',
-
+    'sortedm2m',
 
     'django.contrib.admin',
     'django.contrib.auth',

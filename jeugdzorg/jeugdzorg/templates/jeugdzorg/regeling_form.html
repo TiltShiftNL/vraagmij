@@ -37,7 +37,15 @@
           {{ form.einddatum }}
         </label>
       </p>
-      
+        <h2>Doelen</h2>
+        <ul>
+            {% for doel in doelen %}
+            <li>
+                <h3>{{ doel.titel }}</h3>
+                {% if doel.omschrijving %}<p>Omschrijving: {{ doel.omschrijving }}</p>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
       <div class="row">
           <strong>Doel</strong>
           <ul class="regeling-doelen">
@@ -47,7 +55,7 @@
               <label for="regeling-doel-input-515" id="regeling-doel-515" class="regeling-doel">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </label>
-            
+
             </li>
             <li>
               <input id="regeling-doel-input-516" type="checkbox" value="516">
@@ -55,13 +63,12 @@
               <label for="regeling-doel-input-516" id="regeling-doel-516" class="regeling-doel">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </label>
-            
+
             </li>
 
           </ul>
       </div>
-      
-      
+
       <h2>Voorwaarden</h2>
       {{ voorwaarde.management_form }}
     
