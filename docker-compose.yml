@@ -32,6 +32,7 @@ services:
       context: .
       dockerfile: Dockerfile-development
     restart: always
+    env_file: .env
     volumes:
       - ./jeugdzorg:/opt/app
     environment:
