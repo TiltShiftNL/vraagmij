@@ -298,14 +298,14 @@ body {
   background-color: #000;
   border-color: #000; }
 
-input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea {
+input[type="text"], input[type="date"], input[type="password"], input[type="email"], input[type="url"], textarea {
   width: 100%;
   line-height: 1;
   padding: 1em 1em .8em;
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all .3s; }
-input[type="text"]:focus, input[type="date"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus {
+input[type="text"]:focus, input[type="date"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="url"]:focus, textarea:focus {
   border: 1px solid rgba(0, 0, 0, 0.8); }
 
 legend {
@@ -481,5 +481,34 @@ pre.regeling-samenvatting:before {
 .regeling-doel.active {
   max-height: 2000px;
   margin-bottom: 25.2px; }
+
+.letters {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 calc(25.2px - 1em) 0;
+  font-size: 0; }
+.letters li {
+  display: inline; }
+.letters a {
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #f3f3f3;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  padding: 1em;
+  margin: 0 1em 1em 0;
+  text-decoration: none; }
+.letters a:hover {
+  border-color: #000; }
+.letters a.disabled {
+  opacity: .2;
+  cursor: not-allowed; }
+.letters a.disabled:hover {
+  border-color: #f3f3f3; }
+
+.letter {
+  padding-top: 25.2px; }
 
 /*# sourceMappingURL=screen.css.map */

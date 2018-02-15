@@ -1,0 +1,43 @@
+.letters {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 calc(#{$lineHeight} - 1em) 0;
+  
+  font-size: 0;
+  
+  li {
+    display: inline;
+  }
+  
+  a {
+    display: inline-block;
+    text-align: center;
+    
+    font-size: 14px;
+    
+    border: 1px solid #f3f3f3;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    padding: 1em;
+    margin: 0 1em 1em 0;
+    
+    text-decoration: none;
+
+    &:hover {
+      border-color: $textColor;
+    }
+    
+    &.disabled {
+      opacity: .2;
+      cursor: not-allowed;
+      &:hover {
+        border-color: #f3f3f3;
+      }
+    }
+    
+  }
+}
+.letter {
+  padding-top: $lineHeight;
+}
