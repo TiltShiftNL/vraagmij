@@ -5,8 +5,15 @@
 
     <h1>Alle regelingen</h1>
     {% regroup regeling_list by first_letter as title_list %}
+    
+    <ul class="letters">
+        {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
+            <li><a href="#regelingen-{{ letter }}" data-decorator="scroll">{{ letter }}</a></li>
+        {% endfor %}
+    </ul>
+    
     {% for titel in title_list %}
-        <h2 id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+        <h2 class="letter" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
         {% for regeling in titel.list %}
             <article class="regeling" id="regeling-{{ regeling.id }}">
 
