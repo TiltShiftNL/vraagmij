@@ -41,12 +41,13 @@
                     {{ form.einddatum }}
                 </label>
             </p>
+            {% if doelen %}
             <div class="row">
                 <strong>Doel</strong>
                 <ul class="regeling-doelen">
                     {% for doel in doelen %}
                     <li>
-                        <input id="regeling-doel-input-{{ doel.id }}" name="regeling-doel-input-{{ doel.id }}" type="checkbox" value="true">
+                        <input id="regeling-doel-input-{{ doel.id }}" name="regeling-doel-input-{{ doel.id }}" type="checkbox" {% if doel.id in doelen_added %}checked="checked"{% endif %} value="true">
                         <input name="regeling-doel-input-{{ doel.id }}" type="hidden" value="false">
                         <label for="regeling-doel-input-{{ doel.id }}">{{ doel.titel }}</label> <a href="#regeling-doel-{{ doel.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
                         {% if doel.omschrijving %}
@@ -59,6 +60,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
 
             <h2>Voorwaarden</h2>
             {{ voorwaarde.management_form }}
