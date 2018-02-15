@@ -10,6 +10,7 @@ from django.core.management import call_command
 import sys
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
+from django.template.loader import select_template
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -18,6 +19,16 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
 class RegelingList(ListView):
     model = Regeling
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        template = select_template([
+            'snippets/regeling_list_%s.html' % self.request.GET.get('beeld', 'alfabet'),
+            'snippets/regeling_list_alfabet.html'
+        ])
+        data['doelen'] = Doel.objects.all()
+        data['list_template'] = template
+        return data
 
 
 class RegelingCreate(LoginRequiredMixin, CreateView):

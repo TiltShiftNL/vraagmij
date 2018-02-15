@@ -1,0 +1,25 @@
+<div class="container">
+
+    {% for doel in doelen %}
+        {% if doel.regeling_set.all %}
+        <h2>{{ doel.titel }}</h2>
+        <ul>
+        {% for regeling in doel.regeling_set.all %}
+        <li>
+            <h4>{{ regeling.titel }}</h4>
+        </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endfor %}
+    <h2>Overige</h2>
+    <ul>
+    {% for regeling in regeling_list %}
+        {% if not regeling.doelen.all %}
+        <li>
+            <h3>{{ regeling.titel }}</h3>
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</div>
