@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/195fd1b2-81b7-4c67-b3d0-ba13116a1bfd.css">
     
 </head>
-<body>
+<body id="top" data-decorator="scroller">
   <header class="header">
     <div class="container">
       <a href="/" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
@@ -38,6 +38,10 @@
 hello world
 {% endblock %}
   </main>
+  
+  <p class="nav-top">
+    <a href="#top" data-handler="scroll">⇡</a>
+  </p>
   
   <script type="text/javascript" defer src="{% static "js/scripts.js" %}?{% now "U" %}"></script>
   <div class="version">

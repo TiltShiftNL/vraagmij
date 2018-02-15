@@ -247,6 +247,33 @@ body {
 .nav.active ~ .nav-close {
   display: block; }
 
+.nav-top {
+  position: fixed;
+  z-index: 100;
+  margin: 0;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  bottom: 30px;
+  max-width: 960px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: right; }
+.nav-top a {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 44px;
+  border: 1px solid #f3f3f3;
+  text-align: center;
+  text-decoration: none;
+  background-color: #fff; }
+.nav-top a:hover {
+  border-color: #000; }
+
 .icon-menu, .icon-close {
   position: relative;
   z-index: 2;

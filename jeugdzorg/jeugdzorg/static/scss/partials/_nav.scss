@@ -87,6 +87,47 @@
   display: block;
 }
 
+.nav-top {
+  position: fixed;
+  z-index: 100;
+  
+  margin: 0;
+  
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+
+  bottom: $padding;
+  
+  max-width: $maxContentWidth;
+  width: 100%;
+  box-sizing: border-box;
+
+  margin-left: auto;
+  margin-right: auto;
+  text-align: right;
+  
+  a {
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 44px;
+    
+    border: 1px solid #f3f3f3;
+    text-align: center;
+    text-decoration: none;
+    
+    background-color: #fff;
+    
+    &:hover {
+      border-color: $textColor;
+    }
+    
+  }
+  
+}
+
 .icon-menu, .icon-close {
   position: relative;
   z-index: 2;
