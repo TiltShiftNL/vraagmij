@@ -1,95 +1,93 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
 {% block main %}
 <div class="container">
-  <form action="" method="post">
-    {% csrf_token %}
-    <fieldset>
-      <legend>Regeling</legend>
-      <h2>Meta info</h2>
-      <p class="row">
-        <label>
-        <strong>Titel</strong>
-        {{ form.titel }}
-        </label>
-      </p>
-      <p class="row">
-        <label>
-          <strong>Samenvatting</strong>
-          {{ form.samenvatting }}
-        </label>
-      </p>
-      <p class="row">
-        <label>
-          <strong>Aanbieder</strong>
-          {{ form.bron }}
-        </label>
-      </p>
-      <p class="row group">
-        <label>
-          <strong>Startdatum</strong>
-          {{ form.startdatum }}
-        </label>
-        <label>
-          <strong>Einddatum</strong>
-          {{ form.einddatum }}
-        </label>
-      </p>
-        <h2>Doelen</h2>
-        <ul>
-            {% for doel in doelen %}
-            <li>
-                <h3>{{ doel.titel }}</h3>
-                {% if doel.omschrijving %}<p>Omschrijving: {{ doel.omschrijving }}</p>{% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-      <div class="row">
-          <strong>Doel</strong>
-          <ul class="regeling-doelen">
-            {% for doel in doelen %}
-            <li>
-              <input id="regeling-doel-input-{{ doel.id }}5" type="checkbox" value="515">
-              <label for="regeling-doel-input-{{ doel.id }}">{{ doel.titel }}</label> <a href="#regeling-doel-{{ doel.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
-              <label for="regeling-doel-input-{{ doel.id }}" id="regeling-doel-{{ doel.id }}" class="regeling-doel">
-                {{ doel.omschrijving }}
-              </label>
+    <form action="" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Regeling</legend>
+            <h2>Meta info</h2>
+            <p class="row">
+                <label>
+                    <strong>Titel</strong>
+                    {{ form.titel }}
+                </label>
+            </p>
+            <p class="row">
+                <label>
+                    <strong>Samenvatting</strong>
+                    {{ form.samenvatting }}
+                </label>
+            </p>
+            <p class="row">
+                <label>
+                    <strong>Aanbieder</strong>
+                    {{ form.bron }}
+                </label>
+            </p>
+            <p class="row group">
+                <label>
+                    <strong>Startdatum</strong>
+                    {{ form.startdatum }}
+                </label>
+                <label>
+                    <strong>Einddatum</strong>
+                    {{ form.einddatum }}
+                </label>
+            </p>
+            <h2>Doelen</h2>
+            <ul>
+                {% for doel in doelen %}
+                <li>
+                    <h3>{{ doel.titel }}</h3>
+                    {% if doel.omschrijving %}<p>Omschrijving: {{ doel.omschrijving }}</p>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <div class="row">
+                <strong>Doel</strong>
+                <ul class="regeling-doelen">
+                    {% for doel in doelen %}
+                    <li>
+                        <input id="regeling-doel-input-{{ doel.id }}5" type="checkbox" value="515">
+                        <label for="regeling-doel-input-{{ doel.id }}">{{ doel.titel }}</label> <a href="#regeling-doel-{{ doel.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
+                        <label for="regeling-doel-input-{{ doel.id }}" id="regeling-doel-{{ doel.id }}" class="regeling-doel">
+                            {{ doel.omschrijving }}
+                        </label>
 
-            </li>
-            {% endfor %}
-          </ul>
-      </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-      <h2>Voorwaarden</h2>
-      {{ voorwaarde.management_form }}
-    
-      <ol class="form-list" data-decorator="list">
-        {% for form in voorwaarde.forms %}
-          <li class=" formset_row">
-            <label>
-              <strong>Voorwaarde</strong>
-              {% for field in form.visible_fields %}
-                {% if forloop.first %}
-                  {% for hidden in form.hidden_fields %}
-                    {{ hidden }}
-                  {% endfor %}
-                {% endif %}
-                {{ field.errors.as_ul }}
-                {{ field }}
-              {% endfor %}
-            </label>
-          </li>
-        {% endfor %}
-      </ol>
-    </fieldset>
-    <p class="buttons">
-      <button name="submit" type="submit" value="{% url 'regelingen' %}" class="button">Opslaan</button>
-      <button name="submit" type="submit" class="button secondary">Opslaan en doorgaan</button>
-      <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
-    </p>
-  </form>
+            <h2>Voorwaarden</h2>
+            {{ voorwaarde.management_form }}
+            <ol class="form-list" data-decorator="list">
+                {% for form in voorwaarde.forms %}
+                <li class=" formset_row">
+                    <label>
+                        <strong>Voorwaarde</strong>
+                        {% for field in form.visible_fields %}
+                            {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        {% endfor %}
+                    </label>
+                </li>
+                {% endfor %}
+            </ol>
+        </fieldset>
+        <p class="buttons">
+            <button name="submit" type="submit" value="{% url 'regelingen' %}" class="button">Opslaan</button>
+            <button name="submit" type="submit" class="button secondary">Opslaan en doorgaan</button>
+            <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
+        </p>
+    </form>
 </div>
 
 {% endblock %}
