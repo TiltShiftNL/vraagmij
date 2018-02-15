@@ -54,7 +54,7 @@ class RegelingCreate(LoginRequiredMixin, CreateView):
 
 class RegelingUpdate(LoginRequiredMixin, UpdateView):
     model = Regeling
-    fields = ['titel', 'samenvatting', 'bron', 'startdatum', 'einddatum']
+    fields = ['titel', 'samenvatting', 'bron', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def get_success_url(self):
@@ -64,12 +64,18 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['doelen'] = Doel.objects.all()
+
+        print(self.request.POST)
+        doelen = Doel.objects.all()
+        data['doelen'] = doelen
         RegelingTagFormSet = forms.formset_factory(RegelingTag, extra=2)
         if self.request.POST:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
             #data['tags'] = RegelingTagFormSet(self.request.POST, self.request.FILES, instance=self.object)
             # data['tags'] = RegelingTagFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            #for doel in doelen:
+
+
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
             #data['tags'] = RegelingTagFormSet(instance=self.object)
