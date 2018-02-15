@@ -464,4 +464,18 @@ pre.regeling-samenvatting:before {
 .active pre.regeling-samenvatting {
   margin-bottom: 0; }
 
+.regeling-doelen {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+.regeling-doelen label {
+  display: inline-block; }
+
+.regeling-doel {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .3s; }
+.regeling-doel.active {
+  max-height: 2000px; }
+
 /*# sourceMappingURL=screen.css.map */

@@ -121,3 +121,19 @@ pre.regeling-samenvatting {
     margin-bottom: 0;
   }
 }
+.regeling-doelen {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  label {
+    display: inline-block;
+  }
+}
+.regeling-doel {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .3s;
+  &.active {
+    max-height: 2000px;
+  }
+}
