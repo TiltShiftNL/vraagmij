@@ -4,7 +4,9 @@
 <div class="container">
 
   <h1>Alle regelingen</h1>
-  {% for regeling in regeling_list %}
+{% regroup regeling_list by titel as title_list %}
+{% for titel in title_list %}
+  {% for regeling in titel.list %}
     <article class="regeling" id="regeling-{{ regeling.id }}">
 
       <header class="regeling-header">
@@ -43,6 +45,7 @@
       
 
     </article>
+  {% endfor %}
   {% endfor %}
 
 </div>
