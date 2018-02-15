@@ -46,6 +46,19 @@ class Regeling(models.Model):
     )
     doelen = SortedManyToManyField('Doel')
 
+    datum_gecreeerd = models.DateTimeField(
+        verbose_name=_('Datum gecreëerd'),
+        auto_now_add=True,
+        null=True,
+        blank=True,
+    )
+    datum_opgeslagen = models.DateTimeField(
+        verbose_name=_('Datum opgeslagen'),
+        auto_now=True,
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return '%s' % (self.titel)
 
@@ -61,6 +74,19 @@ class Voorwaarde(SortableMixin):
         max_length=255,
     )
     order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    datum_gecreeerd = models.DateTimeField(
+        verbose_name=_('Datum gecreëerd'),
+        auto_now_add=True,
+        null=True,
+        blank=True,
+    )
+    datum_opgeslagen = models.DateTimeField(
+        verbose_name=_('Datum opgeslagen'),
+        auto_now=True,
+        null=True,
+        blank=True,
+    )
 
     regeling = SortableForeignKey(
         to=Regeling,
