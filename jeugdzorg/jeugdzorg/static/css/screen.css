@@ -73,6 +73,26 @@ button::-moz-focus-inner {
 .version:hover span {
   max-width: 200px; }
 
+/*
+
+  http://fast.fonts.net/cssapi/195fd1b2-81b7-4c67-b3d0-ba13116a1bfd.css
+
+  font-family: "Avenir LT W01_65 Medium1475538";
+  font-family: "Avenir LT W01_95 Black_1475562";
+  font-family: "Avenir LT W01_85 Heavy1475544";
+  font-family: "Avenir LT W01_85 Heavy_1475550";
+  font-family: "Avenir LT W01_55 Obliqu1475526";
+  font-family: "Avenir LT W01_45 Book1475508";
+  font-family: "Avenir LT W01_65 Medium1475538";
+  font-family: "Avenir LT W01_45 Book O1475514";
+  font-family: "Avenir LT W01_95 Black1475556";
+  font-family: "Avenir LT W01_55 Roman1475520";
+  font-family: "Avenir LT W01_65 Medium1475532";
+  font-family: "Avenir LT W01_35 Light1475496";
+  font-family: "Avenir LT W01_35 Light_1475502";
+
+
+*/
 html {
   font-size: 62.5%; }
 @media (max-width: 700px) {
@@ -178,7 +198,8 @@ body {
   color: #ec0000;
   text-decoration: none;
   width: 6em;
-  padding-left: 30px; }
+  padding-left: 30px;
+  font-family: "Avenir LT W01_85 Heavy1475544", Helvetica, Arial, sans-serif; }
 .logo i {
   position: absolute;
   left: 0;
