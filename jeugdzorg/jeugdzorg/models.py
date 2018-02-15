@@ -59,13 +59,16 @@ class Regeling(models.Model):
         blank=True,
     )
 
+    def first_letter(self):
+        return self.titel and self.titel[0] or ''
+
     def __str__(self):
         return '%s' % (self.titel)
 
     class Meta:
         verbose_name = _('Regeling')
         verbose_name_plural = _('Regelingen')
-        ordering = ('-id', )
+        ordering = ('titel', )
 
 
 class Voorwaarde(SortableMixin):
