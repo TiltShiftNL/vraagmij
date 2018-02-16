@@ -13,6 +13,12 @@
 
         {% if doel.regeling_set.all %}
             <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.titel }}</h2>
+            {% if doel.omschrijving %}
+                <p class="doel-omschrijving">
+                    {{ doel.omschrijving }}
+                </p>
+            {% endif %}
+            
             {% for regeling in doel.regeling_set.all %}
                 {% include "snippets/regeling.html" %}
             {% endfor %}
