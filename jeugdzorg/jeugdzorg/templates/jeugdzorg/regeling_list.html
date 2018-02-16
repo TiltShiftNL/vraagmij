@@ -6,8 +6,10 @@
     <h1>Alle regelingen</h1>
 </div>
 <div class="container">
-    <a class="button {% if request.GET.beeld != 'doel' %}secondary{% endif %}" href=".?beeld=alfabet">Op alfabet</a>
-    <a class="button {% if request.GET.beeld == 'doel' %}secondary{% endif %}" href=".?beeld=doel">Op doel</a>
+    <p class="buttons">
+        <a class="button {% if request.GET.beeld != 'doel' %}secondary{% endif %}" href=".?beeld=alfabet">Op alfabet</a>
+        <a class="button {% if request.GET.beeld == 'doel' %}secondary{% endif %}" href=".?beeld=doel">Op doel</a>
+    </p>
 </div>
 
 {% include list_template %}

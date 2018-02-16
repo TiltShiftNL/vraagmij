@@ -10,7 +10,7 @@
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <p class="buttons">
+      <p class="buttons right">
         <button type="submit" class="button">Login</button>
         <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
       </p>

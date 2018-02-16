@@ -106,13 +106,20 @@
   margin-right: auto;
   text-align: right;
   
+  pointer-events: none;
+  
   a {
     display: inline-block;
+    
+    pointer-events: auto;
+    
     width: 42px;
     height: 42px;
     font-size: 1.2em;
     font-weight: bold;
     line-height: 44px;
+    
+    transition: all .3s;
     
     border: 1px solid #f3f3f3;
     text-align: center;
@@ -124,11 +131,19 @@
       border-color: $textColor;
     }
     
+    outline: 4000px solid rgba(#000, 0);
+    
+    &:hover {
+      outline: 4000px solid rgba(#000, .1);
+    }
+    
   }
   
   opacity: 0;
   z-index: 1;
   transition: all .3s;
+  
+  
   .scrolled & {
     z-index: 100;
     opacity: 1;

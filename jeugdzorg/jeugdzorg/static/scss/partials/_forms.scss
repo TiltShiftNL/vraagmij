@@ -122,9 +122,16 @@ form {
 .buttons {
   overflow: hidden;
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
   > * {
-    margin-left: 1em;
+    margin-right: 1em;
+  }
+  &.right {
+    flex-direction: row-reverse;
+    > * {
+      margin-left: 0;
+      margin-right: 1em;
+    }
+    
   }
 }

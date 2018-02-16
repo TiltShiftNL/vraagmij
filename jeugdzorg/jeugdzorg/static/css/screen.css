@@ -95,7 +95,7 @@ button::-moz-focus-inner {
 */
 html {
   font-size: 62.5%; }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   html {
     font-size: 55%; } }
 
@@ -290,22 +290,28 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: right;
+  pointer-events: none;
   opacity: 0;
   z-index: 1;
   transition: all .3s; }
 .nav-top a {
   display: inline-block;
+  pointer-events: auto;
   width: 42px;
   height: 42px;
   font-size: 1.2em;
   font-weight: bold;
   line-height: 44px;
+  transition: all .3s;
   border: 1px solid #f3f3f3;
   text-align: center;
   text-decoration: none;
-  background-color: #fff; }
+  background-color: #fff;
+  outline: 4000px solid transparent; }
 .nav-top a:hover {
   border-color: #000; }
+.nav-top a:hover {
+  outline: 4000px solid rgba(0, 0, 0, 0.1); }
 .scrolled .nav-top {
   z-index: 100;
   opacity: 1; }
@@ -403,10 +409,14 @@ form label strong {
 .buttons {
   overflow: hidden;
   display: flex;
-  flex-direction: row-reverse;
   align-items: center; }
 .buttons > * {
-  margin-left: 1em; }
+  margin-right: 1em; }
+.buttons.right {
+  flex-direction: row-reverse; }
+.buttons.right > * {
+  margin-left: 0;
+  margin-right: 1em; }
 
 .regeling {
   position: relative;
