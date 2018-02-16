@@ -1,25 +1,29 @@
 <div class="container">
+  
+    <ul class="shortcuts">
+        {% for doel in doelen %}
+            {% if doel.regeling_set.all %}
+                <li><a href="#doel-{{ doel.id }}" data-decorator="scroll">{{ doel }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li><a href="#doel-overige" data-decorator="scroll">Overige</a></li>
+    </ul>
 
     {% for doel in doelen %}
+
         {% if doel.regeling_set.all %}
-        <h2>{{ doel.titel }}</h2>
-        <ul>
-        {% for regeling in doel.regeling_set.all %}
-        <li>
-            <h4>{{ regeling.titel }}</h4>
-        </li>
-        {% endfor %}
-        </ul>
+            <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.title }}</h2>
+            {% for regeling in doel.regeling_set.all %}
+                {% include "snippets/regeling.html" %}
+            {% endfor %}
         {% endif %}
+
     {% endfor %}
-    <h2>Overige</h2>
-    <ul>
+
+    <h2 class="shortcut" id="doel-overige">Overige</h2>
     {% for regeling in regeling_list %}
         {% if not regeling.doelen.all %}
-        <li>
-            <h3>{{ regeling.titel }}</h3>
-        </li>
+            {% include "snippets/regeling.html" %}
         {% endif %}
     {% endfor %}
-    </ul>
 </div>
