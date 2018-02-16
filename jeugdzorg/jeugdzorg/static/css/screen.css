@@ -628,16 +628,16 @@ pre.regeling-samenvatting {
 }
 */
 .contact {
-  max-width: 280px;
+  max-width: 300px;
   width: auto;
   min-height: 60px;
-  background: #ffaaaa;
+  background: #f8f8f8;
   padding: 20px;
   margin-bottom: 20px;
   color: white; }
 .contact h3 {
   font-size: 16px;
-  color: white;
+  color: #343434;
   margin-bottom: 10px; }
 .contact .button {
   margin-bottom: 0; }
@@ -645,7 +645,7 @@ pre.regeling-samenvatting {
   float: left;
   width: 60px;
   height: 60px;
-  margin-right: 10px; }
+  margin-right: 20px; }
 .contact:last-child {
   margin-bottom: 0; }
 

@@ -184,7 +184,7 @@ class Contact(models.Model):
         verbose_name_plural = _('Contacten')
 
 
-class ContactNaarRegeling(models.Model):
+    class ContactNaarRegeling(models.Model):
     contact = models.ForeignKey(
         to=Contact,
         verbose_name=_('Contact'),
