@@ -9,7 +9,7 @@ html {
 
 p, ol, ul, dl, figure {
   margin-top: 0;
-  margin-bottom: 2.52rem; }
+  margin-bottom: 2.2rem; }
 
 img {
   vertical-align: top;
@@ -73,26 +73,6 @@ button::-moz-focus-inner {
 .version:hover span {
   max-width: 200px; }
 
-/*
-
-  http://fast.fonts.net/cssapi/195fd1b2-81b7-4c67-b3d0-ba13116a1bfd.css
-
-  font-family: "Avenir LT W01_65 Medium1475538";
-  font-family: "Avenir LT W01_95 Black_1475562";
-  font-family: "Avenir LT W01_85 Heavy1475544";
-  font-family: "Avenir LT W01_85 Heavy_1475550";
-  font-family: "Avenir LT W01_55 Obliqu1475526";
-  font-family: "Avenir LT W01_45 Book1475508";
-  font-family: "Avenir LT W01_65 Medium1475538";
-  font-family: "Avenir LT W01_45 Book O1475514";
-  font-family: "Avenir LT W01_95 Black1475556";
-  font-family: "Avenir LT W01_55 Roman1475520";
-  font-family: "Avenir LT W01_65 Medium1475532";
-  font-family: "Avenir LT W01_35 Light1475496";
-  font-family: "Avenir LT W01_35 Light_1475502";
-
-
-*/
 html {
   font-size: 62.5%; }
 @media (max-width: 900px) {
@@ -100,11 +80,14 @@ html {
     font-size: 50%; } }
 
 body, [type="text"], [type="search"], [type="email"], [type="password"], [type="url"], [type="number"], [type="date"], [type="time"], [type="tel"], [type="datalist"], pre, textarea, select {
-  font-size: 1.8rem;
-  font-family: Helvetica, Arial; }
+  font-size: 1.6rem;
+  font-family: "AvenirNextLTW01-Regular", verdana, sans-serif; }
+
+.bold {
+  font-family: "Avenir Next LT W01 Demi", verdana, sans-serif; }
 
 body {
-  line-height: 1.4; }
+  line-height: 1.375; }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -128,19 +111,21 @@ a {
   color: #000; }
 
 h1, h2, h3 {
-  color: #000; }
+  color: #000;
+  font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
+  font-weight: 400; }
 
 h4, .normal {
-  font-size: 1.8rem;
-  line-height: 1.4; }
+  font-size: 1.6rem;
+  line-height: 1.375; }
 
 h5, .small {
   font-size: 1.4rem;
-  line-height: 1.4; }
+  line-height: 1.375; }
 
 h6, .tiny {
   font-size: 1.2rem;
-  line-height: 1.4; }
+  line-height: 1.375; }
 
 body {
   padding: 3rem; }
@@ -174,6 +159,15 @@ body {
   break-inside: avoid-column;
   display: table;
   margin-right: 1em; }
+@media (max-width: 1290px) {
+  .columns {
+    columns: 3; } }
+@media (max-width: 900px) {
+  .columns {
+    columns: 2; } }
+@media (max-width: 700px) {
+  .columns {
+    columns: 1; } }
 
 .icon-andreas {
   display: inline-block;
@@ -249,7 +243,7 @@ body {
   text-decoration: none;
   width: 6em;
   padding-left: 3rem;
-  font-family: "Avenir LT W01_85 Heavy1475544", Helvetica, Arial, sans-serif; }
+  font-family: "Avenir Next LT W01 Demi", verdana, sans-serif; }
 .logo i {
   position: absolute;
   left: 0;
@@ -258,6 +252,10 @@ body {
 .logo .icon-andreas {
   width: 2rem;
   height: 6.8rem; }
+.logo strong {
+  white-space: nowrap;
+  color: #000;
+  font-weight: normal; }
 
 .nav-container {
   position: absolute;
@@ -386,11 +384,11 @@ legend {
 
 fieldset {
   border-bottom: 1px solid #f3f3f3;
-  padding-bottom: 2.52rem;
-  margin-bottom: 2.52rem; }
+  padding-bottom: 2.2rem;
+  margin-bottom: 2.2rem; }
 
 form .row {
-  margin-bottom: 2.52rem; }
+  margin-bottom: 2.2rem; }
 form .group {
   display: flex; }
 form .group label {
@@ -414,7 +412,7 @@ form label strong {
   margin: 0;
   color: #ec0000;
   border: none;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   background-color: transparent;
   cursor: pointer; }
 .form-list button:hover, .form-list + button:hover {
@@ -456,13 +454,24 @@ form label strong {
   display: block;
   text-decoration: none;
   line-height: 1.2;
-  margin-bottom: 10px; }
+  margin-bottom: .5em; }
+
+.regelingen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #dfdfdf;
+  margin-bottom: 2.2rem; }
+.regelingen-header > * {
+  margin: 0 0 2.2rem 0; }
+.regelingen-header .sort {
+  font-size: 1.4rem; }
 
 .shortcut {
-  font-size: 2.52rem;
+  font-size: 2.2rem;
   line-height: 1;
-  padding: 2.52rem 0 0 0;
-  margin: 0; }
+  padding: 2.2rem 0 0 0;
+  margin: 0 0 .4em 0; }
 
 .regeling-title {
   margin: .2em 0;
@@ -630,8 +639,9 @@ pre.regeling-samenvatting {
 .shortcuts {
   list-style: none;
   padding: 0;
-  margin: 0 0 calc(2.52rem - 1em) 0;
-  font-size: 0; }
+  margin: 0 0 calc(2.2rem - 1em) 0;
+  font-size: 0;
+  display: none; }
 .shortcuts li {
   display: inline; }
 .shortcuts a {
@@ -652,8 +662,25 @@ pre.regeling-samenvatting {
   cursor: not-allowed; }
 .shortcuts a.disabled:hover {
   border-color: #f3f3f3; }
+@media (max-width: 900px) {
+  .shortcuts {
+    display: block; } }
 
 .shortcut {
-  padding-top: 2.52rem; }
+  padding-top: 2.2rem;
+  line-height: 2.2rem; }
+
+.sort {
+  list-style: none; }
+.sort li {
+  display: inline; }
+.sort a {
+  display: inline-block;
+  color: #6db5d6;
+  padding: 0 .5em; }
+.sort a.active {
+  text-decoration: none; }
+.sort li + li {
+  border-left: 1px solid #6db5d6; }
 
 /*# sourceMappingURL=screen.css.map */
