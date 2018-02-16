@@ -1,3 +1,54 @@
+.regelingen {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  a {
+    display: block;
+    text-decoration: none;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  
+}
+
+.shortcut {
+  font-size: $lineHeight;
+  line-height: 1;
+  padding: $lineHeight 0 0 0;
+  margin: 0;
+}
+
+.regeling-title {
+  margin: .2em 0;
+  font-size: 2rem;
+  .regeling-edit {
+    position: relative;
+    z-index: 10;
+    top: .1em;
+    float: right;
+    margin-left: 1em;
+    font-size: .8em;
+    font-weight: 400;
+    a {
+      text-decoration: none;
+    }
+  }
+  &:hover .regeling-edit {
+    opacity: .6;
+  }
+  .regeling-edit:hover {
+    opacity: 1;
+  }
+}
+
+.regeling-edit {
+  opacity: .1;
+  transition: all .3s;
+}
+
+/*
+
 .regeling {
   
   position: relative;
@@ -30,41 +81,9 @@
   opacity: .1;
   transition: all .3s;
 }
-.regeling-details,
-pre.regeling-samenvatting {
-  
-  max-height: 0;
-  overflow: hidden;
-  transition: all .3s;
-  
-  .active & {
-    max-height: 2000px;
-  }
-  
-}
-.regeling-title {
-  margin: .2em 0;
-  font-size: 2rem;
-  .regeling-edit {
-    position: relative;
-    z-index: 10;
-    top: .1em;
-    float: right;
-    margin-left: 1em;
-    font-size: .8em;
-    font-weight: 400;
-    a {
-      text-decoration: none;
-    }
-  }
-  &:hover .regeling-edit {
-    opacity: .6;
-  }
-  .regeling-edit:hover {
-    opacity: 1;
-  }
-}
+
 .regeling-more {
+  display: none;
   margin: 0;
   a {
     text-decoration: none;
@@ -104,6 +123,8 @@ pre.regeling-samenvatting {
   padding: 0 0 $lineHeight;
   margin: 0 0 $lineHeight/2 0;
   white-space: normal;
+  
+  display: none;
   
   max-height: 2 * $lineHeight;
   &:before {
@@ -150,3 +171,20 @@ pre.regeling-samenvatting {
     margin-bottom: $lineHeight;
   }
 }
+
+.regelingen {
+
+  .regeling-details,
+  pre.regeling-samenvatting {
+
+    max-height: 0;
+    overflow: hidden;
+    transition: all .3s;
+
+    .active & {
+      max-height: 2000px;
+    }
+  }
+
+}
+*/
