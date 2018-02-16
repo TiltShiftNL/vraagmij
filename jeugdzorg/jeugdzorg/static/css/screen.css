@@ -179,6 +179,36 @@ body {
   border-top: 0.15em solid #000;
   border-right: 0.15em solid #000; }
 
+.icon-menu, .icon-close {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: middle;
+  width: 44px;
+  height: 44px;
+  background-color: #fff;
+  text-align: center;
+  background-color: #e5e5e5; }
+.icon-menu:before, .icon-menu:after, .icon-close:before, .icon-close:after {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  border-top: 4px solid #ec0000;
+  border-bottom: 4px solid #ec0000; }
+.icon-menu:after, .icon-close:after {
+  top: 21px;
+  border-bottom: 0; }
+
+.icon-close {
+  background-color: #fff; }
+.icon-close:before {
+  display: none; }
+
 .header {
   max-width: 1400px;
   box-sizing: border-box;
@@ -253,13 +283,16 @@ body {
   margin: 0;
   left: 50%;
   transform: translate3d(-50%, 0, 0);
-  bottom: 30px;
+  top: 60px;
   max-width: 960px;
   width: 100%;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
-  text-align: right; }
+  text-align: right;
+  opacity: 0;
+  z-index: 1;
+  transition: all .3s; }
 .nav-top a {
   display: inline-block;
   width: 42px;
@@ -273,36 +306,9 @@ body {
   background-color: #fff; }
 .nav-top a:hover {
   border-color: #000; }
-
-.icon-menu, .icon-close {
-  position: relative;
-  z-index: 2;
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: middle;
-  width: 44px;
-  height: 44px;
-  background-color: #fff;
-  text-align: center;
-  background-color: #e5e5e5; }
-.icon-menu:before, .icon-menu:after, .icon-close:before, .icon-close:after {
-  position: absolute;
-  left: 12px;
-  top: 14px;
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 10px;
-  border-top: 4px solid #ec0000;
-  border-bottom: 4px solid #ec0000; }
-.icon-menu:after, .icon-close:after {
-  top: 21px;
-  border-bottom: 0; }
-
-.icon-close {
-  background-color: #fff; }
-.icon-close:before {
-  display: none; }
+.scrolled .nav-top {
+  z-index: 100;
+  opacity: 1; }
 
 .button {
   display: inline-block;

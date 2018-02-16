@@ -80,11 +80,11 @@
       scrollers.push({
         el: this,
         fn: function(){
-          d.classList[this.getBoundingClientRect().top < -100 ? 'add' : 'remove']('nav-fixed');
+          d.classList[this.getBoundingClientRect().top < -100 ? 'add' : 'remove']('scrolled');
         }
       });
       
-      }
+    }
 
   };
   
