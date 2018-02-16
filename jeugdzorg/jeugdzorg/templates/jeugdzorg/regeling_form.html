@@ -80,6 +80,27 @@
             </div>
             {% endif %}
 
+            <h2>Doelen generiek</h2>
+            {{ dfs.management_form }}
+            <ol class="form-list" data-decorator="list">
+                {% for form in dfs.forms %}
+                <li class=" formset_row">
+                    <label>
+                        <strong>Doel</strong>
+                        {% for field in form.visible_fields %}
+                            {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        {% endfor %}
+                    </label>
+                </li>
+                {% endfor %}
+            </ol>
+
             <h2>Voorwaarden</h2>
             {{ voorwaarde.management_form }}
             <ol class="form-list" data-decorator="list">

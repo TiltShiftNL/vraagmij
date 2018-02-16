@@ -27,9 +27,31 @@
         {% endif %}
 
     </div>
+    <div class="regeling-contacten">
+        <ul class="contact-lijst">
+            {% for contact in regeling.contact.all %}
+            <li class="contact">
+            <div class="foto">
+                <img width="100%" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNTBweCIgaGVpZ2h0PSI1MHB4IiB2aWV3Qm94PSIwIDAgNTAgNTAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ4LjIgKDQ3MzI3KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5TaGFwZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJ1c2VyLWF2YXRhci1tYWluLXBpY3R1cmUiIGZpbGw9IiNBQ0FDQUMiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0yNC44MjcsMCBDMTEuMTM4LDAgMC4wMDEsMTEuMTM4IDAuMDAxLDI0LjgyNyBDMC4wMDEsMzguNTE2IDExLjEzOCw0OS42NTQgMjQuODI3LDQ5LjY1NCBDMzguNTE1LDQ5LjY1NCA0OS42NTMsMzguNTE2IDQ5LjY1MywyNC44MjcgQzQ5LjY1MywxMS4xMzggMzguNTE3LDAgMjQuODI3LDAgWiBNMzkuMTQyLDM4LjUxIEMzOS4xNDIsMzcuOTM2IDM5LjE0MiwzNy41MzEgMzkuMTQyLDM3LjUzMSBDMzkuMTQyLDM0LjE0NSAzNS4yMywzMi45MSAzMy4xMzYsMzIuMDE0IEMzMi4zNzgsMzEuNjkxIDMwLjk0OSwzMS4wMDMgMjkuNDgzLDMwLjI4NiBDMjguOTg4LDMwLjA0NCAyOC41NDIsMjkuMzk5IDI4LjQ4NiwyOC44NDggTDI4LjMyNCwyNy4yNDQgQzI5LjQ0NiwyNi4xOTkgMzAuNDU3LDI0Ljc0NCAzMC42MjgsMjMuMTIyIEwzMC44ODEsMjMuMTIyIEMzMS4yNzksMjMuMTIyIDMxLjY1NCwyMi44MjQgMzEuNzEzLDIyLjQ1OSBMMzIuMTEsMjAuMDA2IEMzMi4xNjMsMTkuNDgyIDMxLjY2OCwxOS4xNjQgMzEuMjY3LDE5LjE2NCBDMzEuMjc4LDE5LjExMiAzMS4yODcsMTkuMDU5IDMxLjI5MiwxOS4wMTUgQzMxLjM0MywxOC43MiAzMS4zNzQsMTguNDM1IDMxLjM5NCwxOC4xNTggQzMxLjQxOSwxNy45MzUgMzEuNDM5LDE3LjcwNCAzMS40NSwxNy40NjUgQzMxLjQ5MiwxNi4zMDcgMzEuMjk2LDE1LjI5NCAzMC45NzEsMTQuNzI3IEMzMC42NDEsMTMuOTM0IDMwLjE0MSwxMy4xNjQgMjkuNDQ1LDEyLjUwNCBDMjcuNTA2LDEwLjY2OCAyNS4yNTcsOS45NTMgMjMuMzM5LDExLjQyOSBDMjIuMDMzLDExLjIwMyAyMC40ODEsMTEuOCAxOS4zNiwxMy4xMTMgQzE4Ljc0OCwxMy44MyAxOC4zNjcsMTQuNjUgMTguMjA0LDE1LjQ1NyBDMTguMDU4LDE1Ljk2IDE3Ljk2MSwxNi41NjkgMTcuOTM3LDE3LjIyOCBDMTcuOTExLDE3Ljk2MSAxNy45ODMsMTguNjMyIDE4LjExOCwxOS4xNzUgQzE3LjczNiwxOS4xOTkgMTcuMzU0LDE5LjUxMyAxNy4zNTQsMjAuMDA4IEwxNy43NSwyMi40NjEgQzE3LjgwOSwyMi44MjYgMTguMTg0LDIzLjEyNCAxOC41ODIsMjMuMTI0IEwxOC44MDksMjMuMTI0IEMxOS4xNjksMjQuODc4IDIwLjEwMSwyNi4zMTggMjEuMTMyLDI3LjMyMiBMMjAuOTc2LDI4Ljg3MyBDMjAuOTIsMjkuNDIzIDIwLjQ3NCwzMC4wNjYgMTkuOTc4LDMwLjMxMSBDMTguNTYsMzEuMDAzIDE3LjE2MywzMS42NjkgMTYuMzI3LDMyLjAxNCBDMTQuMzU3LDMyLjgyNiAxMC4zMjEsMzQuMTQ1IDEwLjMyMSwzNy41MzEgTDEwLjMyMSwzOC4yOTcgQzcuMDMzLDM0Ljc1NiA1LjAwNSwzMC4wMzEgNS4wMDUsMjQuODMgQzUuMDA1LDEzLjg5OCAxMy44OTksNS4wMDQgMjQuODMxLDUuMDA0IEMzNS43NjQsNS4wMDQgNDQuNjU3LDEzLjg5OCA0NC42NTcsMjQuODMgQzQ0LjY1MywzMC4xMzMgNDIuNTQ4LDM0Ljk0NiAzOS4xNDIsMzguNTEgWiIgaWQ9IlNoYXBlIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=">
+            </div>
+            <div class="details">
+                <h3>{{ contact }}</h3>
+                {% if contact.contactnaarregeling.rol %}
+                <span>{{ contact.contactnaarregeling.rol }}</span>
+                {% endif %}
+                <div class="container">
+                    <a href="mailto:{{ contact.email }}" class="button">mailen</a>
+                    {% if contact.telefoonnummer %}
+                    <a href="tel:{{ contact.telefoonnummer }}" class="button">bellen</a>
+                    {% endif %}
+                </div>
+            </div>
 
-    <p class="regeling-more">
-        <a class="more" href="#regeling-{{ regeling.id }}" data-handler="toggle" data-more="Meer " data-less="Verberg ">details en {{ regeling.voorwaarde_set.all|length }} voorwaarde{% if regeling.voorwaarde_set.all|length > 1 %}n{% endif %} <i class="icon-arrow"></i></a>
-    </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
 
 </article>
