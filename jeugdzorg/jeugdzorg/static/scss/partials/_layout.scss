@@ -1,5 +1,8 @@
 body {
   padding: $padding;
+  @include medium {
+    padding: 10px;
+  }
 }
 .container {
   max-width: $maxContentWidth;
@@ -15,5 +18,8 @@ body {
 
   background-color: #fff;
   padding: $padding;
+  @include medium {
+    padding: 10px;
+  }
   
 }
