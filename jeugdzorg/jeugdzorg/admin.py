@@ -14,13 +14,20 @@ class RegelingenTagsInline(SortableStackedInline):
     extra = 1
 
 
+class ContactNaarRegelingInline(admin.TabularInline):
+    model = ContactNaarRegeling
+    extra = 1
+
+
 @admin.register(Regeling)
 class RegelingAdmin(SortableAdmin):
-    #raw_id_fields = ['doelen', ]
+    #raw_id_fields = ['contact', ]
 
     inlines = [
         VoorwaardeInline,
+        ContactNaarRegelingInline,
     ]
+    #filter_horizontal = ('contact',)  #
 
 
 @admin.register(Voorwaarde)
@@ -36,3 +43,9 @@ class RegelingTagAdmin(SortableAdmin):
 @admin.register(Doel)
 class DoelAdmin(SortableAdmin):
     pass
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    pass
+

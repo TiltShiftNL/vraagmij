@@ -32,12 +32,13 @@ services:
       context: .
       dockerfile: Dockerfile-development
     restart: always
+    env_file: .env
     volumes:
       - ./jeugdzorg:/opt/app
     environment:
       - ENV=develop
+      - RUNSERVER=no
       - DJANGO_ENV=dev
-      - RUNSERVER=yes
       - POSTGRES_DB=jeugdzorg
       - POSTGRES_HOST=db
       - POSTGRES_USER=postgres
