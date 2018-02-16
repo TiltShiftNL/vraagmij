@@ -1,23 +1,3 @@
-/*
-
-  http://fast.fonts.net/cssapi/195fd1b2-81b7-4c67-b3d0-ba13116a1bfd.css
-
-  font-family: "Avenir LT W01_65 Medium1475538";
-  font-family: "Avenir LT W01_95 Black_1475562";
-  font-family: "Avenir LT W01_85 Heavy1475544";
-  font-family: "Avenir LT W01_85 Heavy_1475550";
-  font-family: "Avenir LT W01_55 Obliqu1475526";
-  font-family: "Avenir LT W01_45 Book1475508";
-  font-family: "Avenir LT W01_65 Medium1475538";
-  font-family: "Avenir LT W01_45 Book O1475514";
-  font-family: "Avenir LT W01_95 Black1475556";
-  font-family: "Avenir LT W01_55 Roman1475520";
-  font-family: "Avenir LT W01_65 Medium1475532";
-  font-family: "Avenir LT W01_35 Light1475496";
-  font-family: "Avenir LT W01_35 Light_1475502";
-
-
-*/
 html { 
   font-size: 62.5%;
   @include medium {
@@ -39,8 +19,12 @@ pre,
 textarea,
 select {
   font-size: $fontSize;
-  font-family: Helvetica, Arial;
-} 
+  font-family: "AvenirNextLTW01-Regular", verdana, sans-serif;
+}
+.bold {
+  font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
+}
+
 body {
   line-height: $lineHeightRelative;
 }
@@ -69,6 +53,8 @@ a {
 }
 h1, h2, h3 {
   color: $brandColor2;
+  font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
+  font-weight: 400;
 }
 h4, .normal {
   font-size: $fontSize;
