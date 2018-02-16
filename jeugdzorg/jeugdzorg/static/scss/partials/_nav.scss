@@ -30,7 +30,7 @@
   width: 6em;
   padding-left: 3rem;
 
-  font-family: "Avenir LT W01_85 Heavy1475544", Helvetica, Arial, sans-serif;
+  font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
 
   i {
     position: absolute;
@@ -41,7 +41,12 @@
   .icon-andreas {
     width: 2rem;
     height: 6.8rem;
-    
+  }
+  
+  strong {
+    white-space: nowrap;
+    color: $textColor;
+    font-weight: normal;
   }
 }
 
