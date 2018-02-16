@@ -642,19 +642,24 @@ pre.regeling-samenvatting {
   min-height: 60px;
   background: #f8f8f8;
   padding: 20px;
-  margin-bottom: 20px;
-  color: white; }
+  margin-bottom: 20px; }
 .contact h3 {
   font-size: 16px;
   color: #343434;
-  margin-bottom: 10px; }
+  margin-bottom: 5px; }
+.contact .rol {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #666; }
 .contact .button {
   margin-bottom: 0; }
 .contact .foto {
   float: left;
   width: 60px;
-  height: 60px;
-  margin-right: 20px; }
+  height: 60px; }
+.contact .details {
+  margin-left: 80px; }
 .contact:last-child {
   margin-bottom: 0; }
 

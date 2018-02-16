@@ -66,6 +66,9 @@ class Regeling(models.Model):
         through='ContactNaarRegeling',
         through_fields=('regeling', 'contact'),
     )
+    def contacten(self):
+        print(self.contact.through.objects.all())
+        return self.contact.through.objects.all()
 
     def first_letter(self):
         return self.titel and self.titel[0] or ''
@@ -176,6 +179,11 @@ class Contact(models.Model):
         blank=True,
     )
 
+    @property
+    def regeling_contact(self):
+        print(dir(self))
+        return self.contactnaarregeling
+
     def __str__(self):
         return '%s %s' % (self.voornaam, self.achternaam)
 
@@ -188,6 +196,7 @@ class ContactNaarRegeling(models.Model):
     contact = models.ForeignKey(
         to=Contact,
         verbose_name=_('Contact'),
+        related_name='contactnaarregeling',
         on_delete=models.CASCADE,
     )
     regeling = models.ForeignKey(
@@ -205,9 +214,9 @@ class ContactNaarRegeling(models.Model):
         null=True,
         blank=True,
     )
-
-    def __str__(self):
-        return '%s naar %s' % (self.contact, self.regeling)
+    #
+    # def __str__(self):
+    #     return '%s naar %s' % (self.contact, self.regeling)
 
     class Meta:
         verbose_name = _('Contact naar regeling')
