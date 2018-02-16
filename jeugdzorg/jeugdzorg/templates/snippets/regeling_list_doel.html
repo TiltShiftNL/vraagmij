@@ -12,7 +12,7 @@
     {% for doel in doelen %}
 
         {% if doel.regeling_set.all %}
-            <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.title }}</h2>
+            <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.titel }}</h2>
             {% for regeling in doel.regeling_set.all %}
                 {% include "snippets/regeling.html" %}
             {% endfor %}
@@ -26,4 +26,5 @@
             {% include "snippets/regeling.html" %}
         {% endif %}
     {% endfor %}
+    
 </div>
