@@ -37,13 +37,19 @@ input[type="url"],
 textarea {
   width: 100%;
   line-height: 1;
-  padding: 1em 1em .8em;
+  padding: 0 1em;
+  
+  min-height: 3em;
+  
   box-sizing: border-box;
   border: 1px solid rgba(#000, .1);
   transition: all .3s;
   &:focus {
     border: 1px solid rgba(#000, .8);
   }
+}
+textarea {
+  padding: 1em;
 }
 legend {
   padding: 0;
