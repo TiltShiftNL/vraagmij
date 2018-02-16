@@ -41,6 +41,24 @@
                     {{ form.einddatum }}
                 </label>
             </p>
+            {% if contacten %}
+            <div class="row">
+                <strong>Contacten</strong>
+                <ul class="regeling-doelen">
+                    {% for contact in contacten %}
+                    <li>
+                        <input id="regeling-contact-input-{{ contact.id }}" name="regeling-contact-input-{{ contact.id }}" type="checkbox" {% if contact.id in contacten_added %}checked="checked"{% endif %} value="true">
+                        <input name="regeling-contact-input-{{ contact.id }}" type="hidden" value="false">
+                        <input name="regeling-contact-input-{{ contact.id }}" type="text" value="">
+                        <label for="regeling-contact-input-{{ contact.id }}">{{ contact }}</label> <a href="#regeling-contact-{{ contact.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
+                        {{ contact.volgorde }}
+
+
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
             {% if doelen %}
             <div class="row">
                 <strong>Doel</strong>
@@ -69,6 +87,29 @@
                 <li class=" formset_row">
                     <label>
                         <strong>Voorwaarde</strong>
+                        {% for field in form.visible_fields %}
+                            {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        {% endfor %}
+                    </label>
+                </li>
+                {% endfor %}
+            </ol>
+
+
+
+            <h2>crfs</h2>
+            {{ crfs.management_form }}
+            <ol class="form-list" data-decorator="list">
+                {% for form in crfs.forms %}
+                <li class=" formset_row">
+                    <label>
+                        <strong>Contact</strong>
                         {% for field in form.visible_fields %}
                             {% if forloop.first %}
                                 {% for hidden in form.hidden_fields %}

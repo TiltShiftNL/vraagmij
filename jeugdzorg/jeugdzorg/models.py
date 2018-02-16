@@ -61,6 +61,11 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    contact = models.ManyToManyField(
+        to='Contact',
+        through='ContactNaarRegeling',
+        through_fields=('regeling', 'contact'),
+    )
 
     def first_letter(self):
         return self.titel and self.titel[0] or ''
@@ -152,4 +157,60 @@ class Doel(Sortable):
         verbose_name_plural = _('Doelen')
 
 
+class Contact(models.Model):
+    voornaam = models.CharField(
+        verbose_name=_('Voornaam'),
+        max_length=100,
+    )
+    achternaam = models.CharField(
+        verbose_name=_('Achternaam'),
+        max_length=100,
+    )
+    email = models.EmailField(
+        verbose_name=_('E-mailadres'),
+    )
+    telefoonnummer = models.CharField(
+        verbose_name=_('Telefoonnummer'),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
 
+    def __str__(self):
+        return '%s %s' % (self.voornaam, self.achternaam)
+
+    class Meta:
+        verbose_name = _('Contact')
+        verbose_name_plural = _('Contacten')
+
+
+class ContactNaarRegeling(models.Model):
+    contact = models.ForeignKey(
+        to=Contact,
+        verbose_name=_('Contact'),
+        on_delete=models.CASCADE,
+    )
+    regeling = models.ForeignKey(
+        to=Regeling,
+        verbose_name=_('Regeling'),
+        on_delete=models.CASCADE,
+    )
+    volgorde = models.IntegerField(
+        verbose_name=_('Volgorde'),
+        default=0,
+    )
+    rol = models.CharField(
+        verbose_name=_('Rol'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return '%s naar %s' % (self.contact, self.regeling)
+
+    class Meta:
+        verbose_name = _('Contact naar regeling')
+        verbose_name_plural = _('Contacten naar regelingen')
+        ordering = ('volgorde', )
+        unique_together = ('contact', 'regeling', )

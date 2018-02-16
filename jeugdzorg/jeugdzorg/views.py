@@ -11,6 +11,7 @@ import sys
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.template.loader import select_template
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -91,31 +92,66 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         doelen = Doel.objects.all()
-        doelen_added = [d.id for d in self.object.doelen.all()]
+        contacten = Contact.objects.all()
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
+
             for doel in doelen:
                 if post.getlist('regeling-doel-input-%s' % doel.id)[0] == 'true':
                     self.object.doelen.add(doel)
                 else:
                     self.object.doelen.remove(doel)
+            for contact in contacten:
+                print(post.getlist('regeling-contact-input-%s' % contact.id)[-1])
+                rol = post.getlist('regeling-contact-input-%s' % contact.id)[-1]
+                if post.getlist('regeling-contact-input-%s' % contact.id)[0] == 'true':
+                    try:
+                        cr = ContactNaarRegeling.objects.get(
+                            contact=contact,
+                            regeling=self.object
+                        )
+                        cr.rol = rol
+                        cr.save()
+                    except ObjectDoesNotExist:
+                        cr = ContactNaarRegeling(
+                            contact=contact,
+                            regeling=self.object,
+                            rol=rol,
+                        )
+                        cr.save()
+                else:
+                    try:
+                        cr = ContactNaarRegeling.objects.get(contact=contact, regeling=self.object)
+                        cr.delete()
+                    except ObjectDoesNotExist:
+                        pass
 
 
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
+            data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
+
         data['doelen'] = doelen
-        data['doelen_added'] = doelen_added
+        data['contacten'] = contacten
+        data['doelen_added'] = [d.id for d in self.object.doelen.all()]
+        data['contacten_added'] = [d.id for d in self.object.contact.all()]
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
+        crfs = context['crfs']
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
                 voorwaarde.save()
+            if crfs.is_valid():
+                crfs.instance = self.object
+                crfs.save()
+
         return super(RegelingUpdate, self).form_valid(form)
 
 
