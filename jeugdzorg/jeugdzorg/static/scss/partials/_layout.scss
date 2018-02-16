@@ -34,4 +34,15 @@ body {
     display:table;
     margin-right: 1em;
   }
+  @include large {
+    columns: 3;
+  }
+  @include medium {
+    columns: 2;
+  }
+  @include small {
+    columns: 1;
+  }
+  
+  
 }
