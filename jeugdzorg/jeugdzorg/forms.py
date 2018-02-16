@@ -25,5 +25,5 @@ class RegelingModelForm(forms.ModelForm):
 VoorwaardeFormSet = forms.inlineformset_factory(Regeling, Voorwaarde,
                                             form=RegelingModelForm, extra=1)
 
-# RegelingTagFormSet = forms.inlineformset_factory(Regeling, TaggedRegeling.tag,
-#                                             form=RegelingModelForm, extra=1)
+ContactNaarRegelingFormSet = forms.inlineformset_factory(Regeling, ContactNaarRegeling,
+                                            form=RegelingModelForm, extra=1)
