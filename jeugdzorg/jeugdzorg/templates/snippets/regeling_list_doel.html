@@ -9,28 +9,39 @@
         <li><a href="#doel-overige" data-decorator="scroll">Overige</a></li>
     </ul>
 
-    {% for doel in doelen %}
 
-        {% if doel.regeling_set.all %}
-            <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.titel }}</h2>
-            {% if doel.omschrijving %}
-                <p class="doel-omschrijving">
-                    {{ doel.omschrijving }}
-                </p>
-            {% endif %}
+    <div class="columns">
+        {% for doel in doelen %}
+
+            {% if doel.regeling_set.all %}
+                <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.titel }}</h2>
+                {% if doel.omschrijving %}
+                    <p class="doel-omschrijving">
+                        {{ doel.omschrijving }}
+                    </p>
+                {% endif %}
             
-            {% for regeling in doel.regeling_set.all %}
-                {% include "snippets/regeling.html" %}
-            {% endfor %}
-        {% endif %}
+                <ul class="regelingen">
+                    {% for regeling in doel.regeling_set.all %}
+                        <li><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></li>
+                    {% endfor %}
+                </ul>
+                
+            {% endif %}
 
-    {% endfor %}
+        {% endfor %}
 
-    <h2 class="shortcut" id="doel-overige">Overige</h2>
-    {% for regeling in regeling_list %}
-        {% if not regeling.doelen.all %}
-            {% include "snippets/regeling.html" %}
-        {% endif %}
-    {% endfor %}
-    
+        <div class="group">
+            <h2 class="shortcut" id="doel-overige">Overige</h2>
+            <ul class="regelingen">
+                {% for regeling in regeling_list %}
+                    {% if not regeling.doelen.all %}
+                        <li><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        
+    </div>
+
 </div>

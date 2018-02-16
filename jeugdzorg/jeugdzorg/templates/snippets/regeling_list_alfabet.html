@@ -6,12 +6,19 @@
             <li><a href="#regelingen-{{ letter }}" data-decorator="scroll">{{ letter }}</a></li>
         {% endfor %}
     </ul>
+    
+    <div class="columns">
 
-    {% for titel in title_list %}
-        <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-        {% for regeling in titel.list %}
-            {% include "snippets/regeling.html" %}
+        {% for titel in title_list %}
+            <div class="group">
+                <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+                <ul class="regelingen">
+                    {% for regeling in titel.list %}
+                        <li><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endfor %}
-    {% endfor %}
+    </div>
 
 </div>

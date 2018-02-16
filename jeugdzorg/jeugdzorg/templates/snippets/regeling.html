@@ -11,9 +11,9 @@
         </h1>
 
         {% if regeling.samenvatting %}
-            <pre class="regeling-samenvatting">
-                {{ regeling.samenvatting }}
-            </pre>
+            <div class="regeling-samenvatting">
+                {{ regeling.samenvatting|linebreaks }}
+            </div>
         {% endif %}
     </header>
 

@@ -30,6 +30,8 @@ class RegelingList(ListView):
         data['list_template'] = template
         return data
 
+class RegelingDetail(DetailView):
+    model = Regeling
 
 class RegelingCreate(LoginRequiredMixin, CreateView):
     model = Regeling
