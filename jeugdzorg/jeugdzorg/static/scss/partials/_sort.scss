@@ -1,0 +1,19 @@
+.sort {
+  list-style: none;
+  li {
+    display: inline;
+  }
+  a {
+    display: inline-block;
+    color: #6db5d6;
+    padding: 0 .5em;
+    
+    &.active {
+      text-decoration: none;
+    }
+  }
+  
+  li + li {
+    border-left: 1px solid #6db5d6;
+  }
+}

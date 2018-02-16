@@ -37,7 +37,12 @@
     }
     
   }
+  display: none;
+  @include medium {
+    display: block;
+  }
 }
 .shortcut {
   padding-top: $lineHeight;
+  line-height: $lineHeight;
 }
