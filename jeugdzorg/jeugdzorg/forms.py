@@ -27,3 +27,6 @@ VoorwaardeFormSet = forms.inlineformset_factory(Regeling, Voorwaarde,
 
 ContactNaarRegelingFormSet = forms.inlineformset_factory(Regeling, ContactNaarRegeling,
                                             form=RegelingModelForm, extra=1)
+
+DoelFormSet = forms.inlineformset_factory(Regeling, Regeling.doelen.through,
+                                            form=RegelingModelForm, extra=1)

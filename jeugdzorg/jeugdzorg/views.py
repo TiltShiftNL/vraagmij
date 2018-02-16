@@ -96,6 +96,7 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
             for doel in doelen:
@@ -131,6 +132,7 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
 
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
+            data['dfs'] = DoelFormSet(instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
 
         data['doelen'] = doelen
@@ -143,6 +145,7 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
         crfs = context['crfs']
+        dfs = context['dfs']
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
@@ -151,6 +154,9 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
             if crfs.is_valid():
                 crfs.instance = self.object
                 crfs.save()
+            if dfs.is_valid():
+                dfs.instance = self.object
+                dfs.save()
 
         return super(RegelingUpdate, self).form_valid(form)
 
