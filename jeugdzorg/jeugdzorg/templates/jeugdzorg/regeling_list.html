@@ -1,58 +1,15 @@
 {% extends 'base.html' %}
 
 {% block main %}
+
 <div class="container">
-
     <h1>Alle regelingen</h1>
-    {% regroup regeling_list by first_letter as title_list %}
-    
-    <ul class="letters">
-        {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
-            <li><a href="#regelingen-{{ letter }}" data-decorator="scroll">{{ letter }}</a></li>
-        {% endfor %}
-    </ul>
-    
-    {% for titel in title_list %}
-        <h2 class="letter" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-        {% for regeling in titel.list %}
-            <article class="regeling" id="regeling-{{ regeling.id }}">
-
-                <header class="regeling-header">
-                    <h1 class="regeling-title">
-                        {% if user.is_authenticated %}
-                            <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
-                        {% endif %}
-
-                        {{ regeling.titel }}
-
-                    </h1>
-        
-                    {% if regeling.samenvatting %}
-                        <pre class="regeling-samenvatting">
-                            {{ regeling.samenvatting }}
-                        </pre>
-                    {% endif %}
-                </header>
-      
-                <div class="regeling-details">
-                    {% if regeling.voorwaarde_set.all %}
-                        <ol class="regeling-voorwaarden">
-                            {% for vw in regeling.voorwaarde_set.all %}
-                                <li>{{ vw.titel }}</li>
-                            {% endfor %}
-                        </ol>
-                    {% endif %}
-
-                </div>
-      
-                <p class="regeling-more">
-                    <a class="more" href="#regeling-{{ regeling.id }}" data-handler="toggle" data-more="Meer " data-less="Verberg ">details en {{ regeling.voorwaarde_set.all|length }} voorwaarde{% if regeling.voorwaarde_set.all|length > 1 %}n{% endif %} <i class="icon-arrow"></i></a>
-                </p>
-
-            </article>
-        {% endfor %}
-    {% endfor %}
-
 </div>
+<div class="container">
+    <a class="button {% if request.GET.beeld != 'doel' %}secondary{% endif %}" href=".?beeld=alfabet">Op alfabet</a>
+    <a class="button {% if request.GET.beeld == 'doel' %}secondary{% endif %}" href=".?beeld=doel">Op doel</a>
+</div>
+
+{% include list_template %}
 
 {% endblock %}
