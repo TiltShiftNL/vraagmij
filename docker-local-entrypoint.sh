@@ -1,6 +1,8 @@
 #!/bin/bash
 
-GIT_REV="$(git rev-parse HEAD)"
+GIT_REV="$( cd /opt/git/ ; git rev-parse HEAD)"
+
+rm -rf /opt/git/
 
 echo $GIT_REV > /opt/git_rev
 

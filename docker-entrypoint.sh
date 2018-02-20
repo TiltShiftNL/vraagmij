@@ -1,5 +1,11 @@
 #!/bin/bash
 
+GIT_REV="$( cd /opt/git/ ; git rev-parse HEAD)"
+
+rm -rf /opt/git/
+
+echo $GIT_REV > /opt/git_rev
+
 # Collect static files
 echo "Collect static files"
 python manage.py collectstatic --noinput

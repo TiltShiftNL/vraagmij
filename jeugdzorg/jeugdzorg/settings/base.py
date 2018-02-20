@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ENV = os.getenv("ENV", "develop")
 DJANGO_ENV = os.getenv("DJANGO_ENV", "dev")
-SOURCE_COMMIT = os.getenv("SOURCE_COMMIT", "no-build-number")
+# SOURCE_COMMIT = os.getenv("SOURCE_COMMIT", "no-build-number")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "jeugdzorg")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "db")
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
@@ -31,6 +31,9 @@ SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
 TEST = os.getenv("TEST", False)
 
 DEBUG = SECRET_KEY == 'default-secret'
+
+f = open('/opt/git_rev', 'r')
+SOURCE_COMMIT = f.read()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
