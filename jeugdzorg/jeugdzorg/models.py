@@ -66,8 +66,8 @@ class Regeling(models.Model):
         through='ContactNaarRegeling',
         through_fields=('regeling', 'contact'),
     )
+
     def contacten(self):
-        print(self.contact.through.objects.all())
         return self.contact.through.objects.all()
 
     def first_letter(self):
@@ -178,11 +178,6 @@ class Contact(models.Model):
         null=True,
         blank=True,
     )
-
-    @property
-    def regeling_contact(self):
-        print(dir(self))
-        return self.contactnaarregeling
 
     def __str__(self):
         return '%s %s' % (self.voornaam, self.achternaam)

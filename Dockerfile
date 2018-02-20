@@ -17,7 +17,7 @@ RUN apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install -y --no-install-recommends supervisor && \
     pip3 install uwsgi
 
-COPY . /opt/app/
+COPY jeugdzorg /opt/app/
 RUN mkdir /opt/static_root/
 RUN mkdir /var/uwsgi/
 RUN usermod -a -G root www-data
@@ -32,7 +32,7 @@ RUN mkdir /opt/file_upload/
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 RUN chmod 777 /etc/nginx/sites-enabled/django_nginx.conf
 
-WORKDIR /opt/app/jeugdzorg
+WORKDIR /opt/app
 
 RUN pip3 install -r ./requirements.txt
 
