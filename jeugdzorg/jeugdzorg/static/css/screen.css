@@ -87,7 +87,8 @@ body, [type="text"], [type="search"], [type="email"], [type="password"], [type="
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif; }
 
 body {
-  line-height: 1.375; }
+  line-height: 1.375;
+  color: #5e5e5e; }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -108,10 +109,9 @@ h3, .large {
   line-height: 1.2; }
 
 a {
-  color: #000; }
+  color: #5e5e5e; }
 
 h1, h2, h3 {
-  color: #000;
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
   font-weight: 400; }
 
@@ -187,8 +187,8 @@ body {
   width: .4em;
   height: .4em;
   transform: rotate(45deg);
-  border-top: 0.15em solid #000;
-  border-right: 0.15em solid #000; }
+  border-top: 0.15em solid #5e5e5e;
+  border-right: 0.15em solid #5e5e5e; }
 
 .icon-menu, .icon-close {
   position: relative;
@@ -255,7 +255,7 @@ body {
   height: 6.8rem; }
 .logo strong {
   white-space: nowrap;
-  color: #000;
+  color: #5e5e5e;
   font-weight: normal; }
 
 .nav-container {
@@ -265,6 +265,8 @@ body {
   top: 0; }
 
 .nav {
+  position: relative;
+  z-index: 5;
   display: none; }
 .nav.active {
   display: block; }
@@ -273,14 +275,14 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  text-align: right;
-  outline: 2000px solid rgba(0, 0, 0, 0.2); }
+  text-align: right; }
 .menu a {
   display: block;
   padding: 1em;
   min-width: 200px;
   text-decoration: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  background-color: #fff;
+  margin-bottom: 1px; }
 
 .nav-open, .nav-close {
   display: block;
@@ -295,6 +297,14 @@ body {
   right: 0;
   top: 0;
   display: none; }
+.nav-close:before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2); }
 
 .nav.active ~ .nav-close {
   display: block; }
@@ -334,7 +344,7 @@ body {
   background-color: #fff;
   outline: 4000px solid transparent; }
 .nav-top a:hover {
-  border-color: #000; }
+  border-color: #5e5e5e; }
 .nav-top a:hover {
   outline: 4000px solid rgba(0, 0, 0, 0.1); }
 .scrolled .nav-top {
@@ -475,8 +485,9 @@ form label strong {
   margin: 0 0 .4em 0; }
 
 .regeling-title {
-  margin: .2em 0;
-  font-size: 2rem; }
+  margin: 0 0 .8em 0;
+  font-size: 2.4rem;
+  font-weight: 700; }
 .regeling-title .regeling-edit {
   position: relative;
   z-index: 10;
@@ -495,6 +506,108 @@ form label strong {
 .regeling-edit {
   opacity: .1;
   transition: all .3s; }
+
+.regeling {
+  position: relative;
+  padding-left: 130px; }
+.regeling p, .regeling li {
+  max-width: 45em; }
+
+.regeling-voorwaarden {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0 0 2.2rem 0;
+  counter-reset: item; }
+.regeling-voorwaarden li {
+  position: relative;
+  padding-left: 44px;
+  padding-right: 150px; }
+.regeling-voorwaarden li:before {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  counter-increment: item;
+  content: counter(item);
+  min-width: 30px;
+  height: 30px;
+  background-color: #5e5e5e;
+  color: #fff;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: center; }
+.regeling-voorwaarden li {
+  margin-bottom: 2.2rem; }
+
+.regeling-progress {
+  display: inline-block;
+  text-align: center;
+  line-height: 88px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 4px solid #f3f3f3;
+  font-size: 2.4rem;
+  font-weight: 700; }
+.regeling-progress em {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 400;
+  font-style: normal;
+  font-size: .5em; }
+.regeling .regeling-progress {
+  position: absolute;
+  left: 0;
+  top: -36px; }
+
+.regeling-voorwaarde-yesno {
+  position: absolute;
+  right: 0;
+  top: 0; }
+.regeling-voorwaarde-yesno input {
+  position: absolute;
+  left: -1000px;
+  opacity: 0; }
+.regeling-voorwaarde-yesno label {
+  cursor: pointer;
+  padding: .5em 0;
+  display: inline-block;
+  border-radius: 3px 0 0 3px;
+  width: 3.5em;
+  text-align: center;
+  color: #000;
+  background-color: #ebeaea;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  transition: all .3s; }
+.regeling-voorwaarde-yesno label + label {
+  border-radius: 0 3px 3px 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.2); }
+.regeling-voorwaarde-yesno [for*="-yes"]:hover {
+  background-color: #d7e2c7; }
+.regeling-voorwaarde-yesno [for*="-no"]:hover {
+  background-color: #eed7d7; }
+.regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-no"] {
+  background-color: #ff9191;
+  color: #fff; }
+.regeling-voorwaarde-yesno [id*="-yes"]:checked ~ [for*="-yes"] {
+  background-color: #8ac640;
+  color: #fff; }
+.regeling-voorwaarde-yesno [for*="-initial"] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: none;
+  width: 50%;
+  background-color: #000;
+  opacity: 0;
+  overflow: hidden; }
+.regeling-voorwaarde-yesno [id*="-yes"]:checked ~ [for*="-initial"], .regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-initial"] {
+  display: block; }
+.regeling-voorwaarde-yesno [id*="-yes"]:checked ~ [for*="-initial"] {
+  left: 0; }
+.regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-initial"] {
+  right: 0; }
 
 /*
 
@@ -689,7 +802,7 @@ pre.regeling-samenvatting {
   margin: 0 1em 1em 0;
   text-decoration: none; }
 .shortcuts a:hover {
-  border-color: #000; }
+  border-color: #5e5e5e; }
 .shortcuts a.disabled {
   opacity: .2;
   cursor: not-allowed; }
