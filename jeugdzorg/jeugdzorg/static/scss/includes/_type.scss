@@ -27,6 +27,7 @@ select {
 
 body {
   line-height: $lineHeightRelative;
+  color: $textColor;
 }
 
 body {
@@ -52,7 +53,6 @@ a {
   color: $textColor;
 }
 h1, h2, h3 {
-  color: $brandColor2;
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
   font-weight: 400;
 }
