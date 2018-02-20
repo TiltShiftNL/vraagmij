@@ -45,6 +45,53 @@
   
   var decorators = {
     
+    'progress': function(){
+      var el = this;
+      var id = el.dataset.regelingId;
+      var items = el.children;
+      
+      var progress = document.createElement('span');
+      progress.classList.add('regeling-progress');
+      el.parentNode.appendChild(progress);
+      
+      
+      var _change = function(){
+        var 
+          total = items.length,
+          maybe = 0,
+          yes = 0,
+          no = 0;
+          
+        for (var i=0; i<items.length; i++) {
+          if (items[i].querySelectorAll('[value="yes"]:checked').length) yes++;
+          else if (items[i].querySelectorAll('[value="no"]:checked').length) no++;
+          else if (items[i].querySelectorAll('[value="maybe"]:checked').length) maybe++;
+        }
+        
+        progress.innerHTML = Math.round(yes / total * 100) + '<em>%</em>';
+        
+        console.log(total, yes, no, maybe)
+      };
+      
+      
+      
+      for (var i=0; i<items.length; i++) {
+        var yesno = document.createElement('div');
+        yesno.classList.add('regeling-voorwaarde-yesno');
+        yesno.innerHTML = '';
+        
+        yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="yes">';
+        yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="no">';
+        yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="maybe" checked>';
+        yesno.innerHTML += '<label for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes">Ja</label>';
+        yesno.innerHTML += '<label for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no">Nee</label>';
+        yesno.innerHTML += '<label for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial">Misschien</label>';
+        items[i].appendChild(yesno);
+      }
+      
+      el.addEventListener('change', _change); _change();
+    },
+    
     'list': function(){
       
       var remove = document.createElement('button');
