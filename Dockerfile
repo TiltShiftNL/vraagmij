@@ -17,17 +17,20 @@ RUN apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install -y --no-install-recommends supervisor && \
     pip3 install uwsgi
 
-COPY jeugdzorg /opt/app
 RUN mkdir /opt/static_root/
+RUN mkdir /opt/file_upload/
+RUN mkdir /opt/git/
 RUN mkdir /var/uwsgi/
-RUN usermod -a -G root www-data
-RUN newgrp www-data
-RUN newgrp root
+
+COPY .git /opt/git
+COPY jeugdzorg /opt/app
 COPY jeugdzorg/django_nginx.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-RUN mkdir /opt/file_upload/
+RUN usermod -a -G root www-data
+RUN newgrp www-data
+RUN newgrp root
 
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 RUN chmod 777 /etc/nginx/sites-enabled/django_nginx.conf
