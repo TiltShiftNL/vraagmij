@@ -19,9 +19,9 @@
 
     <div class="regeling-details">
         {% if regeling.voorwaarde_set.all %}
-            <ol class="regeling-voorwaarden">
+            <ol class="regeling-voorwaarden" data-decorator="progress" data-regeling-id="{{ regeling.id }}">
                 {% for vw in regeling.voorwaarde_set.all %}
-                    <li>{{ vw.titel }}</li>
+                    <li data-voorwaarde-id="{{ vw.id }}">{{ vw.titel }}</li>
                 {% endfor %}
             </ol>
         {% endif %}
