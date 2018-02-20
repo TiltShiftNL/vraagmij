@@ -1,5 +1,9 @@
 #!/bin/bash
 
+GIT_REV="$(git rev-parse HEAD)"
+
+echo $GIT_REV > /opt/git_rev
+
 echo "Apply database migrations"
 python manage.py migrate
 

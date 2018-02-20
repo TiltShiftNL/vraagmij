@@ -34,7 +34,7 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - ./jeugdzorg:/opt/app
+      - .:/opt/app
     environment:
       - ENV=develop
       - RUNSERVER=no
