@@ -12,6 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.template.loader import select_template
 from django.core.exceptions import ObjectDoesNotExist
+from .mail import send_simple_message
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -171,6 +172,9 @@ def dump_jeugdzorg(request):
     sys.stdout = response
     call_command('dumpdata', 'jeugdzorg', '--indent=4')
     sys.stdout = sysout
+
+    # send_simple_message()
+
     return response
 
 

@@ -7,7 +7,7 @@
     
     <title>Jeugdzorg - {% block title %}Regelingen{% endblock %}</title>
     
-    <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?{% now "U" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?v={% now "U" %}"/>
     <!-- TODO: USE FONTS FROM AMSTERDAM -->
     <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/0037f97b-b0f6-41de-8f33-75b12c9f76ea.css"/>
     
@@ -44,7 +44,7 @@ hello world
     <a href="#top" data-handler="scroll">⇡</a>
   </p>
   
-  <script type="text/javascript" defer src="{% static "js/scripts.js" %}?{% now "U" %}"></script>
+  <script type="text/javascript" defer src="{% static "js/scripts.js" %}?v={% now "U" %}"></script>
   <div class="version">
     <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>

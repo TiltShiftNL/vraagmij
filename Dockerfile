@@ -24,7 +24,8 @@ RUN mkdir /var/uwsgi/
 
 COPY .git /opt/git
 COPY jeugdzorg /opt/app
-COPY jeugdzorg/django_nginx.conf /etc/nginx/sites-enabled
+COPY jeugdzorg/nginx_production.conf /etc/nginx/sites-enabled
+# COPY jeugdzorg/nginx_acceptance.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
@@ -33,7 +34,8 @@ RUN newgrp www-data
 RUN newgrp root
 
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
-RUN chmod 777 /etc/nginx/sites-enabled/django_nginx.conf
+RUN chmod 777 /etc/nginx/sites-enabled/nginx_production.conf
+# RUN chmod 777 /etc/nginx/sites-enabled/nginx_acceptance.conf
 
 WORKDIR /opt/app
 
