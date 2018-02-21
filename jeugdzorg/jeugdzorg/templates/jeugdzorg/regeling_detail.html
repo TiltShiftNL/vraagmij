@@ -3,6 +3,9 @@
 {% block main %}
 
 <div class="container">
+  <p class="regeling-back">
+    <a href="{% url 'regelingen' %}"><i class="icon-arrow-left"></i> Terug naar de lijst</a>
+  </p>
   {% include "snippets/regeling.html" %}
 </div>
 
