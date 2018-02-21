@@ -49,7 +49,7 @@
       var el = this;
       var id = el.dataset.regelingId;
       var items = el.children;
-      
+
       // var progress = document.createElement('svg');
       // progress.classList.add('progress');
       // progress.width = 88;
@@ -135,7 +135,7 @@
       var remove = document.createElement('button');
       remove.dataset.handler = 'list-remove';
       remove.type = 'button';
-      remove.innerHTML = '[-] voorwaarde verwijderen';
+      remove.innerHTML = '[-] item verwijderen';
 
       for (var i=0; i<this.children.length; i++) {
         this.children[i].appendChild(remove.cloneNode(true));
@@ -144,7 +144,7 @@
       var add = document.createElement('button');
       add.dataset.handler = 'list-add';
       add.type = 'button';
-      add.innerHTML = '[+] voorwaarde toevoegen';
+      add.innerHTML = '[+] item toevoegen';
 
       add.list = this;
       
