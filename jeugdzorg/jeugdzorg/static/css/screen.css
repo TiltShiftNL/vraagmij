@@ -372,7 +372,7 @@ body {
   background-color: #000;
   border-color: #000; }
 
-input[type="text"], input[type="date"], input[type="password"], input[type="email"], input[type="url"], textarea {
+input[type="text"], input[type="date"], input[type="password"], input[type="email"], input[type="url"], select, textarea {
   width: 100%;
   line-height: 1;
   padding: 0 1em;
@@ -380,8 +380,11 @@ input[type="text"], input[type="date"], input[type="password"], input[type="emai
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all .3s; }
-input[type="text"]:focus, input[type="date"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="url"]:focus, textarea:focus {
+input[type="text"]:focus, input[type="date"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
   border: 1px solid rgba(0, 0, 0, 0.8); }
+
+option {
+  min-height: 2.75em; }
 
 textarea {
   padding: 1em; }
@@ -404,6 +407,8 @@ form .group {
   display: flex; }
 form .group label {
   margin-right: 1em; }
+form .group label:last-child {
+  margin-right: 0; }
 form label {
   display: block; }
 form label strong {
@@ -414,7 +419,7 @@ form label strong {
   list-style: none;
   padding: 0;
   counter-reset: item; }
-.form-list li:not(.item-deleted) strong:after {
+.form-list li:not(.item-deleted) > label:first-child > strong:after {
   counter-increment: item;
   content: " " counter(item); }
 
@@ -565,6 +570,9 @@ hr {
 .regeling-voorwaarden li {
   margin-bottom: 2.2rem; }
 
+.regeling-samenvatting {
+  margin-bottom: 4.4rem; }
+
 .regeling-progress {
   position: relative;
   display: inline-block;
@@ -670,147 +678,66 @@ hr {
 .regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-initial"] {
   right: 0; }
 
-/*
+.input-volgorde, .input-delete {
+  opacity: 0;
+  position: absolute;
+  left: -1000px; }
 
-.regeling {
-  
-  position: relative;
-  
-  margin-bottom: $lineHeight;
-  border-bottom: 1px solid #f3f3f3;
-  padding: $padding / 2;
-  margin-left: -$padding / 2;
-  margin-right: -$padding / 2;
-  
-  transition: all .3s;
-  
-  &.active {
-//    background-color: #f3f3f3;
-  }
-  
-  @include medium {
-    padding: 5px;
-    margin-left: -5px;
-    margin-right: -5px;
-    
-  }
-  
-}
-.regeling-voorwaarden {
-  margin-bottom: $lineHeight;
-  padding-left: 2em;
-}
-.regeling-edit {
-  opacity: .1;
-  transition: all .3s;
-}
+.input-contact {
+  flex-basis: 50%; }
+
+.input-rol {
+  flex-basis: 50%; }
 
 .regeling-more {
   display: none;
-  margin: 0;
-  a {
-    text-decoration: none;
-    font-weight: bold;
-  }
-  a:before {
-    content: attr(data-more);
-  }
-  a:after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba($accentColor, 0);
-    
-    transition: all .1s;
-  }
-  .active & {
-    a:before {
-      content: attr(data-less);
-    }
-    a:after {
-      background-color: rgba($accentColor, .02);
-    }
-    
-  }
-  a:hover:after {
-    background-color: rgba($accentColor, .05);
-  }
-}
+  margin: 0; }
+.regeling-more a {
+  text-decoration: none;
+  font-weight: bold; }
+.regeling-more a:before {
+  content: attr(data-more); }
+.regeling-more a:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(236, 0, 0, 0);
+  transition: all .1s; }
+.active .regeling-more a:before {
+  content: attr(data-less); }
+.active .regeling-more a:after {
+  background-color: rgba(236, 0, 0, 0.02); }
+.regeling-more a:hover:after {
+  background-color: rgba(236, 0, 0, 0.05); }
 
-pre.regeling-samenvatting {
+.regeling-samenvatting {
   position: relative;
-  padding: 0 0 $lineHeight;
-  margin: 0 0 $lineHeight/2 0;
+  padding: 0 0 2.2rem;
+  margin: 0 0 1.1rem 0;
   white-space: normal;
-  
   display: none;
-  
-  max-height: 2 * $lineHeight;
-  &:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    height: $lineHeight;
-    transition: all .3s;
-    opacity: 1;
-    
-    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 80%);
-    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%);
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 80%);
-    
-    .active & {
-      opacity: 0;
-    }
-  }
-  
-  .active & {
-    margin-bottom: 0;
-  }
-}
-.regeling-doelen {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  label {
-    display: inline-block;
-  }
-  .regeling-doel {
-    display: block;
-  }
-}
-.regeling-doel {
-  display: block;
-  max-height: 0;
-  overflow: hidden;
+  max-height: 4.4rem; }
+.regeling-samenvatting:before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 2.2rem;
   transition: all .3s;
-  &.active {
-    max-height: 2000px;
-    margin-bottom: $lineHeight;
-  }
-}
+  opacity: 1;
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 80%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 80%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 80%); }
+.active .regeling-samenvatting:before {
+  opacity: 0; }
+.active .regeling-samenvatting {
+  margin-bottom: 0; }
 
-.regelingen {
-
-  .regeling-details,
-  pre.regeling-samenvatting {
-
-    max-height: 0;
-    overflow: hidden;
-    transition: all .3s;
-
-    .active & {
-      max-height: 2000px;
-    }
-  }
-
-}
-*/
 .contact {
   max-width: 300px;
   width: auto;

@@ -34,6 +34,7 @@ input[type="date"],
 input[type="password"],
 input[type="email"],
 input[type="url"],
+select,
 textarea {
   width: 100%;
   line-height: 1;
@@ -47,6 +48,9 @@ textarea {
   &:focus {
     border: 1px solid rgba(#000, .8);
   }
+}
+option {
+  min-height: 2.75em;
 }
 textarea {
   padding: 1em;
@@ -69,8 +73,12 @@ form {
   }
   .group {
     display: flex;
+    
     label {
       margin-right: 1em;
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
   label {
@@ -86,7 +94,7 @@ form {
   list-style: none;
   padding: 0;
   counter-reset: item;
-  li:not(.item-deleted) strong {
+  li:not(.item-deleted) > label:first-child > strong {
     &:after {
       counter-increment: item; 
       content: ' ' counter(item);
