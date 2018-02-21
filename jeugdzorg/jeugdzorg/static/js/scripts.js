@@ -50,12 +50,28 @@
       var id = el.dataset.regelingId;
       var items = el.children;
       
+      // var progress = document.createElement('svg');
+      // progress.classList.add('progress');
+      // progress.width = 88;
+      // progress.height = 88;
+      // progress.viewBox = '0 0 88 88';
+      // progress.innerHTML = '';
+      // progress.innerHTML += '<circle class="progress__meter" cx="44" cy="44" r="41" stroke-width="6" />';
+      // progress.innerHTML += '<circle class="progress__value" cx="44" cy="44" r="41" stroke-width="6" />';
+      
       var progress = document.createElement('span');
+      
       progress.classList.add('regeling-progress');
+      
+      progress.innerHTML = '<span class="yes"></span><span class="no"></span><span class="result"></span>';
       el.parentNode.appendChild(progress);
+      var 
+        resultEl = progress.querySelector('.result'),
+        yesEl = progress.querySelector('.yes'),
+        noEl = progress.querySelector('.no');
       
       
-      var _change = function(){
+        var _change = function(){
         var 
           total = items.length,
           maybe = 0,
@@ -68,9 +84,31 @@
           else if (items[i].querySelectorAll('[value="maybe"]:checked').length) maybe++;
         }
         
-        progress.innerHTML = Math.round(yes / total * 100) + '<em>%</em>';
+        resultEl.innerHTML = Math.round(yes / total * 100) + '<em>%</em>';
         
-        console.log(total, yes, no, maybe)
+        var 
+          yesResult = Math.round(yes / total * 100),
+          noResult = Math.round(no / total * 100);
+        
+        yesEl.style.width = yesResult + '%';
+        yesEl.style.height = yesResult + '%';
+        noEl.style.width = (yesResult + noResult) + '%';
+        noEl.style.height = (yesResult + noResult) + '%';
+        
+        progress.classList[(yes + no == total) ? 'add' : 'remove']('complete');
+        progress.classList[(yes + no > 0) ? 'add' : 'remove']('started');
+        
+        progress.classList.remove('complete-no');
+        progress.classList.remove('complete-yes');
+        
+        if (yes + no == total) {
+          if (yes == total) {
+            progress.classList.add('complete-yes');
+          } else {
+            progress.classList.add('complete-no');
+          }
+        }
+        
       };
       
       

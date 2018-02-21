@@ -512,6 +512,10 @@ form label strong {
   padding-left: 130px; }
 .regeling p, .regeling li {
   max-width: 45em; }
+@media (max-width: 900px) {
+  .regeling {
+    padding-left: 0;
+    padding-top: 130px; } }
 
 .regeling-voorwaarden {
   list-style: none;
@@ -536,10 +540,14 @@ form label strong {
   font-weight: 700;
   line-height: 30px;
   text-align: center; }
+@media (max-width: 900px) {
+  .regeling-voorwaarden li {
+    padding-right: 110px; } }
 .regeling-voorwaarden li {
   margin-bottom: 2.2rem; }
 
 .regeling-progress {
+  position: relative;
   display: inline-block;
   text-align: center;
   line-height: 88px;
@@ -547,24 +555,52 @@ form label strong {
   height: 88px;
   border-radius: 50%;
   border: 4px solid #f3f3f3;
-  font-size: 2.4rem;
-  font-weight: 700; }
-.regeling-progress em {
+  background-color: #d9d9d9;
+  transition: all .3s;
+  transition-delay: .3s; }
+.regeling-progress > * {
   position: absolute;
-  display: inline-block;
-  vertical-align: middle;
-  font-weight: 400;
-  font-style: normal;
-  font-size: .5em; }
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transition: all .3s; }
+.regeling-progress .yes {
+  background-color: #8ac640;
+  z-index: 2;
+  width: 30%;
+  height: 30%; }
+.regeling-progress .no {
+  background-color: #ff9191;
+  z-index: 1;
+  width: 40%;
+  height: 40%; }
+.regeling-progress .result {
+  z-index: 4;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  color: #fff; }
+.regeling-progress .result em {
+  font-style: normal; }
+.regeling-progress.complete-yes {
+  border-color: #6fa330; }
+.regeling-progress.complete-no {
+  border-color: #ff5e5e; }
 .regeling .regeling-progress {
   position: absolute;
   left: 0;
   top: -36px; }
+@media (max-width: 900px) {
+  .regeling .regeling-progress {
+    left: 50%;
+    top: 0;
+    transform: translate3d(-50%, 0, 0); } }
 
 .regeling-voorwaarde-yesno {
   position: absolute;
   right: 0;
-  top: 0; }
+  top: -.5em; }
 .regeling-voorwaarde-yesno input {
   position: absolute;
   left: -1000px;
