@@ -92,7 +92,6 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        doelen = Doel.objects.all()
         contacten = Contact.objects.all()
         post = self.request.POST
         if post:
@@ -100,13 +99,7 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
             data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
-            for doel in doelen:
-                if post.getlist('regeling-doel-input-%s' % doel.id)[0] == 'true':
-                    self.object.doelen.add(doel)
-                else:
-                    self.object.doelen.remove(doel)
             for contact in contacten:
-                print(post.getlist('regeling-contact-input-%s' % contact.id)[-1])
                 rol = post.getlist('regeling-contact-input-%s' % contact.id)[-1]
                 if post.getlist('regeling-contact-input-%s' % contact.id)[0] == 'true':
                     try:
@@ -136,7 +129,6 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
             data['dfs'] = DoelFormSet(instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
 
-        data['doelen'] = doelen
         data['contacten'] = contacten
         data['doelen_added'] = [d.id for d in self.object.doelen.all()]
         data['contacten_added'] = [d.id for d in self.object.contact.all()]
