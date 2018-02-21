@@ -4,3 +4,4 @@ Pillow==5.0.0
 django-admin-sortable
 django-sortedm2m
 django-taggit
+requests
