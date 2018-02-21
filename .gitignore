@@ -23,4 +23,3 @@ celerybeat-schedule
 /jeugdzorg/static/
 /jeugdzorg/media/
 /jeugdzorg/settings/local.py
-.env
