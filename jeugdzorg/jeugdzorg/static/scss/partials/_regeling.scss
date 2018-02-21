@@ -61,7 +61,8 @@
   opacity: .1;
   transition: all .3s;
 }
-.regeling {
+.regeling,
+.regeling-back {
   position: relative;
   padding-left: 130px;
   p, li {
@@ -184,6 +185,12 @@
   position: absolute;
   right: 0;
   top: -.5em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   input {
     position: absolute;
     left: -1000px;
