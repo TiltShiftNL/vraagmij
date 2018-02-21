@@ -22,6 +22,9 @@ RUN mkdir /opt/file_upload/
 RUN mkdir /opt/git/
 RUN mkdir /var/uwsgi/
 
+RUN echo $ENV
+RUN echo $DJANGO_ENV
+
 COPY .git /opt/git
 COPY jeugdzorg /opt/app
 COPY jeugdzorg/nginx_$ENV.conf /etc/nginx/sites-enabled
