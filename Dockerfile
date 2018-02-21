@@ -8,6 +8,7 @@ ENV POSTGRES_HOST=notset
 ENV POSTGRES_USER=notset
 ENV POSTGRES_PASSWORD=notset
 ENV STATIC_ROOT '/opt/static_root/'
+ENV ENV=production
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -22,13 +23,17 @@ RUN mkdir /opt/file_upload/
 RUN mkdir /opt/git/
 RUN mkdir /var/uwsgi/
 
+RUN echo $ENV
+RUN echo $DJANGO_ENV
+
 COPY .git /opt/git
 COPY jeugdzorg /opt/app
-COPY jeugdzorg/nginx_production.conf /etc/nginx/sites-enabled
-# COPY jeugdzorg/nginx_acceptance.conf /etc/nginx/sites-enabled
+COPY jeugdzorg/nginx_$ENV.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
+
+RUN htpasswd -c /opt/.htpasswd $ADMIN_USERNAME $ADMIN_PASSWORD
 RUN usermod -a -G root www-data
 RUN newgrp www-data
 RUN newgrp root
