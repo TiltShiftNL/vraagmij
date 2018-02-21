@@ -88,7 +88,7 @@ body, [type="text"], [type="search"], [type="email"], [type="password"], [type="
 
 body {
   line-height: 1.375;
-  color: #5e5e5e; }
+  color: #333; }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -109,7 +109,7 @@ h3, .large {
   line-height: 1.2; }
 
 a {
-  color: #5e5e5e; }
+  color: #333; }
 
 h1, h2, h3 {
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
@@ -128,13 +128,10 @@ h6, .tiny {
   line-height: 1.375; }
 
 body {
-  padding: 3rem; }
-@media (max-width: 900px) {
-  body {
-    padding: 10px; } }
+  padding: 0; }
 
 .container {
-  max-width: 960px;
+  max-width: 1200px;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto; }
@@ -178,7 +175,7 @@ body {
   background-size: 100% auto;
   background-repeat: no-repeat; }
 
-.icon-arrow {
+.icon-arrow, .icon-arrow-left {
   position: relative;
   top: .4em;
   display: inline-block;
@@ -187,8 +184,11 @@ body {
   width: .4em;
   height: .4em;
   transform: rotate(45deg);
-  border-top: 0.15em solid #5e5e5e;
-  border-right: 0.15em solid #5e5e5e; }
+  border-top: 0.15em solid #333;
+  border-right: 0.15em solid #333; }
+
+.icon-arrow-left {
+  transform: rotate(-135deg); }
 
 .icon-menu, .icon-close {
   position: relative;
@@ -209,8 +209,8 @@ body {
   display: inline-block;
   width: 20px;
   height: 10px;
-  border-top: 4px solid #ec0000;
-  border-bottom: 4px solid #ec0000; }
+  border-top: 4px solid #000;
+  border-bottom: 4px solid #000; }
 .icon-menu:after, .icon-close:after {
   top: 21px;
   border-bottom: 0; }
@@ -255,7 +255,7 @@ body {
   height: 6.8rem; }
 .logo strong {
   white-space: nowrap;
-  color: #5e5e5e;
+  color: #333;
   font-weight: normal; }
 
 .nav-container {
@@ -316,7 +316,7 @@ body {
   left: 50%;
   transform: translate3d(-50%, 0, 0);
   top: 6rem;
-  max-width: 960px;
+  max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
   margin-left: auto;
@@ -344,7 +344,7 @@ body {
   background-color: #fff;
   outline: 4000px solid transparent; }
 .nav-top a:hover {
-  border-color: #5e5e5e; }
+  border-color: #333; }
 .nav-top a:hover {
   outline: 4000px solid rgba(0, 0, 0, 0.1); }
 .scrolled .nav-top {
@@ -507,13 +507,13 @@ form label strong {
   opacity: .1;
   transition: all .3s; }
 
-.regeling {
+.regeling, .regeling-back {
   position: relative;
   padding-left: 130px; }
-.regeling p, .regeling li {
+.regeling p, .regeling li, .regeling-back p, .regeling-back li {
   max-width: 45em; }
 @media (max-width: 900px) {
-  .regeling {
+  .regeling, .regeling-back {
     padding-left: 0;
     padding-top: 130px; } }
 
@@ -535,7 +535,7 @@ form label strong {
   content: counter(item);
   min-width: 30px;
   height: 30px;
-  background-color: #5e5e5e;
+  background-color: #333;
   color: #fff;
   font-weight: 700;
   line-height: 30px;
@@ -600,7 +600,13 @@ form label strong {
 .regeling-voorwaarde-yesno {
   position: absolute;
   right: 0;
-  top: -.5em; }
+  top: -.5em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 .regeling-voorwaarde-yesno input {
   position: absolute;
   left: -1000px;
@@ -838,7 +844,7 @@ pre.regeling-samenvatting {
   margin: 0 1em 1em 0;
   text-decoration: none; }
 .shortcuts a:hover {
-  border-color: #5e5e5e; }
+  border-color: #333; }
 .shortcuts a.disabled {
   opacity: .2;
   cursor: not-allowed; }
