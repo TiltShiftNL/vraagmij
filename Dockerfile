@@ -24,11 +24,14 @@ RUN mkdir /var/uwsgi/
 
 COPY .git /opt/git
 COPY jeugdzorg /opt/app
-COPY jeugdzorg/nginx_production.conf /etc/nginx/sites-enabled
+#COPY jeugdzorg/nginx_production.conf /etc/nginx/sites-enabled
+RUN cp jeugdzorg/nginx_production.conf /etc/nginx/sites-enabled
 # COPY jeugdzorg/nginx_acceptance.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
+
+RUN htpasswd -c /opt/.htpasswd $ADMIN_USERNAME $ADMIN_PASSWORD
 RUN usermod -a -G root www-data
 RUN newgrp www-data
 RUN newgrp root

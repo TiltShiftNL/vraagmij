@@ -13,6 +13,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get dist-upgrade -y
 RUN apt-get install -y --no-install-recommends apt-utils
+RUN apt-get install -y --no-install-recommends apache2-utils
 RUN apt-get install -y --no-install-recommends vim
 RUN apt-get install -y --no-install-recommends supervisor && \
     pip3 install uwsgi
@@ -24,6 +25,7 @@ COPY .git /opt/git
 COPY jeugdzorg /opt/app
 COPY docker-local-entrypoint.sh /usr/local/bin/docker-local-entrypoint.sh
 
+RUN htpasswd -b -c /opt/.htpasswd $POSTGRES_USER $POSTGRES_PASSWORD
 RUN chmod 777 /usr/local/bin/docker-local-entrypoint.sh
 
 WORKDIR /opt/app
