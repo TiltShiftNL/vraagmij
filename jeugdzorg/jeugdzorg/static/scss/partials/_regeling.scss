@@ -61,8 +61,7 @@
   opacity: .1;
   transition: all .3s;
 }
-.regeling,
-.regeling-back {
+.regeling {
   position: relative;
   padding-left: 130px;
   p, li {
@@ -73,6 +72,23 @@
     padding-top: 130px;
   }
 }
+.regeling-back {
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: $lineHeight;
+  margin-bottom: 3 * $lineHeight;
+  a {
+    color: $brandColor2;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    i {
+      border-color: $brandColor2;
+    }
+  }
+  
+}
+
 .regeling-voorwaarden {
   list-style: none;
   padding: 0;

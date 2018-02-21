@@ -4,7 +4,7 @@ html, body, h1, h2, h3, h4, h5, h6, fieldset, figure, blockquote, dl, dt, dd {
   border: none; }
 
 html {
-  background-color: #e5e5e5;
+  background-color: #fff;
   overflow-x: hidden; }
 
 p, ol, ul, dl, figure {
@@ -507,15 +507,27 @@ form label strong {
   opacity: .1;
   transition: all .3s; }
 
-.regeling, .regeling-back {
+.regeling {
   position: relative;
   padding-left: 130px; }
-.regeling p, .regeling li, .regeling-back p, .regeling-back li {
+.regeling p, .regeling li {
   max-width: 45em; }
 @media (max-width: 900px) {
-  .regeling, .regeling-back {
+  .regeling {
     padding-left: 0;
     padding-top: 130px; } }
+
+.regeling-back {
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 2.2rem;
+  margin-bottom: 6.6rem; }
+.regeling-back a {
+  color: #6db5d6;
+  text-decoration: none; }
+.regeling-back a:hover {
+  text-decoration: underline; }
+.regeling-back a i {
+  border-color: #6db5d6; }
 
 .regeling-voorwaarden {
   list-style: none;

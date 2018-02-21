@@ -5,7 +5,7 @@
   }
   a {
     display: inline-block;
-    color: #6db5d6;
+    color: $brandColor2;
     padding: 0 .5em;
     
     &.active {
@@ -14,6 +14,6 @@
   }
   
   li + li {
-    border-left: 1px solid #6db5d6;
+    border-left: 1px solid $brandColor2;
   }
 }
