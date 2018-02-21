@@ -92,46 +92,16 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        contacten = Contact.objects.all()
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
-            for contact in contacten:
-                rol = post.getlist('regeling-contact-input-%s' % contact.id)[-1]
-                if post.getlist('regeling-contact-input-%s' % contact.id)[0] == 'true':
-                    try:
-                        cr = ContactNaarRegeling.objects.get(
-                            contact=contact,
-                            regeling=self.object
-                        )
-                        cr.rol = rol
-                        cr.save()
-                    except ObjectDoesNotExist:
-                        cr = ContactNaarRegeling(
-                            contact=contact,
-                            regeling=self.object,
-                            rol=rol,
-                        )
-                        cr.save()
-                else:
-                    try:
-                        cr = ContactNaarRegeling.objects.get(contact=contact, regeling=self.object)
-                        cr.delete()
-                    except ObjectDoesNotExist:
-                        pass
-
-
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
             data['dfs'] = DoelFormSet(instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
-
-        data['contacten'] = contacten
-        data['doelen_added'] = [d.id for d in self.object.doelen.all()]
-        data['contacten_added'] = [d.id for d in self.object.contact.all()]
         return data
 
     def form_valid(self, form):
