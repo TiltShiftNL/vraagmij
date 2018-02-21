@@ -1,8 +1,5 @@
 body {
-  padding: $padding;
-  @include medium {
-    padding: 10px;
-  }
+  padding: 0;
 }
 .container {
   max-width: $maxContentWidth;
