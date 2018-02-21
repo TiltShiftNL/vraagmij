@@ -1,3 +1,11 @@
 .article {
   
 }
+
+hr {
+  height: 1px;
+  background-color: #dfdfdf;
+  padding: 0;
+  border: none;
+  margin: 2 * $lineHeight 0;
+}
