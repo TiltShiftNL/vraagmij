@@ -59,26 +59,6 @@
                 </ul>
             </div>
             {% endif %}
-            {% if doelen %}
-            <div class="row">
-                <strong>Doel</strong>
-                <ul class="regeling-doelen">
-                    {% for doel in doelen %}
-                    <li>
-                        <input id="regeling-doel-input-{{ doel.id }}" name="regeling-doel-input-{{ doel.id }}" type="checkbox" {% if doel.id in doelen_added %}checked="checked"{% endif %} value="true">
-                        <input name="regeling-doel-input-{{ doel.id }}" type="hidden" value="false">
-                        <label for="regeling-doel-input-{{ doel.id }}">{{ doel.titel }}</label> <a href="#regeling-doel-{{ doel.id }}" data-handler="toggle"><abbr title="info">?</abbr></a>
-                        {% if doel.omschrijving %}
-                            <label for="regeling-doel-input-{{ doel.id }}" id="regeling-doel-{{ doel.id }}" class="regeling-doel">
-                                {{ doel.omschrijving }}
-                            </label>
-                        {% endif %}
-
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
 
             <h2>Doelen generiek</h2>
             {{ dfs.management_form }}
