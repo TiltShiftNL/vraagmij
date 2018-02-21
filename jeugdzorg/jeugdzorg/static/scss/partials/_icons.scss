@@ -11,7 +11,8 @@
   background-repeat: no-repeat;
 }
 
-.icon-arrow {
+.icon-arrow,
+.icon-arrow-left {
   position: relative;
   top: .4em;
   display: inline-block;
@@ -22,6 +23,10 @@
   transform: rotate(45deg);
   border-top: .15em solid $textColor;
   border-right: .15em solid $textColor;
+}
+
+.icon-arrow-left {
+  transform: rotate(-135deg);
 }
 .icon-menu, .icon-close {
   position: relative;
@@ -46,8 +51,8 @@
     display: inline-block;
     width: 20px;
     height: 10px;
-    border-top: 4px solid $accentColor;
-    border-bottom: 4px solid $accentColor;
+    border-top: 4px solid #000;
+    border-bottom: 4px solid #000;
   }
   &:after {
     top: 21px;
