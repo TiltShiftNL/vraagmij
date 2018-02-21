@@ -24,9 +24,7 @@ RUN mkdir /var/uwsgi/
 
 COPY .git /opt/git
 COPY jeugdzorg /opt/app
-#COPY jeugdzorg/nginx_production.conf /etc/nginx/sites-enabled
-RUN cp jeugdzorg/nginx_$ENV.conf /etc/nginx/sites-enabled
-# COPY jeugdzorg/nginx_acceptance.conf /etc/nginx/sites-enabled
+COPY jeugdzorg/nginx_$ENV.conf /etc/nginx/sites-enabled
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
