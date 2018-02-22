@@ -25,6 +25,7 @@
           <a href="#MENU" class="nav-open" data-handler="toggle">MENU<i class="icon-menu"></i></a>
           <nav class="nav" id="MENU">
             <ul class="menu">
+              <li><a href="{% url 'regelingen' %}">Alle regelingen</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url 'create_regeling' %}">Regeling toevoegen</a></li>
                 <li><a href="/logout">Logout</a></li>
