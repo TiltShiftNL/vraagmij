@@ -700,55 +700,85 @@ hr {
 .regeling-more a:hover:after {
   background-color: rgba(236, 0, 0, 0.05); }
 
-.regeling-samenvatting {
-  position: relative;
-  padding: 0 0 2.2rem;
-  margin: 0 0 1.1rem 0;
-  white-space: normal;
-  display: none;
-  max-height: 4.4rem; }
-.regeling-samenvatting:before {
-  content: '';
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  height: 2.2rem;
-  transition: all .3s;
-  opacity: 1;
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 80%);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 80%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 80%); }
-.active .regeling-samenvatting:before {
-  opacity: 0; }
-.active .regeling-samenvatting {
-  margin-bottom: 0; }
-
 .contacten {
-  position: flex;
+  display: flex;
   flex-wrap: wrap;
-  margin-right: -2.2rem;
+  justify-content: flex-start;
   list-style: none;
   padding: 0;
-  margin: 0 -2.2rem 2.2rem 0; }
+  margin: 0 -10px 2.2rem 0; }
+.contacten > li {
+  flex-basis: 380px; }
 
 .contact {
-  flex-basis: 50%;
+  position: relative;
   background: #f8f8f8;
-  padding: 3rem;
-  margin-bottom: 2.2rem;
-  margin-right: 2.2rem; }
+  padding: 10px;
+  padding-left: 108px;
+  min-height: 88px;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #dbdbdb;
+  margin: 0 10px 10px 0;
+  max-width: 340px; }
+
+.contact-manieren {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+.contact-manieren a {
+  color: #6db5d6;
+  text-decoration: none; }
+
+.contact-naam {
+  display: block;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-top: 10px; }
+
+.contact-rol {
+  display: block;
+  color: #ccc;
+  font-style: normal; }
 
 .contact-avatar {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  border: 4px solid rgba(0, 0, 0, 0.2);
-  background-color: #fff; }
+  border: 4px solid #ccc;
+  background-color: #fff;
+  overflow: hidden; }
 .contact-avatar:before, .contact-avatar:after {
   content: '';
   position: absolute;
-  bottom: 0; }
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  border-radius: 50%;
+  background-color: #ccc; }
+.contact-avatar:before {
+  content: '..';
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+  font-size: 1.6em;
+  line-height: .6em;
+  transition: all .3s;
+  top: 24%;
+  width: 40%;
+  height: 40%; }
+.contact-avatar:after {
+  top: 60%;
+  width: 70%;
+  height: 80%;
+  border-radius: 20%; }
+.contact-avatar:hover:before {
+  text-indent: .1em;
+  color: white; }
+.contact .contact-avatar {
+  position: absolute;
+  left: 10px;
+  top: 10px; }
 
 .shortcuts {
   list-style: none;
