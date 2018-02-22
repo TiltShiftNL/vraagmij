@@ -5,11 +5,11 @@
         <em class="contact-rol">{{ contact.rol }}</em>
     {% endif %}
     
-    <div class="buttons">
-        <a href="mailto:{{ contact.contact.email }}" class="button">mailen</a>
+    <ul class="contact-manieren">
+        <li><a href="mailto:{{ contact.contact.email }}">{{ contact.contact.email }}</a></li>
         {% if contact.contact.telefoonnummer %}
-            <a href="tel:{{ contact.contact.telefoonnummer }}" class="button">bellen</a>
+            <li><a href="tel:{{ contact.contact.telefoonnummer }}">{{ contact.contact.telefoonnummer }}</a></li>
         {% endif %}
-    </div>
+    </ul>
     
 </section>
