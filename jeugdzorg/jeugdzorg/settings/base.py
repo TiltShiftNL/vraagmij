@@ -159,6 +159,10 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+CRONJOBS = [
+    ('*/5 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /opt/app/scheduled_job.log')
+]
+
 
 
 # STATICFILES_DIRS = [

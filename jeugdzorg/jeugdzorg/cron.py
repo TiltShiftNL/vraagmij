@@ -2,6 +2,8 @@ from jeugdzorg.models import Regeling
 import requests
 from bs4 import BeautifulSoup
 import json
+import datetime
+
 
 def update_regeling_bron_job():
     for regeling in Regeling.objects.all():
@@ -15,7 +17,9 @@ def update_regeling_bron_job():
                 # print(json_result)
                 # print(link.text)
                 soup_result.append(link.text)
-            print(hash(json.dumps(soup_result)))
-            regeling.bron_result = hash(json.dumps(soup_result))
-            regeling.save()
+            # print(hash(json.dumps(soup_result)))
+            # regeling.bron_result = datetime.datetime.now().strftime("%b %d %Y %H:%M:%S")
+            # regeling.bron_result = hash(json.dumps(soup_result))
+        regeling.bron_veranderd = True
+        regeling.save()
 

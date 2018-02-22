@@ -16,6 +16,7 @@ RUN apt-get dist-upgrade -y
 RUN apt-get install -y nginx
 RUN apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install -y --no-install-recommends apache2-utils
+RUN apt-get install -y --no-install-recommends cron
 RUN apt-get install -y --no-install-recommends supervisor && \
     pip3 install uwsgi
 

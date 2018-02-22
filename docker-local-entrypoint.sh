@@ -6,6 +6,9 @@ rm -rf /opt/git/
 
 echo $GIT_REV > /opt/git_rev
 
+echo "Add cron jobs"
+python manage.py crontab add
+
 echo "Apply database migrations"
 python manage.py migrate
 
