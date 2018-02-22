@@ -29,12 +29,16 @@
 
     </div>
     {% if request.user|has_group:"viewers" %}
+    <h2>Contacten</h2>
+    <p>
+        Heeft u een inhoudelijke vraag over "{{ regeling.titel }}"? Neem dan contact op met één van onderstaande contactpersonen.
+    </p>
     <div class="regeling-contacten">
         <ul class="contacten">
             {% for contact in regeling.contacten %}
-            <li>
-                {% include "snippets/contact.html" %}
-            </li>
+                <li>
+                    {% include "snippets/contact.html" %}
+                </li>
             {% endfor %}
         </ul>
     </div>
