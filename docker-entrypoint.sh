@@ -17,6 +17,7 @@ echo "Collect static files"
 python manage.py collectstatic --noinput
 
 echo "Add cron jobs"
+/etc/init.d/cron start
 python manage.py crontab add
 
 # Apply database migrations
