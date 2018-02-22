@@ -16,6 +16,9 @@ htpasswd -c /opt/.htpasswd $ADMIN_USERNAME $ADMIN_PASSWORD
 echo "Collect static files"
 python manage.py collectstatic --noinput
 
+echo "Add cron jobs"
+python manage.py crontab add
+
 # Apply database migrations
 echo "Apply database migrations"
 python manage.py migrate

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'adminsortable',
     'sortedm2m',
     'requests',
+    'django_crontab',
 
     'django.contrib.admin',
     'django.contrib.auth',
