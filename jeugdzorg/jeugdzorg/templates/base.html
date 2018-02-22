@@ -50,7 +50,7 @@ hello world
   
   <script type="text/javascript" defer src="{% static "js/scripts.js" %}?v={% now "U" %}"></script>
   <div class="version">
-    <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
+    <strong>{{ ENV }}</strong><span>{{ UWSGI_TEST }}: {{ SOURCE_COMMIT }}</span>
   </div>
 </body>
 </html>
