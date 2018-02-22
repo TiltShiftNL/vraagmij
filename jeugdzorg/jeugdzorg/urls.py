@@ -24,6 +24,7 @@ urlpatterns = [
     path('', RegelingList.as_view(), name='regelingen'),
     path('regeling-maken/', RegelingCreate.as_view(), name='create_regeling'),
     path('regeling/<int:pk>/bewerken', RegelingUpdate.as_view(), name='update_regeling'),
+    path('regeling/<int:pk>/verwijderen', RegelingDelete.as_view(), name='verwijder_regeling'),
     path('regeling/<int:pk>', RegelingDetail.as_view(), name='detail_regeling'),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),

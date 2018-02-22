@@ -125,6 +125,7 @@
         <p class="buttons right">
             <button name="submit" type="submit" value="{% url 'regelingen' %}" class="button">Opslaan</button>
             <button name="submit" type="submit" class="button secondary">Opslaan en doorgaan</button>
+            <a href="{% url 'verwijder_regeling' object.id %}" class="button secondary">Verwijderen</a>
             <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
         </p>
     </form>

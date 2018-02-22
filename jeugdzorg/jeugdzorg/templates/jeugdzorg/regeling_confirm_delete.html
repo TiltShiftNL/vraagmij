@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="container">
+        <form action="" method="post">{% csrf_token %}
+            <p>Wil je de regeling "{{ object }}" echt verwijderen?</p>
+            <div class="container">
+
+                <a href="{% url 'update_regeling' object.id %}" class="button">Annuleer</a>
+                <input type="submit" value="Confirm" class="button secondary"/>
+            </div>
+        </form>
+    </div>
+{% endblock %}
