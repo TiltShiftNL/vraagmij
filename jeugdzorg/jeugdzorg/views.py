@@ -38,6 +38,10 @@ class RegelingDetail(DetailView):
     model = Regeling
 
 
+class RegelingCreate(UserPassesTestMixin, DeleteView):
+    pass
+
+
 class RegelingCreate(UserPassesTestMixin, CreateView):
     model = Regeling
     fields = ['titel', 'samenvatting', 'bron', 'bron_url', 'startdatum', 'einddatum']
