@@ -68,7 +68,7 @@ class Regeling(models.Model):
     )
 
     def contacten(self):
-        return self.contact.through.objects.all()
+        return self.contact.through.objects.filter(regeling=self)
 
     def first_letter(self):
         return self.titel and self.titel[0] or ''

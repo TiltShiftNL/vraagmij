@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django import forms
 from django.db import transaction
 from django.shortcuts import get_object_or_404, render
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.management import call_command
 import sys
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,6 +13,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.template.loader import select_template
 from django.core.exceptions import ObjectDoesNotExist
 from .mail import send_simple_message
+from .auth import auth_test
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -32,13 +33,18 @@ class RegelingList(ListView):
         data['list_template'] = template
         return data
 
+
 class RegelingDetail(DetailView):
     model = Regeling
 
-class RegelingCreate(LoginRequiredMixin, CreateView):
+
+class RegelingCreate(UserPassesTestMixin, CreateView):
     model = Regeling
     fields = ['titel', 'samenvatting', 'bron', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
+
+    def test_func(self):
+        return auth_test(self.request.user, 'editor')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -80,10 +86,13 @@ class RegelingCreate(LoginRequiredMixin, CreateView):
         return super(RegelingCreate, self).form_valid(form)
 
 
-class RegelingUpdate(LoginRequiredMixin, UpdateView):
+class RegelingUpdate(UserPassesTestMixin, UpdateView):
     model = Regeling
     fields = ['titel', 'samenvatting', 'bron', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
+
+    def test_func(self):
+        return auth_test(self.request.user, 'editor')
 
     def get_success_url(self):
         if self.request.POST.get('submit'):
@@ -92,46 +101,16 @@ class RegelingUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        contacten = Contact.objects.all()
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
-            for contact in contacten:
-                rol = post.getlist('regeling-contact-input-%s' % contact.id)[-1]
-                if post.getlist('regeling-contact-input-%s' % contact.id)[0] == 'true':
-                    try:
-                        cr = ContactNaarRegeling.objects.get(
-                            contact=contact,
-                            regeling=self.object
-                        )
-                        cr.rol = rol
-                        cr.save()
-                    except ObjectDoesNotExist:
-                        cr = ContactNaarRegeling(
-                            contact=contact,
-                            regeling=self.object,
-                            rol=rol,
-                        )
-                        cr.save()
-                else:
-                    try:
-                        cr = ContactNaarRegeling.objects.get(contact=contact, regeling=self.object)
-                        cr.delete()
-                    except ObjectDoesNotExist:
-                        pass
-
-
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
             data['dfs'] = DoelFormSet(instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
-
-        data['contacten'] = contacten
-        data['doelen_added'] = [d.id for d in self.object.doelen.all()]
-        data['contacten_added'] = [d.id for d in self.object.contact.all()]
         return data
 
     def form_valid(self, form):

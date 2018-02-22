@@ -1,8 +1,9 @@
+{% load auth_tags %}
 <article class="regeling" id="regeling-{{ regeling.id }}">
 
     <header class="regeling-header">
         <h1 class="regeling-title">
-            {% if user.is_authenticated %}
+            {% if request.user|has_group:"editor" %}
                 <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
             {% endif %}
 
@@ -27,6 +28,7 @@
         {% endif %}
 
     </div>
+    {% if request.user|has_group:"viewers" %}
     <div class="regeling-contacten">
         <ul class="contacten">
             {% for contact in regeling.contacten %}
@@ -36,6 +38,7 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
 
 
 

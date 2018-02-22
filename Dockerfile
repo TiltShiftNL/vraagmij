@@ -23,24 +23,20 @@ RUN mkdir /opt/file_upload/
 RUN mkdir /opt/git/
 RUN mkdir /var/uwsgi/
 
-RUN echo $ENV
-RUN echo $DJANGO_ENV
-
 COPY .git /opt/git
 COPY jeugdzorg /opt/app
-COPY jeugdzorg/nginx_$ENV.conf /etc/nginx/sites-enabled
+COPY jeugdzorg/nginx_production.conf /opt/
+COPY jeugdzorg/nginx_acceptance.conf /opt/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-
-RUN htpasswd -c /opt/.htpasswd $ADMIN_USERNAME $ADMIN_PASSWORD
 RUN usermod -a -G root www-data
 RUN newgrp www-data
 RUN newgrp root
 
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
-RUN chmod 777 /etc/nginx/sites-enabled/nginx_production.conf
-# RUN chmod 777 /etc/nginx/sites-enabled/nginx_acceptance.conf
+#RUN chmod 777 /etc/nginx/sites-enabled/nginx_production.conf
+#RUN chmod 777 /etc/nginx/sites-enabled/nginx_acceptance.conf
 
 WORKDIR /opt/app
 

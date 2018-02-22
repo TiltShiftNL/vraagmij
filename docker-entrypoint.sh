@@ -6,6 +6,12 @@ rm -rf /opt/git/
 
 echo $GIT_REV > /opt/git_rev
 
+cp /opt/nginx_$ENV.conf /etc/nginx/sites-enabled/
+
+chmod 777 /etc/nginx/sites-enabled/nginx_$ENV.conf
+
+htpasswd -c /opt/.htpasswd $ADMIN_USERNAME $ADMIN_PASSWORD
+
 # Collect static files
 echo "Collect static files"
 python manage.py collectstatic --noinput
