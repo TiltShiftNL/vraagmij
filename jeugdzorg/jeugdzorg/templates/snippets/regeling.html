@@ -28,7 +28,7 @@
         {% endif %}
 
     </div>
-    {% if request.user|has_group:"viewers" %}
+    {% if request.user|has_group:"viewer" %}
     <h2>Contacten</h2>
     <p>
         Heeft u een inhoudelijke vraag over "{{ regeling.titel }}"? Neem dan contact op met één van onderstaande contactpersonen.
