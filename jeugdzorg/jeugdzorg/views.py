@@ -68,19 +68,16 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        doelen = Doel.objects.all()
-        doelen_added = []
         post = self.request.POST
         if post:
-            data['voorwaarde'] = VoorwaardeFormSet(self.request.POST)
-            for doel in doelen:
-                if post.getlist('regeling-doel-input-%s' % doel.id)[0] == 'true':
-                    doelen_added.append(doel.id)
+            data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES)
+            data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES)
+            data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES)
+
         else:
             data['voorwaarde'] = VoorwaardeFormSet()
-
-        data['doelen'] = doelen
-        data['doelen_added'] = doelen_added
+            data['dfs'] = DoelFormSet()
+            data['crfs'] = ContactNaarRegelingFormSet()
         return data
 
     def get_success_url(self):
@@ -91,18 +88,19 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
-        post = self.request.POST
-        doelen = Doel.objects.all()
+        crfs = context['crfs']
+        dfs = context['dfs']
         with transaction.atomic():
             self.object = form.save()
-            for doel in doelen:
-                if post.getlist('regeling-doel-input-%s' % doel.id)[0] == 'true':
-                    self.object.doelen.add(doel)
-                else:
-                    self.object.doelen.remove(doel)
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
                 voorwaarde.save()
+            if crfs.is_valid():
+                crfs.instance = self.object
+                crfs.save()
+            if dfs.is_valid():
+                dfs.instance = self.object
+                dfs.save()
         return super(RegelingCreate, self).form_valid(form)
 
 
