@@ -40,6 +40,15 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    bron_html_query = models.TextField(
+        verbose_name=_('Bron html queryselector'),
+        null=True,
+        blank=True,
+    )
+    bron_veranderd = models.BooleanField(
+        verbose_name=_('Bron veranderd'),
+        default=False,
+    )
     tags = TaggableManager(
         through='TaggedRegeling',
         blank=True,
