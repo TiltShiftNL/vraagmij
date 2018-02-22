@@ -1,28 +1,98 @@
 .contacten {
-  position: flex;
+  display: flex;
   flex-wrap: wrap;
-  margin-right: -$lineHeight;
+  justify-content: flex-start;
   list-style: none;
   padding: 0;
-  margin: 0 (-$lineHeight) $lineHeight 0;
+  margin: 0 (-10px) $lineHeight 0;
+  > li {
+    flex-basis: 380px;
+  }
 }
 .contact {
-  flex-basis: 50%;
+  position: relative;
   background: #f8f8f8;
-  padding: $padding;
-  margin-bottom: $lineHeight;
-  margin-right: $lineHeight;
+  padding: 10px;
+  padding-left: 108px;
+  min-height: 88px;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #dbdbdb;
+  margin: 0 10px 10px 0;
+  max-width: 340px;
+}
+.contact-manieren {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  a {
+    color: $brandColor2;
+    text-decoration: none;
+  }
+}
+.contact-naam {
+  display: block;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-top: 10px;
+}
+.contact-rol {
+  display: block;
+  color: #ccc;
+  font-style: normal;
 }
 
+
 .contact-avatar {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  border: 4px solid rgba(#000, .2);
+  
+//  border-radius: 50%;
+  border: 4px solid #ccc;  
   background-color: #fff;
+  
+  overflow: hidden;
+  
   &:before, &:after {
     content: '';
     position: absolute;
-    bottom: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    border-radius: 50%;
+    
+    background-color: #ccc;
+    
+  }
+  &:before {
+    content: '..';
+    text-align: center;
+    color: rgba(#fff, .5);
+    font-weight: 700;
+    font-size: 1.6em;
+    line-height: .6em;
+    transition: all .3s;
+    top: 24%;
+    width: 40%;
+    height: 40%;
+  }
+  &:after {
+    top: 60%;
+    width: 70%;
+    height: 80%;
+    border-radius: 20%;
+  }
+  &:hover {
+    &:before {
+      text-indent: .1em;
+      color: rgba(#fff, 1);
+    }
+  }
+  .contact & {
+    position: absolute;
+    left: 10px;
+    top: 10px;
   }
 }
