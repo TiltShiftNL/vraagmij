@@ -38,8 +38,24 @@ class RegelingDetail(DetailView):
     model = Regeling
 
 
-class RegelingCreate(UserPassesTestMixin, DeleteView):
-    pass
+class RegelingDelete(UserPassesTestMixin, DeleteView):
+    #template_name = 'confirm_delete_someitems.html'
+    model = Regeling
+    success_url = reverse_lazy('regelingen')
+
+    def test_func(self):
+        return auth_test(self.request.user, 'editor')
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        #self.object.delete()
+        print('delete')
+        return HttpResponseRedirect(success_url)
 
 
 class RegelingCreate(UserPassesTestMixin, CreateView):

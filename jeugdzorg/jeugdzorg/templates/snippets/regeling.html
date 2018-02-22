@@ -28,7 +28,7 @@
         {% endif %}
 
     </div>
-    {% if request.user|has_group:"viewers" %}
+    {% if request.user|has_group:"viewer" %}
     <div class="regeling-contacten">
         <ul class="contact-lijst">
             {% for contact in regeling.contacten %}
