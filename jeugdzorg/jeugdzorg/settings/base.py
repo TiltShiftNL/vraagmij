@@ -29,8 +29,6 @@ POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
 SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
 TEST = os.getenv("TEST", False)
-UWSGI_TEST = os.getenv("UWSGI_TEST", 'notset')
-
 
 DEBUG = SECRET_KEY == 'default-secret'
 
