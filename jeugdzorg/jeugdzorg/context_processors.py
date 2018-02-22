@@ -7,5 +7,5 @@ def app_settings(request):
     return {
         'ENV': settings.ENV,
         'SOURCE_COMMIT': settings.SOURCE_COMMIT,
-        'UWSGI_TEST': request.environ['UWSGI_TEST'],
+        'UWSGI_TEST': request.environ.get('UWSGI_TEST'),
     }
