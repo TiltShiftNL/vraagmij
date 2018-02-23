@@ -231,8 +231,6 @@
 
   var _closest=function(e,t){var ms='MatchesSelector',c;['matches','webkit'+ms,'moz'+ms,'ms'+ms,'o'+ms].some(function(e){return'function'==typeof document.body[e]&&(c=e,!0)});var r=e;try{for(;e;){if(r&&r[c](t))return r;e=r=e.parentElement}}catch(e){}return null};
   
-  // kickoff 
-  if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') _decorate();
-  else document.addEventListener('DOMContentLoaded', _decorate);
+  _decorate();
 
 }(window, document.documentElement);
