@@ -2,11 +2,12 @@
 
 {% block main %}
 
-<header class="container regelingen-header">
+<header class="container">
     <h1>Alle regelingen {% now "Y" %}</h1>
-    <ul class="sort">
-        <li><a{% if request.GET.beeld != 'doel' %} class="active"{% endif %} href=".?beeld=alfabet">A-Z index</a></li>
-        <li><a{% if request.GET.beeld == 'doel' %} class="active"{% endif %} href=".?beeld=doel">Thema overzicht</a></li>
+    <ul class="tabs">
+        <li><a{% if request.GET.beeld == 'alfabet' or not request.GET.beeld %} class="active"{% endif %} data-handler="tabs" href=".?beeld=alfabet">Index A-Z</a></li>
+        <li><a{% if request.GET.beeld == 'doel' %} class="active"{% endif %} data-handler="tabs" href=".?beeld=doel">Thematisch</a></li>
+        <!-- <li><a{% if request.GET.beeld == 'aanbieder' %} class="active"{% endif %} data-handler="tabs" href=".?beeld=aanbieder">Aanbieders</a></li> -->
     </ul>
 </header>
 
