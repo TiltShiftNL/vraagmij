@@ -54,6 +54,11 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    aanvraag_url = models.URLField(
+        verbose_name=_('Aaanvraag url'),
+        null=True,
+        blank=True,
+    )
     tags = TaggableManager(
         through='TaggedRegeling',
         blank=True,

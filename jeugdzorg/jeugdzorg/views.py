@@ -45,17 +45,17 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return auth_test(self.request.user, 'editor')
-
-    def delete(self, request, *args, **kwargs):
-        """
-        Call the delete() method on the fetched object and then redirect to the
-        success URL.
-        """
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        #self.object.delete()
-        print('delete')
-        return HttpResponseRedirect(success_url)
+    #
+    # def delete(self, request, *args, **kwargs):
+    #     """
+    #     Call the delete() method on the fetched object and then redirect to the
+    #     success URL.
+    #     """
+    #     self.object = self.get_object()
+    #     success_url = self.get_success_url()
+    #     #self.object.delete()
+    #     print('delete')
+    #     return HttpResponseRedirect(success_url)
 
 
 class RegelingCreate(UserPassesTestMixin, CreateView):
@@ -90,6 +90,7 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
         voorwaarde = context['voorwaarde']
         crfs = context['crfs']
         dfs = context['dfs']
+        print(self.request.POST)
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
