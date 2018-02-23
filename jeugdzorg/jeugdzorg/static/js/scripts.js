@@ -4,7 +4,7 @@
     'list-add': function(){
       var 
         template = this.template.cloneNode(true),
-        inputs = template.querySelectorAll('input');
+        inputs = template.querySelectorAll('input, select');
         
       for (var i =0; i<inputs.length; i++) {
         inputs[i].id = inputs[i].id.replace(/-\d-/, '-' + this.list.children.length + '-');
@@ -13,9 +13,16 @@
       
       this.list.appendChild(template);
       
-      document.getElementById('id_voorwaarde_set-TOTAL_FORMS').value = this.list.children.length;
-    }
-    ,
+      var totalInputs = this.list.parentNode.querySelectorAll('[id*="-TOTAL_FORMS"]');
+      
+      console.log(totalInputs);
+      
+      for (var i =0; i<totalInputs.length; i++) {
+        totalInputs[i].value = this.list.children.length;
+      
+      }
+    },
+    
     'list-remove': function(){
       var 
         li = this.parentNode,
