@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import datetime
+import hashlib
 
 
 def update_regeling_bron_job():
@@ -13,10 +14,11 @@ def update_regeling_bron_job():
             soup_result = []
             for link in soup.select(regeling.bron_html_query):
                 soup_result.append(link.text)
-                print(hash(json.dumps(soup_result)))
             h = json.dumps(soup_result)
+            h= hashlib.sha1(soup_result).hexdigest()
+            print(h)
             if h != regeling.bron_resultaat and not regeling.bron_veranderd:
-                regeling.bron_veranderd = True
                 regeling.bron_resultaat = h
-                regeling.save()
+        regeling.bron_veranderd = False
+        regeling.save()
 

@@ -8,6 +8,7 @@ ENV POSTGRES_HOST=notset
 ENV POSTGRES_USER=notset
 ENV POSTGRES_PASSWORD=notset
 ENV STATIC_ROOT '/opt/static_root/'
+ENV PYTHONHASHSEED 0
 ENV ENV=production
 
 RUN apt-get update

@@ -9,6 +9,7 @@ ENV POSTGRES_USER=notset
 ENV POSTGRES_PASSWORD=notset
 ENV RUNSERVER=yes
 ENV ENV=production
+ENV PYTHONHASHSEED 0
 
 RUN apt-get update
 RUN apt-get upgrade -y
