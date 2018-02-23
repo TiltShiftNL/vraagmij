@@ -486,17 +486,6 @@ hr {
 .regelingen a:hover {
   color: #000; }
 
-.regelingen-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid #dfdfdf;
-  margin-bottom: 2.2rem; }
-.regelingen-header > * {
-  margin: 0 0 2.2rem 0; }
-.regelingen-header .sort {
-  font-size: 1.4rem; }
-
 .shortcut {
   font-size: 2.2rem;
   line-height: 1;
@@ -874,17 +863,46 @@ hr {
   padding-top: 2.2rem;
   line-height: 2.2rem; }
 
-.sort {
-  list-style: none; }
-.sort li {
-  display: inline; }
-.sort a {
-  display: inline-block;
-  color: #6db5d6;
-  padding: 0 .5em; }
-.sort a.active {
-  text-decoration: none; }
-.sort li + li {
-  border-left: 1px solid #6db5d6; }
+.tabs {
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.2rem 0;
+  border-bottom: 3px solid #e5e5e5; }
+.tabs > li {
+  margin-right: 4px; }
+.tabs a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #959595;
+  padding: .7em 1.8em;
+  transition: all .3s; }
+.tabs a:before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 1em;
+  background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+  background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+  pointer-events: none;
+  opacity: 1;
+  transition: all .3s; }
+.tabs a:hover {
+  background-color: #a2a2a2; }
+.tabs a:hover:before {
+  opacity: 0; }
+.tabs a.active {
+  background-color: #e5e5e5;
+  color: #333; }
+.tabs a.active:before {
+  display: none; }
 
 /*# sourceMappingURL=screen.css.map */
