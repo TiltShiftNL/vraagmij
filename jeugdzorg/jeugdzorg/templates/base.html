@@ -16,7 +16,15 @@
 
 </head>
 <body id="top" data-decorator="scroller">
-
+    {% if messages %}
+    <div class="systeem-berichten">
+        <div class="container">
+            {% for message in messages %}
+            <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
   <header class="header">
     <div class="container">
       <a href="/" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
@@ -39,7 +47,7 @@
       {% endblock %}
     </div>
   </header>
-  
+
   <main class="main">
       {% block main %}{% endblock %}
   </main>
@@ -51,8 +59,8 @@
   <div class="version">
     <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>
-  
+
   <script type="text/javascript" src="{% static "js/scripts.js" %}?v={{ SOURCE_COMMIT }}"></script>
-  
+
 </body>
 </html>

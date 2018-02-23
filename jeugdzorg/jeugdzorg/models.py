@@ -8,7 +8,6 @@ from sortedm2m.fields import SortedManyToManyField
 from adminsortable.models import Sortable
 
 
-
 class Regeling(models.Model):
     titel = models.CharField(
         verbose_name=('titel'),
