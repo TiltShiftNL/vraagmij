@@ -20,6 +20,18 @@ from django.contrib import messages
 class ConfigView(LoginRequiredMixin, TemplateView):
     template_name = 'snippets/config.html'
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        error_log = "/var/log/nginx/nginx_error.log"
+        access_log = "/var/log/nginx/nginx_access.log"
+
+        error_log_f = open(error_log, 'r')
+        access_log_f = open(access_log, 'r')
+        data['error'] = error_log_f.read()
+        data['access'] = access_log_f.read()
+
+        return data
+
 
 class RegelingList(ListView):
     model = Regeling
@@ -40,13 +52,11 @@ class RegelingDetail(DetailView):
 
 
 class RegelingDelete(UserPassesTestMixin, DeleteView):
-    #template_name = 'confirm_delete_someitems.html'
     model = Regeling
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
         return auth_test(self.request.user, 'editor')
-
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
