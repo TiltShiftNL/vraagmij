@@ -27,8 +27,10 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
         error_log_f = open(error_log, 'r')
         access_log_f = open(access_log, 'r')
-        data['error'] = error_log_f.read()
-        data['access'] = access_log_f.read()
+        data['error'] = [line.rstrip('\n') for line in open(error_log, 'r')]
+        # data['error'] = error_log_f.read()
+        # data['access'] = access_log_f.read()
+        data['access'] = [line.rstrip('\n') for line in open(access_log, 'r')]
 
         return data
 
