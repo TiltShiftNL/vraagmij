@@ -4,11 +4,10 @@
     <div class="container">
         <form action="" method="post">{% csrf_token %}
             <p>Wil je de regeling "{{ object }}" echt verwijderen?</p>
-            <div class="container">
-
-                <a href="{% url 'update_regeling' object.id %}" class="button">Annuleren</a>
+            <p class="buttons">
+                <a href="{% url 'update_regeling' object.id %}">Annuleren</a>
                 <button type="submit" class="button secondary">Verwijderen</button>
-            </div>
+            </p>
         </form>
     </div>
 {% endblock %}
