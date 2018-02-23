@@ -14,6 +14,7 @@ from django.template.loader import select_template
 from django.core.exceptions import ObjectDoesNotExist
 from .mail import send_simple_message
 from .auth import auth_test
+from django.contrib import messages
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -45,17 +46,24 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return auth_test(self.request.user, 'editor')
-    #
-    # def delete(self, request, *args, **kwargs):
-    #     """
-    #     Call the delete() method on the fetched object and then redirect to the
-    #     success URL.
-    #     """
-    #     self.object = self.get_object()
-    #     success_url = self.get_success_url()
-    #     #self.object.delete()
-    #     print('delete')
-    #     return HttpResponseRedirect(success_url)
+
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        return data
+
+    def delete(self, request, *args, **kwargs):
+
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        messages.add_message(self.request, messages.INFO, "De regeling '%s' is verwijderd." % self.object.titel)
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
 
 
 class RegelingCreate(UserPassesTestMixin, CreateView):
@@ -90,7 +98,6 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
         voorwaarde = context['voorwaarde']
         crfs = context['crfs']
         dfs = context['dfs']
-        print(self.request.POST)
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
@@ -102,6 +109,7 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
             if dfs.is_valid():
                 dfs.instance = self.object
                 dfs.save()
+        messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangemaakt." % self.object.titel)
         return super(RegelingCreate, self).form_valid(form)
 
 
@@ -149,6 +157,7 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
                 dfs.instance = self.object
                 dfs.save()
 
+        messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangepast." % self.object.titel)
         return super(RegelingUpdate, self).form_valid(form)
 
 
