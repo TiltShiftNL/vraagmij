@@ -3,7 +3,16 @@
 
 {% block main %}
 <h2>error</h2>
-{{ error }}
+    <ul>
+    {% for l in error %}
+    <li>{{ l }}</li>
+    {% endfor %}
+    </ul>
 <h2>access</h2>
-{{ access }}
+    <ul>
+    {% for l in access %}
+    <li>{{ l }}</li>
+    {% endfor %}
+    </ul>
+
 {% endblock %}
