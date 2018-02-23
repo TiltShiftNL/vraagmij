@@ -51,6 +51,7 @@
       var el = this;
       var id = el.dataset.regelingId;
       var items = el.children;
+      var regeling = _closest(el, '.regeling');
       // var hashIcons = {
       //   yes: '■',
       //   no: '□',
@@ -69,7 +70,9 @@
       progress.innerHTML += '<span class="yes-1"><span></span></span><span class="yes-2"><span></span></span>';
       progress.innerHTML += '<span class="no-1"><span></span></span><span class="no-2"><span></span></span>';
       
-      el.parentNode.appendChild(progress);
+      
+      regeling.insertBefore(progress, regeling.firstChild);
+      // el.parentNode.appendChild(progress);
       var 
         resultEl = progress.querySelector('.result'),
         yesEls = [progress.querySelector('.yes-1 span'), progress.querySelector('.yes-2 span')],

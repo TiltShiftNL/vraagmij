@@ -12,7 +12,8 @@
 }
 
 .icon-arrow,
-.icon-arrow-left {
+.icon-arrow-left,
+.icon-arrow-right {
   position: relative;
   top: .4em;
   display: inline-block;
@@ -28,6 +29,10 @@
 .icon-arrow-left {
   transform: rotate(-135deg);
 }
+.icon-arrow-right {
+  transform: rotate(45deg);
+}
+
 .icon-menu, .icon-close {
   position: relative;
   z-index: 2;
