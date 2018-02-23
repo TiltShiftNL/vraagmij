@@ -22,8 +22,8 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        error_log = "/var/log/nginx/nginx_error.log"
-        access_log = "/var/log/nginx/nginx_access.log"
+        error_log = "/var/log/nginx/error.log"
+        access_log = "/var/log/nginx/access.log"
 
         error_log_f = open(error_log, 'r')
         access_log_f = open(access_log, 'r')

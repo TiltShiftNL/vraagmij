@@ -9,6 +9,8 @@ echo $GIT_REV > /opt/git_rev
 cp /opt/nginx_$ENV.conf /etc/nginx/sites-enabled/
 
 chmod 777 /etc/nginx/sites-enabled/nginx_$ENV.conf
+# chmod 777 /var/log/nginx/nginx_error.log
+# chmod 777 /var/log/nginx/nginx_access.log
 
 htpasswd -c /opt/.htpasswd $ADMIN_USERNAME $ADMIN_PASSWORD
 
