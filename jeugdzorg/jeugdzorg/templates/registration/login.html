@@ -9,7 +9,14 @@
     <h1>Login</h1>
     <form method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      <p>
+          <label for="id_username">Gebruikersnaam:</label>
+          {{ form.username }}
+      </p>
+      <p>
+          <label for="id_password">Wachtwoord:</label>
+          {{ form.password }}
+      </p>
       <p class="buttons right">
         <button type="submit" class="button">Login</button>
         <a href="{% url 'regelingen' %}">Terug naar de lijst</a>

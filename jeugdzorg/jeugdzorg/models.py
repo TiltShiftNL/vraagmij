@@ -49,6 +49,11 @@ class Regeling(models.Model):
         verbose_name=_('Bron veranderd'),
         default=False,
     )
+    bron_resultaat = models.TextField(
+        verbose_name=_('Bron resultaat'),
+        null=True,
+        blank=True,
+    )
     tags = TaggableManager(
         through='TaggedRegeling',
         blank=True,
