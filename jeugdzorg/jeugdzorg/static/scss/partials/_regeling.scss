@@ -16,20 +16,6 @@
   }
   
 }
-.regelingen-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid #dfdfdf;
-  margin-bottom: $lineHeight;
-  > * {
-    margin: 0 0 $lineHeight 0;
-  }
-  .sort {
-    font-size: 1.4rem;
-  }
-}
-
 .shortcut {
   font-size: $lineHeight;
   line-height: 1;
