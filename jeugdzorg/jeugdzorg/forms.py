@@ -22,11 +22,19 @@ class RegelingModelForm(forms.ModelForm):
         exclude = []
 
 
-VoorwaardeFormSet = forms.inlineformset_factory(Regeling, Voorwaarde,
-                                            form=RegelingModelForm, extra=1)
+VoorwaardeFormSet = forms.inlineformset_factory(
+    Regeling,
+    Voorwaarde,
+    form=RegelingModelForm,
+    extra=1
+)
 
-ContactNaarRegelingFormSet = forms.inlineformset_factory(Regeling, ContactNaarRegeling,
-                                            form=RegelingModelForm, extra=1)
+ContactNaarRegelingFormSet = forms.inlineformset_factory(
+    Regeling,
+    ContactNaarRegeling,
+    form=RegelingModelForm,
+    extra=1
+)
 
 DoelFormSet = forms.inlineformset_factory(
     Regeling,

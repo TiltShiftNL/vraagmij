@@ -6,3 +6,4 @@ django-sortedm2m
 django-taggit
 requests
 django-crontab
+beautifulsoup4

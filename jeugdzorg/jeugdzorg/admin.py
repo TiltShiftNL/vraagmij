@@ -21,6 +21,7 @@ class ContactNaarRegelingInline(admin.TabularInline):
 
 @admin.register(Regeling)
 class RegelingAdmin(SortableAdmin):
+    list_display = ['titel', 'bron_veranderd']
     #raw_id_fields = ['contact', ]
 
     inlines = [

@@ -99,10 +99,10 @@ if not TEST:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['POSTGRES_DB'],
-            'USER': os.environ['POSTGRES_USER'],
-            'PASSWORD': os.environ['POSTGRES_PASSWORD'],
-            'HOST': os.environ['POSTGRES_HOST'],  # <-- this is new
+            'NAME': POSTGRES_DB,
+            'USER': POSTGRES_USER,
+            'PASSWORD': POSTGRES_PASSWORD,
+            'HOST': POSTGRES_HOST,  # <-- this is new
             'PORT': '5432',
         }
     }
@@ -157,6 +157,12 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+PYTHONHASHSEED = 0
+
+CRONJOBS = [
+    ('0 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /opt/app/scheduled_job.log 2>&1')
 ]
 
 

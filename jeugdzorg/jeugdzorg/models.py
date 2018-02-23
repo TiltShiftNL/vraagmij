@@ -40,6 +40,25 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    bron_html_query = models.TextField(
+        verbose_name=_('Bron html queryselector'),
+        null=True,
+        blank=True,
+    )
+    bron_veranderd = models.BooleanField(
+        verbose_name=_('Bron veranderd'),
+        default=False,
+    )
+    bron_resultaat = models.TextField(
+        verbose_name=_('Bron resultaat'),
+        null=True,
+        blank=True,
+    )
+    aanvraag_url = models.URLField(
+        verbose_name=_('Aaanvraag url'),
+        null=True,
+        blank=True,
+    )
     tags = TaggableManager(
         through='TaggedRegeling',
         blank=True,
