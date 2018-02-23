@@ -162,7 +162,7 @@ STATICFILES_FINDERS = [
 PYTHONHASHSEED = 0
 
 CRONJOBS = [
-    ('0 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /opt/app/scheduled_job.log 2>&1')
+    ('*/10 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /opt/app/scheduled_job.log 2>&1')
 ]
 
 

@@ -90,7 +90,7 @@ class Regeling(models.Model):
         return self.contact.through.objects.filter(regeling=self)
 
     def first_letter(self):
-        return self.titel and self.titel[0] or ''
+        return self.titel and self.titel[0].upper() or ''
 
     def __str__(self):
         return '%s' % (self.titel)
