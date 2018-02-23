@@ -19,6 +19,10 @@ def update_regeling_bron_job():
             print(h)
             if h != regeling.bron_resultaat and not regeling.bron_veranderd:
                 regeling.bron_resultaat = h
-        regeling.bron_veranderd = False
-        regeling.save()
+                regeling.bron_veranderd = True
+                regeling.save()
+        else:
+            regeling.bron_veranderd = False
+            regeling.save()
+
 
