@@ -63,7 +63,8 @@
   position: relative;
   z-index: 5;
   display: none;
-  &.active {
+  &.active,
+  &:target {
     display: block;
   }
   
@@ -110,11 +111,13 @@
     background-color: rgba(#000, .2);
   }
 }
-.nav.active ~ .nav-close {
+.nav.active ~ .nav-close,
+.nav:target ~ .nav-close {
   display: block;
 }
 
 .nav-top {
+  
   position: fixed;
   z-index: 100;
   
@@ -124,11 +127,6 @@
   transform: translate3d(-50%, 0, 0);
 
   top: 2 * $padding;
-  
-  @include medium {
-    padding: 20px;
-  }
-  
   
   max-width: $maxContentWidth;
   width: 100%;
@@ -151,7 +149,7 @@
     font-weight: bold;
     line-height: 44px;
     
-    transition: all .3s;
+    transition: outline .3s;
     
     border: 1px solid #f3f3f3;
     text-align: center;
@@ -171,9 +169,18 @@
     
   }
   
+  @include medium {
+    left: auto;
+    right: $padding / 2;
+    top: $padding / 2;
+    transform: none;
+  }
+  
+  
+  
   opacity: 0;
-  z-index: 1;
-  transition: all .3s;
+  z-index: -1;
+  transition: opacity .3s;
   
   
   .scrolled & {
