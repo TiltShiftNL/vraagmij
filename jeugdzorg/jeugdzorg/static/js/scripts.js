@@ -46,14 +46,16 @@
   var decorators = {
     
     'progress': function(){
+      
+
       var el = this;
       var id = el.dataset.regelingId;
       var items = el.children;
-      var hashIcons = {
-        yes: '■',
-        no: '□',
-        maybe: '▣'
-      };
+      // var hashIcons = {
+      //   yes: '■',
+      //   no: '□',
+      //   maybe: '▣'
+      // };
 
       var hashIcons = {
         yes: '+',
@@ -61,27 +63,18 @@
         maybe: '_'
       };
 
-      var progress = document.createElement('svg');
+      var progress = document.createElement('span');
       progress.classList.add('regeling-progress');
-      progress.width = 88;
-      progress.height = 88;
-      progress.viewBox = '0 0 88 88';
-      progress.innerHTML = '';
-      progress.innerHTML += '<circle class="initial" cx="44" cy="44" r="41" stroke-width="6" />';
-      progress.innerHTML += '<circle class="yes" cx="44" cy="44" r="41" stroke-width="6" />';
-      progress.innerHTML += '<circle class="no" cx="44" cy="44" r="41" stroke-width="6" />';
+      progress.innerHTML = '<span class="result"></span>';
+      progress.innerHTML += '<span class="yes-1"><span></span></span><span class="yes-2"><span></span></span>';
+      progress.innerHTML += '<span class="no-1"><span></span></span><span class="no-2"><span></span></span>';
       
-      // var progress = document.createElement('span');
-      
-      // progress.classList.add('regeling-progress');
-      
-      // progress.innerHTML = '<span class="yes"></span><span class="no"></span><span class="result"></span>';
       el.parentNode.appendChild(progress);
       var 
         resultEl = progress.querySelector('.result'),
-        yesEl = progress.querySelector('.yes'),
-        noEl = progress.querySelector('.no');
-      
+        yesEls = [progress.querySelector('.yes-1 span'), progress.querySelector('.yes-2 span')],
+        noEls = [progress.querySelector('.no-1 span'), progress.querySelector('.no-2 span')],
+        noEl = [progress.querySelector('.no-1'), progress.querySelector('.no-2')];
       
         var _change = function(){
         var 
@@ -107,18 +100,24 @@
           }
         }
         resultHash.push(']');
-        document.location.hash = resultHash.join('');
+        // document.location.hash = resultHash.join('');
         
-        // resultEl.innerHTML = Math.round(yes / total * 100) + '<em>%</em>';
+        resultEl.innerHTML = Math.round(yes / total * 100);
         
         var 
-          yesResult = Math.round(yes / total * 100),
-          noResult = Math.round(no / total * 100);
+          yesResult = Math.round(yes / total * 360),
+          noResult =  Math.round(no / total * 360);
+          
         
-        // yesEl.style.width = yesResult + '%';
-        // yesEl.style.height = yesResult + '%';
-        // noEl.style.width = (yesResult + noResult) + '%';
-        // noEl.style.height = (yesResult + noResult) + '%';
+        yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
+        yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
+        
+        noEl[0].style.transform = 'rotate(' + yesResult + 'deg)';
+        noEl[1].style.transform = 'rotate(' + yesResult + 'deg)';
+        
+        noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
+        noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
+        
         
         progress.classList[(yes + no == total) ? 'add' : 'remove']('complete');
         progress.classList[(yes + no > 0) ? 'add' : 'remove']('started');
