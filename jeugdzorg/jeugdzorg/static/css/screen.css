@@ -589,7 +589,7 @@ hr {
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background-color: #d9d9d9; }
+  background-color: #dadada; }
 .regeling-progress .result {
   position: absolute;
   z-index: 3;
@@ -886,5 +886,10 @@ hr {
   text-decoration: none; }
 .sort li + li {
   border-left: 1px solid #6db5d6; }
+
+.systeem-berichten {
+  background: #ec0000;
+  color: white;
+  padding: 10px; }
 
 /*# sourceMappingURL=screen.css.map */
