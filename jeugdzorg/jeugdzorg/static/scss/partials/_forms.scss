@@ -44,7 +44,7 @@ textarea {
   
   box-sizing: border-box;
   border: 1px solid rgba(#000, .1);
-  transition: all .3s;
+  transition: border-color .3s;
   &:focus {
     border: 1px solid rgba(#000, .8);
   }
@@ -118,13 +118,12 @@ form {
   position: relative;
   margin-bottom: 10px;
   overflow: hidden;
-  transition: all .3s;
+  transition: max-height .3s;
   max-height: 1000px;
   button {
     position: absolute;
     right: 0;
     top: 0;
-    transition: all .3s;
   }
   &.item-deleted {
     max-height: 0;

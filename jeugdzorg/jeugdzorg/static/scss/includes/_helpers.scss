@@ -37,7 +37,7 @@
   text-transform: uppercase;
   font-size: 1.2rem;
   line-height: 1;
-  transition: all .3s;
+  transition: outline .3s;
   outline: 5000px solid rgba(#000, 0);
   * {
     display: inline-block;
@@ -51,7 +51,7 @@
     }
     max-width: 0;
     overflow: hidden;
-    transition: all .3s;
+    transition: max-width .3s;
   }
   
   &:hover {
