@@ -22,15 +22,20 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        error_log = "/var/log/nginx/error.log"
-        access_log = "/var/log/nginx/access.log"
 
-        error_log_f = open(error_log, 'r')
-        access_log_f = open(access_log, 'r')
-        data['error'] = [line.rstrip('\n') for line in open(error_log, 'r')]
-        # data['error'] = error_log_f.read()
-        # data['access'] = access_log_f.read()
-        data['access'] = [line.rstrip('\n') for line in open(access_log, 'r')]
+        logs = [
+            ['nginx error', '/var/log/nginx/error.log'],
+            ['nginx access', '/var/log/nginx/access.log'],
+            ['cron log', '/var/log/scheduled_job.log'],
+        ]
+
+        for l in logs:
+            try:
+                l.append(open(l[1], 'r'))
+            except:
+                l.append([])
+
+        data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
 
         return data
 

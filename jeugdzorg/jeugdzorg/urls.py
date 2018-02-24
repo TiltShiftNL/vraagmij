@@ -31,7 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
     path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
-    path('admin/config/', ConfigView.as_view(), name='config'),
+    path('admin/logs/', ConfigView.as_view(), name='logs'),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

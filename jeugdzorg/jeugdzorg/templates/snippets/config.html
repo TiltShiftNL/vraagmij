@@ -2,17 +2,15 @@
 {% load version_tags %}
 
 {% block main %}
-<h2>error</h2>
-    <ul>
-    {% for l in error %}
-    <li>{{ l }}</li>
+    {% for log in logs %}
+        {% if log.2 %}
+        <h2>{{ log.0 }}</h2>
+        <ul>
+            {% for line in log.2 %}
+                <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     {% endfor %}
-    </ul>
-<h2>access</h2>
-    <ul>
-    {% for l in access %}
-    <li>{{ l }}</li>
-    {% endfor %}
-    </ul>
 
 {% endblock %}
