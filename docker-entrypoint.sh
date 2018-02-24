@@ -12,7 +12,7 @@ chmod 777 /etc/nginx/sites-enabled/nginx_$ENV.conf
 # chmod 777 /var/log/nginx/nginx_error.log
 # chmod 777 /var/log/nginx/nginx_access.log
 
-htpasswd -c /opt/.htpasswd ${ADMIN_USERNAME} ${ADMIN_PASSWORD}
+htpasswd -c /opt/.htpasswd 'jeugdzorg' 'fixxx7'
 
 # Collect static files
 echo "Collect static files"
