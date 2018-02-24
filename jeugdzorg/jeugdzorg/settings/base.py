@@ -24,7 +24,7 @@ ENV = os.getenv("ENV", "develop")
 DJANGO_ENV = os.getenv("DJANGO_ENV", "dev")
 # SOURCE_COMMIT = os.getenv("SOURCE_COMMIT", "no-build-number")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "jeugdzorg")
-POSTGRES_HOST = os.getenv("POSTGRES_HOST", "db")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "notset")
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
 SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'jeugdzorg.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-if not TEST:
+if not TEST and POSTGRES_HOST != 'notset':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
