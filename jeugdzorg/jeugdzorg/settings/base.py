@@ -159,7 +159,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-CRONTAB_EXECUTABLE = '/usr/bin/crontab -e'
+# CRONTAB_EXECUTABLE = '/usr/bin/crontab -e'
 
 CRONJOBS = [
     ('*/10 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /var/log/scheduled_job.log 2>&1')
