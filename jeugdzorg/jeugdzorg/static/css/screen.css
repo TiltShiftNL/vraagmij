@@ -639,8 +639,8 @@ hr {
   color: #fff;
   background-color: #ff9191; }
 .regeling .regeling-progress {
-  position: absolute;
   position: sticky;
+  position: -webkit-sticky;
   display: block;
   top: 3rem;
   margin-left: -130px;
