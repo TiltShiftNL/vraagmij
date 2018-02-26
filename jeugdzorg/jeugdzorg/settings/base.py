@@ -161,7 +161,7 @@ STATICFILES_FINDERS = [
 
 # CRONTAB_EXECUTABLE = '/usr/bin/crontab -e'
 
-CRONTAB_PYTHON_EXECUTABLE = '/usr/local/bin/python'
+#CRONTAB_PYTHON_EXECUTABLE = '/usr/local/bin/python'
 
 CRONTAB_DJANGO_SETTINGS_MODULE = 'jeugdzorg.settings.production'
 
