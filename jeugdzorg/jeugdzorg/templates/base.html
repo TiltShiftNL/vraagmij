@@ -8,7 +8,7 @@
 
     <title>Jeugdzorg - {% block title %}Regelingen{% endblock %}</title>
 
-    <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?v={{ SOURCE_COMMIT }}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?v={% if ENV == 'develop' %}{% now "U" %}_{% endif %}{{ SOURCE_COMMIT }}"/>
     <!-- TODO: USE FONTS FROM AMSTERDAM -->
     <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/0037f97b-b0f6-41de-8f33-75b12c9f76ea.css"/>
 
@@ -60,7 +60,7 @@
     <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>
 
-  <script type="text/javascript" src="{% static "js/scripts.js" %}?v={{ SOURCE_COMMIT }}"></script>
+  <script type="text/javascript" src="{% static "js/scripts.js" %}?v={% if ENV == 'develop' %}{% now "U" %}_{% endif %}{{ SOURCE_COMMIT }}"></script>
 
 </body>
 </html>
