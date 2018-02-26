@@ -4,7 +4,7 @@
 
 <div class="container">
   <p class="regeling-back">
-    <a href="{% url 'regelingen' %}"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
+    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'regelingen' %}{% endif %}"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
   </p>
   {% include "snippets/regeling.html" %}
 </div>
