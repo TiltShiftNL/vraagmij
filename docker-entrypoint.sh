@@ -14,7 +14,7 @@ chmod 777 /etc/nginx/sites-enabled/nginx_$ENV.conf
 
 printenv | sed 's/^\(.*\)$/export \1/g' > /root/project_env.sh
 
-htpasswd -c /opt/.htpasswd 'jeugdzorg' 'fixxx7'
+htpasswd -c /opt/.htpasswd "jeugdzorg" "fixxx7"
 
 # Collect static files
 echo "Collect static files"
