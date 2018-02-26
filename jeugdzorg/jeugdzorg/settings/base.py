@@ -163,11 +163,11 @@ STATICFILES_FINDERS = [
 
 #CRONTAB_PYTHON_EXECUTABLE = '/usr/local/bin/python'
 
-CRONTAB_DJANGO_SETTINGS_MODULE = 'jeugdzorg.settings.production'
-
-CRONJOBS = [
-    ('*/1 * * * *', 'jeugdzorg.cron.print_variables', '>> /var/log/scheduled_job.log 2>&1')
-]
+# CRONTAB_DJANGO_SETTINGS_MODULE = 'jeugdzorg.settings.production'
+#
+# CRONJOBS = [
+#     ('*/1 * * * *', 'jeugdzorg.cron.print_variables', '>> /var/log/cron.log 2>&1')
+# ]
 
 
 # STATICFILES_DIRS = [

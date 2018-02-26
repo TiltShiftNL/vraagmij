@@ -20,7 +20,7 @@ python manage.py collectstatic --noinput
 
 echo "Add cron jobs"
 /etc/init.d/cron start
-python manage.py crontab add
+# python manage.py crontab add
 # python manage.py crontab show
 
 # Apply database migrations

@@ -26,7 +26,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         logs = [
             ['nginx error', '/var/log/nginx/error.log'],
             ['nginx access', '/var/log/nginx/access.log'],
-            ['cron log', '/var/log/scheduled_job.log'],
+            ['cron log', '/var/log/cron.log'],
         ]
 
         for l in logs:
