@@ -1,3 +1,3 @@
-* * * * * root /usr/local/bin/update_regelingen.sh >> /var/log/cron.log 2>&1
+* * * * * root  . /root/project_env.sh; /usr/local/bin/update_regelingen.sh >> /var/log/cron.log 2>&1
 # * * * * * root echo "Hello world" >> /var/log/cron.log 2>&1
 # An empty line is required at the end of this file for a valid cron file.
