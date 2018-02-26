@@ -12,7 +12,7 @@ chmod 777 /etc/nginx/sites-enabled/nginx_$ENV.conf
 # chmod 777 /var/log/nginx/nginx_error.log
 # chmod 777 /var/log/nginx/nginx_access.log
 
-# printenv | sed 's/^\(.*\)$/export \1/g' > /root/project_env.sh
+printenv | sed 's/^\(.*\)$/export \1/g' | grep -E "^export POSTGRES" > /root/project_env.sh
 
 htpasswd -c /opt/.htpasswd "jeugdzorg" "fixxx7"
 
