@@ -6,14 +6,13 @@
 # import hashlib
 
 
-
 def print_variables():
-    from django.conf import settings
+    #from django.conf import settings
     print('settings.ENV')
-    print(settings.ENV)
-    print('settings.POSTGRES_HOST')
-    print(settings.POSTGRES_HOST)
-    print('---')
+    # print(settings.ENV)
+    # print('settings.POSTGRES_HOST')
+    # print(settings.POSTGRES_HOST)
+    # print('---')
 
 
 # def update_regeling_bron_job():
