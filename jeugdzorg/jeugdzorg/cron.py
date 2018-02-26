@@ -4,10 +4,10 @@
 # import json
 # import datetime
 # import hashlib
-from django.conf import settings
 
 
 def print_variables():
+    from django.conf import settings
     print('settings.ENV')
     print(settings.ENV)
     print('settings.POSTGRES_HOST')
