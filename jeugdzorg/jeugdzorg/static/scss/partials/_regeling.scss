@@ -233,8 +233,8 @@
   }
 
   .regeling & {
-    position: absolute;
     position: sticky;
+    position: -webkit-sticky;
     display: block;
     top: $padding;
 
