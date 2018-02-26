@@ -43,6 +43,9 @@ RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /opt/app
 
+RUN python manage.py crontab add
+RUN python manage.py crontab show
+
 RUN pip3 install -r ./requirements.txt
 
 EXPOSE 80
