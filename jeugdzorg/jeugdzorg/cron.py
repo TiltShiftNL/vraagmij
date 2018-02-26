@@ -4,15 +4,15 @@
 # import json
 # import datetime
 # import hashlib
-#from django.conf import settings
+from django.conf import settings
 
 
 def print_variables():
     print('settings.ENV')
-    # print(settings.ENV)
-    # print('settings.POSTGRES_HOST')
-    # print(settings.POSTGRES_HOST)
-    # print('---')
+    print(settings.ENV)
+    print('settings.POSTGRES_HOST')
+    print(settings.POSTGRES_HOST)
+    print('---')
 
 
 # def update_regeling_bron_job():
