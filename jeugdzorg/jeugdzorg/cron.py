@@ -4,6 +4,15 @@ from bs4 import BeautifulSoup
 import json
 import datetime
 import hashlib
+from django.conf import settings
+
+
+def print_variables():
+    print('settings.ENV')
+    print(settings.ENV)
+    print('settings.POSTGRES_HOST')
+    print(settings.POSTGRES_HOST)
+    print('---')
 
 
 def update_regeling_bron_job():

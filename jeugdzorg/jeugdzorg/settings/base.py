@@ -161,10 +161,11 @@ STATICFILES_FINDERS = [
 
 # CRONTAB_EXECUTABLE = '/usr/bin/crontab -e'
 
-CRONJOBS = [
-    ('*/10 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /var/log/scheduled_job.log 2>&1')
-]
+CRONTAB_PYTHON_EXECUTABLE = '/usr/local/bin/python'
 
+CRONJOBS = [
+    ('*/1 * * * *', 'jeugdzorg.cron.print_variables', '>> /var/log/scheduled_job.log 2>&1')
+]
 
 
 # STATICFILES_DIRS = [
