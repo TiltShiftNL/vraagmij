@@ -411,10 +411,9 @@ body {
   text-decoration: none;
   background-color: #fff;
   outline: 4000px solid transparent; }
-.nav-top a:hover {
+.no-touch .nav-top a:hover {
+  outline: 4000px solid rgba(0, 0, 0, 0.1);
   border-color: #333; }
-.nav-top a:hover {
-  outline: 4000px solid rgba(0, 0, 0, 0.1); }
 @media (max-width: 900px) {
   .nav-top {
     left: auto;
@@ -806,6 +805,7 @@ hr {
 .regeling .regeling-progress {
   position: sticky;
   position: -webkit-sticky;
+  z-index: 2;
   display: block;
   top: 3rem;
   margin-left: -130px;
