@@ -235,6 +235,7 @@
   .regeling & {
     position: sticky;
     position: -webkit-sticky;
+    z-index: 2;
     display: block;
     top: $padding;
 
