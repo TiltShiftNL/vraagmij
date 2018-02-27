@@ -58,12 +58,23 @@ textarea {
 legend {
   padding: 0;
   margin: 0;
-  font-size: 3rem;
-  color: rgba(#000, .2);
+  
+  width: 100%;
+  
+  display: block;
+  font-size: 2.4rem;
+  @extend .bold !optional;
   font-weight: 700;
+  line-height: 1;
+  
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid rgba($textColor, .2);
+  
+  
 }
 fieldset {
-  border-bottom: 1px solid #f3f3f3;
+  border-bottom: 1px solid $lightColor;
   padding-bottom: $lineHeight;
   margin-bottom: $lineHeight;
 }
@@ -135,16 +146,31 @@ form {
 .buttons {
   overflow: hidden;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   > * {
-    margin-right: 1em;
+    margin-right: 2em;
+    margin-bottom: 0;
   }
   &.right {
     flex-direction: row-reverse;
     > * {
-      margin-left: 0;
-      margin-right: 1em;
+      margin-right: 0;
+      margin-left: 2em;
     }
     
+    > a {
+      padding: 1.2em 0 1em;
+    }
+    
+  }
+  .left {
+    margin-right: auto;
+    margin-left: 0;
+    @include small {
+      margin-right: 0;
+      margin-left: 2em;
+      
+    }
   }
 }

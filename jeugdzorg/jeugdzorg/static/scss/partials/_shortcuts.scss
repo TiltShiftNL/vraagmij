@@ -15,7 +15,7 @@
     
     font-size: 1.4rem;
     
-    border: 1px solid #f3f3f3;
+    border: 1px solid $lightColor;
     min-width: 1em;
     height: 1em;
     line-height: 1;
@@ -32,7 +32,7 @@
       opacity: .2;
       cursor: not-allowed;
       &:hover {
-        border-color: #f3f3f3;
+        border-color: $lightColor;
       }
     }
     

@@ -29,6 +29,9 @@ body {
   line-height: $lineHeightRelative;
   color: $textColor;
 }
+a:hover {
+  color: darken($textColor, 20);
+}
 
 body {
   -webkit-font-smoothing: antialiased;

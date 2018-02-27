@@ -6,21 +6,25 @@
 
 {% block main %}
   <div class="container">
-    <h1>Login</h1>
-    <form method="post">
-      {% csrf_token %}
-      <p>
-          <label for="id_username">Gebruikersnaam:</label>
-          {{ form.username }}
-      </p>
-      <p>
-          <label for="id_password">Wachtwoord:</label>
-          {{ form.password }}
-      </p>
-      <p class="buttons right">
-        <button type="submit" class="button">Login</button>
-        <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
-      </p>
+    <form method="post" class="login">
+        <fieldset>
+            <legend>Inloggen bij RegelDingen</legend>
+            {% csrf_token %}
+            <p class="row">
+                <label for="id_username">Gebruikersnaam:</label>
+                {{ form.username }}
+            </p>
+            <p class="row">
+                <label for="id_password">Wachtwoord:</label>
+                {{ form.password }}
+            </p>
+        </fieldset>
+        <p class="buttons right">
+            <button type="submit" class="button">Inloggen</button>
+            <a href="#TODO" class="login-forgot">Wachtwoord vergeten</a>
+            <a href="#TODO" class="login-create">Nog geen account? <u>Vraag het aan!</u></a>
+            <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left">Annuleren</a>
+        </p>
     </form>
   </div>
 {% endblock %}

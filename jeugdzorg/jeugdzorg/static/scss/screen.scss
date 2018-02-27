@@ -3,18 +3,17 @@
 @import "includes/reset";
 @import "includes/helpers";
 @import "includes/type";
-// partials
 
 @import "partials/layout";
 @import "partials/icons";
 @import "partials/nav";
 @import "partials/forms";
-@import "partials/article";
-@import "partials/regeling";
-@import "partials/contact";
+
 @import "partials/shortcuts";
 @import "partials/tabs";
 @import "partials/systeem-berichten";
 
-
-@import "partials/footer";
+@import "partials/article";
+@import "partials/regeling";
+@import "partials/contact";
+@import "partials/login";

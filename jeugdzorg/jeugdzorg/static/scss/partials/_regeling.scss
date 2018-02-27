@@ -140,7 +140,7 @@
   height: $progressWidth;
   
   border-radius: 50%;
-  background-color: darken(#f3f3f3, 10);
+  background-color: darken($lightColor, 10);
   
   .result {
     position: absolute;
@@ -344,12 +344,16 @@
   position: absolute;
   left: -1000px;
 }
-.input-contact {
-  flex-basis: 50%;
+.group {
+  .input-contact {
+    flex-basis: 50%;
+  }
+  .input-rol {
+    flex-basis: 50%;
+    margin-right: 0;
+  }
 }
-.input-rol {
-  flex-basis: 50%;
-}
+
 
 .regeling-more {
   display: none;

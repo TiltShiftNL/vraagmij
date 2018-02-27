@@ -49,6 +49,9 @@
     color: $textColor;
     font-weight: normal;
   }
+  &:hover {
+    color: $accentColor;
+  }
 }
 
 .nav-container {
@@ -63,10 +66,11 @@
   margin: 0;
   .button {
     font-size: 1.2rem;
+    font-weight: 700;
     background-color: $textColor;
     border-color: $textColor;
-    padding: .5em 1em;
-    margin: 0;
+    padding: 1em 1em;
+    margin: 0 0 0 1em;
     color: #fff;
   }
   .icon-avatar {
@@ -135,6 +139,9 @@
       border-color: #fff;
     }
   }
+  &:hover {
+    color: #fff;
+  }
   
 }
 .nav-close {
@@ -193,7 +200,7 @@
     
     transition: outline .3s;
     
-    border: 1px solid #f3f3f3;
+    border: 1px solid $lightColor;
     text-align: center;
     text-decoration: none;
     
