@@ -12,7 +12,20 @@ chmod 777 /etc/nginx/sites-enabled/nginx_$ENV.conf
 # chmod 777 /var/log/nginx/nginx_error.log
 # chmod 777 /var/log/nginx/nginx_access.log
 
-htpasswd -c /opt/.htpasswd 'jeugdzorg' 'fixxx7'
+# printenv | sed 's/^\(.*\)$/export \1/g' | grep -E "^export POSTGRES" > /root/project_env.sh
+
+cat <<EOF > /root/project_env.sh
+export ENV=${ENV}
+export POSTGRES_DB=${POSTGRES_DB}
+export POSTGRES_HOST=${POSTGRES_HOST}
+export POSTGRES_USER=${POSTGRES_USER}
+export POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+export ADMIN_USERNAME=${ADMIN_USERNAME}
+export ADMIN_PASSWORD=${ADMIN_PASSWORD}
+export GIT_REV=${GIT_REV}
+EOF
+
+htpasswd -c /opt/.htpasswd "jeugdzorg" "fixxx7"
 
 # Collect static files
 echo "Collect static files"
