@@ -70,8 +70,13 @@
         no: '-',
         maybe: '_'
       };
-
-      var progress = document.createElement('span');
+      var aanvragen = document.getElementById('regeling-aanvragen');
+      var progress = document.createElement(aanvragen ? 'a' : 'span');
+      
+      if (aanvragen) {
+        progress.href = '#regeling-aanvragen';
+        progress.dataset.handler = 'scroll';
+      }
       progress.classList.add('regeling-progress');
       progress.innerHTML = '<span class="result"></span>';
       progress.innerHTML += '<span class="yes-1"><span></span></span><span class="yes-2"><span></span></span>';

@@ -105,3 +105,45 @@
   
   
 }
+
+.icon-external {
+  position: relative;
+  top: 1px;
+  z-index: 1;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid $textColor;
+  
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    right: -5px;
+    top: -5px;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid $textColor;
+    border-right: 2px solid $textColor;
+  }
+  &:after {
+    transform: rotate(45deg);
+    z-index: 1;
+    border-top: none;
+    width: 0;
+    height: 14px;
+    right: -1px;
+    top: -7px;
+    outline: 2px solid #fff;
+  }
+  
+  .button & {
+    margin-left: .4em;
+    &, &:after, &:before {
+      border-color: #fff;
+    }
+    &:after {
+      outline-color: $accentColor;
+    }
+  }
+}

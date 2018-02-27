@@ -91,6 +91,7 @@
     position: relative;
     padding-left: 44px;
     padding-right: 150px;
+    max-width: none;
     &:before {
       position: absolute;
       left: 0;
@@ -120,7 +121,7 @@
 }
 
 .regeling-details {
-  margin-bottom: 2 * $lineHeight;
+  margin-bottom: 3 * $lineHeight;
 }
 
 .regeling-samenvatting {
@@ -193,7 +194,7 @@
       height: $progressWidth;
       clip: rect(0, $progressWidth / 2, $progressWidth, 0);
       border-radius: 50%;
-      background-color: #8ac640;
+      background-color: $yesColor;
       transform: rotate(0);
     }
 
@@ -210,7 +211,7 @@
   .no-2 {
     z-index: 1;
     span {
-      background-color: #ff9191;
+      background-color: $noColor;
     }
   }
 
@@ -222,13 +223,13 @@
   &.complete-yes {
     .result {
       color: #fff;
-      background-color: #8ac640;
+      background-color: $yesColor;
     }
   }
   &.complete-no {
     .result {
       color: #fff;
-      background-color: #ff9191;
+      background-color: $noColor;
     }
   }
 
@@ -258,9 +259,25 @@
       border-radius: 50%;
       opacity: .8;
       background-color: #fff;
+      
+      transition: all 2s;
     }
     
   }
+}
+a.regeling-progress {
+  &:hover:before {
+    opacity: .5;
+  }
+  &.complete-yes:hover:before {
+    opacity: .9;
+    background-color: $yesColor;
+  }
+  &.complete-no:hover:before {
+    opacity: .9;
+    background-color: $noColor;
+  }
+  
 }
 
 
@@ -297,18 +314,18 @@
     border-left: 1px solid rgba(#000, .2);
   }
   [for*="-yes"]:hover{
-    background-color: #d7e2c7;
+    background-color: lighten($yesColor, 35);
   }
   [for*="-no"]:hover{
-    background-color: #eed7d7;
+    background-color: lighten($noColor, 15);
   }
 
   [id*="-no"]:checked ~ [for*="-no"]{
-    background-color: #ff9191;
+    background-color: $noColor;
     color: #fff;
   }
   [id*="-yes"]:checked ~ [for*="-yes"]{
-    background-color: #8ac640;
+    background-color: $yesColor;
     color: #fff;
   }
   [for*="-initial"] {
@@ -391,6 +408,37 @@
     background-color: rgba($accentColor, .05);
   }
 }
+
+.regeling-aanvragen {
+  max-width: 45em;
+  margin: 0 auto;
+  padding: $padding;
+  background-color: $lightColor;
+  
+  text-align: center;
+  
+  > *:last-child {
+    margin-bottom: 0;
+  } 
+  .buttons {
+    display: block;
+    > * {
+      margin: 0 1em;
+    }
+  }
+}
+
+.complete-yes ~ .regeling-aanvragen {
+  background-color: lighten($yesColor, 45);
+  .button {
+    background-color: $yesColor;
+    border-color: $yesColor;
+    .icon-external:after {
+      outline-color: $yesColor;
+    }
+  }
+}
+
 
 .regeling-samenvatting {
 //  position: relative;

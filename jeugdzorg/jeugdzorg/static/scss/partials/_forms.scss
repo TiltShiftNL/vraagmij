@@ -27,6 +27,9 @@
     background-color: #000;
     border-color: #000;
   }
+  &:hover {
+    color: #fff;
+  }
   
 }
 input[type="text"],
@@ -159,7 +162,7 @@ form {
       margin-left: 2em;
     }
     
-    > a {
+    > a:not(.button) {
       padding: 1.2em 0 1em;
     }
     

@@ -29,6 +29,19 @@
 
     </div>
     
+    {% if regeling.aanvraag_url %}
+        <div class="regeling-aanvragen" id="regeling-aanvragen">
+            <h2>Aanvragen</h2>
+            <p>
+                Als u in aanmerking komt voor deze regeling kunt u deze op de website van <strong class="regeling-aanbieder">{% if regeling.bron %}{{ regeling.bron }}{% else %}de aanbieder{% endif %}</strong> aanvragen.
+            </p>
+            <p class="buttons">
+                <a href="{{ regeling.aanvraag_url }}" target="_blank" class="button">Nu aanvragen <i class="icon-external"></i></a>
+            </p>
+        </div>
+    {% endif %}
+    
+    
     
     {% if regeling.contacten %}
 
