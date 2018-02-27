@@ -44,6 +44,10 @@ button::-moz-focus-inner {
 .hidden, .js .js-hidden {
   display: none !important; }
 
+@media (max-width: 700px) {
+  .small-hide {
+    display: none !important; } }
+
 .version {
   position: fixed;
   left: 0;
@@ -330,7 +334,9 @@ body {
   position: absolute;
   z-index: 100;
   right: 0;
-  top: 0; }
+  top: 0;
+  text-align: right;
+  margin-left: 17rem; }
 
 .nav-login {
   display: inline-block;
@@ -395,6 +401,12 @@ body {
   border-color: #fff; }
 .nav-open:hover, .nav-close:hover {
   color: #fff; }
+@media (max-width: 900px) {
+  .nav-open, .nav-close {
+    padding-right: 35px; }
+  .nav-open .icon-menu, .nav-open .icon-close, .nav-close .icon-menu, .nav-close .icon-close {
+    top: -7px;
+    right: -5px; } }
 
 .nav-close {
   position: absolute;
@@ -814,7 +826,8 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
-  clip: rect(0, 88px, 88px, 44px); }
+  clip: rect(0, 88px, 88px, 44px);
+  transform: rotate(360deg); }
 .regeling-progress .yes-1 span, .regeling-progress .yes-2 span, .regeling-progress .no-1 span, .regeling-progress .no-2 span {
   position: absolute;
   margin-left: -44px;

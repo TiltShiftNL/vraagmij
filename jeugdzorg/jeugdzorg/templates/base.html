@@ -33,7 +33,7 @@
       {% block login %}
         <div class="nav-container">
           {% if user.is_authenticated %}
-            <p class="nav-login">Ingelogd als <strong><i class="icon-avatar"></i> {{ user }}</strong></p>
+            <p class="nav-login">Ingelogd <span class="small-hide">als </span><strong><i class="icon-avatar"></i> <span class="small-hide">{{ user }}</span></strong></p>
             <a href="#MENU" class="nav-open" data-handler="toggle">MENU<i class="icon-menu"></i></a>
             <nav class="nav" id="MENU">
               <ul class="menu">

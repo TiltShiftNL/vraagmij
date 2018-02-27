@@ -24,6 +24,11 @@
 .js .js-hidden {
   display: none !important;
 }
+.small-hide {
+  @include small {
+    display: none !important;
+  }
+}
 
 .version {
   position: fixed;
@@ -60,7 +65,5 @@
       max-width: 300px;
     }
   }
-  
-  
   
 }
