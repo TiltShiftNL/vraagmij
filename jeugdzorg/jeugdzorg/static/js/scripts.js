@@ -59,17 +59,12 @@
       var id = el.dataset.regelingId;
       var items = el.children;
       var regeling = _closest(el, '.regeling');
-      // var hashIcons = {
-      //   yes: '■',
-      //   no: '□',
-      //   maybe: '▣'
-      // };
-
       var hashIcons = {
-        yes: '+',
-        no: '-',
+        yes: '1',
+        no: '0',
         maybe: '_'
       };
+
       var aanvragen = document.getElementById('regeling-aanvragen');
       var progress = document.createElement(aanvragen ? 'a' : 'span');
       
@@ -84,7 +79,7 @@
       
       
       regeling.insertBefore(progress, regeling.firstChild);
-      // el.parentNode.appendChild(progress);
+
       var 
         resultEl = progress.querySelector('.result'),
         yesEls = [progress.querySelector('.yes-1 span'), progress.querySelector('.yes-2 span')],
@@ -120,8 +115,8 @@
         resultEl.innerHTML = Math.round(yes / total * 100);
         
         var 
-          yesResult = Math.round(yes / total * 360),
-          noResult =  Math.round(no / total * 360);
+          yesResult = (yes / total * 360), // Math.round
+          noResult =  (no / total * 360); // Math.round
           
         
         yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
