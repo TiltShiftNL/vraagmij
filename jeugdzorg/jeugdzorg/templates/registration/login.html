@@ -20,10 +20,10 @@
             </p>
         </fieldset>
         <p class="buttons right">
-            <button type="submit" class="button">Inloggen</button>
-            <a href="#TODO" class="login-forgot">Wachtwoord vergeten</a>
-            <a href="#TODO" class="login-create">Nog geen account? <u>Vraag het aan!</u></a>
-            <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left">Annuleren</a>
+            <button type="submit" class="button" data-counter="click.login.login">Inloggen</button>
+            <a href="#TODO" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
+            <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a>
+            <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left" data-counter="click.login.cancel">Annuleren</a>
         </p>
     </form>
   </div>

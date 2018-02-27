@@ -3,10 +3,10 @@
     <ul class="shortcuts">
         {% for doel in doelen %}
             {% if doel.regeling_set.all %}
-                <li><a href="#doel-{{ doel.id }}" data-decorator="scroll">{{ doel }}</a></li>
+                <li><a href="#doel-{{ doel.id }}" data-decorator="scroll" data-counter="click.list.doel.{{ doel.id }}">{{ doel }}</a></li>
             {% endif %}
         {% endfor %}
-        <li><a href="#doel-overige" data-decorator="scroll">Overige</a></li>
+        <li><a href="#doel-overige" data-decorator="scroll" data-counter="click.list.doel.overige">Overige</a></li>
     </ul>
 
 
@@ -23,7 +23,7 @@
             
                 <ul class="regelingen">
                     {% for regeling in doel.regeling_set.all %}
-                        <li><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></li>
+                        <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
                     {% endfor %}
                 </ul>
                 
@@ -36,7 +36,7 @@
             <ul class="regelingen">
                 {% for regeling in regeling_list %}
                     {% if not regeling.doelen.all %}
-                        <li><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></li>
+                        <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

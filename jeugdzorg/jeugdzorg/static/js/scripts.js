@@ -114,6 +114,9 @@
         
         resultEl.innerHTML = Math.round(yes / total * 100);
         
+        // setting counters
+        progress.dataset.counter = 'click.detail.progress.' + (aanvragen ? 'aanvragen' : 'indicatief') + '.total.' + total + '.yes.' + yes + '.no.' + no;
+        
         var 
           yesResult = (yes / total * 360), // Math.round
           noResult =  (no / total * 360); // Math.round
@@ -153,13 +156,13 @@
         yesno.innerHTML = '';
         
         yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="yes">';
-        yesno.innerHTML += '<label for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes">Ja</label>';
+        yesno.innerHTML += '<label data-counter="click.voorwaarde.' + items[i].dataset.voorwaardeId + '.yes mouseout.voorwaarde.' + items[i].dataset.voorwaardeId + '.yes mouseover.voorwaarde.' + items[i].dataset.voorwaardeId + '.yes" for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes">Ja</label>';
 
         yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="no">';
-        yesno.innerHTML += '<label for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no">Nee</label>';
+        yesno.innerHTML += '<label data-counter="click.voorwaarde.' + items[i].dataset.voorwaardeId + '.no mouseout.voorwaarde.' + items[i].dataset.voorwaardeId + '.no mouseover.voorwaarde.' + items[i].dataset.voorwaardeId + '.no" for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no">Nee</label>';
 
         yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="maybe" checked>';
-        yesno.innerHTML += '<label for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial">Misschien</label>';
+        yesno.innerHTML += '<label data-counter="click.voorwaarde.' + items[i].dataset.voorwaardeId + '.initial mouseout.voorwaarde.' + items[i].dataset.voorwaardeId + '.initial mouseover.voorwaarde.' + items[i].dataset.voorwaardeId + '.initial" for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial">Misschien</label>';
         items[i].appendChild(yesno);
       }
       
@@ -230,7 +233,7 @@
   var helpers = {
 
   };
-
+  
   d.addEventListener('click',function(t){var k,e,a=t&&t.target;if(a=_closest(a,'[data-handler]')){var r=a.getAttribute('data-handler').split(/\s+/);if('A'==a.tagName&&(t.metaKey||t.shiftKey||t.ctrlKey||t.altKey))return;for(e=0;e<r.length;e++){k=r[e].split(/[\(\)]/);handlers[k[0]]&&handlers[k[0]].call(a,t,k[1])}}});
 
   var scrollers=[];w.addEventListener('scroll',function(){requestAnimationFrame(function(){for(var l=0;l<scrollers.length;l++)scrollers[l].el&&scrollers[l].fn.call(scrollers[l].el)})},!1);

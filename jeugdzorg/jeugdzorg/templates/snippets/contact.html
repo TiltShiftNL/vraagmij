@@ -6,9 +6,9 @@
     {% endif %}
     
     <ul class="contact-manieren">
-        <li><a href="mailto:{{ contact.contact.email }}">{{ contact.contact.email }}</a></li>
+        <li><a href="mailto:{{ contact.contact.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ contact.contact.email }}</a></li>
         {% if contact.contact.telefoonnummer %}
-            <li><a href="tel:{{ contact.contact.telefoonnummer }}">{{ contact.contact.telefoonnummer }}</a></li>
+            <li><a href="tel:{{ contact.contact.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel">{{ contact.contact.telefoonnummer }}</a></li>
         {% endif %}
     </ul>
     

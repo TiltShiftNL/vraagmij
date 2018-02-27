@@ -3,7 +3,7 @@
     {% regroup regeling_list by first_letter as title_list %}
     <ul class="shortcuts">
         {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
-            <li><a href="#regelingen-{{ letter }}" data-decorator="scroll">{{ letter }}</a></li>
+            <li><a href="#regelingen-{{ letter }}" data-decorator="scroll" data-counter="click.list.alfabet.{{ letter }}">{{ letter }}</a></li>
         {% endfor %}
     </ul>
     
@@ -14,7 +14,7 @@
                 <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
                 <ul class="regelingen">
                     {% for regeling in titel.list %}
-                        <li><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></li>
+                        <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
