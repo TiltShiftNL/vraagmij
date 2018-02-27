@@ -218,7 +218,8 @@
   @include medium {
     left: auto;
     right: $padding / 2;
-    top: $padding / 2;
+    top: auto;
+    bottom: $padding / 2;
     transform: none;
   }
   

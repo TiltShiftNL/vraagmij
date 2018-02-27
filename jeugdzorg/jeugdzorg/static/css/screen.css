@@ -148,7 +148,7 @@ body {
   padding: 3rem; }
 @media (max-width: 900px) {
   .main {
-    padding: 10px; } }
+    padding: 10px 10px 54px 10px; } }
 
 .columns {
   columns: 4;
@@ -418,7 +418,8 @@ body {
   .nav-top {
     left: auto;
     right: 1.5rem;
-    top: 1.5rem;
+    top: auto;
+    bottom: 1.5rem;
     transform: none; } }
 .scrolled .nav-top {
   z-index: 100;
