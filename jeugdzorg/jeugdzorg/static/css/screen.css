@@ -71,7 +71,7 @@ button::-moz-focus-inner {
 .version:hover {
   outline: 5000px solid rgba(0, 0, 0, 0.2); }
 .version:hover span {
-  max-width: 200px; }
+  max-width: 300px; }
 
 html {
   font-size: 62.5%; }
