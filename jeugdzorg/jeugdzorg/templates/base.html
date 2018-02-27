@@ -30,19 +30,26 @@
       <a href="/" class="logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
       {% block login %}
         <div class="nav-container">
-          <a href="#MENU" class="nav-open" data-handler="toggle">MENU<i class="icon-menu"></i></a>
-          <nav class="nav" id="MENU">
-            <ul class="menu">
-              <li><a href="{% url 'regelingen' %}">Alle regelingen</a></li>
-              {% if user.is_authenticated %}
-                <li><a href="{% url 'create_regeling' %}">Regeling toevoegen</a></li>
-                <li><a href="/logout">Logout</a></li>
-              {% else %}
-                <li><a href="/login">Login</a></li>
-              {% endif %}
-            </ul>
-          </nav>
-          <a href="#MENU" class="nav-close" data-handler="toggle"><i class="icon-close"></i></a>
+          {% if user.is_authenticated %}
+            <p class="nav-login">Ingelogd als <strong><i class="icon-avatar"></i> {{ user }}</strong></p>
+            <a href="#MENU" class="nav-open" data-handler="toggle">MENU<i class="icon-menu"></i></a>
+            <nav class="nav" id="MENU">
+              <ul class="menu">
+                <li><a href="{% url 'regelingen' %}">Alle regelingen</a></li>
+                {% if user.is_authenticated %}
+                  <li><a href="{% url 'create_regeling' %}">Regeling toevoegen</a></li>
+                  <li><a href="{% url 'logout' %}">Uitloggen</a></li>
+                {% else %}
+                  <li><a href="{% url 'login' %}">Inloggen</a></li>
+                {% endif %}
+              </ul>
+            </nav>
+          {% else %}
+          <p class="nav-login">
+            <a href="{% url 'login' %}" class="button">Inloggen</a>
+          </p>
+          {% endif %}
+          <a href="#MENU" class="nav-close" data-handler="toggle">MENU<i class="icon-close"></i></a>
         </div>
       {% endblock %}
     </div>

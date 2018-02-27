@@ -223,6 +223,32 @@ body {
 .icon-close:before {
   display: none; }
 
+.icon-avatar {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  vertical-align: middle;
+  width: 3.0rem;
+  height: 3.0rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #d8d8d8; }
+.icon-avatar:before, .icon-avatar:after {
+  content: '';
+  position: absolute;
+  background-color: #545454;
+  top: 30%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  overflow: hidden;
+  transform: translate3d(-50%, 0, 0); }
+.icon-avatar:after {
+  top: 64%;
+  height: 60%;
+  width: 69%; }
+
 .header {
   max-width: 1400px;
   box-sizing: border-box;
@@ -267,6 +293,20 @@ body {
   right: 0;
   top: 0; }
 
+.nav-login {
+  display: inline-block;
+  margin: 0; }
+.nav-login .button {
+  font-size: 1.2rem;
+  background-color: #333;
+  border-color: #333;
+  padding: .5em 1em;
+  margin: 0;
+  color: #fff; }
+.nav-login .icon-avatar {
+  top: -.2em;
+  margin: 0 .2em; }
+
 .nav {
   position: relative;
   z-index: 5;
@@ -284,19 +324,39 @@ body {
   padding: 1em;
   min-width: 200px;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #333;
+  color: #fff;
   margin-bottom: 1px; }
 
 .nav-open, .nav-close {
-  display: block;
-  height: 44px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
   text-align: right;
-  line-height: 48px;
   text-decoration: none;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: #333;
+  border-color: #333;
+  padding: 1em 1em;
+  margin: 0 0 0 1em;
+  color: #fff;
+  width: 4em;
+  text-align: center;
+  padding-right: 40px; }
+.nav-open .icon-menu, .nav-open .icon-close, .nav-close .icon-menu, .nav-close .icon-close {
+  position: absolute;
+  right: 0;
+  top: -2px;
+  background-color: transparent; }
+.nav-open .icon-menu:before, .nav-open .icon-menu:after, .nav-open .icon-close:before, .nav-open .icon-close:after, .nav-close .icon-menu:before, .nav-close .icon-menu:after, .nav-close .icon-close:before, .nav-close .icon-close:after {
+  border-color: #fff; }
 
 .nav-close {
   position: absolute;
+  z-index: 2;
   right: 0;
   top: 0;
   display: none; }

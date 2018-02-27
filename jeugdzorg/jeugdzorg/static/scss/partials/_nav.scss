@@ -56,7 +56,23 @@
   z-index: 100;
   right: 0;
   top: 0;
-  
+}
+
+.nav-login {
+  display: inline-block;
+  margin: 0;
+  .button {
+    font-size: 1.2rem;
+    background-color: $textColor;
+    border-color: $textColor;
+    padding: .5em 1em;
+    margin: 0;
+    color: #fff;
+  }
+  .icon-avatar {
+    top: -.2em;
+    margin: 0 .2em;
+  }
 }
 
 .nav {
@@ -82,22 +98,48 @@
     padding: 1em;
     min-width: 200px;
     text-decoration: none;
-    background-color: #fff;
+    background-color: $textColor;
+    color: #fff;
     margin-bottom: 1px;
   }
 }
 
 .nav-open, .nav-close {
-  display: block;
-  height: 44px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  overflow: hidden;
   text-align: right;
-  line-height: 48px;
   text-decoration: none;
   margin-bottom: 10px;
+  
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: $textColor;
+  border-color: $textColor;
+  padding: 1em 1em;
+  margin: 0 0 0 1em;
+  color: #fff;
+  width: 4em;
+  text-align: center;
+  
+  padding-right: 40px;
+  
+  .icon-menu, .icon-close {
+    position: absolute;
+    right: 0;
+    top: -2px;
+    background-color: transparent;
+    &:before, &:after {
+      border-color: #fff;
+    }
+  }
   
 }
 .nav-close {
   position: absolute;
+  z-index: 2;
   right: 0;
   top: 0;
   display: none;
