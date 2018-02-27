@@ -206,14 +206,11 @@
     
     background-color: #fff;
     
-    &:hover {
-      border-color: $textColor;
-    }
-    
     outline: 4000px solid rgba(#000, 0);
     
-    &:hover {
+    .no-touch &:hover {
       outline: 4000px solid rgba(#000, .1);
+      border-color: $textColor;
     }
     
   }
