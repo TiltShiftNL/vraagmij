@@ -29,46 +29,49 @@
 
     </div>
     
+    <div class="regelingen-acties">
+    
+    {% if regeling.contacten %}
+        <div class="contacten-container">
+
+            <h2>Contacten</h2>
+            <p>
+                Heeft u een inhoudelijke vraag over "{{ regeling.titel }}"? 
+                {% if request.user|has_group:"viewer" %}
+                    Neem dan contact op met één van onderstaande contactpersonen.
+                {% else %}
+                    <br>
+                    <a href="{% url 'login' %}?next={% url 'detail_regeling' regeling.id %}" data-counter="click.detail.contact.login">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
+                {% endif %}
+            </p>
+            {% if request.user|has_group:"viewer" %}
+            <div class="regeling-contacten">
+                <ul class="contacten">
+                    {% for contact in regeling.contacten %}
+                        <li>
+                            {% include "snippets/contact.html" %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+    {% endif %}
+    
     {% if regeling.aanvraag_url %}
         <div class="regeling-aanvragen" id="regeling-aanvragen">
             <h2>Aanvragen</h2>
             <p>
-                Als u in aanmerking komt voor deze regeling kunt u deze op de website van <strong class="regeling-aanbieder">{% if regeling.bron %}{{ regeling.bron }}{% else %}de aanbieder{% endif %}</strong> aanvragen.
+                Als u in aanmerking komt voor <strong>{{ regeling.titel }}</strong> kunt u deze op de website van <strong class="regeling-aanbieder">{% if regeling.bron %}{{ regeling.bron }}{% else %}de aanbieder{% endif %}</strong> aanvragen.
             </p>
             <p class="buttons">
                 <a href="{{ regeling.aanvraag_url }}" target="_blank" class="button" data-counter="click.detail.aanvragen.regeling.{{ regeling.id }}">Nu aanvragen <i class="icon-external"></i></a>
             </p>
         </div>
     {% endif %}
-    
-    
-    
-    {% if regeling.contacten %}
-
-        <h2>Contacten</h2>
-        <p>
-            Heeft u een inhoudelijke vraag over "{{ regeling.titel }}"? 
-            {% if request.user|has_group:"viewer" %}
-                Neem dan contact op met één van onderstaande contactpersonen.
-            {% else %}
-                <br>
-                <a href="{% url 'login' %}?next={% url 'detail_regeling' regeling.id %}" data-counter="click.detail.contact.login">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
-            {% endif %}
-        </p>
-        {% if request.user|has_group:"viewer" %}
-        <div class="regeling-contacten">
-            <ul class="contacten">
-                {% for contact in regeling.contacten %}
-                    <li>
-                        {% include "snippets/contact.html" %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-
-    {% endif %}
-
+  
+    </div>
 
 
 </article>
