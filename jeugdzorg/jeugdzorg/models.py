@@ -7,6 +7,9 @@ from taggit.models import TagBase, GenericTaggedItemBase
 from sortedm2m.fields import SortedManyToManyField
 from adminsortable.models import Sortable
 
+# from boto.s3.storage import S3Storage
+#
+# s3 = S3Storage()
 
 class Regeling(models.Model):
     titel = models.CharField(
@@ -193,6 +196,12 @@ class Contact(models.Model):
     telefoonnummer = models.CharField(
         verbose_name=_('Telefoonnummer'),
         max_length=20,
+        null=True,
+        blank=True,
+    )
+    photo = models.ImageField(
+        verbose_name=_('Pas foto'),
+        upload_to='contact',
         null=True,
         blank=True,
     )
