@@ -55,20 +55,24 @@
     'progress': function(){
       
 
-      var el = this;
-      var id = el.dataset.regelingId;
-      var items = el.children;
-      var regeling = _closest(el, '.regeling');
+      var 
+        el = this,
+        id = el.dataset.regelingId,
+        items = el.children,
+        prevResult = [0,0],
+        result = [0,0],
+        regeling = _closest(el, '.regeling');
+
       var hashIcons = {
         yes: '1',
         no: '0',
         maybe: '_'
       };
 
-      var aanvragen = document.getElementById('regeling-aanvragen');
-      var progress = document.createElement(aanvragen ? 'a' : 'span');
+      var hasAanvragen = document.getElementById('regeling-aanvragen');
+      var progress = document.createElement(hasAanvragen ? 'a' : 'span');
       
-      if (aanvragen) {
+      if (hasAanvragen) {
         progress.href = '#regeling-aanvragen';
         progress.dataset.handler = 'scroll';
       }
@@ -86,7 +90,46 @@
         noEls = [progress.querySelector('.no-1 span'), progress.querySelector('.no-2 span')],
         noEl = [progress.querySelector('.no-1'), progress.querySelector('.no-2')];
       
-        var _change = function(){
+      var _update = function(y, n, t){
+        
+        resultEl.innerHTML = Math.round(y / t * 100);
+        
+        var 
+          yesResult = (y / t * 360),
+          noResult =  (n / t * 360);
+
+        yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
+        yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
+        
+        noEl[0].style.transform = 'rotate(' + yesResult + 'deg)';
+        noEl[1].style.transform = 'rotate(' + yesResult + 'deg)';
+        
+        noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
+        noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
+        
+      };
+      
+      var _updateByPercentages = function(a, b) {
+        
+        resultEl.innerHTML = a;
+        
+        var 
+          yesResult = (a/100 * 360),
+          noResult =  (b/100 * 360);
+
+        yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
+        yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
+        
+        noEl[0].style.transform = 'rotate(' + yesResult + 'deg)';
+        noEl[1].style.transform = 'rotate(' + yesResult + 'deg)';
+        
+        noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
+        noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
+        
+        
+      };
+      
+      var _change = function(){
         var 
           total = items.length,
           maybe = 0,
@@ -111,25 +154,33 @@
         }
         resultHash.push(']');
         // document.location.hash = resultHash.join('');
-        
-        resultEl.innerHTML = Math.round(yes / total * 100);
-        
+
         // setting counters
-        progress.dataset.counter = 'click.detail.progress.' + (aanvragen ? 'aanvragen' : 'indicatief') + '.total.' + total + '.yes.' + yes + '.no.' + no;
+        progress.dataset.counter = 'click.detail.progress.' + (hasAanvragen ? 'aanvragen' : 'indicatief') + '.total.' + total + '.yes.' + yes + '.no.' + no;
         
-        var 
-          yesResult = (yes / total * 360), // Math.round
-          noResult =  (no / total * 360); // Math.round
-          
+        result = [Math.round(yes*100/total), Math.round(no*100/total)];
+        var step = [prevResult[0] < result[0] ? 1 : -1, prevResult[1] < result[1] ? 1 : -1];
         
-        yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
-        yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
+        // _update(yes, no, total)
         
-        noEl[0].style.transform = 'rotate(' + yesResult + 'deg)';
-        noEl[1].style.transform = 'rotate(' + yesResult + 'deg)';
         
-        noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
-        noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
+        
+        var _animate = function(){
+          var animate = false;
+          _updateByPercentages(prevResult[0], prevResult[1])
+          if (prevResult[0] != result[0]) {
+            prevResult[0] = prevResult[0] + step[0];
+            animate= true;
+          }
+          if (prevResult[1] != result[1]) {
+            prevResult[1] = prevResult[1] + step[1];
+            animate= true;
+          }
+          animate && requestAnimationFrame(_animate);
+
+        }
+        
+        _animate();
         
         
         progress.classList[(yes + no == total) ? 'add' : 'remove']('complete');
@@ -147,9 +198,7 @@
         }
         
       };
-      
-      
-      
+
       for (var i=0; i<items.length; i++) {
         var yesno = document.createElement('div');
         yesno.classList.add('regeling-voorwaarde-yesno');
