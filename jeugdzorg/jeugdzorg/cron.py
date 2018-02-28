@@ -25,6 +25,7 @@ def update_regeling_bron_job():
                 soup_result.append(link.text)
             h = json.dumps(soup_result)
             #h = hashlib.sha1(json.dumps(soup_result).encode('utf-8')).hexdigest()
+            print('regeling id:%s' % regeling.id)
             print(h)
             if h != regeling.bron_resultaat and not regeling.bron_veranderd:
                 regeling.bron_resultaat = h
