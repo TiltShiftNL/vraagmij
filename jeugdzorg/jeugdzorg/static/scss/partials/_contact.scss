@@ -1,24 +1,21 @@
 .contacten {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   list-style: none;
   padding: 0;
-  margin: 0 (-10px) $lineHeight 0;
-  > li {
-    flex-basis: 380px;
-  }
+  margin: 0 (-10px) 0 0;
 }
 .contact {
   position: relative;
-  background: #f8f8f8;
+  background: #fff;
   padding: 10px;
   padding-left: 108px;
   min-height: 88px;
   font-size: 1.4rem;
   border-bottom: 1px solid #dbdbdb;
   margin: 0 10px 10px 0;
-  max-width: 340px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+
 }
 .contact-manieren {
   list-style: none;
@@ -50,46 +47,49 @@
   width: 80px;
   height: 80px;
   
-//  border-radius: 50%;
-  border: 4px solid #ccc;  
+  background-image: url('../images/pic_avatar.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+
+  border: 4px solid #ccc;
   background-color: #fff;
   
   overflow: hidden;
   
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translate3d(-50%, 0, 0);
-    border-radius: 50%;
-    
-    background-color: #ccc;
-    
-  }
-  &:before {
-    content: '..';
-    text-align: center;
-    color: rgba(#fff, .5);
-    font-weight: 700;
-    font-size: 1.6em;
-    line-height: .6em;
-    transition: all .3s;
-    top: 24%;
-    width: 40%;
-    height: 40%;
-  }
-  &:after {
-    top: 60%;
-    width: 70%;
-    height: 80%;
-    border-radius: 20%;
-  }
-  &:hover {
-    &:before {
-      text-indent: .1em;
-      color: rgba(#fff, 1);
-    }
-  }
+//  &:before, &:after {
+//    content: '';
+//    position: absolute;
+//    left: 50%;
+//    transform: translate3d(-50%, 0, 0);
+//    border-radius: 50%;
+//
+//    background-color: #ccc;
+//
+//  }
+//  &:before {
+//    content: '..';
+//    text-align: center;
+//    color: rgba(#fff, .5);
+//    font-weight: 700;
+//    font-size: 1.6em;
+//    line-height: .6em;
+//    transition: all .3s;
+//    top: 24%;
+//    width: 40%;
+//    height: 40%;
+//  }
+//  &:after {
+//    top: 60%;
+//    width: 70%;
+//    height: 80%;
+//    border-radius: 20%;
+//  }
+//  &:hover {
+//    &:before {
+//      text-indent: .1em;
+//      color: rgba(#fff, 1);
+//    }
+//  }
   .contact & {
     position: absolute;
     left: 10px;
