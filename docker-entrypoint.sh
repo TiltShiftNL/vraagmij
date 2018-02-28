@@ -25,6 +25,8 @@ export ADMIN_PASSWORD=${ADMIN_PASSWORD}
 export GIT_REV=${GIT_REV}
 EOF
 
+
+
 htpasswd -c /opt/.htpasswd "jeugdzorg" "fixxx7"
 
 # Collect static files

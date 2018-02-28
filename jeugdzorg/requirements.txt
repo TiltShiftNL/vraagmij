@@ -10,3 +10,4 @@ beautifulsoup4
 boto
 python-dateutil
 django-storages
+awscli
