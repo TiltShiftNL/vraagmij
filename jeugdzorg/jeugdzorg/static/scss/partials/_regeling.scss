@@ -223,14 +223,12 @@
   }
   &.complete-yes {
     .result {
-      color: #fff;
-      background-color: $yesColor;
+      color: $yesColor;
     }
   }
   &.complete-no {
     .result {
-      color: #fff;
-      background-color: $noColor;
+      color: $noColor;
     }
   }
 
@@ -266,21 +264,6 @@
     
   }
 }
-a.regeling-progress {
-  &:hover:before {
-    opacity: .5;
-  }
-  &.complete-yes:hover:before {
-    opacity: .9;
-    background-color: $yesColor;
-  }
-  &.complete-no:hover:before {
-    opacity: .9;
-    background-color: $noColor;
-  }
-  
-}
-
 
 .regeling-voorwaarde-yesno {
   position: absolute;
@@ -413,20 +396,6 @@ a.regeling-progress {
 .regeling-aanvragen {
   max-width: 45em;
   margin: 0 auto;
-  padding: $padding;
-  background-color: $lightColor;
-  
-  text-align: center;
-  
-  > *:last-child {
-    margin-bottom: 0;
-  } 
-  .buttons {
-    display: block;
-    > * {
-      margin: 0 1em;
-    }
-  }
 }
 
 .complete-yes ~ .regeling-aanvragen {
@@ -436,6 +405,24 @@ a.regeling-progress {
     border-color: $yesColor;
     .icon-external:after {
       outline-color: $yesColor;
+    }
+  }
+}
+
+.regelingen-acties {
+  display: flex;
+  margin-left: -$padding / 2;
+  margin-right: -$padding / 2;
+  align-items: start;
+  .regeling-aanvragen {
+    flex-basis: 30%;
+  }
+  > * {
+    margin: $padding / 2;
+    background-color: $lightColor;
+    padding: $padding;
+    > *:last-child {
+      margin-bottom: 0;
     }
   }
 }
