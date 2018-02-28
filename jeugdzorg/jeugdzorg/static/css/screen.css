@@ -280,8 +280,8 @@ body {
   border-top: none;
   width: 0;
   height: 14px;
-  right: -1px;
-  top: -7px;
+  right: 0px;
+  top: -6px;
   outline: 2px solid #fff; }
 .button .icon-external {
   margin-left: .4em; }
