@@ -161,10 +161,6 @@
         result = [Math.round(yes*100/total), Math.round(no*100/total)];
         var step = [prevResult[0] < result[0] ? 1 : -1, prevResult[1] < result[1] ? 1 : -1];
         
-        // _update(yes, no, total)
-        
-        
-        
         var _animate = function(){
           var animate = false;
           _updateByPercentages(prevResult[0], prevResult[1])
@@ -180,7 +176,7 @@
 
         }
         
-        _animate();
+        window.requestAnimationFrame ? _animate() : _update(yes, no, total);
         
         
         progress.classList[(yes + no == total) ? 'add' : 'remove']('complete');
