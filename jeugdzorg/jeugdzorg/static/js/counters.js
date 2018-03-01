@@ -1,6 +1,6 @@
 !function(w, d){
   var 
-    endpoint = '/counter/',
+    endpoint = '/event/add',
     interval = 10 * 1000,
     processing = false,
     events = ['click', 'mouseover', 'mouseout'],
@@ -65,6 +65,7 @@
 
     xhr.open('post', endpoint, true);
     xhr.setRequestHeader("X-CSRFToken", token);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = function() {
       if (xhr.status >= 200 && xhr.status < 400) {
@@ -76,8 +77,9 @@
       }
       processing = false;
     };
-
-    xhr.send(payload);
+    var str = JSON.stringify(payload.event_list);
+    console.log(str);
+    xhr.send(str);
     
 
   };

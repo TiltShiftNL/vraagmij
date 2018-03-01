@@ -50,3 +50,9 @@ class DoelAdmin(SortableAdmin):
 class ContactAdmin(admin.ModelAdmin):
     pass
 
+
+@admin.register(EventItem)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'timestamp', 'url', ]
+    list_filter = ['url', 'name', ]
+

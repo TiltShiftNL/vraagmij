@@ -15,6 +15,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from .mail import send_simple_message
 from .auth import auth_test
 from django.contrib import messages
+from django.http import JsonResponse
+import json
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -183,6 +185,29 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
 
         messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangepast." % self.object.titel)
         return super(RegelingUpdate, self).form_valid(form)
+
+
+class EventView(View):
+    #http_method_names = ['post', ]
+
+    def post(self, request, *args, **kwargs):
+        print(kwargs)
+        print(args)
+        print(request.body)
+        print(request.POST)
+
+        event_list = json.loads(request.body)
+        print(event_list)
+        for event in event_list:
+            try:
+                event_item = EventItem(**event)
+                if request.user:
+                    event_item.user = request.user
+                event_item.save()
+            except:
+                pass
+
+        return JsonResponse({'status': 'ok'}, safe=False)
 
 
 @staff_member_required

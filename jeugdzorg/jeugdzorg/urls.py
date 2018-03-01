@@ -28,6 +28,9 @@ urlpatterns = [
     path('regeling/<int:pk>/', RegelingDetail.as_view(), name='detail_regeling'),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
+
+    path('event/add', EventView.as_view(), name='add_event'),
+
     path('admin/', admin.site.urls),
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
     path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
