@@ -4,7 +4,11 @@
     interval = 10 * 1000,
     processing = false,
     events = ['click', 'mouseover', 'mouseout'],
-    counters = [];
+    counters = [],
+    token = d.querySelector('script[data-counter-token]');
+  
+  if (!token) return;
+  token = token.dataset.counterToken;
     
   if (w.localStorage) {
     var cachedCounters = w.localStorage.getItem('counters');
@@ -58,7 +62,7 @@
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', endpoint, true);
-    // xhr.setRequestHeader("X-CSRFToken", token);
+    xhr.setRequestHeader("X-CSRFToken", token);
 
     xhr.onload = function() {
       if (xhr.status >= 200 && xhr.status < 400) {
