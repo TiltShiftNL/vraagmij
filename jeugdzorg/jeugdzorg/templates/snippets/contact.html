@@ -1,5 +1,5 @@
 <section class="contact">
-    <span class="contact-avatar"></span>
+    <span class="contact-avatar"{% if contact.contact.photo %} style="background-image: url({{ contact.contact.photo.url }});"{% endif %}></span>
     <strong class="contact-naam">{{ contact.contact }}</strong>
     {% if contact.rol %}
         <em class="contact-rol">{{ contact.rol }}</em>

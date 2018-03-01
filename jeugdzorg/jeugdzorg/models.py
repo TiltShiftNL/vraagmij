@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
@@ -6,10 +7,11 @@ from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 from sortedm2m.fields import SortedManyToManyField
 from adminsortable.models import Sortable
+from django.core.files.storage import default_storage
 
-# from boto.s3.storage import S3Storage
-#
-# s3 = S3Storage()
+fs = default_storage
+fs.container_name = 'jeugdzorg_protected'
+
 
 class Regeling(models.Model):
     titel = models.CharField(
@@ -202,6 +204,7 @@ class Contact(models.Model):
     photo = models.ImageField(
         verbose_name=_('Pas foto'),
         upload_to='contact',
+        #storage=fs,
         null=True,
         blank=True,
     )
@@ -245,3 +248,43 @@ class ContactNaarRegeling(models.Model):
         verbose_name_plural = _('Contacten naar regelingen')
         ordering = ('volgorde', )
         unique_together = ('contact', 'regeling', )
+
+
+class EventItem(models.Model):
+    naam = models.CharField(
+        verbose_name=_('Naam'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    value = models.CharField(
+        verbose_name=_('Waarde'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    url = models.CharField(
+        verbose_name=_('Url'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    timestamp = models.CharField(
+        verbose_name=_('Timestamp'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    session_id = models.CharField(
+        verbose_name=_('Event id'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    user = models.ForeignKey(
+        to='auth.User',
+        verbose_name=_('Gebruiker'),
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )

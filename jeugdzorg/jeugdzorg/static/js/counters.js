@@ -1,6 +1,6 @@
 !function(w, d){
   var 
-    endpoint = '/counter/',
+    endpoint = '/event/add',
     interval = 10 * 1000,
     processing = false,
     events = ['click', 'mouseover', 'mouseout'],

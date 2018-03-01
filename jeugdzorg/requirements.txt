@@ -11,3 +11,4 @@ boto
 python-dateutil
 django-storages
 awscli
+django-storage-swift
