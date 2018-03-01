@@ -22,4 +22,4 @@ celerybeat-schedule
 #static/*
 /jeugdzorg/static/
 /jeugdzorg/media/
-/jeugdzorg/settings/local.py
+/jeugdzorg/jeugdzorg/settings/local.py

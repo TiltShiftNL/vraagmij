@@ -9,4 +9,5 @@ django-crontab
 beautifulsoup4
 boto
 python-dateutil
-pip install -e hg+https://bitbucket.org/david/django-storages#egg=storages
+django-storages
+awscli
