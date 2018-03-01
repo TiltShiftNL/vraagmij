@@ -57,11 +57,13 @@
     
     processing = true;
     
-    var payload = JSON.stringify(counters);
+    var payload = {
+      'event_list': counters
+    };
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open('GET', endpoint, true);
+    xhr.open('post', endpoint, true);
     xhr.setRequestHeader("X-CSRFToken", token);
 
     xhr.onload = function() {
