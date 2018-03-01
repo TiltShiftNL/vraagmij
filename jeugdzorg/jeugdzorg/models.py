@@ -251,7 +251,7 @@ class ContactNaarRegeling(models.Model):
 
 
 class EventItem(models.Model):
-    naam = models.CharField(
+    name = models.CharField(
         verbose_name=_('Naam'),
         max_length=255,
         null=True,

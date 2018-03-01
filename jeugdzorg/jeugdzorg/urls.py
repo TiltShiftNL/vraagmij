@@ -29,7 +29,7 @@ urlpatterns = [
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
 
-    path('event/add', EventView.as_view, name='add_event'),
+    path('event/add', EventView.as_view(), name='add_event'),
 
     path('admin/', admin.site.urls),
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
