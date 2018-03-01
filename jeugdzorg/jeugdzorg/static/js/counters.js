@@ -2,20 +2,10 @@
   var 
     endpoint = '/counter/',
     interval = 10 * 1000,
-    id = false,
-    token = false,
-    s = document.getElementById('counter'),
+    processing = false,
     events = ['click', 'mouseover', 'mouseout'],
     counters = [];
     
-  if (s) {
-    id = s.dataset.id;
-  }
-  if (id) {
-    id = document.location.hostname + '_' + id;
-    token = s.dataset.token;
-  } else return;
-  
   if (w.localStorage) {
     var cachedCounters = w.localStorage.getItem('counters');
     if (cachedCounters) {
@@ -28,7 +18,7 @@
     if (!obj.url) obj.url = w.location.href;
     if (!obj.name || !obj.value || !obj.url || obj.url.indexOf(w.location.origin) !== 0) return;
     obj.timestamp = (new Date()).getTime();
-    obj.id = id;
+
     counters.push(obj);
     
     w.localStorage && w.localStorage.setItem('counters', JSON.stringify(counters));
@@ -39,6 +29,7 @@
     
     d.addEventListener(events[i], function(t){
       var k, e, a = t && t.target;
+
       if (a = _closest(a, '[data-counter*="' + t.type + '."]')) {
         var r = a.getAttribute('data-counter').split(/\s+/);
         for (e = 0; e < r.length; e++){
@@ -58,26 +49,31 @@
     
     
   var _push = function(){
-    if (!counters.length) return;
+    if (!counters.length || processing) return;
+    
+    processing = true;
     
     var payload = JSON.stringify(counters);
-    counters = [];
-    w.localStorage && w.localStorage.removeItem('counters');
-    
-    // var xhr = new XMLHttpRequest();
-    //
-    // xhr.open('POST', endpoint, true);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', endpoint, true);
     // xhr.setRequestHeader("X-CSRFToken", token);
-    //
-    // xhr.onload = function() {
-    //   console.log(xhr);
-    //   if (xhr.status >= 200 && xhr.status < 400) {
-    //   }
-    // };
-    //
-    // xhr.send(payload);
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        counters = [];
+        w.localStorage && w.localStorage.removeItem('counters');
+        console.log(payload);
+      } else {
+        console.log('error sending playload.');
+      }
+      processing = false;
+    };
+
+    xhr.send(payload);
     
-    console.log(payload);
+
   };
   
   setTimeout(_push, 1000);

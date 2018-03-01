@@ -39,6 +39,13 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
         return data
 
+class CounterView(TemplateView):
+    template_name = 'snippets/counter.html'
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        return data
 
 class RegelingList(ListView):
     model = Regeling
