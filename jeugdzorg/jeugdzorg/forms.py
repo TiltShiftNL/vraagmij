@@ -20,7 +20,7 @@ def handle_uploaded_file(f):
 class RegelingModelForm(forms.ModelForm):
     class Meta:
         model = Regeling
-        exclude = []
+        exclude = ['contact', ]
         widgets = {
             'startdatum': widgets.DateInput(
                 attrs={'type': 'date'},
