@@ -6,7 +6,7 @@
     <h1>Alle regelingen {% now "Y" %}</h1>
     <ul class="tabs">
         <li><a{% if request.GET.beeld == 'alfabet' or not request.GET.beeld %} class="active"{% endif %} data-handler="tabs" data-counter="click.list.tab.alfabet" href=".?beeld=alfabet">Index A-Z</a></li>
-        <li><a{% if request.GET.beeld == 'doel' %} class="active"{% endif %} data-handler="tabs" data-counter="click.list.tab.doel" href=".?beeld=doel">Thematisch</a></li>
+        <li><a{% if request.GET.beeld == 'thema' %} class="active"{% endif %} data-handler="tabs" data-counter="click.list.tab.thema" href=".?beeld=thema">Thematisch</a></li>
         <!-- <li><a{% if request.GET.beeld == 'aanbieder' %} class="active"{% endif %} data-handler="tabs" href=".?beeld=aanbieder">Aanbieders</a></li> -->
     </ul>
 </header>

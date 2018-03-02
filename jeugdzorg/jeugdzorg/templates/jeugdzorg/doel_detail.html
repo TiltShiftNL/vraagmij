@@ -6,7 +6,7 @@
   <p class="regeling-back">
     <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.detail.back"><i class="icon-arrow-left"></i> Thema overzicht</a>
   </p>
-  {% include "snippets/doel.html" %}
+  {% include "snippets/thema.html" %}
 </div>
 
 {% endblock %}

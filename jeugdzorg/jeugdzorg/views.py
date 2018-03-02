@@ -17,6 +17,7 @@ from .auth import auth_test
 from django.contrib import messages
 from django.http import JsonResponse
 import json
+from django.conf import settings
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -51,7 +52,7 @@ class RegelingList(ListView):
             'snippets/regeling_list_%s.html' % self.request.GET.get('beeld', 'alfabet'),
             'snippets/regeling_list_alfabet.html'
         ])
-        data['doelen'] = Thema.objects.all()
+        data['themas'] = Thema.objects.all()
         data['list_template'] = template
         return data
 
@@ -60,11 +61,11 @@ class RegelingDetail(DetailView):
     model = Regeling
 
 
-class DoelList(ListView):
+class ThemaList(ListView):
     model = Thema
 
 
-class DoelDetail(DetailView):
+class ThemaDetail(DetailView):
     model = Thema
 
 
@@ -95,7 +96,8 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
 
 class RegelingCreate(UserPassesTestMixin, CreateView):
     model = Regeling
-    fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
+    form_class = RegelingModelForm
+    #fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -106,12 +108,12 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES)
-            data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES)
+            data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES)
             data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES)
 
         else:
             data['voorwaarde'] = VoorwaardeFormSet()
-            data['dfs'] = DoelFormSet()
+            data['dfs'] = ThemaFormSet()
             data['crfs'] = ContactNaarRegelingFormSet()
         return data
 
@@ -142,7 +144,8 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
 
 class RegelingUpdate(UserPassesTestMixin, UpdateView):
     model = Regeling
-    fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
+    form_class = RegelingModelForm
+    #fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -158,12 +161,12 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
-            data['dfs'] = DoelFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES, instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
-            data['dfs'] = DoelFormSet(instance=self.object)
+            data['dfs'] = ThemaFormSet(instance=self.object)
             data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
         return data
 
@@ -214,7 +217,7 @@ class EventView(View):
 @staff_member_required
 def dump_jeugdzorg(request):
     sysout = sys.stdout
-    fname = "%s.json" % ('jeugdzorg')
+    fname = "%s-%s.json" % ('jeugdzorg', settings.SOURCE_COMMIT.strip())
     response = HttpResponse(content_type='application/json')
     response['Content-Disposition'] = 'attachment; filename=%s' % fname
 
