@@ -1,5 +1,19 @@
 .systeem-berichten {
-  background: $brandColor1;
-  color: white;
-  padding: 10px;
+  background: $lightColor;
+  padding: $padding;
+  list-style: none;
+  margin: 0 auto $lineHeight auto;
+  line-height: 1.2;
+  li {
+    margin-bottom: .5em;
+  }
+  > *:last-child {
+    margin-bottom: 0;
+  }
+  &.fout {
+    background-color: rgba(red, .1);
+  }
+  &.goed {
+    background-color: rgba(green, .1);
+  }
 }

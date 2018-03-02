@@ -6,6 +6,9 @@ body {
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
+  &.container-small {
+    max-width: 45em;
+  }
 }
 .main {
   max-width: $maxWidth;

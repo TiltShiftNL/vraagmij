@@ -52,6 +52,53 @@ textarea {
     border: 1px solid rgba(#000, .8);
   }
 }
+input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  
+  left: 0;
+  top: 0;
+  
+  & + strong {
+    position: relative;
+    padding-left: 2em;
+    margin: 0;
+    line-height: 1.1;
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -.1em;
+    }
+    &:before {
+      width: 1.2em;
+      height: 1.2em;
+      border: 1px solid $textColor;
+      border-radius: 3px;
+      background-color: #fff;
+    }
+    &:after {
+      left: .25em;
+      top: .1em;
+      width: .8em;
+      height: .4em;
+      border-left: .2em solid $textColor;
+      border-bottom: .2em solid $textColor;
+      transform: rotate(-45deg);
+      
+      opacity: 0;
+      transition: all .1s;
+    }
+    
+  }
+  &:checked + strong {
+    &:after {
+      opacity: 1;
+    }
+  }
+  
+}
+
 option {
   min-height: 2.75em;
 }
@@ -96,12 +143,48 @@ form {
     }
   }
   label {
+    cursor: pointer;
     strong {
       display: block;
       margin-bottom: 5px;
     }
     
     display: block;
+  }
+  .choices {
+    list-style: none;
+    padding: 0;
+    margin: -10px;
+    margin-bottom: calc(#{$lineHeight} - 10px);
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      flex-basis: 25%;
+    }
+    strong {
+      background-color: $lightColor;
+      padding: 10px;
+      padding-left: calc(10px + 2em);
+      margin: 10px;
+      transition: all .3s;
+      
+      box-shadow: 0 -1px 0 rgba($textColor, 0) inset;
+      
+      &:before, &:after {
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+    }
+    
+    label:hover strong {
+      box-shadow: 0 -1px 0 rgba($textColor, .2) inset;
+    }
+    
+    :checked + strong,
+    label:hover strong {
+      box-shadow: 0 -1px 0 rgba($textColor, 1) inset;
+    }
+  
   }
 }
 .form-list {
