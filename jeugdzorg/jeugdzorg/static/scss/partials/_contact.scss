@@ -1,20 +1,25 @@
 .contacten {
   list-style: none;
   padding: 0;
-  margin: 0 (-10px) 0 0;
+  margin: 0 (-10px) calc(#{$lineHeight} - 10px) 0;
+  display: flex;
+  flex-wrap: wrap;
+  > * {
+    flex-basis: 33.33%;
+  }
+  .contact {
+    margin: 0 10px 10px 0;
+  }
 }
 .contact {
   position: relative;
-  background: #fff;
+  background: $lightColor;
   padding: 10px;
   padding-left: 108px;
   min-height: 88px;
   font-size: 1.4rem;
   border-bottom: 1px solid #dbdbdb;
   margin: 0 10px 10px 0;
-  &:last-child {
-    margin-bottom: 0;
-  }
 
 }
 .contact-manieren {

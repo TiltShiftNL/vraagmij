@@ -970,8 +970,9 @@ hr {
   background-color: rgba(236, 0, 0, 0.05); }
 
 .regeling-aanvragen {
-  max-width: 45em;
-  margin: 0 auto; }
+  margin: 0 0 2.2rem 0;
+  background-color: #f5f5f5;
+  padding: 3rem; }
 
 .complete-yes ~ .regeling-aanvragen {
   background-color: #f6fbf1; }
@@ -981,36 +982,26 @@ hr {
 .complete-yes ~ .regeling-aanvragen .button .icon-external:after {
   outline-color: #8ac640; }
 
-.regelingen-acties {
-  display: flex;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  align-items: start; }
-.regelingen-acties .regeling-aanvragen {
-  flex-basis: 30%; }
-.regelingen-acties > * {
-  margin: 1.5rem;
-  background-color: #f5f5f5;
-  padding: 3rem; }
-.regelingen-acties > * > *:last-child {
-  margin-bottom: 0; }
-
 .contacten {
   list-style: none;
   padding: 0;
-  margin: 0 -10px 0 0; }
+  margin: 0 -10px calc(2.2rem - 10px) 0;
+  display: flex;
+  flex-wrap: wrap; }
+.contacten > * {
+  flex-basis: 33.33%; }
+.contacten .contact {
+  margin: 0 10px 10px 0; }
 
 .contact {
   position: relative;
-  background: #fff;
+  background: #f5f5f5;
   padding: 10px;
   padding-left: 108px;
   min-height: 88px;
   font-size: 1.4rem;
   border-bottom: 1px solid #dbdbdb;
   margin: 0 10px 10px 0; }
-.contact:last-child {
-  margin-bottom: 0; }
 
 .contact-manieren {
   list-style: none;
