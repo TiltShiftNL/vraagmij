@@ -434,10 +434,25 @@ class EventItem(models.Model):
         null=True,
         blank=True,
     )
-    user = models.ForeignKey(
-        to='auth.User',
-        verbose_name=_('Gebruiker'),
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+    # user = models.ForeignKey(
+    #     to='jeugdzorg.User',
+    #     verbose_name=_('Gebruiker'),
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True,
+    # )
+
+
+# from django.apps import apps
+# from django.contrib.auth import get_user_model
+# from django.core.signals import setting_changed
+# from django.dispatch import receiver
+#
+#
+# @receiver(setting_changed)
+# def user_model_swapped(**kwargs):
+#     print(kwargs)
+#     if kwargs['setting'] == 'AUTH_USER_MODEL':
+#         apps.clear_cache()
+#         from django.contrib.admin.models import LogEntry
+#         LogEntry.UserModel = get_user_model()

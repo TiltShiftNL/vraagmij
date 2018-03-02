@@ -3,6 +3,7 @@ from .models import *
 from django.core.management import call_command
 
 
+
 class UploadJeugdzorgFixtureFileForm(forms.Form):
     file = forms.FileField(
         label='Upload jeugdzorg.json'
@@ -20,6 +21,18 @@ class RegelingModelForm(forms.ModelForm):
     class Meta:
         model = Regeling
         exclude = []
+
+
+# class UserCreationForm(forms.ModelForm):
+#     class Meta:
+#         model = User  # non-swappable User model here.
+#         exclude = []
+#
+#
+# class UserChangeForm(forms.ModelForm):
+#     class Meta:
+#         model = User  # non-swappable User model here.
+#         exclude = []
 
 
 VoorwaardeFormSet = forms.inlineformset_factory(
@@ -44,3 +57,5 @@ DoelFormSet = forms.inlineformset_factory(
     extra=1,
 
 )
+
+

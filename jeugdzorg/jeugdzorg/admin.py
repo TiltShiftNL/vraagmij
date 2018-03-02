@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from .forms import *
 from adminsortable.admin import SortableAdmin
 from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
 
@@ -76,3 +77,8 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'timestamp', 'url', ]
     list_filter = ['url', 'name', ]
 
+
+# @admin.register(User)
+# class UserAdmin(admin.ModelAdmin):
+#     form = UserChangeForm
+#     add_form = UserCreationForm
