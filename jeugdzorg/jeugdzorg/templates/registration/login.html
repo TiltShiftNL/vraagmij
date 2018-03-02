@@ -5,26 +5,44 @@
 {% block login %}{% endblock %}
 
 {% block main %}
-  <div class="container">
-    <form method="post" class="login">
-        <fieldset>
-            <legend>Inloggen bij RegelDingen</legend>
-            {% csrf_token %}
-            <p class="row">
-                <label for="id_username">Gebruikersnaam:</label>
-                {{ form.username }}
+    <div class="container container-small">
+
+        {% if form.errors %}
+            <ul class="systeem-berichten fout">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>
+                            <label for="{{ field.id }}">{{ error|escape }}</label>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>
+                        {{ error|escape }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <form method="post" class="login">
+            <fieldset>
+                <legend>Inloggen bij RegelDingen</legend>
+                {% csrf_token %}
+                <p class="row">
+                    <label for="id_username">Gebruikersnaam:</label>
+                    {{ form.username }}
+                </p>
+                <p class="row">
+                    <label for="id_password">Wachtwoord:</label>
+                    {{ form.password }}
+                </p>
+            </fieldset>
+            <p class="buttons right">
+                <button type="submit" class="button" data-counter="click.login.login">Inloggen</button>
+                <a href="#TODO" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
+                <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a>
+                <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left" data-counter="click.login.cancel">Annuleren</a>
             </p>
-            <p class="row">
-                <label for="id_password">Wachtwoord:</label>
-                {{ form.password }}
-            </p>
-        </fieldset>
-        <p class="buttons right">
-            <button type="submit" class="button" data-counter="click.login.login">Inloggen</button>
-            <a href="#TODO" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
-            <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a>
-            <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left" data-counter="click.login.cancel">Annuleren</a>
-        </p>
-    </form>
-  </div>
+        </form>
+    </div>
 {% endblock %}
