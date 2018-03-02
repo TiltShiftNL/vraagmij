@@ -46,16 +46,6 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 class RegelingList(ListView):
     model = Regeling
 
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        template = select_template([
-            'snippets/regeling_list_%s.html' % self.request.GET.get('beeld', 'alfabet'),
-            'snippets/regeling_list_alfabet.html'
-        ])
-        data['themas'] = Thema.objects.all()
-        data['list_template'] = template
-        return data
-
 
 class RegelingDetail(DetailView):
     model = Regeling

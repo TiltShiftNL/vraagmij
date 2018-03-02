@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<header class="container">
+    <ul class="tabs tabs-center tabs-heavy">
+        <li><a{% if request.path == '/themas/' or request.path == '/'  %} class="active"{% endif %} data-handler="tabs" data-counter="click.homepage.tab.themas" href="{% url 'themas' %}">Thema's</a></li>
+        <li><a{% if request.path == '/regelingen/' %} class="active"{% endif %} data-handler="tabs" data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}">Regelingen</a></li>
+        <li><a{% if request.path == '/contacten/' %} class="active"{% endif %} data-handler="tabs" data-counter="click.homepage.tab.contacten" href="#">Contacten</a></li>
+    </ul>
+</header>
+
+{% block tab_content %}{% endblock %}
+
+{% endblock %}

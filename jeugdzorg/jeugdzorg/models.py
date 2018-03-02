@@ -245,6 +245,9 @@ class Thema(Sortable):
         through_fields=('thema', 'contact'),
     )
 
+    def first_letter(self):
+        return self.titel and self.titel[0].upper() or ''
+
     def contacten(self):
         return self.contact.through.objects.filter(thema=self)
 
