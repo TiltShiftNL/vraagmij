@@ -2,15 +2,21 @@
   display: flex;
   justify-content: flex-start;
   
+  &.tabs-center {
+    justify-content: center;
+  }
+
   list-style: none;
   padding: 0;
   margin: 0 0 $lineHeight 0;
   
   border-bottom: 3px solid #e5e5e5;
-  
-  &.center {
-    justify-content: center;
+
+  &.tabs-heavy {
+    border-width: 3em;
   }
+  
+  
 
   > li {
     margin-right: 4px;

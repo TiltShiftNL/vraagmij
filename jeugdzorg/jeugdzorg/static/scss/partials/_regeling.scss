@@ -1,21 +1,3 @@
-.regelingen {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 $lineHeight 0;
-
-  a {
-    display: block;
-    text-decoration: none;
-    line-height: 1.2;
-    margin-bottom: .5em;
-
-    &:hover {
-      color: #000;
-    }
-    
-  }
-  
-}
 .shortcut {
   font-size: $lineHeight;
   line-height: 1;

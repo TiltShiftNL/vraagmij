@@ -35,6 +35,21 @@ body {
     display:table;
     margin-right: 1em;
   }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 $lineHeight 0;
+
+    a {
+      display: block;
+      text-decoration: none;
+      line-height: 1.2;
+      margin-bottom: .5em;
+    }
+
+  }
+  
   @include large {
     columns: 3;
   }

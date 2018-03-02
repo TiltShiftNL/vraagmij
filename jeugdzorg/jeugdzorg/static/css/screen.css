@@ -87,7 +87,7 @@ body, [type="text"], [type="search"], [type="email"], [type="password"], [type="
   font-size: 1.6rem;
   font-family: "AvenirNextLTW01-Regular", verdana, sans-serif; }
 
-.bold, legend {
+.bold, legend, b, strong {
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif; }
 
 body {
@@ -166,6 +166,15 @@ body {
   break-inside: avoid-column;
   display: table;
   margin-right: 1em; }
+.columns ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.2rem 0; }
+.columns ul a {
+  display: block;
+  text-decoration: none;
+  line-height: 1.2;
+  margin-bottom: .5em; }
 @media (max-width: 1290px) {
   .columns {
     columns: 3; } }
@@ -701,8 +710,10 @@ form .choices :checked + strong, form .choices label:hover strong {
   padding: 0;
   margin: 0 0 2.2rem 0;
   border-bottom: 3px solid #e5e5e5; }
-.tabs.center {
+.tabs.tabs-center {
   justify-content: center; }
+.tabs.tabs-heavy {
+  border-width: 3em; }
 .tabs > li {
   margin-right: 4px; }
 .tabs a {
@@ -744,9 +755,13 @@ form .choices :checked + strong, form .choices label:hover strong {
   list-style: none;
   margin: 0 auto 2.2rem auto;
   line-height: 1.2; }
+.systeem-berichten ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
 .systeem-berichten li {
   margin-bottom: .5em; }
-.systeem-berichten > *:last-child {
+.systeem-berichten > *:last-child, .systeem-berichten ul > li:last-child {
   margin-bottom: 0; }
 .systeem-berichten.fout {
   background-color: rgba(255, 0, 0, 0.1); }
@@ -759,18 +774,6 @@ hr {
   padding: 0;
   border: none;
   margin: 4.4rem 0; }
-
-.regelingen {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2.2rem 0; }
-.regelingen a {
-  display: block;
-  text-decoration: none;
-  line-height: 1.2;
-  margin-bottom: .5em; }
-.regelingen a:hover {
-  color: #000; }
 
 .shortcut {
   font-size: 2.2rem;
