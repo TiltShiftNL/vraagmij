@@ -241,7 +241,7 @@ class Thema(Sortable):
     )
     contact = models.ManyToManyField(
         to='Contact',
-        through='ContactNaarDoel',
+        through='ContactNaarThema',
         through_fields=('doel', 'contact'),
     )
 
@@ -370,7 +370,7 @@ class ContactNaarRegeling(models.Model):
         unique_together = ('contact', 'regeling', )
 
 
-class ContactNaarDoel(models.Model):
+class ContactNaarThema(models.Model):
     contact = models.ForeignKey(
         to=Contact,
         verbose_name=_('Contact'),

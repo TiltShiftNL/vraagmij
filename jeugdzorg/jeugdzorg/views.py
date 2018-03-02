@@ -17,6 +17,7 @@ from .auth import auth_test
 from django.contrib import messages
 from django.http import JsonResponse
 import json
+from django.conf import settings
 
 
 class ConfigView(LoginRequiredMixin, TemplateView):
@@ -214,7 +215,7 @@ class EventView(View):
 @staff_member_required
 def dump_jeugdzorg(request):
     sysout = sys.stdout
-    fname = "%s.json" % ('jeugdzorg')
+    fname = "%s-%s.json" % ('jeugdzorg', settings.SOURCE_COMMIT.strip())
     response = HttpResponse(content_type='application/json')
     response['Content-Disposition'] = 'attachment; filename=%s' % fname
 

@@ -20,8 +20,8 @@ class ContactNaarRegelingInline(admin.TabularInline):
     extra = 1
 
 
-class ContactNaarDoelInline(admin.TabularInline):
-    model = ContactNaarDoel
+class ContactNaarThemaInline(admin.TabularInline):
+    model = ContactNaarThema
     extra = 1
 
 
@@ -52,16 +52,16 @@ class OrganisatieAdmin(SortableAdmin):
     pass
 
 
-@admin.register(RegelingTag)
-class RegelingTagAdmin(SortableAdmin):
-    pass
+# @admin.register(RegelingTag)
+# class RegelingTagAdmin(SortableAdmin):
+#     pass
 
 
 @admin.register(Thema)
 class DoelAdmin(SortableAdmin):
     prepopulated_fields = {'slug': ('titel',), }
     inlines = [
-        ContactNaarDoelInline,
+        ContactNaarThemaInline,
     ]
 
 
@@ -74,7 +74,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(EventItem)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'timestamp', 'url', ]
+    list_display = ['id', 'name', 'value', 'timestamp', 'url', ]
     list_filter = ['url', 'name', ]
 
 
