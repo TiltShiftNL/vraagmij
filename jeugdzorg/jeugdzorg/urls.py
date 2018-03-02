@@ -26,6 +26,8 @@ urlpatterns = [
     path('regeling/<int:pk>/bewerken', RegelingUpdate.as_view(), name='update_regeling'),
     path('regeling/<int:pk>/verwijderen', RegelingDelete.as_view(), name='verwijder_regeling'),
     path('regeling/<int:pk>/', RegelingDetail.as_view(), name='detail_regeling'),
+    path('themas/', DoelList.as_view(), name='themas'),
+    path('thema/<slug:slug>/', DoelDetail.as_view(), name='detail_doel'),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
 
@@ -35,7 +37,6 @@ urlpatterns = [
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
     path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
     path('admin/logs/', ConfigView.as_view(), name='logs'),
-    path('counter/', CounterView.as_view(), name='counter'),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

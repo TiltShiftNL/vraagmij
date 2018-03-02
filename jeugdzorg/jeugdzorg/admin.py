@@ -19,6 +19,16 @@ class ContactNaarRegelingInline(admin.TabularInline):
     extra = 1
 
 
+class ContactNaarDoelInline(admin.TabularInline):
+    model = ContactNaarDoel
+    extra = 1
+
+
+class ContactNaarOrganisatieInline(admin.TabularInline):
+    model = ContactNaarOrganisatie
+    extra = 1
+
+
 @admin.register(Regeling)
 class RegelingAdmin(SortableAdmin):
     list_display = ['titel', 'bron_veranderd']
@@ -36,6 +46,11 @@ class VoorwaardeAdmin(SortableAdmin):
     pass
 
 
+@admin.register(Organisatie)
+class OrganisatieAdmin(SortableAdmin):
+    pass
+
+
 @admin.register(RegelingTag)
 class RegelingTagAdmin(SortableAdmin):
     pass
@@ -43,12 +58,17 @@ class RegelingTagAdmin(SortableAdmin):
 
 @admin.register(Doel)
 class DoelAdmin(SortableAdmin):
-    pass
+    prepopulated_fields = {'slug': ('titel',), }
+    inlines = [
+        ContactNaarDoelInline,
+    ]
 
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    pass
+    inlines = [
+        ContactNaarOrganisatieInline,
+    ]
 
 
 @admin.register(EventItem)

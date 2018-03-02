@@ -14,7 +14,7 @@
         {% for doel in doelen %}
 
             {% if doel.regeling_set.all %}
-                <h2 class="shortcut" id="doel-{{ doel.id }}">{{ doel.titel }}</h2>
+                <h2 class="shortcut" id="doel-{{ doel.id }}"><a href="{% url 'detail_doel' doel.slug %}">{{ doel.titel }}</a></h2>
                 {% if doel.omschrijving %}
                     <p class="doel-omschrijving">
                         {{ doel.omschrijving }}
