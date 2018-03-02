@@ -52,13 +52,13 @@
             
             <div class="regeling-set">
 
-                <h2>Doelen</h2>
+                <h2>Thema's</h2>
                 {{ dfs.management_form }}
                 <ol class="form-list" data-decorator="list">
                     {% for form in dfs.forms %}
                     <li>
                         <label>
-                            <strong>Doel</strong>
+                            <strong>Thema</strong>
                             {% for field in form.visible_fields %}
                                 {% if forloop.first %}
                                     {% for hidden in form.hidden_fields %}

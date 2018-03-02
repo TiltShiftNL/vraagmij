@@ -1,28 +1,28 @@
 <div class="container">
   
     <ul class="shortcuts">
-        {% for doel in doelen %}
-            {% if doel.regeling_set.all %}
-                <li><a href="#doel-{{ doel.id }}" data-decorator="scroll" data-counter="click.list.doel.{{ doel.id }}">{{ doel }}</a></li>
+        {% for thema in themas %}
+            {% if thema.regeling_set.all %}
+                <li><a href="#thema-{{ thema.id }}" data-decorator="scroll" data-counter="click.list.thema.{{ thema.id }}">{{ thema }}</a></li>
             {% endif %}
         {% endfor %}
-        <li><a href="#doel-overige" data-decorator="scroll" data-counter="click.list.doel.overige">Overige</a></li>
+        <li><a href="#thema-overige" data-decorator="scroll" data-counter="click.list.thema.overige">Overige</a></li>
     </ul>
 
 
     <div class="columns">
-        {% for doel in doelen %}
+        {% for thema in themas %}
 
-            {% if doel.regeling_set.all %}
-                <h2 class="shortcut" id="doel-{{ doel.id }}"><a href="{% url 'detail_doel' doel.slug %}">{{ doel.titel }}</a></h2>
-                {% if doel.omschrijving %}
-                    <p class="doel-omschrijving">
-                        {{ doel.omschrijving }}
+            {% if thema.regeling_set.all %}
+                <h2 class="shortcut" id="thema-{{ thema.id }}"><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></h2>
+                {% if thema.omschrijving %}
+                    <p class="thema-omschrijving">
+                        {{ thema.omschrijving }}
                     </p>
                 {% endif %}
             
                 <ul class="regelingen">
-                    {% for regeling in doel.regeling_set.all %}
+                    {% for regeling in thema.regeling_set.all %}
                         <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
                     {% endfor %}
                 </ul>
@@ -32,7 +32,7 @@
         {% endfor %}
 
         <div class="group">
-            <h2 class="shortcut" id="doel-overige">Overige</h2>
+            <h2 class="shortcut" id="thema-overige">Overige</h2>
             <ul class="regelingen">
                 {% for regeling in regeling_list %}
                     {% if not regeling.doelen.all %}

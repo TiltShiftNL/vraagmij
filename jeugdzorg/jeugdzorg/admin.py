@@ -58,7 +58,7 @@ class OrganisatieAdmin(SortableAdmin):
 
 
 @admin.register(Thema)
-class DoelAdmin(SortableAdmin):
+class ThemaAdmin(SortableAdmin):
     prepopulated_fields = {'slug': ('titel',), }
     inlines = [
         ContactNaarThemaInline,
