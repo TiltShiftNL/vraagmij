@@ -641,6 +641,8 @@ form label strong {
   padding: 0;
   margin: 0 0 2.2rem 0;
   border-bottom: 3px solid #e5e5e5; }
+.tabs.center {
+  justify-content: center; }
 .tabs > li {
   margin-right: 4px; }
 .tabs a {
