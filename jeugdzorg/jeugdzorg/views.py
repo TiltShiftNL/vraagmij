@@ -96,7 +96,8 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
 
 class RegelingCreate(UserPassesTestMixin, CreateView):
     model = Regeling
-    fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
+    form_class = RegelingModelForm
+    #fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -143,7 +144,8 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
 
 class RegelingUpdate(UserPassesTestMixin, UpdateView):
     model = Regeling
-    fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
+    form_class = RegelingModelForm
+    #fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):

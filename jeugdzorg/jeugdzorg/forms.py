@@ -1,7 +1,7 @@
 from django import forms
+from django.forms import widgets
 from .models import *
 from django.core.management import call_command
-
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
@@ -21,6 +21,15 @@ class RegelingModelForm(forms.ModelForm):
     class Meta:
         model = Regeling
         exclude = []
+        widgets = {
+            'startdatum': widgets.DateInput(
+                attrs={'type': 'date'},
+            ),
+            'einddatum': widgets.DateInput(
+                attrs={'type': 'date'},
+            ),
+        }
+        # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
 
 
 # class UserCreationForm(forms.ModelForm):
@@ -52,10 +61,8 @@ ContactNaarRegelingFormSet = forms.inlineformset_factory(
 DoelFormSet = forms.inlineformset_factory(
     Regeling,
     Regeling.doelen.through,
-    fields=('thema', ),
+    fields=('thema',),
     form=RegelingModelForm,
     extra=1,
 
 )
-
-
