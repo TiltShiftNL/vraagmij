@@ -246,6 +246,7 @@
     @include medium {
       top: $padding / 2;
       margin: $lineHeight auto;
+      overflow: visible;
     }
     
     

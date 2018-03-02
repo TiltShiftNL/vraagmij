@@ -864,7 +864,8 @@ hr {
 @media (max-width: 900px) {
   .regeling .regeling-progress {
     top: 1.5rem;
-    margin: 2.2rem auto; } }
+    margin: 2.2rem auto;
+    overflow: visible; } }
 .regeling .regeling-progress:before {
   content: '';
   position: absolute;
