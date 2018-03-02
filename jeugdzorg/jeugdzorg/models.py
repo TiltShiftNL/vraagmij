@@ -128,7 +128,7 @@ class Regeling(models.Model):
         blank=True,
     )
     doelen = SortedManyToManyField(
-        to='Doel',
+        to='Thema',
         blank=True,
     )
 
@@ -224,7 +224,7 @@ class TaggedRegeling(GenericTaggedItemBase):
     )
 
 
-class Doel(Sortable):
+class Thema(Sortable):
     titel = models.CharField(
         verbose_name=_('Titel'),
         max_length=255,
@@ -378,7 +378,7 @@ class ContactNaarDoel(models.Model):
         on_delete=models.CASCADE,
     )
     doel = models.ForeignKey(
-        to=Doel,
+        to=Thema,
         verbose_name=_('Thema'),
         on_delete=models.CASCADE,
     )

@@ -57,7 +57,7 @@ class RegelingTagAdmin(SortableAdmin):
     pass
 
 
-@admin.register(Doel)
+@admin.register(Thema)
 class DoelAdmin(SortableAdmin):
     prepopulated_fields = {'slug': ('titel',), }
     inlines = [

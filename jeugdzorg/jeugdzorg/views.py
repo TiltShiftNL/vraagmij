@@ -51,7 +51,7 @@ class RegelingList(ListView):
             'snippets/regeling_list_%s.html' % self.request.GET.get('beeld', 'alfabet'),
             'snippets/regeling_list_alfabet.html'
         ])
-        data['doelen'] = Doel.objects.all()
+        data['doelen'] = Thema.objects.all()
         data['list_template'] = template
         return data
 
@@ -61,11 +61,11 @@ class RegelingDetail(DetailView):
 
 
 class DoelList(ListView):
-    model = Doel
+    model = Thema
 
 
 class DoelDetail(DetailView):
-    model = Doel
+    model = Thema
 
 
 class RegelingDelete(UserPassesTestMixin, DeleteView):

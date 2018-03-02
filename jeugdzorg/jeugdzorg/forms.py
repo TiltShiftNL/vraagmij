@@ -52,7 +52,7 @@ ContactNaarRegelingFormSet = forms.inlineformset_factory(
 DoelFormSet = forms.inlineformset_factory(
     Regeling,
     Regeling.doelen.through,
-    fields=('doel', ),
+    fields=('thema', ),
     form=RegelingModelForm,
     extra=1,
 
