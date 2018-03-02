@@ -29,6 +29,8 @@ urlpatterns = [
     path('regeling/<int:pk>/', RegelingDetail.as_view(), name='detail_regeling'),
     path('themas/', ThemaList.as_view(), name='themas'),
     path('thema/<slug:slug>/', ThemaDetail.as_view(), name='detail_thema'),
+    path('contacten/', ContactList.as_view(), name='contacten'),
+    path('contact/<slug:slug>/', ContactDetail.as_view(), name='detail_contact'),
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     

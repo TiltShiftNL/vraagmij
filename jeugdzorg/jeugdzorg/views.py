@@ -59,6 +59,14 @@ class ThemaDetail(DetailView):
     model = Thema
 
 
+class ContactList(ListView):
+    model = Contact
+
+
+class ContactDetail(DetailView):
+    model = Contact
+
+
 class RegelingDelete(UserPassesTestMixin, DeleteView):
     model = Regeling
     success_url = reverse_lazy('regelingen')

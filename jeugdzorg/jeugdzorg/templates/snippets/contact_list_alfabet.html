@@ -1,0 +1,26 @@
+<div class="container">
+
+    {% regroup contact_list by first_letter as title_list %}
+    <ul class="shortcuts">
+        {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
+            <li><a href="#contact-{{ letter }}" data-decorator="scroll" data-counter="click.contacten.alfabet.{{ letter }}">{{ letter }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <div class="columns">
+
+        {% for titel in title_list %}
+            <div class="group">
+                <h2 class="shortcut" id="contacten-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+                <ul class="contacten">
+                    {% for contact in titel.list %}
+                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.contacten.contact.{{ contact.id }}">
+                            {% include 'snippets/contact.html' %}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>

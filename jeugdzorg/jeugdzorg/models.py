@@ -303,6 +303,9 @@ class Contact(models.Model):
         through='ContactNaarOrganisatie',
         through_fields=('contact', 'organisatie'),
     )
+    
+    def first_letter(self):
+        return self.achternaam and self.achternaam[0].upper() or ''
 
     def __str__(self):
         return '%s %s' % (self.voornaam, self.achternaam)

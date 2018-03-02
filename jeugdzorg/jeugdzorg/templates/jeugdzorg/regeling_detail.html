@@ -3,10 +3,10 @@
 {% block main %}
 
 <div class="container">
-  <p class="regeling-back">
-    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'regelingen' %}{% endif %}" data-counter="click.detail.back"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
+  <p class="thema-back">
+    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.thema.back"><i class="icon-arrow-left"></i> Thema's overzicht</a>
   </p>
-  {% include "snippets/regeling.html" %}
+  {% include "snippets/thema.html" %}
 </div>
 
 {% endblock %}

@@ -1,59 +1,20 @@
 {% load auth_tags %}
-<article class="regeling" id="thema-{{ regeling.id }}">
+<article class="thema" id="thema-{{ thema.id }}">
 
-    <header class="regeling-header">
-        <h1 class="regeling-title">
-            {% if request.user|has_group:"editor" %}
-                <small class="regeling-edit"><a href="{% url 'update_regeling' object.id %}">[bewerken]</a></small>
-            {% endif %}
+    <header class="thema-header">
+
+        <h1 class="thema-title">
 
             {{ object.titel }}
 
         </h1>
 
         {% if object.omschrijving %}
-            <div class="regeling-samenvatting">
+            <div class="thema-samenvatting">
                 {{ object.omschrijving|linebreaks }}
             </div>
         {% endif %}
     </header>
-
-    <div class="regelingen-acties">
-
-    {% if object.contacten %}
-        <div class="contacten-container">
-
-            <h2>Contacten</h2>
-            <p>
-                Heeft u een inhoudelijke vraag over "{{ regeling.titel }}"?
-                {% if request.user|has_group:"viewer" %}
-                    Neem dan contact op met één van onderstaande contactpersonen.
-                {% else %}
-                    <br>
-                    <a href="{% url 'login' %}?next={% url 'detail_regeling' regeling.id %}" data-counter="click.detail.contact.login">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
-                {% endif %}
-            </p>
-            {% if request.user|has_group:"viewer" %}
-            <div class="regeling-contacten">
-                <ul class="contacten">
-                    {% for contact in object.contacten %}
-                        <li>
-                            {% include "snippets/contact.html" %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-        </div>
-
-    {% endif %}
-    <ul class="regelingen">
-        {% for regeling in object.regeling_set.all %}
-            <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">&lsaquo;{{ regeling.titel }}</a></li>
-        {% endfor %}
-    </ul>
-
-    </div>
 
 
 </article>
