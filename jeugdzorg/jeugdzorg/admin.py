@@ -69,6 +69,7 @@ class ThemaAdmin(SortableAdmin):
 class ContactAdmin(admin.ModelAdmin):
     inlines = [
         ContactNaarOrganisatieInline,
+        ContactNaarThemaInline,
     ]
 
 
