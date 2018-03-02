@@ -15,8 +15,6 @@
       
       var totalInputs = this.list.parentNode.querySelectorAll('[id*="-TOTAL_FORMS"]');
       
-      console.log(totalInputs);
-      
       for (var i =0; i<totalInputs.length; i++) {
         totalInputs[i].value = this.list.children.length;
       
@@ -61,6 +59,7 @@
         items = el.children,
         prevResult = [0,0],
         result = [0,0],
+        animation,
         regeling = _closest(el, '.regeling');
 
       var hashIcons = {
@@ -98,14 +97,7 @@
           yesResult = (y / t * 360),
           noResult =  (n / t * 360);
 
-        yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
-        yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
-        
-        noEl[0].style.transform = 'rotate(' + yesResult + 'deg)';
-        noEl[1].style.transform = 'rotate(' + yesResult + 'deg)';
-        
-        noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
-        noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
+        _render(yesResult, noResult);
         
       };
       
@@ -116,7 +108,12 @@
         var 
           yesResult = (a/100 * 360),
           noResult =  (b/100 * 360);
+          
+        _render(yesResult, noResult);
 
+      };
+      
+      var _render = function(yesResult, noResult) {
         yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
         yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
         
@@ -125,8 +122,6 @@
         
         noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
         noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
-        
-        
       };
       
       var _change = function(){
@@ -136,6 +131,8 @@
           yes = 0,
           no = 0;
           resultHash = [];
+
+        animation && cancelAnimationFrame(animation);
 
         resultHash.push('[');
           
@@ -157,22 +154,25 @@
 
         // setting counters
         progress.dataset.counter = 'click.detail.progress.' + (hasAanvragen ? 'aanvragen' : 'indicatief') + '.total.' + total + '.yes.' + yes + '.no.' + no;
-        
+
         result = [Math.round(yes*100/total), Math.round(no*100/total)];
+        
         var step = [prevResult[0] < result[0] ? 1 : -1, prevResult[1] < result[1] ? 1 : -1];
         
         var _animate = function(){
-          var animate = false;
+          animating = false;
           _updateByPercentages(prevResult[0], prevResult[1])
           if (prevResult[0] != result[0]) {
             prevResult[0] = prevResult[0] + step[0];
-            animate= true;
+            animating = true;
           }
           if (prevResult[1] != result[1]) {
             prevResult[1] = prevResult[1] + step[1];
-            animate= true;
+            animating = true;
           }
-          animate && requestAnimationFrame(_animate);
+          if (animating) {
+            animation = requestAnimationFrame(_animate);
+          }
 
         }
         
