@@ -4,6 +4,22 @@
 <div class="container">
     <form action="" method="post">
         {% csrf_token %}
+<!--
+        <fieldset>
+          <legend>Organisatie</legend>
+          <div class="row">
+              <ul class="choices">
+              {% for i in '|||||||||||||||' %}
+                <li>
+                  <label>
+                    <input type="checkbox"><strong>Organisate 1</strong>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </fieldset>
+-->
         <fieldset>
             <legend>Regeling</legend>
             <h2>Meta info</h2>
