@@ -192,16 +192,10 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
 
 
 class EventView(View):
-    #http_method_names = ['post', ]
+    http_method_names = ['post', ]
 
     def post(self, request, *args, **kwargs):
-        print(kwargs)
-        print(args)
-        print(request.body)
-        print(request.POST)
-
         event_list = json.loads(request.body)
-        print(event_list)
         for event in event_list:
             try:
                 event_item = EventItem(**event)

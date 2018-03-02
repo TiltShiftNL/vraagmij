@@ -16,7 +16,7 @@ fs = default_storage
 fs.container_name = 'jeugdzorg_protected'
 
 
-# class EmailAuthUserManager(BaseUserManager):
+# class CustomUserManager(BaseUserManager):
 #     """
 #     A custom user manager to deal with emails as unique identifiers for auth
 #     instead of usernames. The default that's used is "UserManager"
@@ -47,6 +47,7 @@ fs.container_name = 'jeugdzorg_protected'
 #
 # class User(AbstractBaseUser, PermissionsMixin):
 #     email = models.EmailField(unique=True, null=True)
+#     username = models.CharField(unique=True, null=True)
 #     is_staff = models.BooleanField(
 #         _('staff status'),
 #         default=False,
@@ -61,7 +62,7 @@ fs.container_name = 'jeugdzorg_protected'
 #         ),
 #     )
 #     USERNAME_FIELD = 'email'
-#     objects = EmailAuthUserManager()
+#     objects = CustomUserManager()
 #
 #     def __str__(self):
 #         return self.email
