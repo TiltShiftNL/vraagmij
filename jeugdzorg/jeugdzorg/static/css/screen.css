@@ -793,6 +793,7 @@ hr {
   width: 88px;
   height: 88px;
   border-radius: 50%;
+  overflow: hidden;
   background-color: gainsboro; }
 .regeling-progress .result {
   position: absolute;

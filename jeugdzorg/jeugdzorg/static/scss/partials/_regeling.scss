@@ -141,6 +141,7 @@
   height: $progressWidth;
   
   border-radius: 50%;
+  overflow: hidden;
   background-color: darken($lightColor, 10);
   
   .result {
