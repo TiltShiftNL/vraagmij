@@ -35,7 +35,7 @@
             <h2 class="shortcut" id="thema-overige">Overige</h2>
             <ul class="regelingen">
                 {% for regeling in regeling_list %}
-                    {% if not regeling.doelen.all %}
+                    {% if not regeling.themas.all %}
                         <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
                     {% endif %}
                 {% endfor %}

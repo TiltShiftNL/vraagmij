@@ -127,7 +127,7 @@ class Regeling(models.Model):
         through='TaggedRegeling',
         blank=True,
     )
-    doelen = SortedManyToManyField(
+    themas = SortedManyToManyField(
         to='Thema',
         blank=True,
     )
@@ -242,11 +242,11 @@ class Thema(Sortable):
     contact = models.ManyToManyField(
         to='Contact',
         through='ContactNaarThema',
-        through_fields=('doel', 'contact'),
+        through_fields=('thema', 'contact'),
     )
 
     def contacten(self):
-        return self.contact.through.objects.filter(doel=self)
+        return self.contact.through.objects.filter(thema=self)
 
     def __str__(self):
         return self.titel
@@ -374,10 +374,10 @@ class ContactNaarThema(models.Model):
     contact = models.ForeignKey(
         to=Contact,
         verbose_name=_('Contact'),
-        related_name='contactnaardoel',
+        related_name='contactnaarthema',
         on_delete=models.CASCADE,
     )
-    doel = models.ForeignKey(
+    thema = models.ForeignKey(
         to=Thema,
         verbose_name=_('Thema'),
         on_delete=models.CASCADE,
@@ -400,7 +400,7 @@ class ContactNaarThema(models.Model):
         verbose_name = _('Contact naar thema')
         verbose_name_plural = _("Contacten naar thema's")
         ordering = ('volgorde', )
-        unique_together = ('contact', 'doel', )
+        unique_together = ('contact', 'thema', )
 
 
 class EventItem(models.Model):
