@@ -27,7 +27,7 @@ EOF
 
 
 
-htpasswd -c /opt/.htpasswd "jeugdzorg" "fixxx7"
+htpasswd -cb /opt/.htpasswd jeugdzorg fixxx7
 
 # Collect static files
 echo "Collect static files"
