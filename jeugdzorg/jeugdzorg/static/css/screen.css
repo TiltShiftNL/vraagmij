@@ -726,8 +726,9 @@ form .choices :checked + strong, form .choices label:hover strong {
   border-bottom: 3px solid #e5e5e5; }
 .tabs.tabs-center {
   justify-content: center; }
-.tabs.tabs-heavy {
-  border-width: 3em; }
+@media (max-width: 900px) {
+  .tabs.tabs-center {
+    justify-content: flex-start; } }
 .tabs > li {
   margin-right: 4px; }
 .tabs a {
@@ -762,6 +763,38 @@ form .choices :checked + strong, form .choices label:hover strong {
   color: #333; }
 .tabs a.active:before {
   display: none; }
+@media (max-width: 900px) {
+  .tabs a {
+    font-size: 1.6rem;
+    padding: .6em 1em; } }
+
+.sort {
+  list-style: none;
+  margin: 0 0 2.2rem 0;
+  padding: 0;
+  line-height: 1;
+  background-color: #e5e5e5;
+  padding: 0 .5em;
+  display: flex;
+  font-size: 1.4rem;
+  min-height: 4em; }
+.sort a {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  padding: 1em 1em;
+  margin: .5em 0;
+  transition: background-color .3s; }
+.sort a:hover {
+  background-color: rgba(255, 255, 255, 0.4); }
+.sort a.active {
+  background-color: rgba(255, 255, 255, 0.8); }
+
+.tabs + .sort {
+  margin-top: -2.2rem;
+  min-height: calc(4em - 3px); }
+.tabs + .sort a {
+  margin-top: calc(.5em - 3px); }
 
 .systeem-berichten {
   background: #f5f5f5;

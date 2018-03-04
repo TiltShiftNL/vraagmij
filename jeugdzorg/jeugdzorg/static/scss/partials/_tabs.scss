@@ -4,6 +4,9 @@
   
   &.tabs-center {
     justify-content: center;
+    @include medium {
+      justify-content: flex-start;
+    }
   }
 
   list-style: none;
@@ -11,12 +14,6 @@
   margin: 0 0 $lineHeight 0;
   
   border-bottom: 3px solid #e5e5e5;
-
-  &.tabs-heavy {
-    border-width: 3em;
-  }
-  
-  
 
   > li {
     margin-right: 4px;
@@ -72,6 +69,13 @@
         display: none;
       }
       
+    }
+  }
+  @include medium {
+    a {
+      font-size: 1.6rem;
+      
+      padding: .6em 1em;
     }
   }
   

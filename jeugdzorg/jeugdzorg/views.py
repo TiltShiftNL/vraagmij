@@ -45,6 +45,21 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
 class RegelingList(ListView):
     model = Regeling
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['beeld'] = self.request.GET.get('beeld', 'alfabet')
+        
+        data['themas'] = Thema.objects.all
+        
+        if data['beeld'] not in ['alfabet', 'thema', 'organisatie']:
+            data['beeld'] = 'alfabet'
+
+        data['list_template'] = 'snippets/regeling_list_%s.html' % data['beeld']
+        
+        
+        
+        return data
 
 
 class RegelingDetail(DetailView):

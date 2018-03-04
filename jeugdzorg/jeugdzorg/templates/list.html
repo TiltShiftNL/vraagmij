@@ -8,6 +8,7 @@
         <li><a{% if request.path == '/regelingen/' %} class="active"{% endif %} data-handler="tabs" data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}">Regelingen</a></li>
         <li><a{% if request.path == '/contacten/' %} class="active"{% endif %} data-handler="tabs" data-counter="click.homepage.tab.contacten" href="{% url 'contacten' %}">Contacten</a></li>
     </ul>
+    {% block sort_options %}<div class="sort"></div>{% endblock %}
 </header>
 
 {% block tab_content %}{% endblock %}

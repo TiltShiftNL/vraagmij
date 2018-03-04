@@ -1,19 +1,38 @@
 .sort {
   list-style: none;
-  li {
-    display: inline;
-  }
+  margin: 0 0 $lineHeight 0;
+  padding: 0;
+  line-height: 1;
+  background-color: #e5e5e5;
+  padding: 0 .5em;
+  display: flex;
+  font-size: 1.4rem;
+  min-height: 4em;
+  
   a {
     display: inline-block;
-    color: $brandColor2;
-    padding: 0 .5em;
     
+    text-decoration: none;
+    color: $textColor;
+
+    padding: 1em 1em;
+    margin: .5em 0;
+    
+    transition: background-color .3s;
+    
+    &:hover {
+      background-color: rgba(#fff, .4);
+    }
     &.active {
-      text-decoration: none;
+      background-color: rgba(#fff, .8);
     }
   }
   
-  li + li {
-    border-left: 1px solid $brandColor2;
+}
+.tabs + .sort {
+  margin-top: -$lineHeight;
+  min-height: calc(4em - 3px);
+  a {
+    margin-top: calc(.5em - 3px);
   }
 }
