@@ -1,7 +1,5 @@
 !function(w, d){
   
-  console.log('loaded');
-  
   var handlers = {
     'list-add': function(){
       var 
