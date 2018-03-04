@@ -7,8 +7,7 @@ django-taggit
 requests
 django-crontab
 beautifulsoup4
-boto
 python-dateutil
 django-storages
-awscli
 django-storage-swift
+django-import-export

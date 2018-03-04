@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'requests',
     'django_crontab',
     'storages',
+    'import_export',
 
     'django.contrib.admin',
     'django.contrib.auth',
