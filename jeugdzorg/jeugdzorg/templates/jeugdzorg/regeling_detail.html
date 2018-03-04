@@ -58,7 +58,7 @@
                   <ul class="contacten">
                       {% for contact in regeling.contacten %}
                           <li>
-                              {% include "snippets/contact.html" %}
+                              {% include "snippets/contact.html" with item=contact.contact %}
                           </li>
                       {% endfor %}
                   </ul>

@@ -1,17 +1,17 @@
 {% load static %}
 <section class="contact">
     <span class="contact-avatar">
-      <span style="background-image: url('{% static '' %}/images/pic_avatar-{{ contact.voornaam|slugify }}-{{ contact.achternaam|slugify }}.jpg')"></span>
+      <span style="background-image: url('{% static '' %}/images/pic_avatar-{{ item.voornaam|slugify }}-{{ item.achternaam|slugify }}.jpg')"></span>
     </span>
-    <strong class="contact-naam">{{ contact.voornaam }} {{ contact.achternaam }}</strong>
+    <strong class="contact-naam">{{ item.voornaam }} {{ item.achternaam }}</strong>
     {% if contact.rol %}
         <em class="contact-rol">{{ contact.rol }}</em>
     {% endif %}
     
     <ul class="contact-manieren">
-        <li><a href="mailto:{{ contact.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ contact.email }}</a></li>
-        {% if contact.telefoonnummer %}
-            <li><a href="tel:{{ contact.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel">{{ contact.telefoonnummer }}</a></li>
+        <li><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ item.email }}</a></li>
+        {% if item.telefoonnummer %}
+            <li><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel">{{ item.telefoonnummer }}</a></li>
         {% endif %}
     </ul>
     
