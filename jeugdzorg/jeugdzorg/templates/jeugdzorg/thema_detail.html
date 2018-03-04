@@ -3,10 +3,30 @@
 {% block main %}
 
 <div class="container">
-  <p class="regeling-back">
+  <p class="nav-back">
     <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.detail.back"><i class="icon-arrow-left"></i> Thema overzicht</a>
   </p>
-  {% include "snippets/thema.html" %}
+  
+  
+  <article class="thema" id="thema-{{ thema.id }}">
+
+      <header class="thema-header">
+
+          <h1 class="thema-title">
+
+              {{ object.titel }}
+
+          </h1>
+
+          {% if object.omschrijving %}
+              <div class="thema-samenvatting">
+                  {{ object.omschrijving|linebreaks }}
+              </div>
+          {% endif %}
+      </header>
+
+  </article>
+  
 </div>
 
 {% endblock %}
