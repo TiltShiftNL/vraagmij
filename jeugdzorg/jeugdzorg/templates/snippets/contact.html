@@ -1,9 +1,9 @@
 {% load static %}
 <section class="contact">
     <span class="contact-avatar">
-      <span style="background-image: url('{% static '' %}/images/pic_avatar-{{ contact.contact|slugify }}.jpg')"></span>
+      <span style="background-image: url('{% static '' %}/images/pic_avatar-{{ contact.voornaam|slugify }}-{{ contact.achternaam|slugify }}.jpg')"></span>
     </span>
-    <strong class="contact-naam">{{ contact.contact }}</strong>
+    <strong class="contact-naam">{{ contact.voornaam }} {{ contact.achternaam }}</strong>
     {% if contact.rol %}
         <em class="contact-rol">{{ contact.rol }}</em>
     {% endif %}

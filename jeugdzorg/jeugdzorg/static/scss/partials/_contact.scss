@@ -11,6 +11,14 @@
     margin: 0 10px 10px 0;
   }
 }
+.columns {
+  .contacten {
+    display: block;
+  }
+  .contact {
+    margin: 0;
+  }
+}
 .contact {
   position: relative;
   background: $lightColor;

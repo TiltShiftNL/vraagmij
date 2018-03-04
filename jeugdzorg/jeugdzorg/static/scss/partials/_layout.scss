@@ -26,6 +26,9 @@ body {
 
 .columns {
   columns: 4;
+  -moz-column-fill: balance;
+  column-fill: balance;
+  
   margin-right: -1em;
   transform: translate3d(0,0,0);
   .group {

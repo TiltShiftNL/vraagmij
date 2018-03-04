@@ -158,6 +158,8 @@ body {
 
 .columns {
   columns: 4;
+  -moz-column-fill: balance;
+  column-fill: balance;
   margin-right: -1em;
   transform: translate3d(0, 0, 0); }
 .columns .group {
@@ -1065,6 +1067,11 @@ hr {
   flex-basis: 33.33%; }
 .contacten .contact {
   margin: 0 10px 10px 0; }
+
+.columns .contacten {
+  display: block; }
+.columns .contact {
+  margin: 0; }
 
 .contact {
   position: relative;
