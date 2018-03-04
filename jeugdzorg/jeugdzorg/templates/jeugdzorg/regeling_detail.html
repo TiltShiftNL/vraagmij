@@ -5,7 +5,7 @@
 
 <div class="container">
   <p class="nav-back">
-    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.thema.back"><i class="icon-arrow-left"></i> Thema's overzicht</a>
+    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'regelingen' %}{% endif %}" data-counter="click.regeling.back"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
   </p>
   
   <article class="regeling" id="regeling-{{ regeling.id }}">
