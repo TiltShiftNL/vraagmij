@@ -483,6 +483,18 @@ body {
   z-index: 100;
   opacity: 1; }
 
+.nav-back {
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 2.2rem;
+  margin-bottom: 2.2rem; }
+.nav-back a {
+  color: #6db5d6;
+  text-decoration: none; }
+.nav-back a:hover {
+  text-decoration: underline; }
+.nav-back a i {
+  border-color: #6db5d6; }
+
 .button {
   display: inline-block;
   box-sizing: border-box;
@@ -812,18 +824,6 @@ hr {
 @media (max-width: 900px) {
   .regeling {
     padding-left: 0; } }
-
-.regeling-back {
-  border-bottom: 1px solid #dfdfdf;
-  padding-bottom: 2.2rem;
-  margin-bottom: 2.2rem; }
-.regeling-back a {
-  color: #6db5d6;
-  text-decoration: none; }
-.regeling-back a:hover {
-  text-decoration: underline; }
-.regeling-back a i {
-  border-color: #6db5d6; }
 
 .regeling-voorwaarden {
   list-style: none;
