@@ -17,7 +17,8 @@ body,
 [type="datalist"],
 pre,
 textarea,
-select {
+select,
+input[type="checkbox"] + strong {
   font-size: $fontSize;
   font-family: "AvenirNextLTW01-Regular", verdana, sans-serif;
 }

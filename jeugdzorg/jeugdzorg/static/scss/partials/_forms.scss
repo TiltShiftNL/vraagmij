@@ -64,6 +64,9 @@ input[type="checkbox"] {
     padding-left: 2em;
     margin: 0;
     line-height: 1.1;
+    
+    font-weight: normal;
+
     &:before, &:after {
       content: '';
       position: absolute;
@@ -187,6 +190,13 @@ form {
   
   }
 }
+form.well {
+  .choices {
+    strong {
+      background-color: #fff;
+    }
+  }
+}
 .form-list {
   list-style: none;
   padding: 0;
@@ -258,5 +268,53 @@ form {
       margin-left: 2em;
       
     }
+  }
+}
+.row-delete {
+  strong {
+    display: inline;
+  }
+  .delete-confirm {
+    display: none;
+  }
+  :checked ~ .delete-confirm {
+    display: inline-block;
+  };
+}
+.form-aside {
+  $formAsideWidth: 240px;
+  float: right;
+  width: $formAsideWidth;
+  box-sizing: border-box;
+  margin: 0 0 $lineHeight $padding;
+  background-color: $lightColor;
+  font-size: 1.4rem;
+  
+  p, ul {
+    margin-bottom: $padding / 2;
+  }
+  
+  ul {
+    list-style-type: '- ';
+    margin-left: 1em;
+    padding: 0;
+  }
+  p + ul {
+    margin-top: -$padding / 2;
+  }
+  
+  .buttons {
+    margin-bottom: 0;
+  }
+  
+  .well & {
+    background-color: #fff;
+    padding: $padding / 2;
+  }
+  &:empty {
+    opacity: 0;
+  }
+  & + .inputs {
+    margin-right: calc(#{$formAsideWidth} + #{$padding});
   }
 }

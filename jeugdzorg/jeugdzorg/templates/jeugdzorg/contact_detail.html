@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load auth_tags %}
+{% block main %}
+
+
+<div class="container">
+  <p class="nav-back">
+    <a href="{% if request.META.HTTP_HOST|add:'/contacten/' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.thema.back"><i class="icon-arrow-left"></i> Contacten overzicht</a>
+  </p>
+  
+  <div class="container container-small">
+    {% include 'snippets/contact.html' with item=contact %}
+  </div>
+  
+  
+</div>
+
+{% endblock %}

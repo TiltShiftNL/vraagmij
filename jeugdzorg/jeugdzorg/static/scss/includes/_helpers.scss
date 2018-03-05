@@ -20,6 +20,16 @@
   float: left;
 }
 
+.well {
+  padding: $padding;
+  background-color: $lightColor;
+  margin-bottom: $lineHeight;
+  border-bottom: 1px solid #bdbdbd;
+  box-shadow: 0 2px 5px 0 rgba(#000, .2);
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
 .hidden,
 .js .js-hidden {
   display: none !important;

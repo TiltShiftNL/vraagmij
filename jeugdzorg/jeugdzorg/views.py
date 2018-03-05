@@ -93,6 +93,18 @@ class ContactList(ListView):
 class ContactDetail(DetailView):
     model = Contact
 
+class ContactUpdate(DetailView):
+    model = Contact
+    template_name = 'jeugdzorg/contact_form.html'
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        
+        data['themas'] = Thema.objects.all
+        data['organisaties'] = Organisatie.objects.all
+        
+        return data
+
 
 class RegelingDelete(UserPassesTestMixin, DeleteView):
     model = Regeling

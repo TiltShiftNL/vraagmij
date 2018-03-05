@@ -1,160 +1,150 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-<div class="container">
-    <div class="systeem-berichten">
-    {{  form.errors.as_ul }}
-    </div>
-    <form action="" method="post">
-        {% csrf_token %}
-<!--
-        <fieldset>
-          <legend>Organisatie</legend>
-          <div class="row">
-              <ul class="choices">
-              {% for i in '|||||||||||||||' %}
-                <li>
+<div class="container container-small">
+    {% if form.errors %}
+      <div class="systeem-berichten">
+      {{ form.errors.as_ul }}
+      </div>
+    {% endif %}
+    <form action="" method="post" class="well">
+      {% csrf_token %}
+      <fieldset>
+          <legend>Regeling</legend>
+          <p class="row">
+              <label>
+                  <strong>Titel</strong>
+                  {{ form.titel }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>Samenvatting</strong>
+                  {{ form.samenvatting }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>Aanbieder</strong>
+                  {{ form.bron }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>Aanvraag url</strong>
+                  {{ form.aanvraag_url }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>Bron URL</strong>
+                  {{ form.bron_url }}
+              </label>
+          </p>
+          <p class="row group">
+              <label>
+                  <strong>Startdatum</strong>
+                  {{ form.startdatum }}
+              </label>
+              <label>
+                  <strong>Einddatum</strong>
+                  {{ form.einddatum }}
+              </label>
+          </p>
+        </fieldset>
+          
+          
+        <fieldset class="regeling-set">
+
+          <legend>Thema's</legend>
+          {{ dfs.management_form }}
+          <ol class="form-list" data-decorator="list">
+              {% for form in dfs.forms %}
+              <li>
                   <label>
-                    <input type="checkbox"><strong>Organisate 1</strong>
+                      <strong>Thema</strong>
+                      {% for field in form.visible_fields %}
+                          {% if forloop.first %}
+                              {% for hidden in form.hidden_fields %}
+                                  {{ hidden }}
+                              {% endfor %}
+                          {% endif %}
+                          {{ field.errors.as_ul }}
+                          {{ field }}
+                      {% endfor %}
                   </label>
-                </li>
+              </li>
               {% endfor %}
-            </ul>
-          </div>
+          </ol>
         </fieldset>
--->
-        <fieldset>
-            <legend>Regeling</legend>
-            <h2>Meta info</h2>
-            <p class="row">
-                <label>
-                    <strong>Titel</strong>
-                    {{ form.titel }}
-                </label>
-            </p>
-            <p class="row">
-                <label>
-                    <strong>Samenvatting</strong>
-                    {{ form.samenvatting }}
-                </label>
-            </p>
-            <p class="row">
-                <label>
-                    <strong>Aanbieder</strong>
-                    {{ form.bron }}
-                </label>
-            </p>
-            <p class="row">
-                <label>
-                    <strong>Aanvraag url</strong>
-                    {{ form.aanvraag_url }}
-                </label>
-            </p>
-            <p class="row">
-                <label>
-                    <strong>Bron URL</strong>
-                    {{ form.bron_url }}
-                </label>
-            </p>
-            <p class="row group">
-                <label>
-                    <strong>Startdatum</strong>
-                    {{ form.startdatum }}
-                </label>
-                <label>
-                    <strong>Einddatum</strong>
-                    {{ form.einddatum }}
-                </label>
-            </p>
-            
-            <hr>
-            
-            <div class="regeling-set">
+    
+        <fieldset class="regeling-set">
 
-                <h2>Thema's</h2>
-                {{ dfs.management_form }}
-                <ol class="form-list" data-decorator="list">
-                    {% for form in dfs.forms %}
-                    <li>
-                        <label>
-                            <strong>Thema</strong>
-                            {% for field in form.visible_fields %}
-                                {% if forloop.first %}
-                                    {% for hidden in form.hidden_fields %}
-                                        {{ hidden }}
-                                    {% endfor %}
-                                {% endif %}
-                                {{ field.errors.as_ul }}
-                                {{ field }}
-                            {% endfor %}
-                        </label>
-                    </li>
-                    {% endfor %}
-                </ol>
-            </div>
-            
-            <hr>
-            
-            <div class="regeling-set">
-
-                <h2>Voorwaarden</h2>
-                {{ voorwaarde.management_form }}
-                <ol class="form-list" data-decorator="list">
-                    {% for form in voorwaarde.forms %}
-                    <li>
-                        <label>
-                            <strong>Voorwaarde</strong>
-                            {% for field in form.visible_fields %}
-                                {% if forloop.first %}
-                                    {% for hidden in form.hidden_fields %}
-                                        {{ hidden }}
-                                    {% endfor %}
-                                {% endif %}
-                                {{ field.errors.as_ul }}
-                                {{ field }}
-                            {% endfor %}
-                        </label>
-                    </li>
-                    {% endfor %}
-                </ol>
-            </div>
-
-            <hr>
-            
-            <div class="regeling-set">
-
-                <h2>Contacten</h2>
-                {{ crfs.management_form }}
-                <ol class="form-list" data-decorator="list">
-                    {% for form in crfs.forms %}
-                    <li class="group">
-                        {% for field in form.visible_fields %}
-                            <label class="input-{{ field.label|slugify }}">
-                                <strong>{{ field.label }}</strong>
-                                {{ field }}
-                            </label>
-                            {% if forloop.first %}
-                                {% for hidden in form.hidden_fields %}
-                                    {{ hidden }}
-                                {% endfor %}
-                            {% endif %}
-                            {{ field.errors.as_ul }}
-                        {% endfor %}
-                    </li>
-                    {% endfor %}
-                </ol>
-                
-            </div>
-            
+          <legend>Voorwaarden</legend>
+          {{ voorwaarde.management_form }}
+          <ol class="form-list" data-decorator="list">
+              {% for form in voorwaarde.forms %}
+              <li>
+                  <label>
+                      <strong>Voorwaarde</strong>
+                      {% for field in form.visible_fields %}
+                          {% if forloop.first %}
+                              {% for hidden in form.hidden_fields %}
+                                  {{ hidden }}
+                              {% endfor %}
+                          {% endif %}
+                          {{ field.errors.as_ul }}
+                          {{ field }}
+                      {% endfor %}
+                  </label>
+              </li>
+              {% endfor %}
+          </ol>
         </fieldset>
+  
+        <fieldset class="regeling-set">
+
+          <legend>Contacten</legend>
+          {{ crfs.management_form }}
+          <ol class="form-list" data-decorator="list">
+              {% for form in crfs.forms %}
+              <li class="group">
+                  {% for field in form.visible_fields %}
+                      <label class="input-{{ field.label|slugify }}">
+                          <strong>{{ field.label }}</strong>
+                          {{ field }}
+                      </label>
+                      {% if forloop.first %}
+                          {% for hidden in form.hidden_fields %}
+                              {{ hidden }}
+                          {% endfor %}
+                      {% endif %}
+                      {{ field.errors.as_ul }}
+                  {% endfor %}
+              </li>
+              {% endfor %}
+          </ol>
+        </fieldset>
+
+        {% if object %}
+          <p class="row row-delete">
+            <label>
+              <input type="checkbox" id="regeling_delete_{{ object.id }}">
+              <strong> Regeling verwijderen?</strong>
+              <a href="{% url 'verwijder_regeling' object.id %}" class="delete-confirm"><b>Verwijderen!</b></a>
+            </label>
+          </p>
+            
+        {% endif %}
+        
+        <hr>
+
         <p class="buttons right">
             <button name="submit" type="submit" value="{% url 'regelingen' %}" class="button">Opslaan</button>
             <button name="submit" type="submit" class="button secondary">Opslaan en doorgaan</button>
-            {% if object %}
-            <a href="{% url 'verwijder_regeling' object.id %}" class="button secondary">Verwijderen</a>
-            {% endif %}
             <a href="{% url 'regelingen' %}">Terug naar de lijst</a>
         </p>
+        
     </form>
 </div>
 

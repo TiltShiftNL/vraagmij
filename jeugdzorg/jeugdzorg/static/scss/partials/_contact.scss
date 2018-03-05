@@ -7,7 +7,7 @@
   > * {
     flex-basis: 33.33%;
   }
-  .contact {
+  .contact-card {
     margin: 0 10px 10px 0;
   }
   em {
@@ -20,11 +20,11 @@
   .contacten {
     display: block;
   }
-  .contact {
+  .contact-card {
     margin: 0;
   }
 }
-.contact {
+.contact-card {
   position: relative;
   background: $lightColor;
   padding: 10px;
@@ -58,12 +58,12 @@
 
 
 .contact-avatar {
-  display: inline-block;
+  display: block;
   vertical-align: top;
   position: relative;
 
-  width: 80px;
-  height: 80px;
+  padding-top: 100%;
+  height: 0;
   
 
   border: 4px solid #ccc;
@@ -115,9 +115,12 @@
       color: rgba(#fff, 1);
     }
   }
-  .contact & {
+  .contact-card & {
     position: absolute;
     left: 10px;
     top: 10px;
+    width: 80px;
+    padding: 0;
+    height: 80px;
   }
 }
