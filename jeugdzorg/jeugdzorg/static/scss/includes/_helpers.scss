@@ -29,6 +29,9 @@
   > *:last-child {
     margin-bottom: 0;
   }
+  @include medium {
+    padding: 10px;
+  }
 }
 .hidden,
 .js .js-hidden {

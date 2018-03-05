@@ -317,4 +317,15 @@ form.well {
   & + .inputs {
     margin-right: calc(#{$formAsideWidth} + #{$padding});
   }
+  @include medium {
+    float: none;
+    width: auto;
+    margin: 0 0 $lineHeight 0;
+    & + .inputs {
+      margin-right: 0;
+    }
+    &.well {
+      padding: 10px;
+    }
+  }
 }

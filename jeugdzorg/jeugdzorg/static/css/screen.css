@@ -49,6 +49,9 @@ button::-moz-focus-inner {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
 .well > *:last-child {
   margin-bottom: 0; }
+@media (max-width: 900px) {
+  .well {
+    padding: 10px; } }
 
 .hidden, .js .js-hidden {
   display: none !important; }
@@ -727,6 +730,15 @@ form.well .choices strong {
   opacity: 0; }
 .form-aside + .inputs {
   margin-right: calc(240px + 3rem); }
+@media (max-width: 900px) {
+  .form-aside {
+    float: none;
+    width: auto;
+    margin: 0 0 2.2rem 0; }
+  .form-aside + .inputs {
+    margin-right: 0; }
+  .form-aside.well {
+    padding: 10px; } }
 
 .shortcuts {
   list-style: none;
