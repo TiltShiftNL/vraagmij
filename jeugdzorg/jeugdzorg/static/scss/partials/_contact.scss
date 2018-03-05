@@ -10,6 +10,11 @@
   .contact {
     margin: 0 10px 10px 0;
   }
+  em {
+    display: block;
+    font-style: normal;
+    color: rgba($textColor, .5);
+  }
 }
 .columns {
   .contacten {

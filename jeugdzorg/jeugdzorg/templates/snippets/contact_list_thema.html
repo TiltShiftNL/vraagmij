@@ -2,7 +2,7 @@
   
     <ul class="shortcuts">
         {% for thema in themas %}
-            {% if thema.regeling_set.all %}
+            {% if thema.contacten.all %}
                 <li><a href="#thema-{{ thema.id }}" data-decorator="scroll" data-counter="click.list.thema.{{ thema.id }}">{{ thema }}</a></li>
             {% endif %}
         {% endfor %}
@@ -13,12 +13,14 @@
     <div class="columns">
         {% for thema in themas %}
 
-            {% if thema.regeling_set.all %}
+            {% if thema.contacten.all %}
                 <h2 class="shortcut" id="thema-{{ thema.id }}"><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></h2>
             
-                <ul class="regelingen">
-                    {% for regeling in thema.regeling_set.all %}
-                        <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
+                <ul class="contacten">
+                    {% for contact in thema.contacten.all %}
+                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
+                          {{ contact.contact.voornaam }} {{ contact.contact.achternaam }} <em>{{ contact.rol }}</em>
+                        </a></li>
                     {% endfor %}
                 </ul>
                 
@@ -28,10 +30,12 @@
 
         <div class="group">
             <h2 class="shortcut" id="thema-overige">Overige</h2>
-            <ul class="regelingen">
-                {% for regeling in regeling_list %}
-                    {% if not regeling.themas.all %}
-                        <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.list.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
+            <ul class="contacten">
+                {% for contact in contact_list %}
+                    {% if not contact.thema_set.all %}
+                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
+                          {{ contact.voornaam }} {{ contact.achternaam }}
+                        </a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

@@ -1,0 +1,46 @@
+<div class="container">
+    <ul class="shortcuts">
+
+        {% for organisatie in organisaties %}
+            {% if organisatie.contact_set.all %}
+                <li><a href="#organisatie-{{ organisatie.id }}" data-decorator="scroll" data-counter="click.list.organisatie.{{ organisatie.id }}">{{ organisatie }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li><a href="#organisatie-overige" data-decorator="scroll" data-counter="click.list.organisatie.overige">Overige</a></li>
+    </ul>
+
+
+    <div class="columns">
+        {% for organisatie in organisaties %}
+        
+            {% if organisatie.contact_set.all %}
+                <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</a></h2>
+            
+                <ul class="contacten">
+                    {% for contact in organisatie.contact_set.all %}
+                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
+                          {{ contact.voornaam }} {{ contact.achternaam }} <em>{{ contact.rol }}</em>
+                        </a></li>
+                    {% endfor %}
+                </ul>
+                
+            {% endif %}
+
+        {% endfor %}
+
+        <div class="group">
+            <h2 class="shortcut" id="thema-overige">Overige</h2>
+            <ul class="contacten">
+                {% for contact in contact_list %}
+                    {% if not contact.organisatie.all %}
+                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
+                          {{ contact.voornaam }} {{ contact.achternaam }}
+                        </a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        
+    </div>
+
+</div>

@@ -1100,6 +1100,10 @@ hr {
   flex-basis: 33.33%; }
 .contacten .contact {
   margin: 0 10px 10px 0; }
+.contacten em {
+  display: block;
+  font-style: normal;
+  color: rgba(51, 51, 51, 0.5); }
 
 .columns .contacten {
   display: block; }

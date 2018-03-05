@@ -74,6 +74,20 @@ class ThemaDetail(DetailView):
 
 class ContactList(ListView):
     model = Contact
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['beeld'] = self.request.GET.get('beeld', 'alfabet')
+        
+        data['themas'] = Thema.objects.all
+        data['organisaties'] = Organisatie.objects.all
+        
+        if data['beeld'] not in ['alfabet', 'thema', 'organisatie']:
+            data['beeld'] = 'alfabet'
+
+        data['list_template'] = 'snippets/contact_list_%s.html' % data['beeld']
+
+        return data
 
 
 class ContactDetail(DetailView):

@@ -15,7 +15,7 @@
                 <ul class="contacten">
                     {% for contact in titel.list %}
                         <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.contacten.contact.{{ contact.id }}">
-                            {% include 'snippets/contact.html' with item=contact %}
+                            {{ contact.voornaam }} {{ contact.achternaam }}
                         </a></li>
                     {% endfor %}
                 </ul>
