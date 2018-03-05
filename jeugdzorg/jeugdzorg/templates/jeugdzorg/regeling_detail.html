@@ -5,7 +5,7 @@
 
 <div class="container">
   <p class="nav-back">
-    <a href="{% if request.META.HTTP_HOST|add:'/regelingen/' in request.META.HTTP_REFERER or request.META.HTTP_HOST|add:'/thema/' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'regelingen' %}{% endif %}" data-counter="click.regeling.back"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
+    <a data-referer="{{ request.META.HTTP_REFERER }}" href="{% if request.META.HTTP_HOST|add:'/regelingen/' in request.META.HTTP_REFERER or request.META.HTTP_HOST|add:'/thema/' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'regelingen' %}{% endif %}" data-counter="click.regeling.back"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
   </p>
   
   <article class="regeling" id="regeling-{{ regeling.id }}">
