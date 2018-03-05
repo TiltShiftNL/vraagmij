@@ -4,7 +4,7 @@
 
 <div class="container">
   <p class="nav-back">
-    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.thema.back"><i class="icon-arrow-left"></i> Thema overzicht</a>
+    <a href="{% if request.META.HTTP_HOST|add:'/themas/' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.thema.back"><i class="icon-arrow-left"></i> Thema overzicht</a>
   </p>
   
   
@@ -26,6 +26,15 @@
       </header>
 
   </article>
+  
+  {% if object.regeling_set.all %}
+  
+      <hr>
+
+      {% include 'snippets/regeling_list_alfabet.html' with regeling_list=object.regeling_set.all %}
+
+  {% endif %}
+  
   
 </div>
 
