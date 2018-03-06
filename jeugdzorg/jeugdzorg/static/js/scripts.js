@@ -34,9 +34,18 @@
       var el = document.getElementById(this.hash.substr(1));
       if (el) {
         e.preventDefault();
-        var addRemove = el.classList.contains('active') ? 'remove' : 'add';
+        var 
+          wasActive = this.hash == w.location.hash,
+          addRemove = wasActive ? 'remove' : 'add';
+
         el.classList[addRemove]('active');
         this.classList[addRemove]('active');
+        var url = document.location.href.split('#')[0];
+        if (history.replaceState) {
+          w.location.hash = '_';
+          history.replaceState({id: url}, d.title, wasActive ? url : url + this.hash);
+        }
+        
       }
     },
     
