@@ -32,6 +32,8 @@ TEST = os.getenv("TEST", False)
 
 DEBUG = SECRET_KEY == 'default-secret'
 
+DEBUG = ENV != 'production'
+
 f = open('/opt/git_rev', 'r')
 SOURCE_COMMIT = f.read()
 
