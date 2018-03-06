@@ -428,6 +428,13 @@ class ContactNaarThema(models.Model):
         unique_together = ('contact', 'thema', )
 
 
+# class Profiel(models.Model):
+#     gebruiker = models.OneToOneField(
+#         to='jeugdzorg.User',
+#         on_delete=models.CASCADE
+#     )
+
+
 class EventItem(models.Model):
     name = models.CharField(
         verbose_name=_('Naam'),
@@ -481,3 +488,5 @@ class EventItem(models.Model):
 #         apps.clear_cache()
 #         from django.contrib.admin.models import LogEntry
 #         LogEntry.UserModel = get_user_model()
+
+
