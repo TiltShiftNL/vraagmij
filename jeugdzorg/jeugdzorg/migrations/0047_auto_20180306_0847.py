@@ -13,7 +13,6 @@ class Migration(migrations.Migration):
         dummy_email_counter = 1
         current_email_counter = 1
         for user in User.objects.all():
-            print(user)
             if user.email:
                 address = user.email.split('@')[0]
                 host = user.email.split('@')[1]

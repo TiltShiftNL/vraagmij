@@ -33,17 +33,17 @@ class RegelingModelForm(forms.ModelForm):
         # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
 
 
-# class CustomUserCreationForm(UserCreationForm):
-#     class Meta:
-#         model = User  # non-swappable User model here.
-#         exclude = ("username", )
-#         fields = ("email",)
-#
-#
-# class CustomUserChangeForm(UserChangeForm):
-#     class Meta:
-#         model = User  # non-swappable User model here.
-#         exclude = []
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User  # non-swappable User model here.
+        exclude = ("username", )
+        fields = ("email",)
+
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = User  # non-swappable User model here.
+        exclude = []
 
 
 VoorwaardeFormSet = forms.inlineformset_factory(

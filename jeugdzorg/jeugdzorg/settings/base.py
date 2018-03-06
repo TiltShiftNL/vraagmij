@@ -135,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = 'jeugdzorg.User'
+AUTH_USER_MODEL = 'jeugdzorg.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
