@@ -13,4 +13,4 @@ from .base import *
 # AWS_S3_HOST = '2d195c35ab9e4bafac2d76efb556964e.objectstore.eu'
 # AWS_S3_CUSTOM_DOMAIN = "%s/%s" % (AWS_S3_HOST, AWS_STORAGE_BUCKET_NAME)
 
-DEBUG = False
+# DEBUG = False
