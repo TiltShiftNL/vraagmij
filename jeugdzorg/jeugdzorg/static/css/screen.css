@@ -547,6 +547,8 @@ input[type="text"], input[type="date"], input[type="password"], input[type="emai
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: border-color .3s; }
+input[type="text"]:hover, input[type="date"]:hover, input[type="password"]:hover, input[type="email"]:hover, input[type="url"]:hover, select:hover, textarea:hover {
+  border: 1px solid rgba(0, 0, 0, 0.4); }
 input[type="text"]:focus, input[type="date"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
   border: 1px solid rgba(0, 0, 0, 0.8); }
 
@@ -637,14 +639,12 @@ form .choices strong {
   padding-left: calc(10px + 2em);
   margin: 10px;
   transition: all .3s;
-  box-shadow: 0 -1px 0 rgba(51, 51, 51, 0) inset; }
+  border: 1px solid rgba(0, 0, 0, 0.1); }
 form .choices strong:before, form .choices strong:after {
   margin-left: 10px;
   margin-top: 10px; }
 form .choices label:hover strong {
-  box-shadow: 0 -1px 0 rgba(51, 51, 51, 0.2) inset; }
-form .choices :checked + strong, form .choices label:hover strong {
-  box-shadow: 0 -1px 0 #333333 inset; }
+  border: 1px solid rgba(0, 0, 0, 0.4); }
 
 form.well .choices strong {
   background-color: #fff; }

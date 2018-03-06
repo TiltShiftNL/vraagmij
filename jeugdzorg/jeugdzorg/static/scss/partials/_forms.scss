@@ -48,6 +48,9 @@ textarea {
   box-sizing: border-box;
   border: 1px solid rgba(#000, .1);
   transition: border-color .3s;
+  &:hover {
+    border: 1px solid rgba(#000, .4);
+  }
   &:focus {
     border: 1px solid rgba(#000, .8);
   }
@@ -171,7 +174,8 @@ form {
       margin: 10px;
       transition: all .3s;
       
-      box-shadow: 0 -1px 0 rgba($textColor, 0) inset;
+      border: 1px solid rgba(#000, .1);
+//      box-shadow: 0 -1px 0 rgba($textColor, 0) inset;
       
       &:before, &:after {
         margin-left: 10px;
@@ -180,13 +184,10 @@ form {
     }
     
     label:hover strong {
-      box-shadow: 0 -1px 0 rgba($textColor, .2) inset;
+      border: 1px solid rgba(#000, .4);
+//      box-shadow: 0 -1px 0 rgba($textColor, .2) inset;
     }
     
-    :checked + strong,
-    label:hover strong {
-      box-shadow: 0 -1px 0 rgba($textColor, 1) inset;
-    }
   
   }
 }
