@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-from django.db import transaction
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,10 +29,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
 TEST = os.getenv("TEST", False)
 
 DEBUG = SECRET_KEY == 'default-secret'
-
-DEBUG = ENV != 'production'
-
-# transaction.commit_unless_managed()
 
 f = open('/opt/git_rev', 'r')
 SOURCE_COMMIT = f.read()

@@ -101,6 +101,7 @@ class ContactList(ListView):
 class ContactDetail(DetailView):
     model = Contact
 
+
 class ContactUpdate(DetailView):
     model = Contact
     template_name = 'jeugdzorg/contact_form.html'
