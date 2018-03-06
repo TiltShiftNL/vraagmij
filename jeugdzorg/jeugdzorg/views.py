@@ -20,6 +20,14 @@ import json
 from django.conf import settings
 
 
+class CheckUserModel(TemplateView):
+    template_name = 'snippets/test.html'
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['users'] = User.objects.all()
+        return data
+
 class ConfigView(LoginRequiredMixin, TemplateView):
     template_name = 'snippets/config.html'
 
