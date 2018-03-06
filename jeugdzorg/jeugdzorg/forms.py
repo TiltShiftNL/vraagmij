@@ -3,6 +3,7 @@ from django.forms import widgets
 from .models import *
 from django.core.management import call_command
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
