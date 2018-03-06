@@ -399,6 +399,13 @@ body {
   background-color: #333;
   color: #fff;
   margin-bottom: 1px; }
+.menu li:first-child a {
+  margin-top: 4px; }
+.menu .divider {
+  margin-bottom: 4px; }
+.menu .divider ~ li a {
+  background-color: #f5f5f5;
+  color: #333; }
 
 .nav-open, .nav-close {
   position: relative;
