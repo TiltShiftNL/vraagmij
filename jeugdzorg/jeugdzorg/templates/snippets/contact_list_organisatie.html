@@ -12,18 +12,18 @@
 
     <div class="columns">
         {% for organisatie in organisaties %}
-        
             {% if organisatie.contact_set.all %}
-                <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</a></h2>
+                <div class="group">
+                    <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</h2>
             
-                <ul class="contacten">
-                    {% for contact in organisatie.contact_set.all %}
-                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                          {{ contact.voornaam }} {{ contact.achternaam }} <em>{{ contact.rol }}</em>
-                        </a></li>
-                    {% endfor %}
-                </ul>
-                
+                    <ul class="contacten">
+                        {% for contact in organisatie.contact_set.all %}
+                            <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
+                              {{ contact.voornaam }} {{ contact.achternaam }} <em>{{ contact.rol }}</em>
+                            </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
 
         {% endfor %}
