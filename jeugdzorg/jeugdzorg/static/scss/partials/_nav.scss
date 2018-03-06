@@ -96,9 +96,6 @@
   margin: 0;
   padding: 0;
   text-align: right;
-  
-  
-  
   a {
     display: block;
     padding: 1em;
@@ -107,6 +104,16 @@
     background-color: $textColor;
     color: #fff;
     margin-bottom: 1px;
+  }
+  li:first-child a {
+    margin-top: 4px;
+  }
+  .divider {
+    margin-bottom: 4px;
+  }
+  .divider ~ li a {
+    background-color: $lightColor;
+    color: $textColor;
   }
 }
 

@@ -28,7 +28,9 @@
             <a href="#MENU" class="nav-open" data-handler="toggle" data-counter="click.nav.open">MENU<i class="icon-menu"></i></a>
             <nav class="nav" id="MENU">
               <ul class="menu">
-                <li><a href="{% url 'regelingen' %}" data-counter="click.nav.regelingen">Alle regelingen</a></li>
+                <li><a href="{% url 'themas' %}" data-counter="click.nav.themas">Thema's</a></li>
+                <li><a href="{% url 'regelingen' %}" data-counter="click.nav.regelingen">Regelingen</a></li>
+                <li class="divider"><a href="{% url 'contacten' %}" data-counter="click.nav.contacten">Contacten</a></li>
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'create_regeling' %}" data-counter="click.nav.create_regeling">Regeling toevoegen</a></li>
                   <li><a href="{% url 'logout' %}" data-counter="click.nav.logout">Uitloggen</a></li>
