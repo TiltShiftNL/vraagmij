@@ -3,6 +3,9 @@ from .models import *
 from .forms import *
 from adminsortable.admin import SortableAdmin
 from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
+# from django.contrib.auth.models import User, Group
+from django.contrib.auth.admin import UserAdmin, GroupAdmin
+from django.utils.translation import ugettext_lazy as _
 
 
 class VoorwaardeInline(SortableStackedInline):
@@ -80,6 +83,29 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 # @admin.register(User)
+# class UserAdmin(UserAdmin):
+#     fieldsets = (
+#         (None, {'fields': ('email', 'username', 'password')}),
+#         (_('Personal info'), {'fields': ('first_name', 'last_name')}),
+#         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+#                                        'groups', 'user_permissions')}),
+#         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+#     )
+#     add_fieldsets = (
+#         (None, {
+#             'classes': ('wide',),
+#             'fields': ('email', 'password1', 'password2'),
+#         }),
+#     )
+#     form = CustomUserChangeForm
+#     add_form = CustomUserCreationForm
+
+
+# admin.site.unregister(Group)
+# @admin.register(Group)
+# class CustomGroupAdmin(GroupAdmin):
+#     pass
+
+# @admin.register(User)
 # class UserAdmin(admin.ModelAdmin):
-#     form = UserChangeForm
-#     add_form = UserCreationForm
+#     pass

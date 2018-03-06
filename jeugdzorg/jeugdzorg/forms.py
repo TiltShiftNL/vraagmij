@@ -2,6 +2,7 @@ from django import forms
 from django.forms import widgets
 from .models import *
 from django.core.management import call_command
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
@@ -32,13 +33,14 @@ class RegelingModelForm(forms.ModelForm):
         # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
 
 
-# class UserCreationForm(forms.ModelForm):
+# class CustomUserCreationForm(UserCreationForm):
 #     class Meta:
 #         model = User  # non-swappable User model here.
-#         exclude = []
+#         exclude = ("username", )
+#         fields = ("email",)
 #
 #
-# class UserChangeForm(forms.ModelForm):
+# class CustomUserChangeForm(UserChangeForm):
 #     class Meta:
 #         model = User  # non-swappable User model here.
 #         exclude = []

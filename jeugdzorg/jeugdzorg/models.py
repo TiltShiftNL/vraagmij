@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
 from taggit.managers import TaggableManager
@@ -10,13 +9,15 @@ from django.core.files.storage import default_storage
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 fs = default_storage
 fs.container_name = 'jeugdzorg_protected'
 
 
-# class CustomUserManager(BaseUserManager):
+# class UserManager(BaseUserManager):
 #     """
 #     A custom user manager to deal with emails as unique identifiers for auth
 #     instead of usernames. The default that's used is "UserManager"
@@ -46,8 +47,24 @@ fs.container_name = 'jeugdzorg_protected'
 #
 #
 # class User(AbstractBaseUser, PermissionsMixin):
+#     username_validator = UnicodeUsernameValidator()
+#
+#     username = models.CharField(
+#         _('username'),
+#         max_length=150,
+#         unique=True,
+#         help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+#         validators=[username_validator],
+#
+#         error_messages={
+#             'unique': _("A user with that username already exists."),
+#         },
+#         blank=True,
+#     )
+#     first_name = models.CharField(_('first name'), max_length=30, blank=True)
+#     last_name = models.CharField(_('last name'), max_length=150, blank=True)
+#
 #     email = models.EmailField(unique=True, null=True)
-#     username = models.CharField(unique=True, null=True)
 #     is_staff = models.BooleanField(
 #         _('staff status'),
 #         default=False,
@@ -61,11 +78,12 @@ fs.container_name = 'jeugdzorg_protected'
 #             'Unselect this instead of deleting accounts.'
 #         ),
 #     )
+#     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 #     USERNAME_FIELD = 'email'
-#     objects = CustomUserManager()
+#     objects = UserManager()
 #
 #     def __str__(self):
-#         return self.email
+#         return 'email: %s' % self.email
 #
 #     def get_full_name(self):
 #         return self.email
