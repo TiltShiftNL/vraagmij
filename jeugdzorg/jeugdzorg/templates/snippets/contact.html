@@ -1,11 +1,11 @@
 {% load static %}
 <section class="contact-card">
     <span class="contact-avatar">
-      <span style="background-image: url('{% static '' %}/images/pic_avatar-{{ item.voornaam|slugify }}-{{ item.achternaam|slugify }}.jpg')"></span>
+      <span {% if item.pasfoto %}style="background-image: url({{ item.pasfoto.url }});"{% else %}style="background-image: url('{% static '' %}/images/pic_avatar-{{ item.voornaam|slugify }}-{{ item.achternaam|slugify }}.jpg')"{% endif %}></span>
     </span>
     <strong class="contact-naam">{{ item.achternaam }}, {{ item.voornaam }}</strong>
-    {% if contact.rol %}
-        <em class="contact-rol">{{ contact.rol }}</em>
+    {% if contact.functie %}
+        <em class="contact-rol">{{ contact.functie }}</em>
     {% endif %}
     
     <ul class="contact-manieren">

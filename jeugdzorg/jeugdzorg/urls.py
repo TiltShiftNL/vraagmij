@@ -19,6 +19,8 @@ from django.urls import path
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from .views import *
+from django.urls import re_path
+from django.views.static import serve
 
 urlpatterns = [
     # path('', CheckUserModel.as_view(), name='test'),
@@ -51,3 +53,10 @@ urlpatterns = [
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    ]
