@@ -24,7 +24,8 @@ from django.views.static import serve
 
 urlpatterns = [
     # path('', CheckUserModel.as_view(), name='test'),
-    path('', ThemaList.as_view(), name='homepage'),
+    # path('', ThemaList.as_view(), name='homepage'),
+    path('', RegelingList.as_view(), name='homepage'),
     path('regelingen/', RegelingList.as_view(), name='regelingen'),
     path('regeling-maken/', RegelingCreate.as_view(), name='create_regeling'),
     path('regeling/<int:pk>/bewerken', RegelingUpdate.as_view(), name='update_regeling'),
