@@ -590,7 +590,7 @@ class Profiel(models.Model):
     class Meta:
         verbose_name = _('Profiel')
         verbose_name_plural = _("Profielen")
-        ordering = ['achternaam', ]
+        #ordering = ['achternaam', ]
 
 
 class EventItem(models.Model):
