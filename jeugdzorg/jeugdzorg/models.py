@@ -652,12 +652,12 @@ class EventItem(models.Model):
 #         LogEntry.UserModel = get_user_model()
 
 
-def save_profile(sender, instance, **kwargs):
-    if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
-        p = Profiel(gebruiker=instance)
-        p.email = instance.email
-        p.voornaam = instance.first_name
-        p.achternaam = instance.last_name
-        p.save()
-
-post_save.connect(save_profile, sender=User)
+# def save_profile(sender, instance, **kwargs):
+#     if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
+#         p = Profiel(gebruiker=instance)
+#         p.email = instance.email
+#         p.voornaam = instance.first_name
+#         p.achternaam = instance.last_name
+#         p.save()
+#
+# post_save.connect(save_profile, sender=User)
