@@ -6,6 +6,11 @@ DEBUG = True
 #     ('*/1 * * * *', 'jeugdzorg.cron.update_regeling_bron_job', '>> /var/log/scheduled_job.log 2>&1')
 # ]
 
+MEDIA_ROOT = '/opt/file_upload/'
+print(MEDIA_ROOT)
+print(BASE_DIR)
+
+
 try:
     from .local import *
 except ImportError:

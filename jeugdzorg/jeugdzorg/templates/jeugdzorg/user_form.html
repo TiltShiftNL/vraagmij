@@ -23,7 +23,7 @@
         <legend>Persoonsgegevens</legend>
         <div class="form-aside">
 
-          <span class="contact-avatar"{% if profiel.forms.0.pasfoto.value %}style="background-image: url({{ profiel.forms.0.pasfoto.value.url }})"{% endif %}></span>
+          <span class="contact-avatar{% if not profiel.forms.0.pasfoto.value %} no-avatar{% endif %}"{% if profiel.forms.0.pasfoto.value %}style="background-image: url({{ profiel.forms.0.pasfoto.value.url }})"{% endif %}></span>
             {{ profiel.forms.0.pasfoto }}
         </div>
         <div class="inputs">

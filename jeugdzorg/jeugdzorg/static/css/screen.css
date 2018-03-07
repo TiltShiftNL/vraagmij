@@ -1221,14 +1221,14 @@ hr {
   background-image: url("../images/pic_avatar.jpg");
   background-size: cover;
   background-position: 50% 50%; }
-.contact-avatar:before, .contact-avatar:after {
+.contact-avatar.no-avatar:before, .contact-avatar:after {
   content: '';
   position: absolute;
   left: 50%;
   transform: translate3d(-50%, 0, 0);
   border-radius: 50%;
   background-color: #ccc; }
-.contact-avatar:before {
+.contact-avatar.no-avatar:before {
   content: '';
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
@@ -1239,7 +1239,7 @@ hr {
   top: 24%;
   width: 40%;
   height: 40%; }
-.contact-avatar:after {
+.contact-avatar.no-avatar:after {
   top: 60%;
   width: 70%;
   height: 80%;

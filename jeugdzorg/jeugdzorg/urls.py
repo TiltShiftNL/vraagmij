@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 from .views import *
 
 urlpatterns = [
-    # path('', CheckUserModel.as_view(), name='test'),
+    path('', CheckUserModel.as_view(), name='test'),
     path('', ThemaList.as_view(), name='homepage'),
     path('regelingen/', RegelingList.as_view(), name='regelingen'),
     path('regeling-maken/', RegelingCreate.as_view(), name='create_regeling'),
