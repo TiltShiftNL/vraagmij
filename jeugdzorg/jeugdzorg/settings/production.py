@@ -7,4 +7,4 @@ from .base import *
 DEFAULT_FILE_STORAGE = 'swift.storage.SwiftStorage'
 SWIFT_CONTAINER_NAME = 'media'
 
-DEBUG = False
+# DEBUG = False

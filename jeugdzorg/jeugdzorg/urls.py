@@ -34,9 +34,9 @@ urlpatterns = [
     # path('contacten/', ContactList.as_view(), name='contacten'),
     path('contact/<int:pk>/', ProfielDetail.as_view(), name='detail_contact'),
     # path('contact/<int:pk>/', ContactDetail.as_view(), name='detail_contact'),
-    path('contact/<int:pk>/bewerken', ContactUpdate.as_view(), name='update_contact'),
+    # path('contact/<int:pk>/bewerken', ContactUpdate.as_view(), name='update_contact'),
 
-    path('profiel/<int:pk>/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
+    # path('profiel/<int:pk>/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
     path('profiel/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
 
     path('login/', auth_views.login, name='login'),
