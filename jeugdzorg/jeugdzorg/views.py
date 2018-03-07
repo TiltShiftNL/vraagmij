@@ -18,6 +18,9 @@ from django.contrib import messages
 from django.http import JsonResponse
 import json
 from django.conf import settings
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
 
 
 class CheckUserModel(TemplateView):
@@ -28,11 +31,23 @@ class CheckUserModel(TemplateView):
         data['users'] = User.objects.all()
         return data
 
+
 class ConfigView(LoginRequiredMixin, TemplateView):
     template_name = 'snippets/config.html'
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+
+        sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+        from_email = Email("info@fixxx7.com")
+        to_email = Email("mguikema@gmail.com")
+        subject = "Sending with SendGrid is Fun"
+        content = Content("text/plain", "and easy to do anywhere, even with Python")
+        mail = Mail(from_email, subject, to_email, content)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
 
         logs = [
             ['nginx error', '/var/log/nginx/error.log'],

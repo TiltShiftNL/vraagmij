@@ -12,3 +12,4 @@ django-storages
 django-storage-swift
 django-import-export
 django-phonenumber-field
+sendgrid
