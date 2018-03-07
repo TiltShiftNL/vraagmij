@@ -61,14 +61,16 @@
   display: block;
   vertical-align: top;
   position: relative;
+  background-size: cover;
+
 
   padding-top: 100%;
   height: 0;
-  
+
 
   border: 4px solid #ccc;
   background-color: #fff;
-  
+
   overflow: hidden;
   span {
     position: relative;
