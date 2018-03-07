@@ -660,5 +660,3 @@ def save_profile(sender, instance, **kwargs):
         p.save()
 
 post_save.connect(save_profile, sender=User)
-
-
