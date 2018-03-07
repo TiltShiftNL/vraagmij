@@ -35,6 +35,9 @@ SWIFT_TENANT_ID = os.getenv("SWIFT_TENANT_ID")
 SWIFT_TENANT_NAME = os.getenv("SWIFT_TENANT_NAME")
 SWIFT_REGION_NAME = os.getenv("SWIFT_REGION_NAME")
 
+# mail settings
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", 'notset')
+
 TEST = os.getenv("TEST", False)
 
 DEBUG = SECRET_KEY == 'default-secret'
