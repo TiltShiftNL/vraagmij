@@ -1,6 +1,6 @@
 <div class="container">
 
-    {% regroup contact_list by first_letter as title_list %}
+    {% regroup profiel_list by first_letter as title_list %}
     <ul class="shortcuts">
         {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
             <li><a href="#contact-{{ letter }}" data-decorator="scroll" data-counter="click.contacten.alfabet.{{ letter }}">{{ letter }}</a></li>

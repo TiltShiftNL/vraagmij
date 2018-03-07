@@ -98,8 +98,36 @@ class ContactList(ListView):
         return data
 
 
+class ProfielList(UserPassesTestMixin, ListView):
+    model = Profiel
+
+    def test_func(self):
+        return auth_test(self.request.user, 'viewer')
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['beeld'] = self.request.GET.get('beeld', 'alfabet')
+
+        data['themas'] = Thema.objects.all
+        data['organisaties'] = Organisatie.objects.all
+
+        if data['beeld'] not in ['alfabet', 'thema', 'organisatie']:
+            data['beeld'] = 'alfabet'
+
+        data['list_template'] = 'snippets/contact_list_%s.html' % data['beeld']
+
+        return data
+
+
 class ContactDetail(DetailView):
     model = Contact
+
+
+class ProfielDetail(UserPassesTestMixin, DetailView):
+    model = Profiel
+
+    def test_func(self):
+        return auth_test(self.request.user, 'viewer')
 
 
 class ContactUpdate(DetailView):
@@ -235,6 +263,59 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
 
         messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangepast." % self.object.titel)
         return super(RegelingUpdate, self).form_valid(form)
+
+
+class ProfielUpdateView(UserPassesTestMixin, UpdateView):
+    model = User
+    form_class = UserModelForm
+
+    def test_func(self):
+        return self.request.user == self.get_object()
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        if self.request.POST.get('submit'):
+            return self.request.POST.get('submit')
+        return reverse_lazy('update_profiel')
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        post = self.request.POST
+        if post:
+            print(post)
+            profiel_formset = UserFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            # for subform in profiel_formset.forms:
+            #     subform.initial = {
+            #         'email': self.object.email,
+            #         'achternaam': self.object.last_name,
+            #         'voornaam': self.object.first_name,
+            #     }
+            data['profiel'] = profiel_formset
+        else:
+            profiel_formset = UserFormSet(instance=self.object)
+            # for subform in profiel_formset.forms:
+            #     subform.initial = {
+            #         'email': self.object.email,
+            #         'achternaam': self.object.last_name,
+            #         'voornaam': self.object.first_name,
+            #     }
+            data['profiel'] = profiel_formset
+            data['object'] = self.object
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        profiel = context['profiel']
+        with transaction.atomic():
+            self.object = form.save()
+            if profiel.is_valid():
+                profiel.instance = self.object
+                profiel.save()
+
+        messages.add_message(self.request, messages.INFO, "Je profiel is aangepast.")
+        return super().form_valid(form)
 
 
 class EventView(View):

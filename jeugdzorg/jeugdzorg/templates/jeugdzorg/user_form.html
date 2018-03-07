@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+  <p class="nav-back">
+    <a href="{% if request.META.HTTP_HOST|add:'/contacten/' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'themas' %}{% endif %}" data-counter="click.thema.back"><i class="icon-arrow-left"></i> Contacten overzicht</a>
+  </p>
+
+  <div class="container container-small">
+    {% if form.errors %}
+      <div class="systeem-berichten">
+      {{ form.errors.as_ul }}
+      </div>
+    {% endif %}
+    <form action="{% url 'update_profiel' %}" method="post" class="well"  enctype="multipart/form-data">
+      {% csrf_token %}
+
+    {{ profiel.management_form }}
+    {% for hidden in profiel.forms.0.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+      <fieldset>
+        <legend>Persoonsgegevens</legend>
+        <div class="form-aside">
+
+          <span class="contact-avatar"{% if profiel.forms.0.pasfoto.value %}style="background-image: url({{ profiel.forms.0.pasfoto.value.url }})"{% endif %}></span>
+            {{ profiel.forms.0.pasfoto }}
+        </div>
+        <div class="inputs">
+          <p class="row">
+        Login e-mailadres: {{ form.email.value }}<br>
+        {{ form.email }}
+          </p>
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.voornaam.label }}</strong>
+                  {{ profiel.forms.0.voornaam }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.tussenvoegsel.label }}</strong>
+                  {{ profiel.forms.0.tussenvoegsel }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.achternaam.label }}</strong>
+                  {{ profiel.forms.0.achternaam }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.functie.label }}</strong>
+                  {{ profiel.forms.0.functie }}
+              </label>
+          </p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Contact</legend>
+        <div class="form-aside">
+          <h3>Privacy</h3>
+          <p>Uw profiel is zichtbaar voor:</p>
+          {% if profiel.forms.0.organisatie_lijst %}
+          <ul>
+            {% for organisatie in profiel.forms.0.instance.organisatie_lijst.all %}
+            <li>personen van "{{ organisatie.naam }}"</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <ul>
+          <li>
+              Je bent nog niet aan een organisatie verbonden
+          </li>
+          </ul>
+          {% endif %}
+{#          <p class="buttons right">#}
+{#            <a href="#">wijzigen</a>#}
+{#          </p>#}
+        </div>
+        <div class="inputs">
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.email.label }}</strong>
+                  {{ profiel.forms.0.email }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.telefoonnummer.label }}</strong>
+                  {{ profiel.forms.0.telefoonnummer }}
+              </label>
+          </p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Thema's</legend>
+        <div class="row">
+            {{ profiel.forms.0.themas }}
+            {% if profiel.forms.0.themas %}
+                {{ profiel.forms.0.themas.management_form }}
+                {{ profiel.forms.0.themas.non_form_errors }}
+
+                {% for nested_form in profiel.forms.0.themas.forms %}
+                    {{ nested_form }}
+                {% endfor %}
+
+            {% endif %}
+        </div>
+      </fieldset>
+      <p class="buttons right">
+        <button type="submit" class="button">Opslaan</button>
+        <a href="{{ request.META.HTTP_REFERER }}">Annuleren</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+
+
+{#    <form action="{% url 'update_profiel' object.id %}" method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{##}
+{#        <fieldset class="regeling-set">#}
+{##}
+{#            <legend>Profiel details</legend>#}
+{#            {{ profiel.management_form }}#}
+{#            {% for hidden in profiel.forms.0.hidden_fields %}#}
+{#                {{ hidden }}#}
+{#            {% endfor %}#}
+{#            {% for field in profiel.forms.0.visible_fields %}#}
+{#                {{ field.errors.as_ul }}#}
+{#                {{ field.label }}#}
+{#                {{ field }}#}
+{#            {% endfor %}#}
+{##}
+{#            <ol class="form-list">#}
+{#                {% for form in profiel.forms %}#}
+{#                    <li>#}
+{#                        <label>#}
+{#                            <strong>Voorwaarde</strong>#}
+{#                            {% for field in form.visible_fields %}#}
+{#                                {% if forloop.first %}#}
+{#                                    {% for hidden in form.hidden_fields %}#}
+{#                                        {{ hidden }}#}
+{#                                    {% endfor %}#}
+{#                                {% endif %}#}
+{#                                {{ field.errors.as_ul }}#}
+{#                                {{ field.label }}#}
+{#                                {{ field }}#}
+{#                            {% endfor %}#}
+{#                        </label>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ol>#}
+{#        </fieldset>#}
+{##}
+{#        <button type="submit" class="button">Wijzig</button>#}
+{#    </form>#}
+{% endblock %}

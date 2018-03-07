@@ -2,7 +2,7 @@
     <ul class="shortcuts">
 
         {% for organisatie in organisaties %}
-            {% if organisatie.contact_set.all %}
+            {% if organisatie.profiel_set.all %}
                 <li><a href="#organisatie-{{ organisatie.id }}" data-decorator="scroll" data-counter="click.list.organisatie.{{ organisatie.id }}">{{ organisatie }}</a></li>
             {% endif %}
         {% endfor %}
@@ -12,12 +12,12 @@
 
     <div class="columns">
         {% for organisatie in organisaties %}
-            {% if organisatie.contact_set.all %}
+            {% if organisatie.profiel_set.all %}
                 <div class="group">
                     <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</h2>
             
                     <ul class="contacten">
-                        {% for contact in organisatie.contact_set.all %}
+                        {% for contact in organisatie.profiel_set.all %}
                             <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
                               {{ contact.achternaam }}, {{ contact.voornaam }} <em>{{ contact.rol }}</em>
                             </a></li>
@@ -31,8 +31,8 @@
         <div class="group">
             <h2 class="shortcut" id="thema-overige">Overige</h2>
             <ul class="contacten">
-                {% for contact in contact_list %}
-                    {% if not contact.organisatie.all %}
+                {% for contact in profiel_list %}
+                    {% if not contact.organisatie_lijst.all %}
                         <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
                           {{ contact.achternaam }}, {{ contact.voornaam }}
                         </a></li>

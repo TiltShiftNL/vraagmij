@@ -26,6 +26,15 @@ POSTGRES_HOST = os.getenv("POSTGRES_HOST", "notset")
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
 SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
+
+# swift storage
+SWIFT_USERNAME = os.getenv("SWIFT_USERNAME")
+SWIFT_PASSWORD = os.getenv("SWIFT_PASSWORD")
+SWIFT_AUTH_URL = os.getenv("SWIFT_AUTH_URL")
+SWIFT_TENANT_ID = os.getenv("SWIFT_TENANT_ID")
+SWIFT_TENANT_NAME = os.getenv("SWIFT_TENANT_NAME")
+SWIFT_REGION_NAME = os.getenv("SWIFT_REGION_NAME")
+
 TEST = os.getenv("TEST", False)
 
 DEBUG = SECRET_KEY == 'default-secret'
@@ -52,6 +61,7 @@ INSTALLED_APPS = [
     'django_crontab',
     'storages',
     'import_export',
+    'phonenumber_field',
 
     'django.contrib.admin',
     'django.contrib.auth',

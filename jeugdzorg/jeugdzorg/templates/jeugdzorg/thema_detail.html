@@ -29,7 +29,7 @@
 
   </article>
   
-  {% if object.contacten.all %}
+  {% if object.profiel_set.all %}
 
       <hr>
 
@@ -47,9 +47,9 @@
           </p>
           {% if request.user|has_group:"viewer" %}
               <ul class="contacten">
-                  {% for contact in object.contacten %}
+                  {% for contact in object.profiel_set.all %}
                       <li>
-                          {% include "snippets/contact.html" with item=contact.contact %}
+                          {% include "snippets/contact.html" with item=contact %}
                       </li>
                   {% endfor %}
               </ul>

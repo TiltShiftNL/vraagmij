@@ -12,9 +12,11 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from phonenumber_field.modelfields import PhoneNumberField
+from django.db.models.signals import post_save
 
-fs = default_storage
-fs.container_name = 'jeugdzorg_protected'
+# fs = default_storage
+# fs.container_name = 'jeugdzorg_protected'
 
 
 class UserManager(BaseUserManager):
@@ -47,20 +49,6 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username_validator = UnicodeUsernameValidator()
-
-    username = models.CharField(
-        _('username'),
-        max_length=150,
-        unique=True,
-        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
-        validators=[username_validator],
-
-        error_messages={
-            'unique': _("A user with that username already exists."),
-        },
-        blank=True,
-    )
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
 
@@ -90,6 +78,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.email
+
+    class Meta:
+        verbose_name = _('Gebruiker')
+        verbose_name_plural = _("Gebruikers")
 
 
 class Regeling(models.Model):
@@ -355,11 +347,105 @@ class ContactNaarOrganisatie(models.Model):
         null=True,
         blank=True,
     )
+
     class Meta:
         verbose_name = _('Contact naar organisatie')
         verbose_name_plural = _('Contacten naar organisaties')
         ordering = ('volgorde', )
         unique_together = ('contact', 'organisatie', )
+
+
+class ProfielNaarOrganisatie(models.Model):
+    profiel = models.ForeignKey(
+        to='jeugdzorg.Profiel',
+        verbose_name=_('Profiel'),
+        related_name='profielnaarorganisatie',
+        on_delete=models.CASCADE,
+    )
+    organisatie = models.ForeignKey(
+        to='jeugdzorg.Organisatie',
+        verbose_name=_('Organistie'),
+        related_name='organisatienaarprofiel',
+        on_delete=models.CASCADE,
+    )
+    volgorde = models.IntegerField(
+        verbose_name=_('Volgorde'),
+        default=0,
+    )
+    rol = models.CharField(
+        verbose_name=_('Rol'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = _('Profiel naar organisatie')
+        verbose_name_plural = _('Profielen naar organisaties')
+        ordering = ('volgorde', )
+        unique_together = ('profiel', 'organisatie', )
+
+
+class ProfielNaarThema(models.Model):
+    profiel = models.ForeignKey(
+        to='jeugdzorg.Profiel',
+        verbose_name=_('Profiel'),
+        related_name='profielnaarthema',
+        on_delete=models.CASCADE,
+    )
+    thema = models.ForeignKey(
+        to='jeugdzorg.Thema',
+        verbose_name=_('Thema'),
+        related_name='themanaarprofiel',
+        on_delete=models.CASCADE,
+    )
+    volgorde = models.IntegerField(
+        verbose_name=_('Volgorde'),
+        default=0,
+    )
+    rol = models.CharField(
+        verbose_name=_('Rol'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = _('Profiel naar thema')
+        verbose_name_plural = _("Profielen naar thema's")
+        ordering = ('volgorde', )
+        unique_together = ('profiel', 'thema', )
+
+
+class ProfielNaarRegeling(models.Model):
+    profiel = models.ForeignKey(
+        to='jeugdzorg.Profiel',
+        verbose_name=_('Profiel'),
+        related_name='profielnaarregeling',
+        on_delete=models.CASCADE,
+    )
+    regeling = models.ForeignKey(
+        to='jeugdzorg.Regeling',
+        verbose_name=_('Regeling'),
+        related_name='regelingnaarprofiel',
+        on_delete=models.CASCADE,
+    )
+    volgorde = models.IntegerField(
+        verbose_name=_('Volgorde'),
+        default=0,
+    )
+    rol = models.CharField(
+        verbose_name=_('Rol'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = _('Profiel naar regeling')
+        verbose_name_plural = _("Profielen naar regelingen")
+        ordering = ('volgorde', )
+        unique_together = ('profiel', 'regeling', )
 
 
 class ContactNaarRegeling(models.Model):
@@ -428,11 +514,82 @@ class ContactNaarThema(models.Model):
         unique_together = ('contact', 'thema', )
 
 
-# class Profiel(models.Model):
-#     gebruiker = models.OneToOneField(
-#         to='jeugdzorg.User',
-#         on_delete=models.CASCADE
-#     )
+class Profiel(models.Model):
+    gebruiker = models.OneToOneField(
+        to='jeugdzorg.User',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    email = models.EmailField(
+        verbose_name=_('Primair e-mailadres'),
+        blank=True,
+        null=True,
+    )
+    telefoonnummer = PhoneNumberField(
+        verbose_name=_('Primair telefoonnummer'),
+        blank=True,
+        null=True,
+    )
+    gebruik_email = models.BooleanField(
+        verbose_name=_('Gebruik e-mailadres'),
+        default=True,
+    )
+    gebruik_telefoonnummer = models.BooleanField(
+        verbose_name=_('Gebruik telefoonnummer'),
+        default=True,
+    )
+    voornaam = models.CharField(
+        verbose_name=_('Voornaam'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    achternaam = models.CharField(
+        verbose_name=_('Achternaam'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    tussenvoegsel = models.CharField(
+        verbose_name=_('Tussenvoegsel'),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+    functie = models.CharField(
+        verbose_name=_('Functie'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    pasfoto = models.ImageField(
+        verbose_name=_('Pasfoto'),
+        upload_to='contact',
+        null=True,
+        blank=True,
+    )
+    organisatie_lijst = models.ManyToManyField(
+        to='Organisatie',
+        through='ProfielNaarOrganisatie',
+        through_fields=('profiel', 'organisatie'),
+    )
+    thema_lijst = models.ManyToManyField(
+        to='Thema',
+        through='ProfielNaarThema',
+        through_fields=('profiel', 'thema'),
+    )
+    regeling_lijst = models.ManyToManyField(
+        to='Regeling',
+        through='ProfielNaarRegeling',
+        through_fields=('profiel', 'regeling'),
+    )
+
+    def first_letter(self):
+        return self.achternaam and self.achternaam[0].upper() or ''
+
+    class Meta:
+        verbose_name = _('Profiel')
+        verbose_name_plural = _("Profielen")
 
 
 class EventItem(models.Model):
@@ -474,6 +631,10 @@ class EventItem(models.Model):
     #     blank=True,
     # )
 
+    class Meta:
+        verbose_name = _('Gebruikers gedrag')
+        verbose_name_plural = _("Gebruikers gedragingen")
+
 
 # from django.apps import apps
 # from django.contrib.auth import get_user_model
@@ -488,5 +649,16 @@ class EventItem(models.Model):
 #         apps.clear_cache()
 #         from django.contrib.admin.models import LogEntry
 #         LogEntry.UserModel = get_user_model()
+
+
+# def save_profile(sender, instance, **kwargs):
+#     if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
+#         p = Profiel(gebruiker=instance)
+#         p.email = instance.email
+#         p.voornaam = instance.first_name
+#         p.achternaam = instance.last_name
+#         p.save()
+#
+# post_save.connect(save_profile, sender=User)
 
 

@@ -30,9 +30,15 @@ urlpatterns = [
     path('regeling/<int:pk>/', RegelingDetail.as_view(), name='detail_regeling'),
     path('themas/', ThemaList.as_view(), name='themas'),
     path('thema/<slug:slug>/', ThemaDetail.as_view(), name='detail_thema'),
-    path('contacten/', ContactList.as_view(), name='contacten'),
-    path('contact/<int:pk>/', ContactDetail.as_view(), name='detail_contact'),
+    path('contacten/', ProfielList.as_view(), name='contacten'),
+    # path('contacten/', ContactList.as_view(), name='contacten'),
+    path('contact/<int:pk>/', ProfielDetail.as_view(), name='detail_contact'),
+    # path('contact/<int:pk>/', ContactDetail.as_view(), name='detail_contact'),
     path('contact/<int:pk>/bewerken', ContactUpdate.as_view(), name='update_contact'),
+
+    path('profiel/<int:pk>/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
+    path('profiel/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
+
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     

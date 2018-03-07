@@ -1,11 +1,13 @@
-from django.contrib import admin
-from .models import *
-from .forms import *
 from adminsortable.admin import SortableAdmin
-from adminsortable.admin import NonSortableParentAdmin, SortableStackedInline
+from adminsortable.admin import SortableStackedInline
+from django.contrib import admin
 # from django.contrib.auth.models import User, Group
-from django.contrib.auth.admin import UserAdmin, GroupAdmin
+from django.contrib.auth.admin import UserAdmin
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+
+from .forms import *
 
 
 class VoorwaardeInline(SortableStackedInline):
@@ -31,6 +33,26 @@ class ContactNaarThemaInline(admin.TabularInline):
 class ContactNaarOrganisatieInline(admin.TabularInline):
     model = ContactNaarOrganisatie
     extra = 1
+
+
+class ProfielNaarOrganisatieInline(admin.TabularInline):
+    model = ProfielNaarOrganisatie
+    extra = 1
+
+
+class ProfielNaarThemaInline(admin.TabularInline):
+    model = ProfielNaarThema
+    extra = 1
+
+
+class ProfielNaarRegelingInline(admin.TabularInline):
+    model = ProfielNaarRegeling
+    extra = 1
+
+
+class ProfielInline(admin.TabularInline):
+    model = Profiel
+    extra = 3
 
 
 @admin.register(Regeling)
@@ -82,10 +104,22 @@ class ContactAdmin(admin.ModelAdmin):
     list_filter = ['url', 'name', ]
 
 
+@admin.register(Profiel)
+class ProfielAdmin(admin.ModelAdmin):
+    list_display = ['gebruiker', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer']
+
+    inlines = [
+        ProfielNaarRegelingInline,
+        ProfielNaarThemaInline,
+        ProfielNaarOrganisatieInline,
+    ]
+
+
 @admin.register(User)
 class UserAdmin(UserAdmin):
+    list_display = ['email', 'is_active', 'is_staff', 'is_superuser', 'wijzig_profiel']
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'password')}),
+        (None, {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
@@ -97,8 +131,21 @@ class UserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
+
+    def wijzig_profiel(self, obj):
+        url = reverse('admin:%s_%s_change' % (obj._meta.app_label,  'profiel'),  args=[obj.profiel.id])
+        return mark_safe("""<a id="edit_related" class="button related-widget-wrapper-link add-related" href="%s?_popup=1">Profiel</a>""" % url)
+
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
+
+    inlines = [
+        ProfielInline,
+    ]
+
+    ordering = []
+
+
 
 
 # admin.site.unregister(Group)

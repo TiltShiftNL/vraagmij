@@ -2,7 +2,7 @@
   
     <ul class="shortcuts">
         {% for thema in themas %}
-            {% if thema.contacten.all %}
+            {% if thema.profiel_set.all %}
                 <li><a href="#thema-{{ thema.id }}" data-decorator="scroll" data-counter="click.list.thema.{{ thema.id }}">{{ thema }}</a></li>
             {% endif %}
         {% endfor %}
@@ -13,13 +13,14 @@
     <div class="columns">
         {% for thema in themas %}
 
-            {% if thema.contacten.all %}
+            {% if thema.profiel_set.all %}
                 <h2 class="shortcut" id="thema-{{ thema.id }}"><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></h2>
             
                 <ul class="contacten">
-                    {% for contact in thema.contacten.all %}
+                    {% for contact in thema.profiel_set.all %}
                         <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                          {{ contact.contact.achternaam }}, {{ contact.contact.voornaam }} <em>{{ contact.rol }}</em>
+                          {{ contact.achternaam }}, {{ contact.voornaam }}
+                            {% if contact.functie %}<em>{{ contact.functie }}</em>{% endif %}
                         </a></li>
                     {% endfor %}
                 </ul>
@@ -31,10 +32,11 @@
         <div class="group">
             <h2 class="shortcut" id="thema-overige">Overige</h2>
             <ul class="contacten">
-                {% for contact in contact_list %}
-                    {% if not contact.thema_set.all %}
+                {% for contact in profiel_list %}
+                    {% if not contact.thema_lijst.all %}
                         <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                          {{ contact.achternaam }}, {{ contact.voornaam }}
+                            {{ contact.achternaam }}, {{ contact.voornaam }}
+                            {% if contact.functie %}<em>{{ contact.functie }}</em>{% endif %}
                         </a></li>
                     {% endif %}
                 {% endfor %}
