@@ -645,6 +645,9 @@ form .choices strong:before, form .choices strong:after {
   margin-top: 10px; }
 form .choices label:hover strong {
   border: 1px solid rgba(0, 0, 0, 0.4); }
+form .choices.inlineformset-checkbox input {
+  position: static;
+  opacity: 1; }
 
 form.well .choices strong {
   background-color: #fff; }

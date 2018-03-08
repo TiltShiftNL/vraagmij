@@ -38,16 +38,16 @@ class ConfigView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
-        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-        from_email = Email("info@fixxx7.com")
-        to_email = Email("mguikema@gmail.com")
-        subject = "Sending with SendGrid is Fun"
-        content = Content("text/plain", "and easy to do anywhere, even with Python")
-        mail = Mail(from_email, subject, to_email, content)
-        response = sg.client.mail.send.post(request_body=mail.get())
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        # sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
+        # from_email = Email("info@fixxx7.com")
+        # to_email = Email("mguikema@gmail.com")
+        # subject = "Sending with SendGrid is Fun"
+        # content = Content("text/plain", "and easy to do anywhere, even with Python")
+        # mail = Mail(from_email, subject, to_email, content)
+        # response = sg.client.mail.send.post(request_body=mail.get())
+        # print(response.status_code)
+        # print(response.body)
+        # print(response.headers)
 
         logs = [
             ['nginx error', '/var/log/nginx/error.log'],
@@ -145,16 +145,16 @@ class ProfielDetail(UserPassesTestMixin, DetailView):
         return auth_test(self.request.user, 'viewer')
 
 
-class ContactUpdate(DetailView):
+class ContactUpdate(TemplateView):
     model = Contact
     template_name = 'jeugdzorg/contact_form.html'
-    
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        
+
         data['themas'] = Thema.objects.all
         data['organisaties'] = Organisatie.objects.all
-        
+
         return data
 
 
