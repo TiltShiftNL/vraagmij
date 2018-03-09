@@ -301,6 +301,7 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
         if post:
             print(post)
             profiel_formset = UserFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            print(profiel_formset)
             # for subform in profiel_formset.forms:
             #     subform.initial = {
             #         'email': self.object.email,
@@ -319,6 +320,10 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
             data['profiel'] = profiel_formset
             data['object'] = self.object
         return data
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid()
 
     def form_valid(self, form):
         context = self.get_context_data()

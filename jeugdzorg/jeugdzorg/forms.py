@@ -11,6 +11,9 @@ from sendgrid.helpers.mail import *
 from django.conf import settings
 from django.template import loader
 from itertools import chain
+from .widgets import ProfielCheckboxSelectMultiple
+from django.forms.utils import ErrorList
+
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
     file = forms.FileField(
@@ -48,7 +51,6 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         pass
 
 
-
 class RegelingModelForm(forms.ModelForm):
     class Meta:
         model = Regeling
@@ -61,51 +63,48 @@ class RegelingModelForm(forms.ModelForm):
                 attrs={'type': 'date'},
             ),
         }
-        # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
-
-
-class CustomField(forms.ModelMultipleChoiceField):
-    widget = widgets.CheckboxSelectMultiple(attrs={'class': 'choices inlineformset-checkbox'})
-
-    # def save_form_data(self):
-
-
 
 
 class ProfielModelForm(forms.ModelForm):
-
-    # thema = forms.ModelMultipleChoiceField(
-    #     required=True,
-    #     widget=widgets.CheckboxSelectMultiple(attrs={'class': 'choices inlineformset-checkbox'}),
-    # )
-    # themas = forms.MultipleChoiceField(
-    #     required=False,
-    #     widget=forms.CheckboxSelectMultiple(attrs={'class': 'choices inlineformset-checkbox'}),
-    #     choices=list((thema.id, thema.titel) for thema in Thema.objects.all()),
-    # )
+    custom_m2m = (
+        ('thema_lijst', 'thema'),
+        ('regeling_lijst', 'regeling'),
+        ('organisatie_lijst', 'organisatie'),
+    )
 
     class Meta:
         model = Profiel
         exclude = []
-        # fields = ['thema_lijst', ]
-        # widgets = {
-        #     'thema_lijst': widgets.CheckboxSelectMultiple(attrs={'class': 'choices inlineformset-checkbox'}),
-        # }
 
-    def save_m2m(self):
-        pass
-    # def save(self, commit=True):
-    #     cleaned_data = self.cleaned_data
-    #     exclude = self._meta.exclude
-    #     fields = self._meta.fields
-    #     opts = self.instance._meta
-    #
-    #     print(self.instance)
-    #     print(cleaned_data)
-    #     print(fields)
-    #     print('opts')
-    #     print(type(opts))
-    #     super().save(commit)
+    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None, initial=None, error_class=ErrorList,
+                 label_suffix=None, empty_permitted=False, instance=None, use_required_attribute=None):
+        super().__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance,
+                         use_required_attribute)
+        for f in self.custom_m2m:
+            self.fields[f[0]].required = False
+
+    def save(self, commit=True):
+        print('save')
+        instance = forms.ModelForm.save(self, False)
+        old_save_m2m = self.save_m2m
+        def save_m2m():
+            # todo normal m2m not saved
+            #old_save_m2m()
+
+            for cm2m in self.custom_m2m:
+
+                getattr(instance, cm2m[0]).clear()
+
+                for obj in self.cleaned_data[cm2m[0]]:
+                    data = dict(profiel=instance)
+                    data[cm2m[1]] = obj
+                    profielrel = getattr(instance, cm2m[0]).through(**data)
+                    profielrel.save()
+        self.save_m2m = save_m2m
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
 
 
 class UserModelForm(forms.ModelForm):
@@ -126,37 +125,6 @@ class UserModelForm(forms.ModelForm):
         widgets = {
             'email': forms.HiddenInput,
         }
-
-    # def _save_m2m(self):
-    #     print('---')
-    #     cleaned_data = self.cleaned_data
-    #     exclude = self._meta.exclude
-    #     fields = self._meta.fields
-    #     opts = self.instance._meta
-    #
-    #     print(self.instance)
-    #     print(cleaned_data)
-    #     print(fields)
-    #     print('opts')
-    #     print(type(opts))
-    #     print('opts')
-    #     for f in chain(opts.many_to_many, opts.private_fields):
-    #         if not hasattr(f, 'save_form_data'):
-    #             continue
-    #         if fields and f.name not in fields:
-    #             continue
-    #         if exclude and f.name in exclude:
-    #             continue
-    #         if f.name in cleaned_data:
-    #             #print(f.name)
-    #             if f.name == 'thema_lijst':
-    #                 print('fix thema lijst')
-    #                 pass
-    #             else:
-    #                 f.save_form_data(self.instance, cleaned_data[f.name])
-    #
-    #     print('---')
-    #     #super()._save_m2m()
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -268,12 +236,15 @@ UserFormSet = forms.inlineformset_factory(
         'functie',
         'email',
         'telefoonnummer',
-        # 'organisatie_lijst',
+        'organisatie_lijst',
+        'regeling_lijst',
         'thema_lijst',
     ),
     #formset=BaseChildrenFormset,
     widgets={
-        'thema_lijst': widgets.CheckboxSelectMultiple(attrs={'class': 'choices inlineformset-checkbox'}),
+        'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
+        'organisatie_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
+        'thema_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
     },
 
     form=ProfielModelForm,

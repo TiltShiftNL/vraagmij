@@ -106,7 +106,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(Profiel)
 class ProfielAdmin(admin.ModelAdmin):
-    list_display = ['gebruiker', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer']
+    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer']
 
     inlines = [
         ProfielNaarRegelingInline,
