@@ -1,7 +1,7 @@
 <div class="container">
 
     {% regroup regeling_list by first_letter as title_list %}
-    <ul class="shortcuts">
+    <ul class="shortcuts medium-show">
         {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
             <li><a href="#regelingen-{{ letter }}" data-decorator="scroll" data-counter="click.regelingen.alfabet.{{ letter }}">{{ letter }}</a></li>
         {% endfor %}

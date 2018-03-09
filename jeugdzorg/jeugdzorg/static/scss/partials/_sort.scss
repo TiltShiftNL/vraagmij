@@ -1,38 +1,94 @@
-.sort {
+.sort, .sort-view {
   list-style: none;
   margin: 0 0 $lineHeight 0;
   padding: 0;
   line-height: 1;
-  background-color: #e5e5e5;
-  padding: 0 .5em;
   display: flex;
   font-size: $fontSmallSize;
-  min-height: 4em;
-  
+}
+.sort {
+  a {
+    text-decoration: none;
+    display: inline-block;
+    padding: .5em;
+    background-color: rgba($textColor, 0);
+    transition: all .3s;
+    &:hover {
+      background-color: rgba($textColor, .05);
+    }
+    &.active {
+      background-color: rgba($textColor, .1);
+    }
+  }
+  i {
+    display: none;
+    top: -2px;
+  }
+  .active i {
+    display: inline-block;
+  }
+}
+.sort-view {
   a {
     display: inline-block;
     
     text-decoration: none;
     color: $textColor;
 
-    padding: 1em 1em;
-    margin: .5em 0;
+    padding: .5em .5em;
+    margin: .5em -1px .5em 0;
+    
+    border: 1px solid #e5e5e5;
     
     transition: background-color .3s;
     
     &:hover {
-      background-color: rgba(#fff, .4);
+      background-color: rgba($textColor, .2);
     }
     &.active {
-      background-color: rgba(#fff, .8);
+      background-color: rgba($textColor, .8);
+      color: #fff;
+    }
+  }
+  i {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    top: -2px;
+  }
+
+  .active .icon-view-normaal {
+    border-color: #fff;
+    &:before, &:after {
+      background-color: #fff;
+    }
+  }
+  .active .icon-view-compact {
+    &, &:before, &:after {
+      background-color: #fff;
     }
   }
   
 }
-.tabs + .sort {
-  margin-top: -$lineHeight;
-  min-height: calc(4em - 3px);
-  a {
-    margin-top: calc(.5em - 3px);
+
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  
+  margin-bottom: $lineHeight;
+  
+  font-size: $fontSmallSize;
+  
+  .sort, .sort-view {
+    margin-bottom: 0;
   }
+  
+  .sort {
+    margin-right: auto;
+  }
+  
+  .sort-label {
+    margin-right: 1em;
+  }
+  
 }

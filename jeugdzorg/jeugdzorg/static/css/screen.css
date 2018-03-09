@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, h1, h2, h3, h4, h5, h6, fieldset, figure, blockquote, dl, dt, dd {
   margin: 0;
   padding: 0;
@@ -209,7 +210,7 @@ body {
   background-size: 100% auto;
   background-repeat: no-repeat; }
 
-.icon-arrow, .icon-arrow-left, .icon-arrow-right {
+.icon-arrow, .icon-arrow-left, .icon-arrow-right, .icon-arrow-bottom {
   position: relative;
   top: .4em;
   display: inline-block;
@@ -226,6 +227,9 @@ body {
 
 .icon-arrow-right {
   transform: rotate(45deg); }
+
+.icon-arrow-bottom {
+  transform: rotate(135deg); }
 
 .icon-menu, .icon-close {
   position: relative;
@@ -345,6 +349,63 @@ body {
   bottom: -2px;
   width: 2px;
   background-color: #fff; }
+
+.icon-sort-desc, .icon-sort-asc {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  line-height: .5em;
+  width: .5em;
+  height: .5em;
+  font-family: "arial";
+  font-weight: bold;
+  font-size: 2rem; }
+.icon-sort-desc:before, .icon-sort-asc:before {
+  content: '↓'; }
+
+.icon-sort-asc:before {
+  content: '↑'; }
+
+.icon-view-normaal, .icon-view-compact {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #333;
+  width: 1.5em;
+  height: 1em;
+  box-sizing: border-box; }
+.icon-view-normaal:before, .icon-view-normaal:after, .icon-view-compact:before, .icon-view-compact:after {
+  content: '';
+  position: absolute;
+  background-color: #333;
+  left: 2px;
+  top: 2px;
+  bottom: 4px;
+  right: 12px; }
+.icon-view-normaal:after, .icon-view-compact:after {
+  left: auto;
+  right: 2px;
+  bottom: 2px;
+  width: 8px; }
+
+.icon-view-compact {
+  border-width: 2px;
+  border-left: none;
+  border-right: none; }
+.icon-view-compact:before, .icon-view-compact:after {
+  background-color: transparent; }
+.icon-view-compact:before {
+  right: 0px;
+  left: 0;
+  height: 2px;
+  background-color: transparent;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  bottom: auto; }
+.icon-view-compact:after {
+  display: none; }
 
 .header {
   max-width: 1400px;
@@ -861,33 +922,65 @@ form.well .choices strong {
     font-size: 1.6rem;
     padding: .6em 1em; } }
 
-.sort {
+.sort, .sort-view {
   list-style: none;
   margin: 0 0 2.2rem 0;
   padding: 0;
   line-height: 1;
-  background-color: #e5e5e5;
-  padding: 0 .5em;
   display: flex;
-  font-size: 1.4rem;
-  min-height: 4em; }
+  font-size: 1.4rem; }
+
 .sort a {
+  text-decoration: none;
+  display: inline-block;
+  padding: .5em;
+  background-color: rgba(51, 51, 51, 0);
+  transition: all .3s; }
+.sort a:hover {
+  background-color: rgba(51, 51, 51, 0.05); }
+.sort a.active {
+  background-color: rgba(51, 51, 51, 0.1); }
+.sort i {
+  display: none;
+  top: -2px; }
+.sort .active i {
+  display: inline-block; }
+
+.sort-view a {
   display: inline-block;
   text-decoration: none;
   color: #333;
-  padding: 1em 1em;
-  margin: .5em 0;
+  padding: .5em .5em;
+  margin: .5em -1px .5em 0;
+  border: 1px solid #e5e5e5;
   transition: background-color .3s; }
-.sort a:hover {
-  background-color: rgba(255, 255, 255, 0.4); }
-.sort a.active {
-  background-color: rgba(255, 255, 255, 0.8); }
+.sort-view a:hover {
+  background-color: rgba(51, 51, 51, 0.2); }
+.sort-view a.active {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff; }
+.sort-view i {
+  margin-top: -10px;
+  margin-bottom: -10px;
+  top: -2px; }
+.sort-view .active .icon-view-normaal {
+  border-color: #fff; }
+.sort-view .active .icon-view-normaal:before, .sort-view .active .icon-view-normaal:after {
+  background-color: #fff; }
+.sort-view .active .icon-view-compact, .sort-view .active .icon-view-compact:before, .sort-view .active .icon-view-compact:after {
+  background-color: #fff; }
 
-.tabs + .sort {
-  margin-top: -2.2rem;
-  min-height: calc(4em - 3px); }
-.tabs + .sort a {
-  margin-top: calc(.5em - 3px); }
+.sort-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.2rem;
+  font-size: 1.4rem; }
+.sort-container .sort, .sort-container .sort-view {
+  margin-bottom: 0; }
+.sort-container .sort {
+  margin-right: auto; }
+.sort-container .sort-label {
+  margin-right: 1em; }
 
 .systeem-berichten {
   background: #f5f5f5;
