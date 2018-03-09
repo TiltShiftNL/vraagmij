@@ -1,18 +1,26 @@
 {% load static %}
-<section class="contact-card">
-    <span class="contact-avatar">
-      <span {% if item.pasfoto %}style="background-image: url({{ item.pasfoto.url }});"{% else %}style="background-image: url('{% static '' %}/images/pic_avatar-{{ item.voornaam|slugify }}-{{ item.achternaam|slugify }}.jpg')"{% endif %}></span>
-    </span>
-    <strong class="contact-naam">{{ item.achternaam }}, {{ item.voornaam }}</strong>
-    {% if contact.functie %}
-        <em class="contact-rol">{{ contact.functie }}</em>
+<div class="contact">
+
+    <figure class="contact-avatar">
+      <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto.url }}')"{% endif %}></span>
+    </figure>
+
+    <dl class="contact-meta">
+      <dt class="contact-naam">naam</dt><dd><strong>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> <span>{{ item.voornaam }}</span></dd>
+      <dt class="contact-functie">functie</dt><dd>{{ item.functie }}</dd>
+      <dt class="contact-organisatie">organisatie</dt><dd>{{ item.organisatie }}</dd>
+      {% if rol %}
+        <dt class="contact-rol">rol</dt><dd>{{ rol }}</dd>
+      {% endif %}
+
+    {% if item.email %}
+        <dt class="contact-email">email</dt><dd data-label="email"><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ item.email }}</a></dd>
     {% endif %}
-    
-    <ul class="contact-manieren">
-        <li><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ item.email }}</a></li>
-        {% if item.telefoonnummer %}
-            <li><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel">{{ item.telefoonnummer }}</a></li>
-        {% endif %}
-    </ul>
-    
-</section>
+
+    {% if item.telefoonnummer %}
+        <dt class="contact-telefoon">telefoon</dt><dd data-label="telefoon"><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel">{{ item.telefoonnummer }}</a></dd>
+    {% endif %}
+
+    </dl>
+
+</div>

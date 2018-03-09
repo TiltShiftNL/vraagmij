@@ -69,7 +69,7 @@
         prevResult = [0,0],
         result = [0,0],
         animation,
-        regeling = _closest(el, '.regeling');
+        regeling = _closest(el, '.regeling-detail');
 
       var hashIcons = {
         yes: '1',

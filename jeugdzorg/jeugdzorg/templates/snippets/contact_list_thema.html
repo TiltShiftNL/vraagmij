@@ -1,6 +1,6 @@
 <div class="container">
   
-    <ul class="shortcuts">
+    <ul class="shortcuts medium-show">
         {% for thema in themas %}
             {% if thema.profiel_set.all %}
                 <li><a href="#thema-{{ thema.id }}" data-decorator="scroll" data-counter="click.list.thema.{{ thema.id }}">{{ thema }}</a></li>
@@ -8,41 +8,29 @@
         {% endfor %}
         <li><a href="#thema-overige" data-decorator="scroll" data-counter="click.list.thema.overige">Overige</a></li>
     </ul>
-
-
-    <div class="columns">
-        {% for thema in themas %}
-
-            {% if thema.profiel_set.all %}
-                <h2 class="shortcut" id="thema-{{ thema.id }}"><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></h2>
-            
-                <ul class="contacten">
-                    {% for contact in thema.profiel_set.all %}
-                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                          {{ contact.achternaam }}, {{ contact.voornaam }}
-                            {% if contact.functie %}<em>{{ contact.functie }}</em>{% endif %}
-                        </a></li>
-                    {% endfor %}
-                </ul>
-                
-            {% endif %}
-
-        {% endfor %}
-
-        <div class="group">
-            <h2 class="shortcut" id="thema-overige">Overige</h2>
-            <ul class="contacten">
-                {% for contact in profiel_list %}
-                    {% if not contact.thema_lijst.all %}
-                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                            {{ contact.achternaam }}, {{ contact.voornaam }}
-                            {% if contact.functie %}<em>{{ contact.functie }}</em>{% endif %}
-                        </a></li>
-                    {% endif %}
+        
+    {% for thema in themas %}
+    
+        {% if thema.profiel_set.all %}
+            <h2 class="shortcut" id="thema-{{ thema.id }}">{{ thema.titel }}</h2>
+            <ul class="contacten cards">
+                {% for contact in thema.profiel_set.all %}
+                    <li>{% include 'snippets/contact.html' with item=contact %}</li>
                 {% endfor %}
             </ul>
-        </div>
-        
-    </div>
+        {% endif %}
+
+    {% endfor %}
+
+    <h2 class="shortcut" id="thema-overige">Overige</h2>
+    <ul class="contacten cards">
+        {% for contact in profiel_list %}
+            {% if not contact.thema_lijst.all %}
+                <li>
+                    {% include 'snippets/contact.html' with item=contact %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
 </div>

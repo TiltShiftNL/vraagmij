@@ -1,1 +1,21 @@
-{% load auth_tags %}
+<div class="thema">
+  
+  <h2 class="thema-titel">{{ thema.titel }}</h2>
+  {% if thema.omschrijving %}
+      <div class="thema-samenvatting">
+          <p>{{ thema.omschrijving|truncatewords_html:20 }}</p>
+      </div>
+  {% endif %}
+
+  <ul class="thema-meta">
+    {% if thema.regeling_set.all %}
+      <li><a href="{% url 'detail_thema' thema.slug %}#regelingen" data-counter="click.themas.thema.{{ thema.slug }}.regelingen"><strong>{{ thema.regeling_set.all|length }}</strong> regeling{% if thema.regeling_set.all|length != 1 %}en{% endif %}</a></li>
+    {% endif %}
+    {% if thema.profiel_set.all %}
+      <li><a href="{% url 'detail_thema' thema.slug %}#contacten" data-counter="click.themas.thema.{{ thema.slug }}.contacten"><strong>{{ thema.profiel_set.all|length }}</strong> contact{% if thema.profiel_set.all|length != 1 %}en{% endif %}</a></li>
+    {% endif %}
+    
+    <li class="thema-link"><a href="{% url 'detail_thema' thema.slug %}" data-counter="click.themas.thema.{{ thema.slug }}.link">Meer details</a>
+  </ul>
+
+</div>

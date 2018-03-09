@@ -1,0 +1,16 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$lineHeight;
+  > * {
+    box-sizing: border-box;
+    padding-right: $lineHeight;
+    flex-basis: 33.33%;
+    @include large {
+      flex-basis: 50;
+    }
+    @include small {
+      flex-basis: 100%;
+    }
+  }
+}

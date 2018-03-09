@@ -5,6 +5,91 @@
   margin: 0 0 .4em 0;
 }
 
+.regelingen {
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: $lineHeight;
+  padding: 0;
+}
+
+.regeling {
+  position: relative;
+  padding: 2rem;
+  border: 1px solid $borderColor;
+  margin-bottom: $lineHeight;
+  .regeling-titel {
+    background-color: #4c4c4c;
+    font-size: $fontSize;
+    line-height: 1.2;
+    font-weight: 700;
+    margin: -2rem -2rem 2rem -2rem;
+    padding: 1.6rem 2rem;
+    color: #fff;
+    
+    display: flex;
+    
+  }
+  .regeling-samenvatting {
+    margin-bottom: 0;
+  }
+  .icon-regeling {
+    margin-right: .5em;
+    top: 2px;
+    &, &:before {
+      border-color: #fff;
+    }
+    &:after {
+      background-color: #4c4c4c
+    }
+  }
+}
+.regeling-meta {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid $borderColor;
+  line-height: 1;
+  li {
+    position: relative;
+    z-index: 2;
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1rem;
+    margin: 1rem -1rem;
+    
+    transition: all .3s;
+    &:hover {
+      background-color: rgba($textColor, .05);
+    }
+  }
+  .regeling-link {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    font-size: 0;
+    
+    
+    a {
+      margin: 0;
+      display: block;
+      height: 100%;
+      padding: 0;
+    }
+  }
+  .regeling & {
+    margin-bottom: -2rem;
+  }
+  
+}
+
+
 .regeling-title {
   margin: 0 0 .8em 0;
   font-size: 2.4rem;
@@ -34,7 +119,7 @@
   opacity: .1;
   transition: opacity .3s;
 }
-.regeling {
+.regeling-detail {
   position: relative;
   padding-left: 130px;
   p, li {
@@ -197,7 +282,7 @@
     }
   }
 
-  .regeling & {
+  .regeling-detail & {
     position: sticky;
     position: -webkit-sticky;
     z-index: 2;

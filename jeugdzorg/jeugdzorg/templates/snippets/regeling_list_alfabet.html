@@ -7,18 +7,14 @@
         {% endfor %}
     </ul>
     
-    <div class="columns">
-
-        {% for titel in title_list %}
-            <div class="group">
-                <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-                <ul class="regelingen">
-                    {% for regeling in titel.list %}
-                        <li><a href="{% url 'detail_regeling' regeling.id %}" data-counter="click.regelingen.regeling.{{ regeling.id }}">{{ regeling.titel }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
-    </div>
+    <ul class="regelingen cards">
+    {% for titel in title_list %}
+          {% for regeling in titel.list %}
+              <li{% if forloop.first %} data-shortcut="{{ titel.grouper }}" id="regelingen-{{ titel.grouper }}"{% endif %}>
+              {% include 'snippets/regeling.html' %}
+              </li>
+          {% endfor %}
+    {% endfor %}
+    </ul>
 
 </div>

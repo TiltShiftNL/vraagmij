@@ -88,6 +88,7 @@
   &:before, &:after {
     content: '';
     position: absolute;
+    z-index: 2;
     background-color: #545454;
     top: 30%;
     left: 50%;
@@ -98,8 +99,9 @@
     transform: translate3d(-50%, 0, 0);
   }
   &:after {
+    z-index: 1;
     top: 64%;
-    height: 60%;
+    height: 70%;
     width: 69%;
   }
   
@@ -146,4 +148,38 @@
       outline-color: $accentColor;
     }
   }
+}
+.icon-regeling {
+  position: relative;
+  top: -2px;
+  z-index: 1;
+  
+  display: inline-block;
+  vertical-align: middle;
+  border-top: 2px solid $textColor;
+  border-bottom: 2px solid $textColor;
+  height: 10px;
+  width: 16px;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 0;
+    border-top: inherit;
+    
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 3px;
+    top: -2px;
+    bottom: -2px;
+    
+    width: 2px;
+    background-color: #fff;
+  }
+  
 }

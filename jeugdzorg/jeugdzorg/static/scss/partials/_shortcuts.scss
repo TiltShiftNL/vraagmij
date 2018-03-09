@@ -13,7 +13,7 @@
     display: inline-block;
     text-align: center;
     
-    font-size: 1.4rem;
+    font-size: $fontSmallSize;
     
     border: 1px solid $lightColor;
     min-width: 1em;
@@ -36,10 +36,6 @@
       }
     }
     
-  }
-  display: none;
-  @include medium {
-    display: block;
   }
 }
 .shortcut {

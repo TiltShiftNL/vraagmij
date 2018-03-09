@@ -290,7 +290,7 @@ form.well {
   box-sizing: border-box;
   margin: 0 0 $lineHeight $padding;
   background-color: $lightColor;
-  font-size: 1.4rem;
+  font-size: $fontSmallSize;
   
   p, ul {
     margin-bottom: $padding / 2;

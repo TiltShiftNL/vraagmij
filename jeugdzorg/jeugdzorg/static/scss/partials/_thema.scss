@@ -1,7 +1,65 @@
 .themas {
-
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: $lineHeight;
+  padding: 0;
 }
 
 .thema {
+  position: relative;
+  padding: 2rem;
+  border: 1px solid $borderColor;
+  margin-bottom: $lineHeight;
+}
+.thema-titel {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: -2rem -2rem 2rem -2rem;
+  padding: 1.6rem 2rem;
+  background-color: $lightColor;
+}
+.thema-meta {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid $borderColor;
+  line-height: 1;
+  li {
+    position: relative;
+    z-index: 2;
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1rem;
+    margin: 1rem -1rem;
+    
+    transition: all .3s;
+    &:hover {
+      background-color: rgba($textColor, .05);
+    }
+  }
+  .thema-link {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 
+    font-size: 0;
+    
+    
+    a {
+      margin: 0;
+      display: block;
+      height: 100%;
+      padding: 0;
+    }
+  }
+  .thema & {
+    margin-bottom: -2rem;
+  }
+  
 }

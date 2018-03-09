@@ -1,24 +1,11 @@
 <div class="container">
-
-    {% regroup thema_list by first_letter as title_list %}
-    <ul class="shortcuts">
-        {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
-            <li><a href="#themas-{{ letter }}" data-decorator="scroll" data-counter="click.themas.alfabet.{{ letter }}">{{ letter }}</a></li>
+    <h1 class="visually-hidden">Thema's</h1>
+    <ul class="themas cards">
+        {% for thema in thema_list %}
+            <li>
+                {% include 'snippets/thema.html' %}
+            </li>
         {% endfor %}
     </ul>
-    
-    <div class="columns">
-
-        {% for titel in title_list %}
-            <div class="group">
-                <h2 class="shortcut" id="themas-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-                <ul class="themas">
-                    {% for thema in titel.list %}
-                        <li><a href="{% url 'detail_thema' thema.slug %}" data-counter="click.themas.thema.{{ thema.slug }}">{{ thema.titel }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
-    </div>
 
 </div>

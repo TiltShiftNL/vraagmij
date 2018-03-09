@@ -8,7 +8,7 @@
     <a href="{% if request.META.HTTP_HOST|add:'/regelingen/' in request.META.HTTP_REFERER or request.META.HTTP_HOST|add:'/thema/' in request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'regelingen' %}{% endif %}" data-counter="click.regeling.back"><i class="icon-arrow-left"></i> Regelingen overzicht</a>
   </p>
   
-  <article class="regeling" id="regeling-{{ regeling.id }}">
+  <article class="regeling-detail" id="regeling-{{ regeling.id }}">
 
       <header class="regeling-header">
           <h1 class="regeling-title">
@@ -29,7 +29,7 @@
 
       <div class="regeling-details">
           {% if regeling.voorwaarde_set.all %}
-              <ol class="regeling-voorwaarden" data-decorator="progress" data-regeling-id="{{ regeling.id }}">
+              <ol class="regeling-voorwaarden" data-decorator="progress" data-regeling-id="{{ regeling.id }}" id="voorwaarden">
                   {% for vw in regeling.voorwaarde_set.all %}
                       <li data-voorwaarde-id="{{ vw.id }}" data-counter="mouseover.detail.voorwaarde.{{ vw.id }} mouseout.detail.voorwaarde.{{ vw.id }}">{{ vw.titel }}</li>
                   {% endfor %}

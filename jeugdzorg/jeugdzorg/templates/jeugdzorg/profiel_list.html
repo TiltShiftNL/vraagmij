@@ -5,6 +5,7 @@
         <li><a{% if request.GET.beeld == 'alfabet' or not request.GET.beeld %} class="active"{% endif %} href=".?beeld=alfabet">A-Z</a></li>
         <li><a{% if request.GET.beeld == 'thema' %} class="active"{% endif %} href=".?beeld=thema">Thema</a></li>
         <li><a{% if request.GET.beeld == 'organisatie' %} class="active"{% endif %} href=".?beeld=organisatie">Organisatie</a></li>
+        <li><a{% if request.GET.beeld == 'gebied' %} class="active"{% endif %} href=".?beeld=gebied">Gebied</a></li>
     </ul>
 {% endblock %}
 

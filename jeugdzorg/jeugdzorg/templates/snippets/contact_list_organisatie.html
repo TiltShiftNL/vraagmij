@@ -1,5 +1,5 @@
 <div class="container">
-    <ul class="shortcuts">
+    <ul class="shortcuts medium-show">
 
         {% for organisatie in organisaties %}
             {% if organisatie.profiel_set.all %}
@@ -9,38 +9,25 @@
         <li><a href="#organisatie-overige" data-decorator="scroll" data-counter="click.list.organisatie.overige">Overige</a></li>
     </ul>
 
-
-    <div class="columns">
-        {% for organisatie in organisaties %}
-            {% if organisatie.profiel_set.all %}
-                <div class="group">
-                    <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</h2>
-            
-                    <ul class="contacten">
-                        {% for contact in organisatie.profiel_set.all %}
-                            <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                              {{ contact.achternaam }}, {{ contact.voornaam }} <em>{{ contact.rol }}</em>
-                            </a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-
-        {% endfor %}
-
-        <div class="group">
-            <h2 class="shortcut" id="thema-overige">Overige</h2>
-            <ul class="contacten">
-                {% for contact in profiel_list %}
-                    {% if not contact.organisatie_lijst.all %}
-                        <li><a href="{% url 'detail_contact' contact.id %}" data-counter="click.list.contact.{{ contact.id }}">
-                          {{ contact.achternaam }}, {{ contact.voornaam }}
-                        </a></li>
-                    {% endif %}
+    {% for organisatie in organisaties %}
+        {% if organisatie.profiel_set.all %}
+            <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</h2>
+            <ul class="contacten cards">
+                {% for contact in organisatie.profiel_set.all %}
+                    <li>{% include 'snippets/contact.html' with item=contact  %}</li>
                 {% endfor %}
             </ul>
-        </div>
-        
-    </div>
+        {% endif %}
+
+    {% endfor %}
+
+    <h2 class="shortcut" id="thema-overige">Overige</h2>
+    <ul class="contacten cards">
+        {% for contact in profiel_list %}
+            {% if not contact.organisatie_lijst.all %}
+                <li>{% include 'snippets/contact.html' with item=contact %}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
 </div>

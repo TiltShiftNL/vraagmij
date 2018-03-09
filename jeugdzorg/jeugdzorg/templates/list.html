@@ -3,10 +3,10 @@
 {% block main %}
 
 <header class="container">
-    <ul class="tabs tabs-center tabs-heavy">
+    <ul class="tabs">
         <li><a{% if request.path == '/themas/'  %} class="active"{% endif %} data-counter="click.homepage.tab.themas" href="{% url 'themas' %}">Thema's</a></li>
-        <li><a{% if request.path == '/regelingen/' or request.path == '/' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}">Regelingen</a></li>
         <li><a{% if request.path == '/contacten/' %} class="active"{% endif %} data-counter="click.homepage.tab.contacten" href="{% url 'contacten' %}">Contacten</a></li>
+        <li><a{% if request.path == '/regelingen/' or request.path == '/' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}">Regelingen</a></li>
     </ul>
     {% block sort_options %}<div class="sort"></div>{% endblock %}
 </header>
