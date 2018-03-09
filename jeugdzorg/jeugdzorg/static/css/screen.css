@@ -960,7 +960,7 @@ hr {
   margin-bottom: 0; }
 .regeling .icon-regeling {
   margin-right: .5em;
-  top: 2px; }
+  top: 3px; }
 .regeling .icon-regeling, .regeling .icon-regeling:before {
   border-color: #fff; }
 .regeling .icon-regeling:after {
@@ -1314,7 +1314,6 @@ hr {
 dl.contact-meta {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   overflow: hidden;
   font-size: 1.8rem; }
 dl.contact-meta dd {
