@@ -14,6 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save
+from .fields import EmailToLowerField
 
 # fs = default_storage
 # fs.container_name = 'jeugdzorg_protected'
@@ -52,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
 
-    email = models.EmailField(unique=True, null=True)
+    email = EmailToLowerField(unique=True, null=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -590,7 +591,7 @@ class Profiel(models.Model):
     class Meta:
         verbose_name = _('Profiel')
         verbose_name_plural = _("Profielen")
-        #ordering = ['achternaam', ]
+        ordering = ('achternaam', )
 
 
 class EventItem(models.Model):

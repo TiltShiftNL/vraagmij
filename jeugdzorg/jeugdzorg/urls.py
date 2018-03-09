@@ -14,11 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
+from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from .views import *
+from .forms import *
 from django.urls import re_path
 from django.views.static import serve
 
@@ -36,10 +38,11 @@ urlpatterns = [
     path('contacten/', ProfielList.as_view(), name='contacten'),
     # path('contacten/', ContactList.as_view(), name='contacten'),
     path('contact/<int:pk>/', ProfielDetail.as_view(), name='detail_contact'),
-    # path('contact/<int:pk>/', ContactDetail.as_view(), name='detail_contact'),
+    #path('contact/<int:pk>/', ContactDetail.as_view(), name='detail_contact'),
     # path('contact/<int:pk>/bewerken', ContactUpdate.as_view(), name='update_contact'),
 
-    # path('profiel/<int:pk>/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
+    #path('profiel/<int:pk>/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
+    path('contact/bewerken', ContactUpdate.as_view(), name='update_contact'),
     path('profiel/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
 
     path('login/', auth_views.login, name='login'),
@@ -51,6 +54,17 @@ urlpatterns = [
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
     path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
     path('admin/logs/', ConfigView.as_view(), name='logs'),
+
+    url('^', include('django.contrib.auth.urls')),
+    url(r'^herstel_wachtwoord/$',
+        auth_views.password_reset,
+        {
+            'template_name': 'registration/reset_password.html',
+            'password_reset_form': MailAPIPasswordResetForm,
+        },
+    ),
+    url(r'^herstel_wachtwoord/klaar/$', auth_views.password_reset_done),
+    url(r'^herstel/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', auth_views.password_reset_confirm),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

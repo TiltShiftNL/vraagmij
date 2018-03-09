@@ -100,15 +100,20 @@
       <fieldset>
         <legend>Thema's</legend>
         <div class="row">
-            {% if profiel.forms.0.themas %}
-                {{ profiel.forms.0.themas.management_form }}
-                {{ profiel.forms.0.themas.non_form_errors }}
-
-                {% for nested_form in profiel.forms.0.themas.forms %}
-                    {{ nested_form }}
-                {% endfor %}
-
-            {% endif %}
+            {{ profiel.forms.0.thema_lijst }}
+{#            {{ profiel.forms.0.themas }}#}
+{#            {% if profiel.forms.0.themas %}#}
+{#                <ul class="choices default-inline">#}
+{#                {{ profiel.forms.0.themas.management_form }}#}
+{#                {{ profiel.forms.0.themas.non_form_errors }}#}
+{#                <li>#}
+{##}
+{#                {% for nested_form in profiel.forms.0.themas.forms %}#}
+{#                    {{ nested_form }}#}
+{#                {% endfor %}#}
+{#                </li>#}
+{#                </ul>#}
+{#            {% endif %}#}
         </div>
       </fieldset>
       <p class="buttons right">
