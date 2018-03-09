@@ -469,6 +469,8 @@ body {
 .nav-login .icon-avatar {
   top: -.2em;
   margin: 0 .2em; }
+.nav-login a {
+  text-decoration: none; }
 
 .nav {
   position: relative;
@@ -706,6 +708,7 @@ form .row {
 form .group {
   display: flex; }
 form .group label {
+  position: relative;
   margin-right: 1em; }
 form .group label:last-child {
   margin-right: 0; }
