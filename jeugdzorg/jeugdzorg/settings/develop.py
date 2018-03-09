@@ -7,9 +7,6 @@ DEBUG = True
 # ]
 
 MEDIA_ROOT = '/opt/file_upload/'
-print(MEDIA_ROOT)
-print(BASE_DIR)
-
 
 try:
     from .local import *

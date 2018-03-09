@@ -116,6 +116,18 @@
 {#            {% endif %}#}
         </div>
       </fieldset>
+      <fieldset>
+        <legend>Regelingen</legend>
+        <div class="row">
+            {{ profiel.forms.0.regeling_lijst }}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Mijn organisatie</legend>
+        <div class="row">
+            {{ profiel.forms.0.organisatie_lijst }}
+        </div>
+      </fieldset>
       <p class="buttons right">
         <button type="submit" class="button">Opslaan</button>
         <a href="{{ request.META.HTTP_REFERER }}">Annuleren</a>

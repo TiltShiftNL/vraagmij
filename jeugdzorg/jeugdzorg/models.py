@@ -516,6 +516,11 @@ class ContactNaarThema(models.Model):
 
 
 class Profiel(models.Model):
+    zichtbaar = models.BooleanField(
+        verbose_name=_('Zichtbaar'),
+        help_text=_('Haal het vinkje, als je wil dat dit profiel onzichtbaar is voor andere.'),
+        default=True,
+    )
     gebruiker = models.OneToOneField(
         to='jeugdzorg.User',
         on_delete=models.SET_NULL,
