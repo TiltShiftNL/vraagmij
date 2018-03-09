@@ -38,11 +38,11 @@ echo "Add cron jobs"
 # python manage.py crontab add
 # python manage.py crontab show
 
-echo "START Create initial migrations"
-python manage.py clear_db_migrations
-python manage.py migrate --fake
-python manage.py migrate --fake-initial
-echo "END Create initial migrations"
+# echo "START Create initial migrations"
+# python manage.py clear_db_migrations
+# python manage.py migrate --fake
+# python manage.py migrate --fake-initial
+# echo "END Create initial migrations"
 
 # Apply database migrations
 echo "Apply database migrations"
