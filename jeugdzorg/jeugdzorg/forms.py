@@ -229,11 +229,13 @@ UserFormSet = forms.inlineformset_factory(
     User,
     Profiel,
     fields=(
+        'zichtbaar',
         'pasfoto',
         'voornaam',
         'tussenvoegsel',
         'achternaam',
         'functie',
+        'vaardigheden',
         'email',
         'telefoonnummer',
         'organisatie_lijst',

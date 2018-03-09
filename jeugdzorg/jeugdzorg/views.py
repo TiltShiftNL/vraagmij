@@ -116,6 +116,7 @@ class ContactList(ListView):
 
 class ProfielList(UserPassesTestMixin, ListView):
     model = Profiel
+    queryset = Profiel.is_zichtbaar.all()
 
     def test_func(self):
         return auth_test(self.request.user, 'viewer')
@@ -141,6 +142,7 @@ class ContactDetail(DetailView):
 
 class ProfielDetail(UserPassesTestMixin, DetailView):
     model = Profiel
+    queryset = Profiel.is_zichtbaar.all()
 
     def test_func(self):
         return auth_test(self.request.user, 'viewer')

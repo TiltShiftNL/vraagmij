@@ -29,7 +29,7 @@
 
   </article>
   
-  {% if object.profiel_set.all %}
+  {% if object.profielen_zichtbaar %}
 
       <hr>
 
@@ -47,9 +47,9 @@
           </p>
           {% if request.user|has_group:"viewer" %}
               <ul class="contacten">
-                  {% for contact in object.profiel_set.all %}
+                  {% for contact in object.profielen_zichtbaar %}
                       <li>
-                          {% include "snippets/contact.html" with item=contact %}
+                          {% include "snippets/contact.html" with item=contact.profiel %}
                       </li>
                   {% endfor %}
               </ul>

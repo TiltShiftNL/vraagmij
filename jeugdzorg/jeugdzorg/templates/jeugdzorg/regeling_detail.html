@@ -39,8 +39,7 @@
       </div>
     
       <div class="regelingen-acties">
-    
-      {% if regeling.profiel_set.all %}
+      {% if regeling.profielen_zichtbaar %}
           <div class="contacten-container">
 
               <h2>Contacten</h2>
@@ -56,9 +55,9 @@
               {% if request.user|has_group:"viewer" %}
               <div class="regeling-contacten">
                   <ul class="contacten">
-                      {% for contact in regeling.profiel_set.all %}
+                      {% for contact in regeling.profielen_zichtbaar %}
                           <li>
-                              {% include "snippets/contact.html" with item=contact %}
+                              {% include "snippets/contact.html" with item=contact.profiel %}
                           </li>
                       {% endfor %}
                   </ul>

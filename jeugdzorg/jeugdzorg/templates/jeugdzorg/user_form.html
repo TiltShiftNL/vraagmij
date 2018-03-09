@@ -47,6 +47,12 @@
           
           <p class="row">
               <label>
+                  {{ profiel.forms.0.zichtbaar }}
+                  <strong>{{ profiel.forms.0.zichtbaar.label }}</strong>
+              </label>
+          </p>
+          <p class="row">
+              <label>
                   <strong>{{ profiel.forms.0.voornaam.label }}</strong>
                   {{ profiel.forms.0.voornaam }}
               </label>
@@ -67,6 +73,12 @@
               <label>
                   <strong>{{ profiel.forms.0.functie.label }}</strong>
                   {{ profiel.forms.0.functie }}
+              </label>
+          </p>
+          <p class="row">
+              <label>
+                  <strong>{{ profiel.forms.0.vaardigheden.label }}</strong>
+                  {{ profiel.forms.0.vaardigheden }}
               </label>
           </p>
         </div>

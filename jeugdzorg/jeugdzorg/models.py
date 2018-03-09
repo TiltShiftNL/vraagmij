@@ -162,6 +162,9 @@ class Regeling(models.Model):
         through_fields=('regeling', 'contact'),
     )
 
+    def profielen_zichtbaar(self):
+        return self.regelingnaarprofiel.filter(profiel__zichtbaar=True)
+
     def contacten(self):
         return self.contact.through.objects.filter(regeling=self)
 
@@ -257,6 +260,9 @@ class Thema(Sortable):
         through_fields=('thema', 'contact'),
     )
 
+    def profielen_zichtbaar(self):
+        return self.themanaarprofiel.filter(profiel__zichtbaar=True)
+
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''
 
@@ -279,6 +285,9 @@ class Organisatie(models.Model):
 
     def __str__(self):
         return self.naam
+
+    def profielen_zichtbaar(self):
+        return self.organisatienaarprofiel.filter(profiel__zichtbaar=True)
 
     class Meta:
         verbose_name = _('Organisatie')
@@ -515,6 +524,11 @@ class ContactNaarThema(models.Model):
         unique_together = ('contact', 'thema', )
 
 
+class ProfielIsZichtbaarManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(zichtbaar=True)
+
+
 class Profiel(models.Model):
     zichtbaar = models.BooleanField(
         verbose_name=_('Zichtbaar'),
@@ -574,6 +588,11 @@ class Profiel(models.Model):
         null=True,
         blank=True,
     )
+    vaardigheden = models.TextField(
+        verbose_name=_('Vaardigheden'),
+        null=True,
+        blank=True,
+    )
     organisatie_lijst = models.ManyToManyField(
         to='Organisatie',
         through='ProfielNaarOrganisatie',
@@ -589,6 +608,8 @@ class Profiel(models.Model):
         through='ProfielNaarRegeling',
         through_fields=('profiel', 'regeling'),
     )
+    objects = models.Manager()
+    is_zichtbaar = ProfielIsZichtbaarManager()
 
     def first_letter(self):
         return self.achternaam and self.achternaam[0].upper() or ''
