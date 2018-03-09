@@ -235,6 +235,7 @@ UserFormSet = forms.inlineformset_factory(
         'tussenvoegsel',
         'achternaam',
         'functie',
+        'vaardigheden',
         'email',
         'telefoonnummer',
         'organisatie_lijst',

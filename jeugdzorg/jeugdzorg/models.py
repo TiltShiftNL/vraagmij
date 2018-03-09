@@ -588,6 +588,11 @@ class Profiel(models.Model):
         null=True,
         blank=True,
     )
+    vaardigheden = models.TextField(
+        verbose_name=_('Vaardigheden'),
+        null=True,
+        blank=True,
+    )
     organisatie_lijst = models.ManyToManyField(
         to='Organisatie',
         through='ProfielNaarOrganisatie',
