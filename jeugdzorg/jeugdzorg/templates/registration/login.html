@@ -29,12 +29,16 @@
                 <legend>Inloggen bij RegelDingen</legend>
                 {% csrf_token %}
                 <p class="row">
-                    <label for="id_username">E-mailadres:</label>
-                    {{ form.username }}
+                    <label for="id_username">
+                        <strong>E-mailadres</strong>
+                        {{ form.username }}
+                    </label>
                 </p>
                 <p class="row">
-                    <label for="id_password">Wachtwoord:</label>
-                    {{ form.password }}
+                    <label for="id_password">
+                        <strong>Wachtwoord</strong>
+                        {{ form.password }}
+                    </label>
                 </p>
             </fieldset>
             <p class="buttons right">
