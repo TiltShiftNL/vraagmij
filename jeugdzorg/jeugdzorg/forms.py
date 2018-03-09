@@ -242,7 +242,7 @@ UserFormSet = forms.inlineformset_factory(
     ),
     #formset=BaseChildrenFormset,
     widgets={
-        'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
+        'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices choices-full'}),
         'organisatie_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
         'thema_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
     },

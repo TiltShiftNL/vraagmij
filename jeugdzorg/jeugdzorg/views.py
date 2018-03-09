@@ -322,10 +322,6 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
             data['object'] = self.object
         return data
 
-    def form_invalid(self, form):
-        print(form.errors)
-        return super().form_invalid()
-
     def form_valid(self, form):
         context = self.get_context_data()
         profiel = context['profiel']

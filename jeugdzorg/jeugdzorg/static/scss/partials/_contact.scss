@@ -18,6 +18,8 @@ dt.contact-naam + dd {
   }
 }
 .contact-avatar {
+  position: relative;
+  
   width: 100%;
   margin: 0 auto $lineHeight;
   padding: 0;
@@ -129,4 +131,53 @@ dl.contact-meta {
   a {
     text-decoration: none;
   }
+}
+
+.contact-avatar-controls {
+  font-size: 0;
+  
+  label[for*="clear"] {
+    position: absolute;
+    right: -$padding / 2;
+    top: -$padding / 2;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+
+    &:before {
+      content: '×';
+      font-size: 4rem;
+      font-weight: 700;
+    }
+  }
+  
+  input[name*="clear"]:checked ~ label {
+    color: red;
+  }
+  
+  input[type*="file"],
+  .contact-avatar-upload {
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    
+    bottom: calc(-#{$lineHeight} - 1.5em);
+    left: -$padding / 2;
+    right: -$padding / 2;
+    padding: $padding / 2;
+    
+  }
+  
+  .contact-avatar-upload {
+    opacity: 1;
+    text-align: center;
+    font-size: $fontSmallSize;
+    font-weight: bold;
+    bottom: -1.5em;
+    pointer-events: none;
+  }
+  
+  
+  
 }

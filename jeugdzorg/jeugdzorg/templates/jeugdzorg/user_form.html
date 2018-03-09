@@ -24,14 +24,27 @@
         <legend>Persoonsgegevens</legend>
         <div class="form-aside">
 
-          <span class="contact-avatar{% if not profiel.forms.0.pasfoto.value %} no-avatar{% endif %}"{% if profiel.forms.0.pasfoto.value %}style="background-image: url({{ profiel.forms.0.pasfoto.value.url }})"{% endif %}></span>
-            {{ profiel.forms.0.pasfoto }}
+          <div class="contact-avatar">
+            <span class="icon-avatar" {% if profiel.forms.0.pasfoto.value %}style="background-image: url('{{ profiel.forms.0.pasfoto.value.url }}')"{% endif %}></span>
+            
+            <div class="contact-avatar-controls">
+              {{ profiel.forms.0.pasfoto }}
+              <span class="contact-avatar-upload">Foto vervangen</span>
+            </div>
+            
+          </div>
+
+            
         </div>
         <div class="inputs">
+          {{ form.email }}
           <p class="row">
-        Login e-mailadres: {{ form.email.value }}<br>
-        {{ form.email }}
+              <label>
+                  <strong>Inlognaam</strong>
+                  <input type="email" readonly value="{{ form.email.value }}">
+              </label>
           </p>
+          
           <p class="row">
               <label>
                   <strong>{{ profiel.forms.0.voornaam.label }}</strong>
