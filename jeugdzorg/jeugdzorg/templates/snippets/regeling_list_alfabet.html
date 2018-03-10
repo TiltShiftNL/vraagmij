@@ -7,14 +7,32 @@
         {% endfor %}
     </ul>
     
-    <ul class="regelingen cards">
-    {% for titel in title_list %}
-          {% for regeling in titel.list %}
-              <li{% if forloop.first %} data-shortcut="{{ titel.grouper }}" id="regelingen-{{ titel.grouper }}"{% endif %}>
-              {% include 'snippets/regeling.html' %}
-              </li>
-          {% endfor %}
-    {% endfor %}
-    </ul>
+    {% if ordening == 'aflopend' %}
+    
+        {% for titel in title_list reversed %}
+          <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+          <ul class="regelingen cards">
+            {% for regeling in titel.list reversed %}
+                <li>
+                    {% include 'snippets/regeling.html' %}
+                </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+    
+    {% else %}
+    
+        {% for titel in title_list %}
+          <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+          <ul class="regelingen cards">
+            {% for regeling in titel.list %}
+                <li>
+                    {% include 'snippets/regeling.html' %}
+                </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+    
+    {% endif %}
 
 </div>

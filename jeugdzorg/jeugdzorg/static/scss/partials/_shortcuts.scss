@@ -39,6 +39,15 @@
   }
 }
 .shortcut {
-  padding-top: $lineHeight;
-  line-height: $lineHeight;
+  font-size: $lineHeight;
+  line-height: 1;
+  padding: $lineHeight 0 $lineHeight/2 0;
+  border-bottom: 1px solid $borderColor;
+  margin-bottom: $lineHeight;
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

@@ -87,6 +87,8 @@
   border-radius: 50%;
   overflow: hidden;
   background-color: #d8d8d8;
+  
+  transition: all .3s;
 
   
   &:before, &:after {
@@ -191,29 +193,51 @@
 .icon-sort-desc,
 .icon-sort-asc {
   position: relative;
+  z-index: 1;
+  
+  width: 7px;
+  height: 1em;
+  margin-top: -.5em;
+
   display: inline-block;
   vertical-align: middle;
   
-  text-align: center;
-  line-height: .5em;
-  
-  width: .5em;
-  height: .5em;
-  
-  font-family: "arial";
-  font-weight: bold;
-  font-size: 2rem;
+  &:before, &:after {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    
+    border-radius: 2px;
+  }
   
   &:before {
-    content: '↓';
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 6px;
+    height: 6px;
+    transform: rotate(135deg);
+    border-top: 2px solid $textColor;
+    border-right: 2px solid $textColor;
+    
   }
+  
+  &:after {
+    left: 3px;
+    height: .7em;
+    border-left: 2px solid $textColor;
+  }
+  
 
 }
-.icon-sort-asc {
-  &:before {
-    content: '↑';
-  }
 
+.icon-sort-asc {
+  margin-bottom: -.5em;
+  transform: rotate(180deg);
 }
 
 .icon-view-normaal,

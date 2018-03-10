@@ -270,7 +270,8 @@ body {
   height: 3.0rem;
   border-radius: 50%;
   overflow: hidden;
-  background-color: #d8d8d8; }
+  background-color: #d8d8d8;
+  transition: all .3s; }
 .icon-avatar:before, .icon-avatar:after {
   content: '';
   position: absolute;
@@ -352,20 +353,36 @@ body {
 
 .icon-sort-desc, .icon-sort-asc {
   position: relative;
+  z-index: 1;
+  width: 7px;
+  height: 1em;
+  margin-top: -.5em;
   display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  line-height: .5em;
-  width: .5em;
-  height: .5em;
-  font-family: "arial";
-  font-weight: bold;
-  font-size: 2rem; }
+  vertical-align: middle; }
+.icon-sort-desc:before, .icon-sort-desc:after, .icon-sort-asc:before, .icon-sort-asc:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 2px; }
 .icon-sort-desc:before, .icon-sort-asc:before {
-  content: '↓'; }
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  transform: rotate(135deg);
+  border-top: 2px solid #333;
+  border-right: 2px solid #333; }
+.icon-sort-desc:after, .icon-sort-asc:after {
+  left: 3px;
+  height: .7em;
+  border-left: 2px solid #333; }
 
-.icon-sort-asc:before {
-  content: '↑'; }
+.icon-sort-asc {
+  margin-bottom: -.5em;
+  transform: rotate(180deg); }
 
 .icon-view-normaal, .icon-view-compact {
   position: relative;
@@ -880,8 +897,15 @@ form.well .choices strong {
   border-color: #f5f5f5; }
 
 .shortcut {
-  padding-top: 2.2rem;
-  line-height: 2.2rem; }
+  font-size: 2.2rem;
+  line-height: 1;
+  padding: 2.2rem 0 1.1rem 0;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 2.2rem; }
+.shortcut a {
+  text-decoration: none; }
+.shortcut a:hover {
+  text-decoration: underline; }
 
 .tabs {
   display: flex;
@@ -954,7 +978,8 @@ form.well .choices strong {
   background-color: rgba(51, 51, 51, 0.1); }
 .sort i {
   display: none;
-  top: -2px; }
+  margin-left: .5em;
+  margin-right: .5em; }
 .sort .active i {
   display: inline-block; }
 
@@ -1027,6 +1052,7 @@ hr {
 .cards > * {
   box-sizing: border-box;
   padding-right: 2.2rem;
+  margin-bottom: 2.2rem;
   flex-basis: 33.33%; }
 @media (max-width: 1290px) {
   .cards > * {
@@ -1035,23 +1061,22 @@ hr {
   .cards > * {
     flex-basis: 100%; } }
 
-.shortcut {
-  font-size: 2.2rem;
-  line-height: 1;
-  padding: 2.2rem 0 0 0;
-  margin: 0 0 .4em 0; }
-
 .regelingen {
   list-style: none;
   margin-left: 0;
-  margin-bottom: 2.2rem;
   padding: 0; }
+.regelingen .regeling {
+  height: 100%;
+  margin-bottom: 0; }
 
 .regeling {
   position: relative;
   padding: 2rem;
+  box-sizing: border-box;
   border: 1px solid #e2e2e2;
-  margin-bottom: 2.2rem; }
+  margin-bottom: 2.2rem;
+  display: flex;
+  flex-flow: column; }
 .regeling .regeling-titel {
   background-color: #4c4c4c;
   font-size: 1.6rem;
@@ -1062,7 +1087,8 @@ hr {
   color: #fff;
   display: flex; }
 .regeling .regeling-samenvatting {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  flex-basis: 100%; }
 .regeling .icon-regeling {
   margin-right: .5em;
   top: 3px; }
@@ -1372,6 +1398,9 @@ hr {
   margin-left: 0;
   margin-bottom: 2.2rem;
   padding: 0; }
+.contacten .contact {
+  margin-bottom: 0;
+  height: 100%; }
 
 .contact-naam strong:after, dt.contact-naam + dd strong:after {
   content: ', '; }
@@ -1395,7 +1424,8 @@ hr {
 
 .contact {
   position: relative;
-  padding: 2rem 2rem;
+  padding: 2rem;
+  box-sizing: border-box;
   background-color: #f7f7f7;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
 .contact dt.contact-naam {
@@ -1490,12 +1520,18 @@ dl.contact-meta a {
   margin-left: 0;
   margin-bottom: 2.2rem;
   padding: 0; }
+.themas .thema {
+  margin-bottom: 0;
+  height: 100%; }
 
 .thema {
   position: relative;
   padding: 2rem;
+  box-sizing: border-box;
   border: 1px solid #e2e2e2;
-  margin-bottom: 2.2rem; }
+  margin-bottom: 2.2rem;
+  display: flex;
+  flex-flow: column; }
 
 .thema-titel {
   font-size: 2.4rem;
@@ -1503,6 +1539,9 @@ dl.contact-meta a {
   margin: -2rem -2rem 2rem -2rem;
   padding: 1.6rem 2rem;
   background-color: #f5f5f5; }
+
+.thema-samenvatting {
+  flex-basis: 100%; }
 
 .thema-meta {
   display: flex;

@@ -3,13 +3,22 @@
   margin-left: 0;
   margin-bottom: $lineHeight;
   padding: 0;
+  .thema {
+    margin-bottom: 0;
+    height: 100%;
+  }
 }
 
 .thema {
   position: relative;
   padding: 2rem;
+  box-sizing: border-box;
+  
   border: 1px solid $borderColor;
   margin-bottom: $lineHeight;
+  
+  display: flex;
+  flex-flow: column;
 }
 .thema-titel {
   font-size: 2.4rem;
@@ -17,6 +26,9 @@
   margin: -2rem -2rem 2rem -2rem;
   padding: 1.6rem 2rem;
   background-color: $lightColor;
+}
+.thema-samenvatting {
+  flex-basis: 100%;
 }
 .thema-meta {
   display: flex;

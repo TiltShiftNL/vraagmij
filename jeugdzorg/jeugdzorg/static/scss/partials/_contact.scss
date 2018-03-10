@@ -3,6 +3,10 @@
   margin-left: 0;
   margin-bottom: $lineHeight;
   padding: 0;
+  .contact {
+    margin-bottom: 0;
+    height: 100%;
+  }
 }
 .contact-naam,
 dt.contact-naam + dd {
@@ -47,7 +51,8 @@ dt.contact-naam + dd {
   
   position: relative;
   
-  padding: 2rem 2rem;
+  padding: 2rem;
+  box-sizing: border-box;
   background-color: #f7f7f7;
   box-shadow: 0 2px 5px 0 rgba(#000, .2);
   

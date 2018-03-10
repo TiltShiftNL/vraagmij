@@ -124,6 +124,7 @@ class ProfielList(UserPassesTestMixin, ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['beeld'] = self.request.GET.get('beeld', 'alfabet')
+        data['ordening'] = self.request.GET.get('ordening', 'oplopend')
 
         data['themas'] = Thema.objects.all
         data['organisaties'] = Organisatie.objects.all

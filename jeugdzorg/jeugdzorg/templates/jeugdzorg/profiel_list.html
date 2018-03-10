@@ -1,12 +1,28 @@
 {% extends 'list.html' %}
 
 {% block sort_options %}
-    <ul class="sort">
-        <li><a{% if request.GET.beeld == 'alfabet' or not request.GET.beeld %} class="active"{% endif %} href=".?beeld=alfabet">A-Z</a></li>
-        <li><a{% if request.GET.beeld == 'thema' %} class="active"{% endif %} href=".?beeld=thema">Thema</a></li>
-        <li><a{% if request.GET.beeld == 'organisatie' %} class="active"{% endif %} href=".?beeld=organisatie">Organisatie</a></li>
-        <li><a{% if request.GET.beeld == 'gebied' %} class="active"{% endif %} href=".?beeld=gebied">Gebied</a></li>
-    </ul>
+    <div class="sort-container">
+      <span class="sort-label">Sortering</span>
+
+        <ul class="sort">
+            <li>
+              <a{% if beeld == 'alfabet' %} class="active"{% endif %} href=".?beeld=alfabet{% if beeld == 'alfabet' and ordening != 'aflopend' %}&amp;ordening=aflopend{% endif %}">alfabetisch <i class="icon-sort-{% if ordening == 'aflopend' %}desc{% else %}asc{% endif %}"></i></a>
+            </li>
+            <li><a{% if request.GET.beeld == 'thema' %} class="active"{% endif %} href=".?beeld=thema">thema</a></li>
+            <li>
+              <a{% if beeld == 'organisatie' %} class="active"{% endif %} href=".?beeld=organisatie{% if beeld == 'organisatie' and ordening != 'aflopend' %}&amp;ordening=aflopend{% endif %}">organisatie <i class="icon-sort-{% if ordening == 'aflopend' %}desc{% else %}asc{% endif %}"></i></a>
+            </li>
+            <li><a{% if request.GET.beeld == 'gebied' %} class="active"{% endif %} href=".?beeld=gebied">gebied</a></li>
+        </ul>
+
+      <span class="sort-label">Weergave</span>
+      <ul class="sort-view">
+        <li><a href="#" class="active" title="Normaal"><i class="icon-view-normaal"></i></a></li>
+        <li><a href="#" title="Compact"><i class="icon-view-compact"></i></a></li>
+      </ul>
+
+    </div>
+
 {% endblock %}
 
 {% block main %}

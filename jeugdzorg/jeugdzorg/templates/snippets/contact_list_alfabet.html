@@ -1,23 +1,38 @@
 <div class="container">
-  
-    <h1 class="visually-hidden">Contacten</h1>
 
     {% regroup profiel_list by first_letter as title_list %}
     <ul class="shortcuts medium-show">
         {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
-            <li><a href="#contact-{{ letter }}" data-decorator="scroll" data-counter="click.contacten.alfabet.{{ letter }}">{{ letter }}</a></li>
+            <li><a href="#profiel-{{ letter }}" data-decorator="scroll">{{ letter }}</a></li>
         {% endfor %}
     </ul>
     
-    <ul class="contacten cards">
-        {% for titel in title_list %}
-            <li class="shortcut medium-show" id="contacten-{{ titel.grouper }}">{{ titel.grouper }}</li>
-            {% for contact in titel.list %}
+    {% if ordening == 'aflopend' %}
+    
+        {% for titel in title_list reversed %}
+          <h2 class="shortcut" id="profiel-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+          <ul class="contacten cards">
+            {% for profiel in titel.list reversed %}
                 <li>
-                    {% include 'snippets/contact.html' with item=contact %}
+                    {% include 'snippets/contact.html' with item=profiel %}
                 </li>
             {% endfor %}
+          </ul>
         {% endfor %}
-    </ul>
+    
+    {% else %}
+    
+        {% for titel in title_list %}
+          <h2 class="shortcut" id="profiel-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+          <ul class="contacten cards">
+            {% for profiel in titel.list %}
+                <li>
+                    {% include 'snippets/contact.html' with item=profiel %}
+                </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+    
+    {% endif %}
 
 </div>

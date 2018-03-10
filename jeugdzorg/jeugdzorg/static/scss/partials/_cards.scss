@@ -5,6 +5,7 @@
   > * {
     box-sizing: border-box;
     padding-right: $lineHeight;
+    margin-bottom: $lineHeight;
     flex-basis: 33.33%;
     @include large {
       flex-basis: 50;

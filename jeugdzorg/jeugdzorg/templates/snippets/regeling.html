@@ -1,16 +1,15 @@
 <div class="regeling">
   
   <h2 class="regeling-titel"><i class="icon-regeling"></i> {{ regeling.titel }}</h2>
-  {% if regeling.samenvatting %}
-      <div class="regeling-samenvatting">
-          <p>{{ regeling.samenvatting|truncatewords_html:20 }}</p>
-      </div>
-  {% endif %}
+  <div class="regeling-samenvatting">
+      <p>{{ regeling.samenvatting|truncatechars_html:100 }}</p>
+  </div>
 
   <ul class="regeling-meta">
-    {% if regeling.voorwaarde_set.all %}
-        <li><a href="{% url 'detail_regeling' regeling.id %}#voorwaarden"><strong>{{ regeling.voorwaarde_set.all|length }}</strong> voorwaarde{% if regeling.voorwaarde_set.all|length != 1 %}n{% endif %}</a></li>
-    {% endif %}
+      <li><a href="{% url 'detail_regeling' regeling.id %}#voorwaarden"><strong>{{ regeling.voorwaarde_set.all|length }}</strong> voorwaarde{% if regeling.voorwaarde_set.all|length != 1 %}n{% endif %}</a></li>
+      {% if regeling.profiel_set.all %}
+          <li><a href="{% url 'detail_regeling' regeling.id %}#contacten"><strong>{{ regeling.profiel_set.all|length }}</strong> contact{% if regeling.profiel_set.all|length != 1 %}en{% endif %}</a></li>
+      {% endif %}
     
     <li class="regeling-link"><a href="{% url 'detail_regeling' regeling.id %}">Meer details</a>
   </ul>

@@ -1,22 +1,24 @@
-.shortcut {
-  font-size: $lineHeight;
-  line-height: 1;
-  padding: $lineHeight 0 0 0;
-  margin: 0 0 .4em 0;
-}
-
 .regelingen {
   list-style: none;
   margin-left: 0;
-  margin-bottom: $lineHeight;
+  
   padding: 0;
+  .regeling {
+    height: 100%;
+    margin-bottom: 0;
+  }
 }
 
 .regeling {
   position: relative;
   padding: 2rem;
+  box-sizing: border-box;
   border: 1px solid $borderColor;
   margin-bottom: $lineHeight;
+  
+  display: flex;
+  flex-flow: column;
+  
   .regeling-titel {
     background-color: #4c4c4c;
     font-size: $fontSize;
@@ -31,6 +33,7 @@
   }
   .regeling-samenvatting {
     margin-bottom: 0;
+    flex-basis: 100%;
   }
   .icon-regeling {
     margin-right: .5em;

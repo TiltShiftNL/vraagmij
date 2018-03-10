@@ -1,11 +1,9 @@
 <div class="thema">
   
   <h2 class="thema-titel">{{ thema.titel }}</h2>
-  {% if thema.omschrijving %}
-      <div class="thema-samenvatting">
-          <p>{{ thema.omschrijving|truncatewords_html:20 }}</p>
-      </div>
-  {% endif %}
+  <div class="thema-samenvatting">
+      <p>{{ thema.omschrijving|truncatechars_html:100 }}</p>
+  </div>
 
   <ul class="thema-meta">
     {% if thema.regeling_set.all %}
