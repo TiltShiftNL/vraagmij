@@ -1467,6 +1467,8 @@ dl.contact-meta a {
   font-weight: 700; }
 .contact-avatar-controls input[name*="clear"]:checked ~ label {
   color: red; }
+.contact-avatar-controls input[name*="clear"]:checked ~ .contact-avatar-upload, .contact-avatar-controls input[name*="clear"]:checked ~ input[type*="file"] {
+  display: none; }
 .contact-avatar-controls input[type*="file"], .contact-avatar-controls .contact-avatar-upload {
   position: absolute;
   z-index: 2;

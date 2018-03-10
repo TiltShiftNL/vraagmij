@@ -280,6 +280,35 @@
         }
       });
       
+    },
+    
+    'avatar': function(){
+      this.addEventListener('change', function(e){
+        var 
+          remove = this.querySelectorAll('[name*="clear"]'),
+          file = this.querySelectorAll('[type="file"]'),
+          avatar = this.querySelectorAll('.icon-avatar'),
+          original = this.querySelectorAll('a');
+          
+        if (!file || !avatar) return;
+        remove = remove && remove[0];
+        file = file[0];
+        avatar = avatar[0];
+        original = original && original[0];
+        
+        if (remove && remove.checked) {
+          avatar.setAttribute('style', null);
+          file.value = '';
+        } else {
+          var url = (file.value != '' ? URL.createObjectURL(e.target.files[0]) : original ? original.href : '');
+          if (url) {
+            avatar.style.backgroundImage = 'url(' + url + ')';
+          } else {
+            avatar.setAttribute('style', null);
+          }
+        }
+          
+      });
     }
 
   };

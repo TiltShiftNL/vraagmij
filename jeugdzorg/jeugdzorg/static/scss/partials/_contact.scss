@@ -155,6 +155,12 @@ dl.contact-meta {
   input[name*="clear"]:checked ~ label {
     color: red;
   }
+  input[name*="clear"]:checked ~ {
+    .contact-avatar-upload,
+    input[type*="file"] {
+      display: none;
+    }
+  }
   
   input[type*="file"],
   .contact-avatar-upload {
