@@ -173,6 +173,8 @@ dl.contact-meta {
     z-index: 2;
     opacity: 0;
     
+    cursor: pointer;
+    
     bottom: calc(-#{$lineHeight} - 1.5em);
     left: -$padding / 2;
     right: -$padding / 2;
@@ -187,8 +189,114 @@ dl.contact-meta {
     font-weight: bold;
     bottom: -1.5em;
     pointer-events: none;
+    
+    
+  }
+}
+
+.contact-status {
+  
+  display: flex;
+  
+  line-height: 1;
+  
+  [type="checkbox"] + strong {
+    padding-left: calc(10px + 2em);
+  }
+  
+  strong {
+    background-color: rgba(red, .2);
+    padding: 10px;
+    font-weight: 700;
+    
+    margin: 10px;
+    transition: all .3s;
+    
+    &:before, &:after {
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+  }
+  
+  :checked + strong {
+    background-color: rgba(green, .8);
+    color: #fff;
+  }
+  
+  .well & {
+    position: absolute;
+    z-index: 10;
+    right: $padding;
+    top: 2.2rem;
+    @include medium {
+      position: relative;
+      right: auto;
+      top: auto;
+    }
   }
   
   
+
+  .help {
+    position: absolute;
+    right: 0;
+    top: calc(#{$fontSize} + 20px);
+    width: 300px;
+    margin-top: 4px;
+    outline: 10000px solid rgba(#000, 0);
+    &.active, &:target {
+      outline: 10000px solid rgba(#000, .2);
+    }
+  }
+
+}
+
+.contact-status-help {
+  position: relative;
+  z-index: 1;
+  display: block;
+
+  background-color: #000;
+  color: #fff;
+  width: calc(#{$fontSize} + 20px);
+  height: calc(#{$fontSize} + 20px);
+  border: 1px solid rgba(#000, .1);
+
+  font-size: 0;
+  text-align: center;
+
+  margin-left: 2px;
   
+  opacity: .4;
+  transition: all .3s;
+
+  &:before {
+    font-size: 1.4rem;
+    font-weight: bold;
+    content: '?';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    overflow: hidden;
+  }
+  &:hover {
+    opacity: 1;
+  }
+  &:hover:before {
+    background-color: #fff;
+  }
+  &.active, :target + & {
+    opacity: 1;
+    &:before {
+      content: '×';
+      color: $textColor;
+      background-color: #fff;
+    }
+  }
 }

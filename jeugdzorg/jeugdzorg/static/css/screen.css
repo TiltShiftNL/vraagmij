@@ -43,6 +43,7 @@ button::-moz-focus-inner {
   float: left; }
 
 .well {
+  position: relative;
   padding: 3rem;
   background-color: #f5f5f5;
   margin-bottom: 2.2rem;
@@ -101,6 +102,23 @@ button::-moz-focus-inner {
   outline: 5000px solid rgba(0, 0, 0, 0.2); }
 .version:hover span {
   max-width: 300px; }
+
+.help {
+  display: block;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  padding: 0 0.75rem;
+  border: 0px solid rgba(51, 51, 51, 0.4);
+  overflow: hidden;
+  max-height: 0;
+  transition: all .3s; }
+.help.active, .help:target {
+  padding: 0.75rem;
+  border-width: 1px;
+  max-height: 1000px; }
 
 html {
   font-size: 62.5%; }
@@ -1503,6 +1521,7 @@ dl.contact-meta a {
   position: absolute;
   z-index: 2;
   opacity: 0;
+  cursor: pointer;
   bottom: calc(-2.2rem - 1.5em);
   left: -1.5rem;
   right: -1.5rem;
@@ -1514,6 +1533,82 @@ dl.contact-meta a {
   font-weight: bold;
   bottom: -1.5em;
   pointer-events: none; }
+
+.contact-status {
+  display: flex;
+  line-height: 1; }
+.contact-status [type="checkbox"] + strong {
+  padding-left: calc(10px + 2em); }
+.contact-status strong {
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 10px;
+  font-weight: 700;
+  margin: 10px;
+  transition: all .3s; }
+.contact-status strong:before, .contact-status strong:after {
+  margin-left: 10px;
+  margin-top: 10px; }
+.contact-status :checked + strong {
+  background-color: rgba(0, 128, 0, 0.8);
+  color: #fff; }
+.well .contact-status {
+  position: absolute;
+  z-index: 10;
+  right: 3rem;
+  top: 2.2rem; }
+@media (max-width: 900px) {
+  .well .contact-status {
+    position: relative;
+    right: auto;
+    top: auto; } }
+.contact-status .help {
+  position: absolute;
+  right: 0;
+  top: calc(1.6rem + 20px);
+  width: 300px;
+  margin-top: 4px;
+  outline: 10000px solid transparent; }
+.contact-status .help.active, .contact-status .help:target {
+  outline: 10000px solid rgba(0, 0, 0, 0.2); }
+
+.contact-status-help {
+  position: relative;
+  z-index: 1;
+  display: block;
+  background-color: #000;
+  color: #fff;
+  width: calc(1.6rem + 20px);
+  height: calc(1.6rem + 20px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0;
+  text-align: center;
+  margin-left: 2px;
+  opacity: .4;
+  transition: all .3s; }
+.contact-status-help:before {
+  font-size: 1.4rem;
+  font-weight: bold;
+  content: '?';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.4em;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  overflow: hidden; }
+.contact-status-help:hover {
+  opacity: 1; }
+.contact-status-help:hover:before {
+  background-color: #fff; }
+.contact-status-help.active, :target + .contact-status-help {
+  opacity: 1; }
+.contact-status-help.active:before, :target + .contact-status-help:before {
+  content: '×';
+  color: #333;
+  background-color: #fff; }
 
 .themas {
   list-style: none;

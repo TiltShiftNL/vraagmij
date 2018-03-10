@@ -21,7 +21,9 @@
         {{ hidden }}
     {% endfor %}
       <fieldset>
+
         <legend>Persoonsgegevens</legend>
+        
         <div class="form-aside">
 
           <div class="contact-avatar" data-decorator="avatar">
@@ -45,12 +47,6 @@
               </label>
           </p>
           
-          <p class="row">
-              <label>
-                  {{ profiel.forms.0.zichtbaar }}
-                  <strong>{{ profiel.forms.0.zichtbaar.label }}</strong>
-              </label>
-          </p>
           <p class="row">
               <label>
                   <strong>{{ profiel.forms.0.voornaam.label }}</strong>
@@ -153,6 +149,18 @@
             {{ profiel.forms.0.organisatie_lijst }}
         </div>
       </fieldset>
+      
+      <p class="row contact-status">
+        <label>
+            {{ profiel.forms.0.zichtbaar }}
+            <strong>{{ profiel.forms.0.zichtbaar.label }}</strong>
+        </label>
+        <span class="help" id="contact-status-help">
+          Hiermee geeft u aan of u zichtbaar bent voor uw collega's zodat ze eventueel contact met u kunnen opnemen over uw vaardigheden.
+        </span>
+        <a href="#contact-status-help" data-handler="toggle" class="contact-status-help"><abbr title="Wat betekent dit?">?</abbr></a>
+      </p>
+      
       <p class="buttons right">
         <button type="submit" class="button">Opslaan</button>
         <a href="{{ request.META.HTTP_REFERER }}">Annuleren</a>

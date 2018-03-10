@@ -21,6 +21,7 @@
 }
 
 .well {
+  position: relative;
   padding: $padding;
   background-color: $lightColor;
   margin-bottom: $lineHeight;
@@ -90,6 +91,29 @@
     span {
       max-width: 300px;
     }
+  }
+  
+}
+.help {
+ 
+  display: block;
+  box-sizing: border-box;
+  
+  background-color: #fff;
+
+  color: $textColor;
+  font-size: $fontSmallSize;
+  line-height: 1.2;
+
+  padding: 0 $padding / 4;
+  border: 0px solid rgba($textColor, .4);
+  overflow: hidden;
+  max-height: 0;
+  transition: all .3s;
+  &.active, &:target {
+    padding: $padding / 4;
+    border-width: 1px;
+    max-height: 1000px
   }
   
 }
