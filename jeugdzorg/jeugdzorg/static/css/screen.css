@@ -64,6 +64,11 @@ button::-moz-focus-inner {
 .hidden, .js .js-hidden {
   display: none !important; }
 
+.js-show {
+  display: none; }
+.js .js-show {
+  display: initial; }
+
 @media (max-width: 700px) {
   .small-hide {
     display: none !important; } }
@@ -983,6 +988,8 @@ form.well .choices strong {
   line-height: 1;
   display: flex;
   font-size: 1.4rem; }
+.sort li, .sort-view li {
+  display: inline; }
 
 .sort a {
   text-decoration: none;
@@ -1001,8 +1008,11 @@ form.well .choices strong {
 .sort .active i {
   display: inline-block; }
 
+.sort-view {
+  font-size: 0; }
 .sort-view a {
   display: inline-block;
+  font-size: 1.4rem;
   text-decoration: none;
   color: #333;
   padding: .5em .5em;
@@ -1011,19 +1021,24 @@ form.well .choices strong {
   transition: background-color .3s; }
 .sort-view a:hover {
   background-color: rgba(51, 51, 51, 0.2); }
-.sort-view a.active {
-  background-color: rgba(51, 51, 51, 0.8);
-  color: #fff; }
 .sort-view i {
   margin-top: -10px;
   margin-bottom: -10px;
   top: -2px; }
-.sort-view .active .icon-view-normaal {
+
+[data-view="normaal"] .sort-view [href="#normaal"] {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff; }
+[data-view="normaal"] .sort-view [href="#normaal"] .icon-view-normaal {
   border-color: #fff; }
-.sort-view .active .icon-view-normaal:before, .sort-view .active .icon-view-normaal:after {
+[data-view="normaal"] .sort-view [href="#normaal"] .icon-view-normaal:before, [data-view="normaal"] .sort-view [href="#normaal"] .icon-view-normaal:after {
   background-color: #fff; }
-.sort-view .active .icon-view-compact, .sort-view .active .icon-view-compact:before, .sort-view .active .icon-view-compact:after {
-  background-color: #fff; }
+
+[data-view="compact"] .sort-view [href="#compact"] {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff; }
+[data-view="compact"] .sort-view [href="#compact"] .icon-view-compact, [data-view="compact"] .sort-view [href="#compact"] .icon-view-compact:before, [data-view="compact"] .sort-view [href="#compact"] .icon-view-compact:after {
+  border-color: #fff; }
 
 .sort-container {
   display: flex;
@@ -1410,6 +1425,34 @@ hr {
   border-color: #8ac640; }
 .complete-yes ~ .regeling-aanvragen .button .icon-external:after {
   outline-color: #8ac640; }
+
+[data-view="compact"] .cards {
+  display: inline; }
+[data-view="compact"] .cards li {
+  display: inline;
+  margin: 0;
+  padding: 0; }
+[data-view="compact"] .regeling {
+  padding: 0;
+  margin: 0;
+  border: none; }
+[data-view="compact"] .regeling .regeling-meta {
+  margin: 0; }
+[data-view="compact"] .regeling .regeling-samenvatting, [data-view="compact"] .regeling .regeling-meta li {
+  display: none; }
+[data-view="compact"] .regeling .regeling-meta .regeling-link {
+  display: block; }
+[data-view="compact"] .regeling .regeling-meta .regeling-link:before {
+  display: none; }
+[data-view="compact"] .regeling .regeling-titel {
+  color: #333;
+  display: block;
+  padding: 0 0 .5em 0;
+  margin: 0;
+  background-color: transparent;
+  font-size: 1.6rem; }
+[data-view="compact"] .regeling .regeling-titel i {
+  display: none; }
 
 .contacten {
   list-style: none;

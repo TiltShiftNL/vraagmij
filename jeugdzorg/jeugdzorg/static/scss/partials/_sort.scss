@@ -5,6 +5,9 @@
   line-height: 1;
   display: flex;
   font-size: $fontSmallSize;
+  li {
+    display: inline;
+  }
 }
 .sort {
   a {
@@ -30,8 +33,10 @@
   }
 }
 .sort-view {
+  font-size: 0;
   a {
     display: inline-block;
+    font-size: $fontSmallSize;
     
     text-decoration: none;
     color: $textColor;
@@ -46,10 +51,6 @@
     &:hover {
       background-color: rgba($textColor, .2);
     }
-    &.active {
-      background-color: rgba($textColor, .8);
-      color: #fff;
-    }
   }
   i {
     margin-top: -10px;
@@ -57,18 +58,26 @@
     top: -2px;
   }
 
-  .active .icon-view-normaal {
+}
+[data-view="normaal"] .sort-view [href="#normaal"] {
+  background-color: rgba($textColor, .8);
+  color: #fff;
+  .icon-view-normaal {
     border-color: #fff;
     &:before, &:after {
       background-color: #fff;
     }
   }
-  .active .icon-view-compact {
+}
+
+[data-view="compact"] .sort-view [href="#compact"] {
+  background-color: rgba($textColor, .8);
+  color: #fff;
+  .icon-view-compact {
     &, &:before, &:after {
-      background-color: #fff;
+      border-color: #fff;
     }
   }
-  
 }
 
 

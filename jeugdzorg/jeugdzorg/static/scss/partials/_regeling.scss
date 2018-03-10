@@ -463,3 +463,43 @@
     }
   }
 }
+
+[data-view="compact"] {
+  .cards {
+    display: inline;
+    li {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .regeling {
+    padding: 0;
+    margin: 0;
+    border: none;
+    .regeling-meta {
+      margin: 0;
+    }
+    .regeling-samenvatting,
+    .regeling-meta li {
+      display: none;
+    }
+    .regeling-meta .regeling-link {
+      display: block;
+      &:before {
+        display: none;
+      }
+    }
+    .regeling-titel {
+      color: $textColor;
+      display: block;
+      padding: 0 0 .5em 0;
+      margin: 0;
+      background-color: transparent;
+      font-size: $fontSize;
+      i {
+        display: none;
+      }
+    }
+  }
+}

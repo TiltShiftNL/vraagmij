@@ -5,7 +5,6 @@
       <span class="sort-label">Sortering</span>
       <ul class="sort">
           <li>
-
             <a{% if beeld == 'alfabet' %} class="active"{% endif %} href=".?beeld=alfabet{% if beeld == 'alfabet' and ordening != 'aflopend' %}&amp;ordening=aflopend{% endif %}">alfabetisch <i class="icon-sort-{% if ordening == 'aflopend' %}desc{% else %}asc{% endif %}"></i></a>
           </li>
           <li>
@@ -13,10 +12,10 @@
           </li>
           <!-- <li><a{% if beeld == 'aanbieder' %} class="active"{% endif %} href=".?beeld=aanbieder">Aanbieder</a></li> -->
       </ul>
-      <span class="sort-label">Weergave</span>
-      <ul class="sort-view">
-        <li><a href="#" class="active" title="Normaal"><i class="icon-view-normaal"></i></a></li>
-        <li><a href="#" title="Compact"><i class="icon-view-compact"></i></a></li>
+      <span class="sort-label js-show">Weergave</span>
+      <ul class="sort-view js-show" data-decorator="view">
+        <li><a href="#normaal" title="Normaal"><i class="icon-view-normaal"></i></a></li>
+        <li><a href="#compact" title="Compact"><i class="icon-view-compact"></i></a></li>
       </ul>
     </div>
 {% endblock %}

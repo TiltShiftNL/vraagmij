@@ -44,6 +44,12 @@
 .js .js-hidden {
   display: none !important;
 }
+.js-show {
+  display: none;
+  .js & {
+    display: initial;
+  }
+}
 .small-hide {
   @include small {
     display: none !important;
