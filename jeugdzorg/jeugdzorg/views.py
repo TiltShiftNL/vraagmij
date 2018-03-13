@@ -37,7 +37,6 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-
         # sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
         # from_email = Email("info@fixxx7.com")
         # to_email = Email("mguikema@gmail.com")
@@ -48,6 +47,18 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         # print(response.status_code)
         # print(response.body)
         # print(response.headers)
+
+        mail = Mail()
+        email_template_name = 'registration/password_reset_email.html'
+        subject = 'reset email subject'
+        body = loader.render_to_string(email_template_name, data)
+        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
+
+        mail.from_email = Email('info@fixxx7.amsterdam.nl')
+        mail.reply_to = Email('mguikema@gmail.com')
+        mail.subject = subject
+        mail.add_content(Content("text/plain", body))
+        sg.client.mail.send.post(request_body=mail.get())
 
         logs = [
             ['nginx error', '/var/log/nginx/error.log'],
