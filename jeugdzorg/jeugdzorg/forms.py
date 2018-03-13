@@ -50,15 +50,15 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         mail.subject = subject
 
         mail.add_content(Content("text/plain", body))
-        mail.add_content(Content("text/html", html_body))
+        #mail.add_content(Content("text/html", html_body))
 
         #mail = Mail(from_email, subject, to_email, body)
         response = sg.client.mail.send.post(request_body=mail.get())
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        # print(response.status_code)
+        # print(response.body)
+        # print(response.headers)
 
-        pass
+        # pass
 
 
 class RegelingModelForm(forms.ModelForm):
