@@ -37,7 +37,7 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         subject = loader.render_to_string(subject_template_name, context)
         subject = ''.join(subject.splitlines())
         body = loader.render_to_string(email_template_name, context)
-        body = 'body'#loader.render_to_string(email_template_name, context)
+        #body = 'body'#loader.render_to_string(email_template_name, context)
         html_body = ''
         if html_email_template_name is not None:
             html_body = loader.render_to_string(html_email_template_name, context)
