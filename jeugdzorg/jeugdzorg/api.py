@@ -5,5 +5,6 @@ from .serializers import RegelingSerializer
 
 # ViewSets define the view behavior.
 class RegelingViewSet(viewsets.ModelViewSet):
+    permission_classes = ()
     queryset = Regeling.objects.all()
     serializer_class = RegelingSerializer

@@ -30,6 +30,7 @@ router = routers.DefaultRouter()
 router.register(r'regelingen', RegelingViewSet)
 
 urlpatterns = [
+    url(r'^api/', include(router.urls)),
     # path('', CheckUserModel.as_view(), name='test'),
     # path('', ThemaList.as_view(), name='homepage'),
     path('', RegelingList.as_view(), name='homepage'),
@@ -85,7 +86,7 @@ urlpatterns = [
         auth_views.password_reset_complete,
         name='herstel_wachtwoord_afgerond',
     ),
-    url(r'^api/', include(router.urls)),
+
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
