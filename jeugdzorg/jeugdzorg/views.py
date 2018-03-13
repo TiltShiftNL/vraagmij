@@ -50,13 +50,13 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
         mail = Mail()
         email_template_name = 'registration/password_reset_email.html'
-        subject = 'reset email subject'
+        subject = "reset email subject"
         #body = loader.render_to_string(email_template_name, data)
-        body = 'body'
+        body = "body"
         sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
 
-        mail.from_email = Email('info@fixxx7.amsterdam.nl')
-        mail.reply_to = Email('mguikema@gmail.com')
+        mail.from_email = Email("info@fixxx7.amsterdam.nl")
+        mail.reply_to = Email("mguikema@gmail.com")
         mail.subject = subject
         mail.add_content(Content("text/plain", body))
         sg.client.mail.send.post(request_body=mail.get())
