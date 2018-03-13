@@ -150,6 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'jeugdzorg.User'
+USERNAME_FIELD = 'email'
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
@@ -204,7 +205,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.authentication.SessionAuthentication',
     ]
 }
 
