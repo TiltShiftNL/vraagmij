@@ -45,7 +45,7 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         # from_email = Email(from_email)
         # to_email = Email(to_email)
 
-        mail.from_email = Email(from_email)
+        mail.from_email = Email('info@fixxx7.amsterdam.nl')
         mail.reply_to = Email(to_email)
         mail.subject = subject
 
