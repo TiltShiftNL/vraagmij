@@ -23,7 +23,7 @@
       <fieldset>
 
         <legend>Persoonsgegevens</legend>
-        
+
         <div class="form-aside">
 
           <div class="contact-avatar" data-decorator="avatar">
@@ -46,7 +46,6 @@
                   <input type="email" readonly value="{{ form.email.value }}">
               </label>
           </p>
-          
           <p class="row">
               <label>
                   <strong>{{ profiel.forms.0.voornaam.label }}</strong>
@@ -122,19 +121,6 @@
         <legend>Thema's</legend>
         <div class="row">
             {{ profiel.forms.0.thema_lijst }}
-{#            {{ profiel.forms.0.themas }}#}
-{#            {% if profiel.forms.0.themas %}#}
-{#                <ul class="choices default-inline">#}
-{#                {{ profiel.forms.0.themas.management_form }}#}
-{#                {{ profiel.forms.0.themas.non_form_errors }}#}
-{#                <li>#}
-{##}
-{#                {% for nested_form in profiel.forms.0.themas.forms %}#}
-{#                    {{ nested_form }}#}
-{#                {% endfor %}#}
-{#                </li>#}
-{#                </ul>#}
-{#            {% endif %}#}
         </div>
       </fieldset>
       <fieldset>
@@ -149,7 +135,13 @@
             {{ profiel.forms.0.organisatie_lijst }}
         </div>
       </fieldset>
-      
+      <fieldset>
+        <legend>Mijn gebieden</legend>
+        <div class="row">
+            {{ profiel.forms.0.gebied_lijst }}
+        </div>
+      </fieldset>
+
       <p class="row contact-status">
         <label>
             {{ profiel.forms.0.zichtbaar }}
@@ -160,7 +152,7 @@
         </span>
         <a href="#contact-status-help" data-handler="toggle" class="contact-status-help"><abbr title="Wat betekent dit?">?</abbr></a>
       </p>
-      
+
       <p class="buttons right">
         <button type="submit" class="button">Opslaan</button>
         <a href="{{ request.META.HTTP_REFERER }}">Annuleren</a>
@@ -168,47 +160,4 @@
     </form>
   </div>
 </div>
-
-
-
-{#    <form action="{% url 'update_profiel' object.id %}" method="post">#}
-{#        {% csrf_token %}#}
-{#        {{ form.as_p }}#}
-{##}
-{#        <fieldset class="regeling-set">#}
-{##}
-{#            <legend>Profiel details</legend>#}
-{#            {{ profiel.management_form }}#}
-{#            {% for hidden in profiel.forms.0.hidden_fields %}#}
-{#                {{ hidden }}#}
-{#            {% endfor %}#}
-{#            {% for field in profiel.forms.0.visible_fields %}#}
-{#                {{ field.errors.as_ul }}#}
-{#                {{ field.label }}#}
-{#                {{ field }}#}
-{#            {% endfor %}#}
-{##}
-{#            <ol class="form-list">#}
-{#                {% for form in profiel.forms %}#}
-{#                    <li>#}
-{#                        <label>#}
-{#                            <strong>Voorwaarde</strong>#}
-{#                            {% for field in form.visible_fields %}#}
-{#                                {% if forloop.first %}#}
-{#                                    {% for hidden in form.hidden_fields %}#}
-{#                                        {{ hidden }}#}
-{#                                    {% endfor %}#}
-{#                                {% endif %}#}
-{#                                {{ field.errors.as_ul }}#}
-{#                                {{ field.label }}#}
-{#                                {{ field }}#}
-{#                            {% endfor %}#}
-{#                        </label>#}
-{#                    </li>#}
-{#                {% endfor %}#}
-{#            </ol>#}
-{#        </fieldset>#}
-{##}
-{#        <button type="submit" class="button">Wijzig</button>#}
-{#    </form>#}
 {% endblock %}

@@ -98,6 +98,18 @@ class ContactAdmin(admin.ModelAdmin):
     ]
 
 
+@admin.register(Gebied)
+class GebiedAdmin(admin.ModelAdmin):
+    list_display = ['naam', 'stadsdeel', ]
+    list_filter = ['stadsdeel', ]
+    prepopulated_fields = {'slug': ('naam',), }
+
+
+@admin.register(Stadsdeel)
+class StadsdeelAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('naam',), }
+
+
 @admin.register(EventItem)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'value', 'timestamp', 'url', ]

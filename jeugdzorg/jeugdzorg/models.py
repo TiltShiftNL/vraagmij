@@ -608,6 +608,10 @@ class Profiel(models.Model):
         through='ProfielNaarRegeling',
         through_fields=('profiel', 'regeling'),
     )
+    gebied_lijst = models.ManyToManyField(
+        to='Gebied',
+        verbose_name=_('Gebieden'),
+    )
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
 
@@ -618,6 +622,55 @@ class Profiel(models.Model):
         verbose_name = _('Profiel')
         verbose_name_plural = _("Profielen")
         ordering = ('achternaam', )
+
+
+class Stadsdeel(models.Model):
+    naam = models.CharField(
+        verbose_name=_('Naam'),
+        max_length=100,
+    )
+    slug = models.SlugField(
+        verbose_name=_('Slug'),
+    )
+
+    def __str__(self):
+        return self.naam
+
+    def first_letter(self):
+        return self.naam and self.naam[0].upper() or ''
+
+    class Meta:
+        verbose_name = _('Stadsdeel')
+        verbose_name_plural = _("Stadsdelen")
+        ordering = ('naam', )
+
+
+class Gebied(models.Model):
+    naam = models.CharField(
+        verbose_name=_('Naam'),
+        max_length=100,
+    )
+    slug = models.SlugField(
+        verbose_name=_('Slug'),
+    )
+    stadsdeel = models.ForeignKey(
+        to='Stadsdeel',
+        verbose_name=_('Stadsdeel'),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.naam
+
+    def first_letter(self):
+        return self.naam and self.naam[0].upper() or ''
+
+    class Meta:
+        verbose_name = _('Gebied')
+        verbose_name_plural = _("Gebieden")
+        ordering = ('naam', )
 
 
 class EventItem(models.Model):

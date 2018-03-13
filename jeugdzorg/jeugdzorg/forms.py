@@ -12,7 +12,9 @@ from django.conf import settings
 from django.template import loader
 from itertools import chain
 from .widgets import ProfielCheckboxSelectMultiple
+from .fields import *
 from django.forms.utils import ErrorList
+from itertools import groupby
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
@@ -52,6 +54,7 @@ class MailAPIPasswordResetForm(PasswordResetForm):
 
 
 class RegelingModelForm(forms.ModelForm):
+
     class Meta:
         model = Regeling
         exclude = ['contact', ]
@@ -66,6 +69,7 @@ class RegelingModelForm(forms.ModelForm):
 
 
 class ProfielModelForm(forms.ModelForm):
+
     custom_m2m = (
         ('thema_lijst', 'thema'),
         ('regeling_lijst', 'regeling'),
@@ -80,16 +84,45 @@ class ProfielModelForm(forms.ModelForm):
                  label_suffix=None, empty_permitted=False, instance=None, use_required_attribute=None):
         super().__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance,
                          use_required_attribute)
+
+        self.fields['gebied_lijst'].required = False
+        gebied_lijst_choices = []
+        for k, gl in groupby(Gebied.objects.all(), lambda x: x.stadsdeel):
+            gebied_lijst_choices.append([k, [[g.id, g.naam] for g in gl]])
+        self.fields['gebied_lijst'].choices = gebied_lijst_choices
+
         for f in self.custom_m2m:
             self.fields[f[0]].required = False
 
+    def _save_m2m(self):
+        """
+        Save the many-to-many fields and generic relations for this form.
+        """
+        cleaned_data = self.cleaned_data
+        exclude = self._meta.exclude
+        fields = self._meta.fields
+        opts = self.instance._meta
+        # Note that for historical reasons we want to include also
+        # private_fields here. (GenericRelation was previously a fake
+        # m2m field).
+        for f in chain(opts.many_to_many, opts.private_fields):
+            if not hasattr(f, 'save_form_data'):
+                continue
+            if fields and f.name not in fields:
+                continue
+            if f.name in [c[0] for c in self.custom_m2m]:
+                continue
+            if exclude and f.name in exclude:
+                continue
+            if f.name in cleaned_data:
+                f.save_form_data(self.instance, cleaned_data[f.name])
+
     def save(self, commit=True):
-        print('save')
         instance = forms.ModelForm.save(self, False)
         old_save_m2m = self.save_m2m
         def save_m2m():
             # todo normal m2m not saved
-            #old_save_m2m()
+            old_save_m2m()
 
             for cm2m in self.custom_m2m:
 
@@ -241,12 +274,18 @@ UserFormSet = forms.inlineformset_factory(
         'organisatie_lijst',
         'regeling_lijst',
         'thema_lijst',
+        'gebied_lijst',
     ),
     #formset=BaseChildrenFormset,
     widgets={
         'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices choices-full'}),
         'organisatie_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
         'thema_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
+        'gebied_lijst': ProfielCheckboxSelectMultiple(
+            attrs={
+                'class': 'choices',
+            },
+        )
     },
 
     form=ProfielModelForm,
