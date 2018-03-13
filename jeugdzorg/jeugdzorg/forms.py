@@ -53,12 +53,12 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         mail.add_content(Content("text/plain", body))
         #mail.add_content(Content("text/html", html_body))
 
-        #mail = Mail(from_email, subject, to_email, body)
-        response = sg.client.mail.send.post(request_body=mail.get())
+        mail = Mail(Email('info@fixxx7.amsterdam.nl'), subject, Email(to_email), body)
         # print(response.status_code)
         # print(response.body)
         # print(response.headers)
 
+        sg.client.mail.send.post(request_body=mail.get())
         # pass
 
 
