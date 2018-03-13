@@ -15,6 +15,7 @@ from .widgets import ProfielCheckboxSelectMultiple
 from .fields import *
 from django.forms.utils import ErrorList
 from itertools import groupby
+from django.urls import reverse, reverse_lazy
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
@@ -31,6 +32,7 @@ def handle_uploaded_file(f):
 
 
 class MailAPIPasswordResetForm(PasswordResetForm):
+
     def send_mail(self, subject_template_name, email_template_name,
                   context, from_email, to_email, html_email_template_name=None):
         mail = Mail()

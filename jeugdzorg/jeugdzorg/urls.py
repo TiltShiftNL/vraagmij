@@ -61,10 +61,25 @@ urlpatterns = [
         {
             'template_name': 'registration/reset_password.html',
             'password_reset_form': MailAPIPasswordResetForm,
+            'post_reset_redirect': reverse_lazy('herstel_wachtwoord_klaar'),
         },
+        name='herstel_wachtwoord'
     ),
-    url(r'^herstel-wachtwoord/klaar/$', auth_views.password_reset_done),
-    url(r'^herstel/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', auth_views.password_reset_confirm),
+    url(r'^herstel-wachtwoord/klaar/$',
+        auth_views.password_reset_done,
+        name='herstel_wachtwoord_klaar'
+    ),
+    url(r'^bevestig-wachtwoord-herstel/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        auth_views.password_reset_confirm,
+        {
+            'post_reset_redirect': reverse_lazy('herstel_wachtwoord_afgerond'),
+        },
+        name='bevestig_herstel'
+    ),
+    url(r'^wachtwoord-herstel-afgerond/',
+        auth_views.password_reset_complete,
+        name='herstel_wachtwoord_afgerond',
+    ),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
