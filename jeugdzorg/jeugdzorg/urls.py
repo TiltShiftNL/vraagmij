@@ -56,14 +56,14 @@ urlpatterns = [
     path('admin/logs/', ConfigView.as_view(), name='logs'),
 
     url('^', include('django.contrib.auth.urls')),
-    url(r'^herstel_wachtwoord/$',
+    url(r'^herstel-wachtwoord/$',
         auth_views.password_reset,
         {
             'template_name': 'registration/reset_password.html',
             'password_reset_form': MailAPIPasswordResetForm,
         },
     ),
-    url(r'^herstel_wachtwoord/klaar/$', auth_views.password_reset_done),
+    url(r'^herstel-wachtwoord/klaar/$', auth_views.password_reset_done),
     url(r'^herstel/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', auth_views.password_reset_confirm),
 ]
 

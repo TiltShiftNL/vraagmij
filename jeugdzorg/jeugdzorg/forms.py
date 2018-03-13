@@ -33,18 +33,26 @@ def handle_uploaded_file(f):
 class MailAPIPasswordResetForm(PasswordResetForm):
     def send_mail(self, subject_template_name, email_template_name,
                   context, from_email, to_email, html_email_template_name=None):
-
+        mail = Mail()
         subject = loader.render_to_string(subject_template_name, context)
         subject = ''.join(subject.splitlines())
         body = loader.render_to_string(email_template_name, context)
+        html_body = ''
         if html_email_template_name is not None:
-            html_email = loader.render_to_string(html_email_template_name, context)
+            html_body = loader.render_to_string(html_email_template_name, context)
 
         sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-        from_email = Email(from_email)
-        to_email = Email(to_email)
+        # from_email = Email(from_email)
+        # to_email = Email(to_email)
 
-        mail = Mail(from_email, subject, to_email, body)
+        mail.from_email = Email(from_email)
+        mail.reply_to = Email(to_email)
+        mail.subject = subject
+
+        mail.add_content(Content("text/plain", body))
+        mail.add_content(Content("text/html", html_body))
+
+        #mail = Mail(from_email, subject, to_email, body)
         response = sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
         print(response.body)
