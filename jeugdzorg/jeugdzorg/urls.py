@@ -23,6 +23,11 @@ from .views import *
 from .forms import *
 from django.urls import re_path
 from django.views.static import serve
+from rest_framework import routers
+from .api import RegelingViewSet
+
+router = routers.DefaultRouter()
+router.register(r'regelingen', RegelingViewSet)
 
 urlpatterns = [
     # path('', CheckUserModel.as_view(), name='test'),
@@ -80,6 +85,7 @@ urlpatterns = [
         auth_views.password_reset_complete,
         name='herstel_wachtwoord_afgerond',
     ),
+    url(r'^api/', include(router.urls)),
 ]
 
 urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

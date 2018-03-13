@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'storages',
     'import_export',
     'phonenumber_field',
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',
