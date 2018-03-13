@@ -58,7 +58,7 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         # print(response.body)
         # print(response.headers)
 
-        sg.client.mail.send.post(request_body=mail.get())
+        #sg.client.mail.send.post(request_body=mail.get())
         # pass
 
 
