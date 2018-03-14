@@ -112,6 +112,15 @@ class ThemaDetail(DetailView):
     model = Thema
 
 
+class GebiedList(ListView):
+    model = Gebied
+
+
+class GebiedDetail(DetailView):
+    model = Gebied
+
+
+
 class ProfielList(UserPassesTestMixin, ListView):
     model = Profiel
     queryset = Profiel.is_zichtbaar.all()
@@ -126,6 +135,7 @@ class ProfielList(UserPassesTestMixin, ListView):
 
         data['themas'] = Thema.objects.all
         data['organisaties'] = Organisatie.objects.all
+        data['gebieden'] = Gebied.objects.all
 
         if data['beeld'] not in ['alfabet', 'thema', 'organisatie', 'gebied']:
             data['beeld'] = 'alfabet'

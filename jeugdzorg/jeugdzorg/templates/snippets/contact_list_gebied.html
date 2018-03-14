@@ -15,10 +15,10 @@
     
             {% if gebied.profiel_set.all %}
                 <div class="group">
-                    <h2 class="shortcut" id="gebied-{{ gebied.id }}">{{ gebied.titel }}</h2>
+                    <h2 class="shortcut" id="gebied-{{ gebied.id }}">{{ gebied.naam }}</h2>
                     <ul class="contacten cards">
                         {% for profiel in gebied.profiel_set.all %}
-                            <li>{% include 'snippets/gebied.html' with item=profiel %}</li>
+                            <li>{% include 'snippets/contact.html' with item=profiel %}</li>
                         {% endfor %}
                     </ul>
                 </div>
