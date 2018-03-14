@@ -54,7 +54,14 @@
       if (!target) return;
       e.preventDefault();
       _scrollTo(target);
+    },
+    
+    'view': function(e){
+      e.preventDefault();
+      d.dataset.view = this.hash.substr(1);
+      w.localStorage && w.localStorage.setItem('view', d.dataset.view);
     }
+    
   };
   
   var decorators = {
@@ -310,29 +317,7 @@
           
       });
     },
-    
-    'view': function(){
-      var els = this.querySelectorAll('a');
-      
-      if (w.localStorage) {
-        var view = w.localStorage.getItem('view');
-        if (view) {
-          d.dataset.view = view;
-        }
-      }
-      
-      
-      var _setView = function(e){
-        e.preventDefault();
-        d.dataset.view = this.hash.substr(1);
-        w.localStorage && w.localStorage.setItem('view', d.dataset.view);
-      };
-      
-      for (var i = 0; i < els.length; i++) {
-        els[i].addEventListener('click', _setView);
-      }
-    }
-
+  
   };
   
   var helpers = {

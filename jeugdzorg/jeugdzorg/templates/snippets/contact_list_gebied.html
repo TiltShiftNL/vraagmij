@@ -1,4 +1,42 @@
 <div class="container">
   
-TODO
+    <ul class="shortcuts medium-show">
+        {% for gebied in gebieden %}
+            {% if gebied.profiel_set.all %}
+                <li><a href="#gebied-{{ gebied.id }}" data-decorator="scroll">{{ gebied }}</a></li>
+            {% endif %}
+        {% endfor %}
+        <li><a href="#gebied-overige" data-decorator="scroll">gebied</a></li>
+    </ul>
+    
+    <div class="compact-columns">
+        
+        {% for gebied in gebieden %}
+    
+            {% if gebied.profiel_set.all %}
+                <div class="group">
+                    <h2 class="shortcut" id="gebied-{{ gebied.id }}">{{ gebied.titel }}</h2>
+                    <ul class="contacten cards">
+                        {% for profiel in gebied.profiel_set.all %}
+                            <li>{% include 'snippets/gebied.html' with item=profiel %}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+        <div class="group">
+            <h2 class="shortcut" id="gebied-overige">Overige</h2>
+            <ul class="contacten cards">
+                {% for profiel in profiel_list %}
+                    {% if not profiel.gebied_lijst.all %}
+                        <li>
+                            {% include 'snippets/contact.html' with item=profiel %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
 </div>

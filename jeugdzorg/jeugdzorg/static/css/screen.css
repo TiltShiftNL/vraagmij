@@ -204,13 +204,13 @@ body {
   .main {
     padding: 10px 10px 54px 10px; } }
 
-.columns {
+.columns, [data-view="compact"] .compact-columns {
   columns: 3;
   -moz-column-fill: balance;
   column-fill: balance;
   margin-right: -1em;
   transform: translate3d(0, 0, 0); }
-.columns .group {
+.columns .group, [data-view="compact"] .compact-columns .group {
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   break-inside: avoid-column;
@@ -218,10 +218,10 @@ body {
   width: calc(100% - 1em);
   margin-right: 1em; }
 @media (max-width: 1290px) {
-  .columns {
+  .columns, [data-view="compact"] .compact-columns {
     columns: 2; } }
 @media (max-width: 700px) {
-  .columns {
+  .columns, [data-view="compact"] .compact-columns {
     columns: 1; } }
 
 .icon-andreas {
@@ -1426,9 +1426,9 @@ hr {
 .complete-yes ~ .regeling-aanvragen .button .icon-external:after {
   outline-color: #8ac640; }
 
-[data-view="compact"] .cards {
+[data-view="compact"] .regelingen {
   display: inline; }
-[data-view="compact"] .cards li {
+[data-view="compact"] .regelingen li {
   display: inline;
   margin: 0;
   padding: 0; }
@@ -1437,22 +1437,26 @@ hr {
   margin: 0;
   border: none; }
 [data-view="compact"] .regeling .regeling-meta {
-  margin: 0; }
+  margin: 0;
+  border: none; }
 [data-view="compact"] .regeling .regeling-samenvatting, [data-view="compact"] .regeling .regeling-meta li {
   display: none; }
 [data-view="compact"] .regeling .regeling-meta .regeling-link {
   display: block; }
 [data-view="compact"] .regeling .regeling-meta .regeling-link:before {
   display: none; }
+[data-view="compact"] .regeling .regeling-meta .regeling-link a:hover {
+  background-color: transparent; }
 [data-view="compact"] .regeling .regeling-titel {
   color: #333;
-  display: block;
   padding: 0 0 .5em 0;
   margin: 0;
   background-color: transparent;
   font-size: 1.6rem; }
-[data-view="compact"] .regeling .regeling-titel i {
-  display: none; }
+[data-view="compact"] .regeling .regeling-titel i, [data-view="compact"] .regeling .regeling-titel i:before {
+  border-color: #333; }
+[data-view="compact"] .regeling .regeling-titel i:after {
+  background-color: #fff; }
 
 .contacten {
   list-style: none;
@@ -1652,6 +1656,27 @@ dl.contact-meta a {
   content: '×';
   color: #333;
   background-color: #fff; }
+
+[data-view="compact"] .contacten.cards {
+  display: inline; }
+[data-view="compact"] .contacten.cards li {
+  display: inline;
+  margin: 0;
+  padding: 0; }
+[data-view="compact"] .contact {
+  padding: 0 0 0 1.4em;
+  margin: 0;
+  background: none;
+  box-shadow: none; }
+[data-view="compact"] .contact-avatar {
+  left: 0;
+  right: auto;
+  top: -.3em;
+  width: 1em; }
+[data-view="compact"] dt.contact-naam + dd {
+  font-size: 1.6rem; }
+[data-view="compact"] dt.contact-naam + dd ~ * {
+  display: none; }
 
 .themas {
   list-style: none;

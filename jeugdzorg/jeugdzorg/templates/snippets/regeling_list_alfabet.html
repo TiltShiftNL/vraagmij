@@ -7,32 +7,40 @@
         {% endfor %}
     </ul>
     
+    <div class="compact-columns">
+    
     {% if ordening == 'aflopend' %}
     
         {% for titel in title_list reversed %}
-          <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-          <ul class="regelingen cards">
-            {% for regeling in titel.list reversed %}
-                <li>
-                    {% include 'snippets/regeling.html' %}
-                </li>
-            {% endfor %}
-          </ul>
+          <div class="group">
+            <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+            <ul class="regelingen cards">
+              {% for regeling in titel.list reversed %}
+                  <li>
+                      {% include 'snippets/regeling.html' %}
+                  </li>
+              {% endfor %}
+            </ul>
+          </div>
         {% endfor %}
-    
+        
     {% else %}
     
         {% for titel in title_list %}
-          <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-          <ul class="regelingen cards">
-            {% for regeling in titel.list %}
-                <li>
-                    {% include 'snippets/regeling.html' %}
-                </li>
-            {% endfor %}
-          </ul>
+          <div class="group">
+            <h2 class="shortcut" id="regelingen-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+            <ul class="regelingen cards">
+              {% for regeling in titel.list %}
+                  <li>
+                      {% include 'snippets/regeling.html' %}
+                  </li>
+              {% endfor %}
+            </ul>
+          </div>
         {% endfor %}
     
     {% endif %}
+    
+    </div>
 
 </div>

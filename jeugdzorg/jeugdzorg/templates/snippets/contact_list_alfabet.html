@@ -7,32 +7,39 @@
         {% endfor %}
     </ul>
     
-    {% if ordening == 'aflopend' %}
+    <div class="compact-columns">
     
-        {% for titel in title_list reversed %}
-          <h2 class="shortcut" id="profiel-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-          <ul class="contacten cards">
-            {% for profiel in titel.list reversed %}
-                <li>
-                    {% include 'snippets/contact.html' with item=profiel %}
-                </li>
+        {% if ordening == 'aflopend' %}
+    
+            {% for titel in title_list reversed %}
+              <div class="group">
+                <h2 class="shortcut" id="profiel-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+                <ul class="contacten cards">
+                  {% for profiel in titel.list reversed %}
+                      <li>
+                          {% include 'snippets/contact.html' with item=profiel %}
+                      </li>
+                  {% endfor %}
+                </ul>
+              </div>
             {% endfor %}
-          </ul>
-        {% endfor %}
     
-    {% else %}
+        {% else %}
     
-        {% for titel in title_list %}
-          <h2 class="shortcut" id="profiel-{{ titel.grouper }}">{{ titel.grouper }}</h2>
-          <ul class="contacten cards">
-            {% for profiel in titel.list %}
-                <li>
-                    {% include 'snippets/contact.html' with item=profiel %}
-                </li>
-            {% endfor %}
-          </ul>
-        {% endfor %}
+            {% for titel in title_list %}
+              <div class="group">
+                <h2 class="shortcut" id="profiel-{{ titel.grouper }}">{{ titel.grouper }}</h2>
+                <ul class="contacten cards">
+                  {% for profiel in titel.list %}
+                      <li>
+                          {% include 'snippets/contact.html' with item=profiel %}
+                      </li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            </div>
     
-    {% endif %}
+        {% endif %}
+    </div>
 
 </div>

@@ -465,7 +465,7 @@
 }
 
 [data-view="compact"] {
-  .cards {
+  .regelingen {
     display: inline;
     li {
       display: inline;
@@ -479,6 +479,7 @@
     border: none;
     .regeling-meta {
       margin: 0;
+      border: none;
     }
     .regeling-samenvatting,
     .regeling-meta li {
@@ -489,16 +490,25 @@
       &:before {
         display: none;
       }
+      a:hover {
+        background-color: transparent;
+      }
     }
     .regeling-titel {
       color: $textColor;
-      display: block;
       padding: 0 0 .5em 0;
       margin: 0;
       background-color: transparent;
       font-size: $fontSize;
       i {
-        display: none;
+        &, &:before {
+          border-color: $textColor;
+        }
+        &:after {
+          background-color: #fff;
+        }
+        
+//        display: none;
       }
     }
   }

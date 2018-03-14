@@ -24,7 +24,8 @@ body {
   
 }
 
-.columns {
+.columns,
+[data-view="compact"] .compact-columns {
   columns: 3;
   -moz-column-fill: balance;
   column-fill: balance;

@@ -301,3 +301,32 @@ dl.contact-meta {
     }
   }
 }
+
+[data-view="compact"] {
+  .contacten.cards {
+    display: inline;
+    li {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .contact {
+    padding: 0 0 0 1.4em;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .contact-avatar {
+    left: 0;
+    right: auto;
+    top: -.3em;
+    width: 1em;   
+  }
+  dt.contact-naam + dd {
+    font-size: $fontSize;
+    & ~ * {
+      display: none;
+    }
+  }
+}
