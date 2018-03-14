@@ -7,8 +7,8 @@
 
   <ul class="regeling-meta">
       <li><a href="{% url 'detail_regeling' regeling.id %}#voorwaarden"><strong>{{ regeling.voorwaarde_set.all|length }}</strong> voorwaarde{% if regeling.voorwaarde_set.all|length != 1 %}n{% endif %}</a></li>
-      {% if regeling.profiel_set.all %}
-          <li><a href="{% url 'detail_regeling' regeling.id %}#contacten"><strong>{{ regeling.profiel_set.all|length }}</strong> contact{% if regeling.profiel_set.all|length != 1 %}en{% endif %}</a></li>
+      {% if regeling.profielen_zichtbaar %}
+          <li><a href="{% url 'detail_regeling' regeling.id %}#contacten"><strong>{{ regeling.profielen_zichtbaar|length }}</strong> contact{% if regeling.profielen_zichtbaar|length != 1 %}en{% endif %}</a></li>
       {% endif %}
     
     <li class="regeling-link"><a href="{% url 'detail_regeling' regeling.id %}">Meer details</a>

@@ -81,26 +81,9 @@
 
       <fieldset>
         <legend>Contact</legend>
-        <div class="form-aside">
-          <h3>Privacy</h3>
-          <p>Uw profiel is zichtbaar voor:</p>
-          {% if profiel.forms.0.organisatie_lijst %}
-          <ul>
-            {% for organisatie in profiel.forms.0.instance.organisatie_lijst.all %}
-            <li>personen van "{{ organisatie.naam }}"</li>
-            {% endfor %}
-          </ul>
-          {% else %}
-          <ul>
-          <li>
-              Je bent nog niet aan een organisatie verbonden
-          </li>
-          </ul>
-          {% endif %}
-{#          <p class="buttons right">#}
-{#            <a href="#">wijzigen</a>#}
-{#          </p>#}
-        </div>
+
+        <div class="form-aside"></div>
+
         <div class="inputs">
           <p class="row">
               <label>
@@ -148,7 +131,7 @@
             <strong>{{ profiel.forms.0.zichtbaar.label }}</strong>
         </label>
         <span class="help" id="contact-status-help">
-          Hiermee geeft u aan of u zichtbaar bent voor uw collega's zodat ze eventueel contact met u kunnen opnemen over uw vaardigheden.
+          Hiermee geef je aan of je account zichtbaar is voor je collega's. Bij een onzichtbaar profiel zal je niet gevonden worden en kan je niet benaderd worden voor vragen van collega hulpverleners.
         </span>
         <a href="#contact-status-help" data-handler="toggle" class="contact-status-help"><abbr title="Wat betekent dit?">?</abbr></a>
       </p>

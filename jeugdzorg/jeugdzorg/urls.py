@@ -41,6 +41,7 @@ urlpatterns = [
     path('regeling/<int:pk>/', RegelingDetail.as_view(), name='detail_regeling'),
     path('themas/', ThemaList.as_view(), name='themas'),
     path('thema/<slug:slug>/', ThemaDetail.as_view(), name='detail_thema'),
+    path('thema/<slug:slug>/regeling/<int:pk>/', RegelingDetail.as_view(), {'sub_view': 'themas'}, name='detail_regeling'),
     path('contacten/', ProfielList.as_view(), name='contacten'),
     # path('contacten/', ContactList.as_view(), name='contacten'),
     path('contact/<int:pk>/', ProfielDetail.as_view(), name='detail_contact'),

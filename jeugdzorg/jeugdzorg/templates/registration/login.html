@@ -26,7 +26,7 @@
         
         <form method="post" class="login">
             <fieldset>
-                <legend>Inloggen bij RegelDingen</legend>
+                <legend>Inloggen</legend>
                 {% csrf_token %}
                 <p class="row">
                     <label for="id_username">
@@ -43,8 +43,8 @@
             </fieldset>
             <p class="buttons right">
                 <button type="submit" class="button" data-counter="click.login.login">Inloggen</button>
-                <a href="#TODO" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
-                <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a>
+                <a href="{% url 'herstel_wachtwoord' %}" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
+                <!-- <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a> -->
                 <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left" data-counter="click.login.cancel">Annuleren</a>
             </p>
         </form>

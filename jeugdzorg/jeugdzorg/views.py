@@ -96,6 +96,12 @@ class RegelingList(ListView):
 
 class RegelingDetail(DetailView):
     model = Regeling
+    
+    def get_context_data(self, **kwargs):
+      data = super().get_context_data(**kwargs)
+      data.update(self.kwargs);
+      
+      return data
 
 
 class ThemaList(ListView):
