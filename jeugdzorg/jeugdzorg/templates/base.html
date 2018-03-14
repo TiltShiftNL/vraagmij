@@ -41,14 +41,14 @@
                   <li><a href="{% url 'logout' %}" data-counter="click.nav.logout">Uitloggen</a></li>
                 {% else %}
                   <li><a href="{% url 'login' %}" data-counter="click.nav.login">Inloggen</a></li>
-                  <li><a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Herstel mijn wachtwoord</a></li>
+                  <li><a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Wachtwoord vergeten</a></li>
                 {% endif %}
               </ul>
             </nav>
           {% else %}
           <p class="nav-login">
             <a href="{% url 'login' %}" class="button">Inloggen</a>
-            <a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Herstel mijn wachtwoord</a>
+            <a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Wachtwoord vergeten</a>
           </p>
           {% endif %}
           <a href="#MENU" class="nav-close" data-handler="toggle" data-counter="click.nav.close">MENU<i class="icon-close"></i></a>

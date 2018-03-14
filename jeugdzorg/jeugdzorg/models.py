@@ -611,6 +611,7 @@ class Profiel(models.Model):
     gebied_lijst = models.ManyToManyField(
         to='Gebied',
         verbose_name=_('Gebieden'),
+        blank=True,
     )
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()

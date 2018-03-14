@@ -106,24 +106,6 @@ class ThemaDetail(DetailView):
     model = Thema
 
 
-class ContactList(ListView):
-    model = Contact
-    
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['beeld'] = self.request.GET.get('beeld', 'alfabet')
-        
-        data['themas'] = Thema.objects.all
-        data['organisaties'] = Organisatie.objects.all
-        
-        if data['beeld'] not in ['alfabet', 'thema', 'organisatie']:
-            data['beeld'] = 'alfabet'
-
-        data['list_template'] = 'snippets/contact_list_%s.html' % data['beeld']
-
-        return data
-
-
 class ProfielList(UserPassesTestMixin, ListView):
     model = Profiel
     queryset = Profiel.is_zichtbaar.all()
@@ -147,29 +129,12 @@ class ProfielList(UserPassesTestMixin, ListView):
         return data
 
 
-class ContactDetail(DetailView):
-    model = Contact
-
-
 class ProfielDetail(UserPassesTestMixin, DetailView):
     model = Profiel
     queryset = Profiel.is_zichtbaar.all()
 
     def test_func(self):
         return auth_test(self.request.user, 'viewer')
-
-
-class ContactUpdate(TemplateView):
-    model = Contact
-    template_name = 'jeugdzorg/contact_form.html'
-
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-
-        data['themas'] = Thema.objects.all
-        data['organisaties'] = Organisatie.objects.all
-
-        return data
 
 
 class RegelingDelete(UserPassesTestMixin, DeleteView):
