@@ -8,7 +8,7 @@
     margin-bottom: $lineHeight;
     flex-basis: 33.33%;
     @include large {
-      flex-basis: 50;
+      flex-basis: 50%;
     }
     @include small {
       flex-basis: 100%;
