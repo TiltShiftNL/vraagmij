@@ -57,14 +57,19 @@ urlpatterns = [
 
     url('^', include('django.contrib.auth.urls')),
     url(r'^herstel-wachtwoord/$',
-        auth_views.password_reset,
+        password_reset_new_user,
         {
-            'template_name': 'registration/reset_password.html',
-            'password_reset_form': MailAPIPasswordResetForm,
-            'post_reset_redirect': reverse_lazy('herstel_wachtwoord_klaar'),
+            'flow': 'default',
         },
         name='herstel_wachtwoord'
     ),
+    url(r'^wachtwoord-instellen/$',
+        password_reset_new_user,
+        {
+            'flow': 'new',
+        },
+        name='wachtwoord_instellen'
+        ),
     url(r'^herstel-wachtwoord/klaar/$',
         auth_views.password_reset_done,
         name='herstel_wachtwoord_klaar'
