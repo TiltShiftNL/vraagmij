@@ -112,10 +112,6 @@ class UserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    inlines = [
-        ProfielInline,
-    ]
-
     ordering = []
 
 

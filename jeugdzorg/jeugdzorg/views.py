@@ -20,7 +20,11 @@ import json
 from django.conf import settings
 import sendgrid
 import os
+from django.contrib.auth import views as auth_views
 from sendgrid.helpers.mail import *
+from django.contrib.auth.tokens import default_token_generator
+from django.views.decorators.csrf import csrf_protect
+from django.template import RequestContext
 
 
 class CheckUserModel(TemplateView):
@@ -344,6 +348,25 @@ class EventView(View):
                 pass
 
         return JsonResponse({'status': 'ok'}, safe=False)
+
+
+@csrf_protect
+def password_reset_new_user(request, flow):
+    data = {
+        'template_name': 'registration/reset_password.html',
+        'password_reset_form': MailAPIPasswordResetForm,
+        'email_template_name': 'registration/password_reset_email_%s.html' % flow,
+        'post_reset_redirect': reverse_lazy('herstel_wachtwoord_klaar'),
+    }
+    if flow == 'new':
+        data.update({
+            'extra_context': {
+                'email': request.GET.get('email'),
+                'flow': flow,
+            }
+        })
+    print(data)
+    return auth_views.password_reset(request, **data)
 
 
 @staff_member_required

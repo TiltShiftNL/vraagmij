@@ -307,7 +307,13 @@ class Contact(models.Model):
         verbose_name=_('E-mailadres'),
     )
     telefoonnummer = models.CharField(
-        verbose_name=_('Telefoonnummer'),
+        verbose_name=_('Primair telefoonnummer '),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+    telefoonnummer_2 = models.CharField(
+        verbose_name=_('Secundair telefoonnummer'),
         max_length=20,
         null=True,
         blank=True,
