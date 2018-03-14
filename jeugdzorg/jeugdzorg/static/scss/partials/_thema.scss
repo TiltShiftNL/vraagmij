@@ -5,7 +5,7 @@
   padding: 0;
   .thema {
     margin-bottom: 0;
-    height: 100%;
+    min-height: 100%;
   }
 }
 
@@ -29,6 +29,7 @@
 }
 .thema-samenvatting {
   flex-basis: 100%;
+  flex-grow: 1;
 }
 .thema-meta {
   display: flex;

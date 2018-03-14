@@ -4,7 +4,7 @@
   
   padding: 0;
   .regeling {
-    height: 100%;
+    min-height: 100%;
     margin-bottom: 0;
   }
 }
@@ -34,6 +34,7 @@
   .regeling-samenvatting {
     margin-bottom: 0;
     flex-basis: 100%;
+    flex-grow: 1;
   }
   .icon-regeling {
     margin-right: .5em;

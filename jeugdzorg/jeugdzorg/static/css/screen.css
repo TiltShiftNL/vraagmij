@@ -1099,7 +1099,7 @@ hr {
   margin-left: 0;
   padding: 0; }
 .regelingen .regeling {
-  height: 100%;
+  min-height: 100%;
   margin-bottom: 0; }
 
 .regeling {
@@ -1121,7 +1121,8 @@ hr {
   display: flex; }
 .regeling .regeling-samenvatting {
   margin-bottom: 0;
-  flex-basis: 100%; }
+  flex-basis: 100%;
+  flex-grow: 1; }
 .regeling .icon-regeling {
   margin-right: .5em;
   top: 3px; }
@@ -1465,7 +1466,7 @@ hr {
   padding: 0; }
 .contacten .contact {
   margin-bottom: 0;
-  height: 100%; }
+  min-height: 100%; }
 
 .contact-naam strong:after, dt.contact-naam + dd strong:after {
   content: ', '; }
@@ -1668,14 +1669,14 @@ dl.contact-meta a {
   margin: 0;
   background: none;
   box-shadow: none; }
-[data-view="compact"] .contact-avatar {
+[data-view="compact"] .contact .contact-avatar {
   left: 0;
   right: auto;
   top: -.3em;
   width: 1em; }
-[data-view="compact"] dt.contact-naam + dd {
+[data-view="compact"] .contact dt.contact-naam + dd {
   font-size: 1.6rem; }
-[data-view="compact"] dt.contact-naam + dd ~ * {
+[data-view="compact"] .contact dt.contact-naam + dd ~ * {
   display: none; }
 
 .themas {
@@ -1685,7 +1686,7 @@ dl.contact-meta a {
   padding: 0; }
 .themas .thema {
   margin-bottom: 0;
-  height: 100%; }
+  min-height: 100%; }
 
 .thema {
   position: relative;
@@ -1704,7 +1705,8 @@ dl.contact-meta a {
   background-color: #f5f5f5; }
 
 .thema-samenvatting {
-  flex-basis: 100%; }
+  flex-basis: 100%;
+  flex-grow: 1; }
 
 .thema-meta {
   display: flex;
