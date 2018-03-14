@@ -1428,7 +1428,8 @@ hr {
   outline-color: #8ac640; }
 
 [data-view="compact"] .regelingen {
-  display: inline; }
+  display: inline;
+  margin: 0; }
 [data-view="compact"] .regelingen li {
   display: inline;
   margin: 0;
@@ -1659,7 +1660,8 @@ dl.contact-meta a {
   background-color: #fff; }
 
 [data-view="compact"] .contacten.cards {
-  display: inline; }
+  display: inline;
+  margin: 0; }
 [data-view="compact"] .contacten.cards li {
   display: inline;
   margin: 0;
