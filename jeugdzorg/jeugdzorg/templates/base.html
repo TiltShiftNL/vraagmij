@@ -47,8 +47,8 @@
             </nav>
           {% else %}
           <p class="nav-login">
+            <a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Wachtwoord vergeten</a> 
             <a href="{% url 'login' %}" class="button">Inloggen</a>
-            <a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Wachtwoord vergeten</a>
           </p>
           {% endif %}
           <a href="#MENU" class="nav-close" data-handler="toggle" data-counter="click.nav.close">MENU<i class="icon-close"></i></a>
