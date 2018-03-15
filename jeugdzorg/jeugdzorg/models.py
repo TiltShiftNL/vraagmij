@@ -16,6 +16,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save
 from .fields import EmailToLowerField
 from django.conf import settings
+from itertools import groupby
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
@@ -637,6 +638,20 @@ class Profiel(models.Model):
     )
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
+
+    def stadsdeel_lijst(self):
+        stadsdelen= []
+        gebied_lijst_choices = []
+        for k, gl in groupby(self.gebied_lijst.all().order_by('stadsdeel'), lambda x: x.stadsdeel):
+            gebied_lijst_choices.append([k, [[g.id, g.naam] for g in gl]])
+        for gl in gebied_lijst_choices:
+            print(gl[0])
+            print(len(gl[1]))
+            print(Gebied.objects.filter(stadsdeel=gl[0]).count())
+            print('---')
+            if Gebied.objects.filter(stadsdeel=gl[0]).count() == len(gl[1]):
+                stadsdelen.append(gl[0])
+        return stadsdelen
 
     def first_letter(self):
         return self.achternaam and self.achternaam[0].upper() or ''

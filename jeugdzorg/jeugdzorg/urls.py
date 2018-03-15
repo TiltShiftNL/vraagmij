@@ -83,11 +83,7 @@ urlpatterns = [
         name='bevestig_herstel'
     ),
     url(r'^bevestig-wachtwoord-instellen/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.password_reset_confirm,
-        {
-            'post_reset_redirect': reverse_lazy('herstel_wachtwoord_afgerond'),
-            'template_name': 'registration/password_reset_confirm_new.html',
-        },
+        password_reset_confirm_new_user,
         name='bevestig_instellen'
         ),
     url(r'^wachtwoord-herstel-afgerond/',

@@ -355,6 +355,7 @@ def password_reset_new_user(request, flow):
         'password_reset_form': MailAPIPasswordResetForm,
         'email_template_name': 'registration/password_reset_email_%s.html' % flow,
         'post_reset_redirect': reverse_lazy('herstel_wachtwoord_klaar'),
+        'subject_template_name': 'registration/password_reset_subject.txt',
     }
     if flow == 'new':
         data.update({
@@ -363,11 +364,25 @@ def password_reset_new_user(request, flow):
                 'flow': flow,
             },
             'post_reset_redirect': reverse_lazy('wachtwoord_instellen_klaar'),
+            'subject_template_name': 'registration/password_reset_subject_new.txt',
         })
 
     response = auth_views.password_reset(request, **data)
     return response
 
+
+def password_reset_confirm_new_user(request, uidb64=None, token=None):
+    # context =
+    data = {
+        'post_reset_redirect': reverse_lazy('login'),
+        'template_name': 'registration/password_reset_confirm_new.html',
+    }
+
+    response = auth_views.password_reset_confirm(request, uidb64=uidb64, token=token, **data)
+    if request.method == 'POST':
+        messages.add_message(request, messages.INFO, "Je wachtwoord is ingesteld.")
+
+    return response
 
 @staff_member_required
 def dump_jeugdzorg(request):
