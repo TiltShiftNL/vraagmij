@@ -774,6 +774,12 @@ form .choices {
   flex-wrap: wrap; }
 form .choices li {
   flex-basis: 33.33%; }
+form .choices li ul {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+form .choices.choices-half li {
+  flex-basis: 50%; }
 form .choices.choices-full li {
   flex-basis: 100%; }
 form .choices strong {
@@ -786,6 +792,8 @@ form .choices strong {
 form .choices strong:before, form .choices strong:after {
   margin-left: 10px;
   margin-top: 10px; }
+form .choices b {
+  padding: 10px; }
 form .choices label:hover strong {
   border: 1px solid rgba(0, 0, 0, 0.4); }
 form .choices.inlineformset-checkbox input {
