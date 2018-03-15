@@ -38,7 +38,7 @@
               <br>Neem dan contact op met één van onderstaande contactpersonen.
           {% else %}
               <br>
-              <a href="{% url 'login' %}?next={% url 'detail_thema' object.slug %}" data-handler="modal" data-counter="click.thema.contact.login">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
+              <a href="{% url 'login' %}?next={% url 'detail_thema' object.slug %}" data-counter="click.thema.contact.login">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
           {% endif %}
       </p>
       {% if request.user|has_group:"viewer" %}
