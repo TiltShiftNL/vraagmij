@@ -29,10 +29,6 @@
                 <legend>Inloggen</legend>
                 {% csrf_token %}
                 
-                <p>
-                  Heb je nog geen account of heb je problemen met inloggen, mail dan naar <a href="mailto:rutger.dik@amsterdam.nl">Rutger Dik</a>.
-                </p>
-                
                 <p class="row">
                     <label for="id_username">
                         <strong>E-mailadres</strong>
@@ -52,6 +48,10 @@
                 <a href="{% url 'herstel_wachtwoord' %}" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
                 <!-- <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a> -->
                 <a href="{% url 'regelingen' %}" data-handler="back" class="left" data-counter="click.login.cancel">Annuleren</a>
+            </p>
+
+            <p>
+              Heb je nog geen account of heb je problemen met inloggen, mail dan naar <a href="mailto:rutger.dik@amsterdam.nl">Rutger Dik</a>.
             </p>
             
         </form>
