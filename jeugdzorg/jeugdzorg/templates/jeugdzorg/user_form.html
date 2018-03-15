@@ -39,7 +39,12 @@
             
         </div>
         <div class="inputs">
+            {% if object.date_saved|date:"Y-m-d|H:i:s" == object.date_joined|date:"Y-m-d|H:i:s" %}
+            Stel hier je profiel samen zodat je collega's je beter kunnen vinden.
+            {% endif %}
+          <p class="row">
           {{ form.email }}
+          </p>
           <p class="row">
               <label>
                   <strong>Inlognaam</strong>

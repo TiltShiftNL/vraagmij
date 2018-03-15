@@ -1,30 +1,29 @@
-from django.views.generic import TemplateView
-from django.views.generic import *
-from .forms import *
-from django.urls import reverse, reverse_lazy
-from django import forms
-from django.db import transaction
-from django.shortcuts import get_object_or_404, render
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.core.management import call_command
-import sys
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.admin.views.decorators import staff_member_required
-from django.template.loader import select_template
-from django.core.exceptions import ObjectDoesNotExist
-from .mail import send_simple_message
-from .auth import auth_test
-from django.contrib import messages
-from django.http import JsonResponse
 import json
-from django.conf import settings
+import sys
+import warnings
+
 import sendgrid
-import os
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import views as auth_views
-from sendgrid.helpers.mail import *
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.tokens import default_token_generator
+from django.core.management import call_command
+from django.db import transaction
+from django.http import HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
+from django.shortcuts import render, resolve_url
+from django.template.response import TemplateResponse
+from django.urls import reverse, reverse_lazy
+from django.utils.deprecation import RemovedInDjango21Warning
 from django.views.decorators.csrf import csrf_protect
-from django.template import RequestContext
+from django.views.generic import *
+from sendgrid.helpers.mail import *
+from django.utils.translation import gettext_lazy as _
+
+from .auth import auth_test
+from .forms import *
 
 
 class CheckUserModel(TemplateView):
@@ -52,16 +51,16 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         # print(response.body)
         # print(response.headers)
 
-        mail = Mail()
-        subject = "reset email subject"
-        body = "body"
-        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-
-        mail.from_email = Email("info@fixxx7.amsterdam.nl")
-        mail.reply_to = Email("mguikema@gmail.com")
-        mail.subject = subject
-        mail.add_content(Content("text/plain", body))
-        sg.client.mail.send.post(request_body=mail.get())
+        # mail = Mail()
+        # subject = "reset email subject"
+        # body = "body"
+        # sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
+        #
+        # mail.from_email = Email("info@fixxx7.amsterdam.nl")
+        # mail.reply_to = Email("mguikema@gmail.com")
+        # mail.subject = subject
+        # mail.add_content(Content("text/plain", body))
+        # sg.client.mail.send.post(request_body=mail.get())
 
         logs = [
             ['nginx error', '/var/log/nginx/error.log'],
@@ -122,7 +121,6 @@ class GebiedList(ListView):
 
 class GebiedDetail(DetailView):
     model = Gebied
-
 
 
 class ProfielList(UserPassesTestMixin, ListView):
@@ -363,10 +361,12 @@ def password_reset_new_user(request, flow):
             'extra_context': {
                 'email': request.GET.get('email'),
                 'flow': flow,
-            }
+            },
+            'post_reset_redirect': reverse_lazy('wachtwoord_instellen_klaar'),
         })
-    print(data)
-    return auth_views.password_reset(request, **data)
+
+    response = auth_views.password_reset(request, **data)
+    return response
 
 
 @staff_member_required
