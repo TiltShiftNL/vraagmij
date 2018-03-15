@@ -56,35 +56,49 @@ urlpatterns = [
     path('admin/logs/', ConfigView.as_view(), name='logs'),
 
     url('^', include('django.contrib.auth.urls')),
+
+
     url(r'^herstel-wachtwoord/$',
         password_reset_new_user,
-        {
-            'flow': 'default',
-        },
+        {'flow': 'default', },
         name='herstel_wachtwoord'
     ),
     url(r'^wachtwoord-instellen/$',
         password_reset_new_user,
-        {
-            'flow': 'new',
-        },
+        {'flow': 'new', },
         name='wachtwoord_instellen'
         ),
-    url(r'^herstel-wachtwoord/klaar/$',
+    url(r'^herstel-wachtwoord/verstuurd/$',
         auth_views.password_reset_done,
         name='herstel_wachtwoord_klaar'
+        ),
+    url(r'^wachtwoord-instellen/verstuurd/$',
+        auth_views.password_reset_done,
+        {'template_name': 'registration/password_reset_done_new.html'},
+        name='wachtwoord_instellen_klaar'
     ),
     url(r'^bevestig-wachtwoord-herstel/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         auth_views.password_reset_confirm,
-        {
-            'post_reset_redirect': reverse_lazy('herstel_wachtwoord_afgerond'),
-        },
+        {'post_reset_redirect': reverse_lazy('herstel_wachtwoord_afgerond'), },
         name='bevestig_herstel'
     ),
+    url(r'^bevestig-wachtwoord-instellen/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        auth_views.password_reset_confirm,
+        {
+            'post_reset_redirect': reverse_lazy('herstel_wachtwoord_afgerond'),
+            'template_name': 'registration/password_reset_confirm_new.html',
+        },
+        name='bevestig_instellen'
+        ),
     url(r'^wachtwoord-herstel-afgerond/',
         auth_views.password_reset_complete,
         name='herstel_wachtwoord_afgerond',
     ),
+    url(r'^wachtwoord-instellen-afgerond/',
+        auth_views.password_reset_complete,
+        {'template_name': 'registration/password_reset_complete_new.html'},
+        name='herstel_wachtwoord_afgerond',
+        ),
     url(r'^api/', include(router.urls)),
 
 ]

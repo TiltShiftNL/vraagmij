@@ -152,7 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'jeugdzorg.User'
 USERNAME_FIELD = 'email'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profiel/bewerken/'
 LOGIN_URL = '/login/'
 
 

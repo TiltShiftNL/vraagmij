@@ -35,6 +35,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY jeugdzorg/crontab /etc/cron.d/crontab
 COPY jeugdzorg/update_regelingen.sh /usr/local/bin/update_regelingen.sh
+COPY jeugdzorg/check_user_activity.sh /usr/local/bin/check_user_activity.sh
 # COPY project_env.sh /root/project_env.sh
 
 RUN usermod -a -G root www-data
@@ -44,6 +45,7 @@ RUN newgrp root
 # RUN chmod 777 /root/project_env.sh
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 RUN chmod 777 /usr/local/bin/update_regelingen.sh
+RUN chmod 777 /usr/local/bin/check_user_activity.sh
 RUN chmod 0644 /etc/cron.d/crontab
 RUN touch /var/log/cron.log
 #RUN chmod 777 /etc/nginx/sites-enabled/nginx_production.conf

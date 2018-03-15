@@ -73,13 +73,13 @@ class StadsdeelAdmin(admin.ModelAdmin):
 
 @admin.register(EventItem)
 class EventItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'value', 'timestamp', 'url', ]
-    list_filter = ['url', 'name', ]
+    list_display = ['id', 'name', 'value', 'timestamp', 'url', 'user']
+    list_filter = ['url', 'name', 'user']
 
 
 @admin.register(Profiel)
 class ProfielAdmin(admin.ModelAdmin):
-    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer']
+    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer', 'seconden_niet_gebruikt']
 
     inlines = [
         ProfielNaarRegelingInline,

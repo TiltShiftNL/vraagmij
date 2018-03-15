@@ -15,6 +15,10 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models.signals import post_save
 from .fields import EmailToLowerField
+from django.conf import settings
+from django.contrib.auth import (
+    authenticate, get_user_model, password_validation,
+)
 
 # fs = default_storage
 # fs.container_name = 'jeugdzorg_protected'
@@ -68,6 +72,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_saved = models.DateTimeField(
+        verbose_name=_('date saved'),
+        auto_now=True,
+        null=True,
+        blank=True,
+    )
     USERNAME_FIELD = 'email'
     objects = UserManager()
 
@@ -536,6 +546,12 @@ class ProfielIsZichtbaarManager(models.Manager):
 
 
 class Profiel(models.Model):
+    seconden_niet_gebruikt = models.PositiveIntegerField(
+        verbose_name=_('Seconden niet gebruikt'),
+        null=True,
+        blank=True,
+        default=0,
+    )
     zichtbaar = models.BooleanField(
         verbose_name=_('Zichtbaar'),
         help_text=_('Haal het vinkje, als je wil dat dit profiel onzichtbaar is voor andere.'),
@@ -711,13 +727,13 @@ class EventItem(models.Model):
         null=True,
         blank=True,
     )
-    # user = models.ForeignKey(
-    #     to='jeugdzorg.User',
-    #     verbose_name=_('Gebruiker'),
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True,
-    # )
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        verbose_name=_('Gebruiker'),
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = _('Gebruikers gedrag')

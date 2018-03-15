@@ -16,6 +16,11 @@ from .fields import *
 from django.forms.utils import ErrorList
 from itertools import groupby
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth import (
+    authenticate, get_user_model, password_validation,
+)
+UserModel = get_user_model()
+
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
@@ -36,9 +41,17 @@ class MailAPIPasswordResetForm(PasswordResetForm):
     def send_mail(self, subject_template_name, email_template_name,
                   context, from_email, to_email, html_email_template_name=None):
         mail = Mail()
+        print(to_email)
+        try:
+            context.update({
+                'profiel': User.objects.get(email=to_email).profiel
+            })
+        except:
+            pass
         subject = loader.render_to_string(subject_template_name, context)
         subject = "".join(subject.splitlines())
         body = loader.render_to_string(email_template_name, context)
+        print(body)
         #body = 'body'#loader.render_to_string(email_template_name, context)
         html_body = ''
         if html_email_template_name is not None:
