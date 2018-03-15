@@ -2,7 +2,7 @@
   
     <ul class="shortcuts medium-show">
         {% for gebied in gebieden %}
-            {% if gebied.profiel_set.all %}
+            {% if gebied.profielen_zichtbaar %}
                 <li><a href="#gebied-{{ gebied.id }}" data-decorator="scroll">{{ gebied }}</a></li>
             {% endif %}
         {% endfor %}
@@ -13,11 +13,11 @@
         
         {% for gebied in gebieden %}
     
-            {% if gebied.profiel_set.all %}
+            {% if gebied.profielen_zichtbaar %}
                 <div class="group">
                     <h2 class="shortcut" id="gebied-{{ gebied.id }}">{{ gebied.naam }}</h2>
                     <ul class="contacten cards">
-                        {% for profiel in gebied.profiel_set.all %}
+                        {% for profiel in gebied.profielen_zichtbaar %}
                             <li>{% include 'snippets/contact.html' with item=profiel %}</li>
                         {% endfor %}
                     </ul>

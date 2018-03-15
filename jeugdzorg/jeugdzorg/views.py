@@ -379,20 +379,23 @@ def password_reset_confirm_new_user(request, uidb64=None, token=None):
     }
 
     response = auth_views.password_reset_confirm(request, uidb64=uidb64, token=token, **data)
-    if not response.context_data.get('form').is_valid():
+
+    if issubclass(HttpResponseRedirect, response.__class__):
         messages.add_message(
             request,
             messages.INFO,
             "Je wachtwoord is ingesteld. Log in met je nieuwe wachtwoord en vul daarna je profiel aan."
         )
-    else:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "Er ging iets mis. Let op de vereisten voor een nieuw wachtwoord."
-        )
+    elif request.method == 'POST':
+        if not response.context_data.get('form').is_valid():
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Er ging iets mis. Let op de vereisten voor een nieuw wachtwoord."
+            )
 
     return response
+
 
 @staff_member_required
 def dump_jeugdzorg(request):

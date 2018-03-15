@@ -702,6 +702,11 @@ class Gebied(models.Model):
     def __str__(self):
         return self.naam
 
+    def profielen_zichtbaar(self):
+        # print()
+        return []
+        #return self.profiel_set.filter(profiel__zichtbaar=True)
+
     def first_letter(self):
         return self.naam and self.naam[0].upper() or ''
 

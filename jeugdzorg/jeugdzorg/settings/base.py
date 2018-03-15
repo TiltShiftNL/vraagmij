@@ -155,6 +155,7 @@ USERNAME_FIELD = 'email'
 LOGIN_REDIRECT_URL = '/profiel/bewerken/'
 LOGIN_URL = '/login/'
 
+PASSWORD_RESET_TIMEOUT_DAYS = 7
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
