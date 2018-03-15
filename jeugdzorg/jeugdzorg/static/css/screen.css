@@ -294,7 +294,9 @@ body {
   border-radius: 50%;
   overflow: hidden;
   background-color: #d8d8d8;
-  transition: all .3s; }
+  transition: all .3s;
+  background-size: cover;
+  background-position: 50% 50%; }
 .icon-avatar:before, .icon-avatar:after {
   content: '';
   position: absolute;
@@ -312,6 +314,8 @@ body {
   top: 64%;
   height: 70%;
   width: 69%; }
+.icon-avatar[style*="background-image"]:before, .icon-avatar[style*="background-image"]:after {
+  display: none; }
 
 .icon-external {
   position: relative;
@@ -1547,11 +1551,7 @@ hr {
   position: relative;
   width: 100%;
   height: 0;
-  padding-top: 100%;
-  background-size: cover;
-  background-position: 50% 50%; }
-.contact-avatar span[style*="background-image"]:before, .contact-avatar span[style*="background-image"]:after {
-  display: none; }
+  padding-top: 100%; }
 
 .contact {
   position: relative;
@@ -1564,11 +1564,14 @@ hr {
 .contact dt.contact-functie, .contact dt.contact-organisatie, .contact dt.contact-gebied {
   display: none; }
 .contact dt.contact-functie + dd, .contact dt.contact-organisatie + dd, .contact dt.contact-gebied + dd {
-  color: rgba(51, 51, 51, 0.8); }
+  color: rgba(51, 51, 51, 0.8);
+  padding-right: calc(1em + 8rem); }
 .contact .contact-naam, .contact dt.contact-naam + dd {
   line-height: 1;
   font-size: 2.4rem;
   margin: 0 0 .5em 0; }
+.contact dt.contact-functie + dd, .contact dt.contact-organisatie + dd, .contact dt.contact-gebied dt.contact-naam + dd {
+  padding-right: calc(1em + 8rem); }
 .contact .contact-avatar {
   width: 8rem;
   position: absolute;

@@ -111,7 +111,15 @@
     width: 69%;
   }
   
+  background-size: cover;
+  background-position: 50% 50%;
   
+  &[style*="background-image"] {
+    &:before, &:after {
+      display: none;
+    }
+  }
+
 }
 
 .icon-external {
