@@ -43,7 +43,7 @@ urlpatterns = [
     path('thema/<slug:slug>/regeling/<int:pk>/', RegelingDetail.as_view(), {'sub_view': 'themas'}, name='detail_regeling'),
     path('contacten/', ProfielList.as_view(), name='contacten'),
     path('contact/<int:pk>/', ProfielDetail.as_view(), name='detail_contact'),
-    path('profiel/bewerken', ProfielUpdateView.as_view(), name='update_profiel'),
+    path('profiel/bewerken/', ProfielUpdateView.as_view(), name='update_profiel'),
 
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
