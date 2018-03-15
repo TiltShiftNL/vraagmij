@@ -371,11 +371,11 @@ def password_reset_new_user(request, flow):
     return response
 
 
-def password_reset_confirm_new_user(request):
+def password_reset_confirm_new_user(request, uidb64=None, token=None):
     # context =
     data = {}
 
-    response = auth_views.password_reset_confirm(request, **data)
+    response = auth_views.password_reset_confirm(request, uidb64=None, token=None, **data)
     messages.add_message(request, messages.INFO, "Je wachtwoord is ingesteld.")
 
     return response
