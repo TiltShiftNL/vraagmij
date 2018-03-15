@@ -290,7 +290,7 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
     def get_success_url(self):
         if self.request.POST.get('submit'):
             return self.request.POST.get('submit')
-        return reverse_lazy('update_profiel')
+        return reverse_lazy('contacten')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
