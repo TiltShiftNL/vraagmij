@@ -373,10 +373,14 @@ def password_reset_new_user(request, flow):
 
 def password_reset_confirm_new_user(request, uidb64=None, token=None):
     # context =
-    data = {}
+    data = {
+        'post_reset_redirect': reverse_lazy('login'),
+        'template_name': 'registration/password_reset_confirm_new.html',
+    }
 
-    response = auth_views.password_reset_confirm(request, uidb64=None, token=None, **data)
-    messages.add_message(request, messages.INFO, "Je wachtwoord is ingesteld.")
+    response = auth_views.password_reset_confirm(request, uidb64=uidb64, token=token, **data)
+    if request.method == 'POST':
+        messages.add_message(request, messages.INFO, "Je wachtwoord is ingesteld.")
 
     return response
 

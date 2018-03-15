@@ -19,6 +19,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
+from django.contrib.auth.forms import SetPasswordForm
 UserModel = get_user_model()
 
 
@@ -40,40 +41,49 @@ class MailAPIPasswordResetForm(PasswordResetForm):
 
     def send_mail(self, subject_template_name, email_template_name,
                   context, from_email, to_email, html_email_template_name=None):
-        mail = Mail()
-        print(to_email)
-        try:
-            context.update({
-                'profiel': User.objects.get(email=to_email).profiel
-            })
-        except:
-            pass
-        subject = loader.render_to_string(subject_template_name, context)
-        subject = "".join(subject.splitlines())
+
         body = loader.render_to_string(email_template_name, context)
         print(body)
-        #body = 'body'#loader.render_to_string(email_template_name, context)
-        html_body = ''
-        if html_email_template_name is not None:
-            html_body = loader.render_to_string(html_email_template_name, context)
 
-        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-        # from_email = Email(from_email)
-        # to_email = Email(to_email)
+        if settings.ENV != 'develop':
+            mail = Mail()
+            print(to_email)
+            try:
+                context.update({
+                    'profiel': User.objects.get(email=to_email).profiel
+                })
+            except:
+                pass
+            subject = loader.render_to_string(subject_template_name, context)
+            subject = "".join(subject.splitlines())
+            #body = 'body'#loader.render_to_string(email_template_name, context)
+            html_body = ''
+            if html_email_template_name is not None:
+                html_body = loader.render_to_string(html_email_template_name, context)
 
-        mail.from_email = Email("info@fixxx7.amsterdam.nl")
-        mail.reply_to = Email(to_email)
-        mail.subject = subject
+            sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
+            # from_email = Email(from_email)
+            # to_email = Email(to_email)
 
-        #mail.add_content(Content("text/plain", body))
-        #mail.add_content(Content("text/html", html_body))
+            mail.from_email = Email("info@fixxx7.amsterdam.nl")
+            mail.reply_to = Email(to_email)
+            mail.subject = subject
 
-        mail = Mail(Email('info@fixxx7.amsterdam.nl'), subject, Email(to_email), Content("text/plain", body))
-        # print(response.status_code)
-        # print(response.body)
-        # print(response.headers)
+            #mail.add_content(Content("text/plain", body))
+            #mail.add_content(Content("text/html", html_body))
 
-        sg.client.mail.send.post(request_body=mail.get())
+            mail = Mail(Email('info@fixxx7.amsterdam.nl'), subject, Email(to_email), Content("text/plain", body))
+            # print(response.status_code)
+            # print(response.body)
+            # print(response.headers)
+
+            sg.client.mail.send.post(request_body=mail.get())
+
+
+# class SetPasswordNewForm(SetPasswordForm):
+#     def save(self, commit=True):
+#         messages.add_message(self.request, messages.INFO, "Je wachtwoord is ingesteld.")
+#         return super().save(commit)
 
 
 class RegelingModelForm(forms.ModelForm):
