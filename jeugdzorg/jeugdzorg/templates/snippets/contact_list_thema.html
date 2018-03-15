@@ -2,7 +2,7 @@
   
     <ul class="shortcuts medium-show">
         {% for thema in themas %}
-            {% if thema.profiel_set.all %}
+            {% if thema.profielen_zichtbaar %}
                 <li><a href="#thema-{{ thema.id }}" data-decorator="scroll">{{ thema }}</a></li>
             {% endif %}
         {% endfor %}
@@ -13,11 +13,11 @@
         
         {% for thema in themas %}
     
-            {% if thema.profiel_set.all %}
+            {% if thema.profielen_zichtbaar %}
                 <div class="group">
                     <h2 class="shortcut" id="thema-{{ thema.id }}"><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></h2>
                     <ul class="contacten cards">
-                        {% for contact in thema.profiel_set.all %}
+                        {% for contact in thema.profielen_zichtbaar %}
                             <li>{% include 'snippets/contact.html' with item=contact %}</li>
                         {% endfor %}
                     </ul>

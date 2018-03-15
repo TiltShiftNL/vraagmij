@@ -272,7 +272,7 @@ class Thema(Sortable):
     )
 
     def profielen_zichtbaar(self):
-        return self.themanaarprofiel.filter(profiel__zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True)
 
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''
@@ -298,7 +298,7 @@ class Organisatie(models.Model):
         return self.naam
 
     def profielen_zichtbaar(self):
-        return self.organisatienaarprofiel.filter(profiel__zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True)
 
     class Meta:
         verbose_name = _('Organisatie')
@@ -701,6 +701,9 @@ class Gebied(models.Model):
 
     def __str__(self):
         return self.naam
+
+    def profielen_zichtbaar(self):
+        return self.profiel_set.filter(zichtbaar=True)
 
     def first_letter(self):
         return self.naam and self.naam[0].upper() or ''

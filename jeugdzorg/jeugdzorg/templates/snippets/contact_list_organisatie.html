@@ -5,7 +5,7 @@
         <ul class="shortcuts medium-show">
 
             {% for organisatie in organisaties reversed %}
-                {% if organisatie.profiel_set.all %}
+                {% if organisatie.profielen_zichtbaar %}
                     <li><a href="#organisatie-{{ organisatie.id }}" data-decorator="scroll" data-counter="click.list.organisatie.{{ organisatie.id }}">{{ organisatie }}</a></li>
                 {% endif %}
             {% endfor %}
@@ -16,11 +16,11 @@
         <div class="compact-columns">
 
             {% for organisatie in organisaties reversed %}
-                {% if organisatie.profiel_set.all %}
+                {% if organisatie.profielen_zichtbaar %}
                     <div class="group">
                         <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</h2>
                         <ul class="contacten cards">
-                            {% for contact in organisatie.profiel_set.all reversed %}
+                            {% for contact in organisatie.profielen_zichtbaar reversed %}
                                 <li>{% include 'snippets/contact.html' with item=contact  %}</li>
                             {% endfor %}
                         </ul>
@@ -35,7 +35,7 @@
         <ul class="shortcuts medium-show">
 
             {% for organisatie in organisaties %}
-                {% if organisatie.profiel_set.all %}
+                {% if organisatie.profielen_zichtbaar %}
                     <li><a href="#organisatie-{{ organisatie.id }}" data-decorator="scroll" data-counter="click.list.organisatie.{{ organisatie.id }}">{{ organisatie }}</a></li>
                 {% endif %}
             {% endfor %}
@@ -46,11 +46,11 @@
         <div class="compact-columns">
 
             {% for organisatie in organisaties %}
-                {% if organisatie.profiel_set.all %}
+                {% if organisatie.profielen_zichtbaar %}
                     <div class="group">
                         <h2 class="shortcut" id="organisatie-{{ organisatie.id }}">{{ organisatie.naam }}</h2>
                         <ul class="contacten cards">
-                            {% for contact in organisatie.profiel_set.all %}
+                            {% for contact in organisatie.profielen_zichtbaar %}
                                 <li>{% include 'snippets/contact.html' with item=contact  %}</li>
                             {% endfor %}
                         </ul>
