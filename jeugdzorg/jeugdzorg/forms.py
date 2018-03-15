@@ -65,14 +65,14 @@ class MailAPIPasswordResetForm(PasswordResetForm):
             # from_email = Email(from_email)
             # to_email = Email(to_email)
 
-            mail.from_email = Email("info@fixxx7.amsterdam.nl")
+            mail.from_email = Email("noreply@fixxx7.amsterdam.nl")
             mail.reply_to = Email(to_email)
             mail.subject = subject
 
             #mail.add_content(Content("text/plain", body))
             #mail.add_content(Content("text/html", html_body))
 
-            mail = Mail(Email('info@fixxx7.amsterdam.nl'), subject, Email(to_email), Content("text/plain", body))
+            mail = Mail(Email('noreply@fixxx7.amsterdam.nl'), subject, Email(to_email), Content("text/plain", body))
             # print(response.status_code)
             # print(response.body)
             # print(response.headers)
