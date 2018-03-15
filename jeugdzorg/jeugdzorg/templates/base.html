@@ -61,7 +61,7 @@
       
       {% if messages %}
           <div class="container">
-              <ul class="systeem-berichten goed">
+              <ul class="systeem-berichten">
                   {% for message in messages %}
                       <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                   {% endfor %}
