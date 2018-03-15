@@ -1014,6 +1014,7 @@ form.well .choices strong {
   width: 3rem;
   height: 3rem;
   font-size: 0;
+  text-align: center;
   background-color: #000; }
 .modal-close:before {
   content: '';
@@ -1023,6 +1024,11 @@ form.well .choices strong {
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.2); }
+.modal-close:after {
+  content: '×';
+  color: #fff;
+  font-size: 3rem;
+  line-height: 3rem; }
 
 .sort, .sort-view {
   list-style: none;
