@@ -4,7 +4,7 @@
   margin-right: -$lineHeight;
   > * {
     box-sizing: border-box;
-    padding-right: $lineHeight;
+    margin-right: $lineHeight;
     margin-bottom: $lineHeight;
     flex-basis: calc(33.33% - #{$lineHeight});
     @include large {
