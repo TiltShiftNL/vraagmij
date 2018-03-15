@@ -26,7 +26,9 @@
       {% block login %}
         <div class="nav-container">
           {% if user.is_authenticated %}
-            <p class="nav-login">Ingelogd <span class="small-hide">als </span><a href="{% url 'update_profiel' %}"><strong><i class="icon-avatar"></i> <span class="small-hide">{{ user.email }}</span></strong></a></p>
+            <p class="nav-login">Ingelogd <span class="small-hide">als </span><a href="{% url 'update_profiel' %}"><strong>
+              <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto.url }}')"{% endif %}></span>
+              <span class="small-hide">{{ user.email }}</span></strong></a></p>
             <a href="#MENU" class="nav-open" data-handler="toggle" data-counter="click.nav.open">MENU<i class="icon-menu"></i></a>
             <nav class="nav" id="MENU">
               <ul class="menu">
