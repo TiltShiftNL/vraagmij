@@ -110,7 +110,7 @@ class ProfielModelForm(forms.ModelForm):
 
         self.fields['gebied_lijst'].required = False
         gebied_lijst_choices = []
-        for k, gl in groupby(Gebied.objects.all(), lambda x: x.stadsdeel):
+        for k, gl in groupby(Gebied.objects.all().order_by('stadsdeel'), lambda x: x.stadsdeel):
             gebied_lijst_choices.append([k, [[g.id, g.naam] for g in gl]])
         self.fields['gebied_lijst'].choices = gebied_lijst_choices
 
@@ -214,6 +214,7 @@ ThemaFormSet = forms.inlineformset_factory(
     form=RegelingModelForm,
     extra=1,
 )
+
 
 class ProfielNaarThemaForm(forms.ModelForm):
     testveld = forms.CharField(label='test')

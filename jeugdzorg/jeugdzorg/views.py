@@ -369,6 +369,15 @@ def password_reset_new_user(request, flow):
     return response
 
 
+def password_reset_confirm_new_user(request):
+    # context =
+    data = {}
+
+    response = auth_views.password_reset_confirm(request, **data)
+    messages.add_message(request, messages.INFO, "Je wachtwoord is ingesteld.")
+
+    return response
+
 @staff_member_required
 def dump_jeugdzorg(request):
     sysout = sys.stdout

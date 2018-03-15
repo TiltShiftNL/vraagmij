@@ -4,7 +4,8 @@
     <figure class="contact-avatar">
       <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto.url }}')"{% endif %}></span>
     </figure>
-
+{#    staddelen#}
+{#    {{ item.stadsdeel_lijst }}#}
     <dl class="contact-meta">
       <dt class="contact-naam">naam</dt><dd><strong>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> <span>{{ item.voornaam }}</span></dd>
       {% if item.functie %}
