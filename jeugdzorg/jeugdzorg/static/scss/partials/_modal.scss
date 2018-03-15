@@ -1,0 +1,54 @@
+.modal {
+ position: fixed;
+ z-index: 100;
+ left: 0;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ padding: 2 * $padding;
+ 
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ 
+ overflow-y: auto;
+ -webkit-overflow-scrolling: touch;
+ 
+ opacity: 0;
+ transition: opacity .3s;
+ 
+ &.active {
+   opacity: 1;
+ }
+ 
+ 
+}
+.modal-inner {
+  position: relative;
+  z-index: 2;
+  padding: $padding;
+  background-color: #fff;
+  max-width: 80vw;
+}
+
+.modal-close {
+  position: fixed;
+  z-index: 1;
+  right: $padding / 2;
+  top: $padding / 2;
+  width: $padding;
+  height: $padding;
+  font-size: 0;
+  
+  background-color: #000;
+  
+  &:before {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(#000, .2);
+  }
+}

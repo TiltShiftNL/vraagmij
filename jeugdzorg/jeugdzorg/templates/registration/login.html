@@ -51,7 +51,7 @@
                 <button type="submit" class="button" data-counter="click.login.login">Inloggen</button>
                 <a href="{% url 'herstel_wachtwoord' %}" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
                 <!-- <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a> -->
-                <a href="{% url 'regelingen' %}" onclick="history.go(-1); return false;" class="left" data-counter="click.login.cancel">Annuleren</a>
+                <a href="{% url 'regelingen' %}" data-handler="modal-close back" class="left" data-counter="click.login.cancel">Annuleren</a>
             </p>
             
         </form>

@@ -60,6 +60,56 @@
       e.preventDefault();
       d.dataset.view = this.hash.substr(1);
       w.localStorage && w.localStorage.setItem('view', d.dataset.view);
+    },
+    
+    'modal': function(e){
+      e.preventDefault();
+      var 
+        el = this.hash && document.getElementById(this.hash.substring(1)),
+        url = this.href, 
+        template = '<div class="modal-inner">[[CONTENT]]</div><a href="#" class="modal-close" data-handler="modal-close">SLUITEN</a>';
+        content = false;
+        
+      var _render = function(content){
+        var modal = document.createElement('div');
+        modal.classList.add('modal');
+        modal.innerHTML = template.replace('[[CONTENT]]', content);
+        document.body.appendChild(modal);
+        setTimeout(function(){
+          modal.classList.add('active');
+        }, 300);
+      };
+        
+      if (el) {
+        content = el.innerHTML;
+      } else if (url) {
+        helpers.ajax(url, function(response){
+          if (response.status >= 200 && response.status < 400) {
+            var r = document.createElement('div');
+            r.innerHTML = response.responseText;
+            (content = r.querySelector('main')) && _render(content.innerHTML);
+          } else {
+            w.location = url;
+          }
+        });
+      } else {
+        w.location = url;
+      }
+      
+      
+    },
+    
+    'back': function(e){
+      !this.handled && history.go(-1);
+    },
+    
+    'modal-close': function(e){
+      var modal = _closest(this, '.modal');
+      if (modal) {
+        e.preventDefault();
+        this.handled = true;
+        modal.parentNode.removeChild(modal);
+      }
     }
     
   };
@@ -321,7 +371,18 @@
   };
   
   var helpers = {
-
+    'ajax': function(url, callback){
+      var request = new XMLHttpRequest();
+      
+      request.open('GET', url, true);
+      request.onload = function() {
+        callback(request);
+      }
+      
+      request.send();
+      
+    }
+    
   };
   
   d.addEventListener('click',function(t){var k,e,a=t&&t.target;if(a=_closest(a,'[data-handler]')){var r=a.getAttribute('data-handler').split(/\s+/);if('A'==a.tagName&&(t.metaKey||t.shiftKey||t.ctrlKey||t.altKey))return;for(e=0;e<r.length;e++){k=r[e].split(/[\(\)]/);handlers[k[0]]&&handlers[k[0]].call(a,t,k[1])}}});
