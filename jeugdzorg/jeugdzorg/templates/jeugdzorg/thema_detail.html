@@ -45,7 +45,7 @@
           <ul class="contacten cards">
               {% for contact in object.profielen_zichtbaar %}
                   <li>
-                      {% include "snippets/contact.html" with item=contact.profiel %}
+                      {% include "snippets/contact.html" with item=contact %}
                   </li>
               {% endfor %}
           </ul>
