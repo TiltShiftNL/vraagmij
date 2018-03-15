@@ -23,4 +23,14 @@
   &.goed {
     background-color: rgba(green, .1);
   }
+  
+  li.error {
+    color: red;
+  }
+  li.info {
+    color: green;
+  }
+  li.warning {
+    color: orange;
+  }
 }
