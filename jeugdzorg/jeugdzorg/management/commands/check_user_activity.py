@@ -31,20 +31,14 @@ class Command(BaseCommand):
         # day = 60 * 60 * 24
         treshold = 60 * 60 * 24 * 30 * 6
         for u in get_users():
-            print(u.email)
             exist = EventItem.objects.filter(**{
                 'user': u,
-                'url__endswith': '/profiel/bewerken',
-                'name': 'load.page',
+                # 'url__endswith': '/profiel/bewerken',
+                # 'name': 'load.page',
             }).order_by('-timestamp')
             if exist:
                 div = int(timezone.now().timestamp()) - int(exist[0].timestamp)/1000
                 div = round(div)
-                # print(div)
-                # div = div - (div % 60)
-                # print(div)
-                # div = div / 60
-                # print(round(div))
                 u.profiel.seconden_niet_gebruikt = div
                 u.profiel.save()
                 if div > treshold:
