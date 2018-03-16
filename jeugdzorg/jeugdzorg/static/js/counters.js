@@ -50,6 +50,12 @@
     name: 'load.page',
     value: document.title
   });
+  
+  _set({
+    name: 'user.env',
+    value: 'width.' + window.innerWidth + '.browser.' + (window.navigator ? window.navigator.userAgent : 'unknown')
+  });
+  
     
     
   var _push = function(){
