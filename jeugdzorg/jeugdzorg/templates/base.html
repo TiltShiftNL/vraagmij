@@ -1,4 +1,4 @@
-{% load static auth_tags version_tags %}<!DOCTYPE html>
+{% load static auth_tags version_tags thumbnail %}<!DOCTYPE html>
 <html lang="nl" class="no-js no-touch" data-view="normaal">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
         <div class="nav-container">
           {% if user.is_authenticated %}
             <p class="nav-login">Ingelogd <span class="small-hide">als </span><a href="{% url 'update_profiel' %}"><strong>
-              <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto.url }}')"{% endif %}></span>
+              <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span>
               <span class="small-hide">{{ user.email }}</span></strong></a></p>
             <a href="#MENU" class="nav-open" data-handler="toggle" data-counter="click.nav.open">MENU<i class="icon-menu"></i></a>
             <nav class="nav" id="MENU">
