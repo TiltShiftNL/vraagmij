@@ -73,7 +73,7 @@ class StadsdeelAdmin(admin.ModelAdmin):
 
 @admin.register(EventItem)
 class EventItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'value', 'timestamp', 'url', 'user']
+    list_display = ['id', 'name', 'value', 'timestamp', 'url', 'session_id', 'user']
     list_filter = ['url', 'name', 'user']
 
 

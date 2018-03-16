@@ -740,7 +740,7 @@ class EventItem(models.Model):
         blank=True,
     )
     session_id = models.CharField(
-        verbose_name=_('Event id'),
+        verbose_name=_('Session id'),
         max_length=255,
         null=True,
         blank=True,

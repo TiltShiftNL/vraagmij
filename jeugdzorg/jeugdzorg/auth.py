@@ -1,5 +1,6 @@
 from django.contrib.auth.models import Group
 
+
 def auth_test(user, group_name):
     group = []
     try:
