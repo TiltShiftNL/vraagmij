@@ -138,6 +138,17 @@ legend {
   margin-bottom: 1em;
   border-bottom: 1px solid rgba($textColor, .2);
   
+  small {
+    @extend .font-normal !optional;
+    font-size: $fontSmallSize;
+    vertical-align: baseline;
+    display: block;
+    
+    margin-top: .4em;
+
+    line-height: 1.2;
+    
+  }
   
 }
 fieldset {
