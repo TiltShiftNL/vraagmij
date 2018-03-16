@@ -26,9 +26,14 @@
 .modal-inner {
   position: relative;
   z-index: 2;
-  padding: $padding;
-  background-color: #fff;
+  margin: $padding / 2;
   max-width: 80vw;
+  
+  background-color: #fff;
+  
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .modal-close {
