@@ -13,7 +13,7 @@
         
         </ul>
         
-        <div class="compact-columns">
+        <div class="overzicht compact-columns">
 
             {% for organisatie in organisaties reversed %}
                 {% if organisatie.profielen_zichtbaar %}
@@ -28,6 +28,18 @@
                 {% endif %}
 
             {% endfor %}
+            
+            <div class="group">
+                <h2 class="shortcut" id="thema-overige">Overige</h2>
+                <ul class="contacten cards">
+                    {% for contact in profiel_list reversed %}
+                        {% if not contact.organisatie_lijst.all %}
+                            <li>{% include 'snippets/contact.html' with item=contact %}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            
         </div>
     
     {% else %}
@@ -43,7 +55,7 @@
         
         </ul>
         
-        <div class="compact-columns">
+        <div class="overzicht compact-columns">
 
             {% for organisatie in organisaties %}
                 {% if organisatie.profielen_zichtbaar %}
