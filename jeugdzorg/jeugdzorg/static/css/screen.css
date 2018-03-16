@@ -125,6 +125,27 @@ button::-moz-focus-inner {
   border-width: 1px;
   max-height: 1000px; }
 
+[data-count]:after {
+  content: attr(data-count);
+  display: inline-block;
+  position: relative;
+  top: -.2em;
+  font-size: .5em;
+  margin-left: 1em;
+  padding: .2em .5em;
+  text-align: center;
+  background-color: #fff;
+  color: #333; }
+
+.footer {
+  font-size: 1.4rem;
+  margin-bottom: 2.2rem; }
+.footer > *:last-child {
+  margin-bottom: 0; }
+
+.footer-well {
+  padding: 0 3rem; }
+
 html {
   font-size: 62.5%; }
 @media (max-width: 900px) {
@@ -863,6 +884,27 @@ form.well .choices strong {
   .buttons .left {
     margin-right: 0;
     margin-left: 2em; } }
+.buttons.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 2;
+  bottom: 0;
+  padding: 1.5rem 0; }
+.buttons.sticky:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: .7;
+  background: -moz-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
+  background: -webkit-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
+  background: linear-gradient(to bottom, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
+  transition: opacity .3s; }
+.buttons.sticky:hover:before {
+  opacity: 1; }
 
 .row-delete strong {
   display: inline; }
@@ -1014,9 +1056,11 @@ form.well .choices strong {
 .modal-inner {
   position: relative;
   z-index: 2;
-  padding: 3rem;
-  background-color: #fff;
-  max-width: 80vw; }
+  margin: 1.5rem;
+  max-width: 80vw;
+  background-color: #fff; }
+.modal-inner > *:last-child {
+  margin-bottom: 0; }
 
 .modal-close {
   position: fixed;
@@ -1131,12 +1175,26 @@ form.well .choices strong {
   background-color: rgba(255, 0, 0, 0.1); }
 .systeem-berichten.goed {
   background-color: rgba(0, 128, 0, 0.1); }
+.well .systeem-berichten {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1.5rem; }
 .systeem-berichten li.error {
   color: red; }
 .systeem-berichten li.info {
   color: green; }
 .systeem-berichten li.warning {
   color: orange; }
+.systeem-berichten p + ul {
+  margin-top: calc(-2.2rem + .5em); }
+.systeem-berichten ul.list li {
+  position: relative;
+  z-index: 1;
+  padding-left: 1em; }
+.systeem-berichten ul.list li:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '-'; }
 
 hr {
   height: 1px;
@@ -1495,37 +1553,37 @@ hr {
 .complete-yes ~ .regeling-aanvragen .button .icon-external:after {
   outline-color: #8ac640; }
 
-[data-view="compact"] .regelingen {
+[data-view="compact"] .overzicht .regelingen {
   display: inline;
   margin: 0; }
-[data-view="compact"] .regelingen li {
+[data-view="compact"] .overzicht .regelingen li {
   display: inline;
   margin: 0;
   padding: 0; }
-[data-view="compact"] .regeling {
+[data-view="compact"] .overzicht .regeling {
   padding: 0;
   margin: 0;
   border: none; }
-[data-view="compact"] .regeling .regeling-meta {
+[data-view="compact"] .overzicht .regeling .regeling-meta {
   margin: 0;
   border: none; }
-[data-view="compact"] .regeling .regeling-samenvatting, [data-view="compact"] .regeling .regeling-meta li {
+[data-view="compact"] .overzicht .regeling .regeling-samenvatting, [data-view="compact"] .overzicht .regeling .regeling-meta li {
   display: none; }
-[data-view="compact"] .regeling .regeling-meta .regeling-link {
+[data-view="compact"] .overzicht .regeling .regeling-meta .regeling-link {
   display: block; }
-[data-view="compact"] .regeling .regeling-meta .regeling-link:before {
+[data-view="compact"] .overzicht .regeling .regeling-meta .regeling-link:before {
   display: none; }
-[data-view="compact"] .regeling .regeling-meta .regeling-link a:hover {
+[data-view="compact"] .overzicht .regeling .regeling-meta .regeling-link a:hover {
   background-color: transparent; }
-[data-view="compact"] .regeling .regeling-titel {
+[data-view="compact"] .overzicht .regeling .regeling-titel {
   color: #333;
   padding: 0 0 .5em 0;
   margin: 0;
   background-color: transparent;
   font-size: 1.6rem; }
-[data-view="compact"] .regeling .regeling-titel i, [data-view="compact"] .regeling .regeling-titel i:before {
+[data-view="compact"] .overzicht .regeling .regeling-titel i, [data-view="compact"] .overzicht .regeling .regeling-titel i:before {
   border-color: #333; }
-[data-view="compact"] .regeling .regeling-titel i:after {
+[data-view="compact"] .overzicht .regeling .regeling-titel i:after {
   background-color: #fff; }
 
 .contacten {
@@ -1727,26 +1785,26 @@ dl.contact-meta a {
   color: #333;
   background-color: #fff; }
 
-[data-view="compact"] .contacten.cards {
+[data-view="compact"] .overzicht .contacten {
   display: inline;
   margin: 0; }
-[data-view="compact"] .contacten.cards li {
+[data-view="compact"] .overzicht .contacten li {
   display: inline;
   margin: 0;
   padding: 0; }
-[data-view="compact"] .contact {
+[data-view="compact"] .overzicht .contact {
   padding: 0 0 0 1.4em;
   margin: 0;
   background: none;
   box-shadow: none; }
-[data-view="compact"] .contact .contact-avatar {
+[data-view="compact"] .overzicht .contact .contact-avatar {
   left: 0;
   right: auto;
   top: -.3em;
   width: 1em; }
-[data-view="compact"] .contact dt.contact-naam + dd {
+[data-view="compact"] .overzicht .contact dt.contact-naam + dd {
   font-size: 1.6rem; }
-[data-view="compact"] .contact dt.contact-naam + dd ~ * {
+[data-view="compact"] .overzicht .contact dt.contact-naam + dd ~ * {
   display: none; }
 
 .themas {
@@ -1812,11 +1870,7 @@ dl.contact-meta a {
   margin-bottom: -2rem; }
 
 .login {
-  position: relative;
-  max-width: 45em;
-  margin: 0 auto;
-  padding: 3rem;
-  background-color: #f5f5f5; }
+  position: relative; }
 .login fieldset {
   padding: 0;
   border: none; }
