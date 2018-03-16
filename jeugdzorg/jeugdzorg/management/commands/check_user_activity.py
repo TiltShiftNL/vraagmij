@@ -27,6 +27,7 @@ class Command(BaseCommand):
     help = 'check user activity'
 
     def handle(self, *args, **options):
+        print('START JOB check user activity')
         # day = 60 * 60 * 24
         treshold = 60 * 60 * 24 * 30 * 6
         for u in get_users():
