@@ -21,6 +21,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic import *
 from sendgrid.helpers.mail import *
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AnonymousUser
 
 from .auth import auth_test
 from .forms import *
@@ -282,7 +283,7 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
     form_class = UserModelForm
 
     def test_func(self):
-        return self.request.user == self.get_object()
+        return auth_test(self.request.user, 'viewer')
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -338,8 +339,9 @@ class EventView(View):
         event_list = json.loads(request.body)
         for event in event_list:
             try:
+                event.update({'session_id': request.session.session_key})
                 event_item = EventItem(**event)
-                if request.user:
+                if request.user.is_authenticated:
                     event_item.user = request.user
                 event_item.save()
             except:
@@ -386,13 +388,6 @@ def password_reset_confirm_new_user(request, uidb64=None, token=None):
             messages.INFO,
             "Je wachtwoord is ingesteld. Log in met je nieuwe wachtwoord en vul daarna je profiel aan."
         )
-    elif request.method == 'POST':
-        if not response.context_data.get('form').is_valid():
-            messages.add_message(
-                request,
-                messages.ERROR,
-                "Er ging iets mis. Let op de vereisten voor een nieuw wachtwoord."
-            )
 
     return response
 

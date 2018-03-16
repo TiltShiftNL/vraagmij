@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'import_export',
     'phonenumber_field',
     'rest_framework',
+    'easy_thumbnails',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'jeugdzorg.middleware.CreateSessionKeyMiddleware',
 ]
 
 ROOT_URLCONF = 'jeugdzorg.urls'
@@ -160,7 +162,7 @@ PASSWORD_RESET_TIMEOUT_DAYS = 7
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'nl-NL'
 
 TIME_ZONE = 'UTC'
 
@@ -170,7 +172,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('nl-NL', 'Nederlands'),
+)
 
+DEFAULT_LANGUAGE = 0
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -202,9 +208,19 @@ MEDIA_URL = '/media/'
 
 DEFAULT_FROM_EMAIL = 'info@fixxx7.amsterdam.nl'
 
+# djangorestframework
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [],
+}
+
+# easy_thumbnails settings
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar_xx': {'size': (210, 210), 'crop': True},
+        'avatar_x': {'size': (160, 160), 'crop': True},
+        'avatar': {'size': (80, 80), 'crop': True},
+    },
 }
 

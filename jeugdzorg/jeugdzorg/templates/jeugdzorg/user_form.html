@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block main %}
 <div class="container">
@@ -27,11 +28,11 @@
         <div class="form-aside">
 
           <div class="contact-avatar" data-decorator="avatar">
-            <span class="icon-avatar" {% if profiel.forms.0.pasfoto.value %}style="background-image: url('{{ profiel.forms.0.pasfoto.value.url }}')"{% endif %}></span>
+            <span class="icon-avatar" {% if profiel.forms.0.pasfoto.value %}style="background-image: url('{{ profiel.forms.0.pasfoto.value|thumbnail_url:'avatar_xx' }}')"{% endif %}></span>
             
             <div class="contact-avatar-controls">
               {{ profiel.forms.0.pasfoto }}
-              <span class="contact-avatar-upload">Foto vervangen (Max. 2MB)</span>
+              <span class="contact-avatar-upload">Foto vervangen (Max. 5MB)</span>
             </div>
             
           </div>

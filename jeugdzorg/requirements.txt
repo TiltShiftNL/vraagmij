@@ -16,3 +16,4 @@ sendgrid
 djangorestframework
 markdown
 django-filter
+easy-thumbnails

@@ -639,8 +639,8 @@ class Profiel(models.Model):
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
 
-    def stadsdeel_lijst(self):
-        stadsdelen= []
+    def alle_gebieden(self):
+        out = {}
         gebied_lijst_choices = []
         for k, gl in groupby(self.gebied_lijst.all().order_by('stadsdeel'), lambda x: x.stadsdeel):
             gebied_lijst_choices.append([k, [[g.id, g.naam] for g in gl]])
@@ -740,7 +740,7 @@ class EventItem(models.Model):
         blank=True,
     )
     session_id = models.CharField(
-        verbose_name=_('Event id'),
+        verbose_name=_('Session id'),
         max_length=255,
         null=True,
         blank=True,

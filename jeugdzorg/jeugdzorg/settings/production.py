@@ -7,4 +7,6 @@ from .base import *
 DEFAULT_FILE_STORAGE = 'swift.storage.SwiftStorage'
 SWIFT_CONTAINER_NAME = 'media'
 
+THUMBNAIL_DEFAULT_STORAGE = 'swift.storage.SwiftStorage'
+
 # DEBUG = False
