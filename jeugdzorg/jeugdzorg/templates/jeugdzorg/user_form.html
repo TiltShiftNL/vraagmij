@@ -86,6 +86,9 @@
 
       <fieldset>
         <legend>Contact</legend>
+        <p class="small">
+          Waar collega zorgprofessionals mij op kunnen bereiken
+        </p>
 
         <div class="form-aside"></div>
 
@@ -106,24 +109,34 @@
       </fieldset>
       <fieldset>
         <legend>Mijn organisatie</legend>
+        
         <div class="row">
             {{ profiel.forms.0.organisatie_lijst }}
         </div>
       </fieldset>
       <fieldset>
         <legend>Mijn gebieden</legend>
+        <p class="small">
+          Waar ik werkzaam ben
+        </p>
         <div class="row">
             {{ profiel.forms.0.gebied_lijst }}
         </div>
       </fieldset>
       <fieldset>
         <legend>Thema's</legend>
+        <p class="small">
+          Waar mensen mij vragen over kunnen stellen
+        </p>
         <div class="row">
             {{ profiel.forms.0.thema_lijst }}
         </div>
       </fieldset>
       <fieldset>
         <legend>Regelingen</legend>
+        <p>
+          Waar ik verstand van heb
+        </p>
         <div class="row">
             {{ profiel.forms.0.regeling_lijst }}
         </div>
@@ -140,7 +153,7 @@
         <a href="#contact-status-help" data-handler="toggle" class="contact-status-help"><abbr title="Wat betekent dit?">?</abbr></a>
       </p>
 
-      <p class="buttons right">
+      <p class="buttons right sticky">
         <button type="submit" class="button">Opslaan</button>
         <a href="{{ request.META.HTTP_REFERER }}">Annuleren</a>
       </p>
