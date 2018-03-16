@@ -123,3 +123,35 @@
   }
   
 }
+
+[data-count]:after {
+
+  content: attr(data-count);
+  display: inline-block;
+  
+  position: relative;
+  top: -.2em;
+  
+
+  font-size: .5em;
+  margin-left: 1em;
+  padding: .2em .5em;
+  
+  text-align: center;
+  
+  background-color: #fff;
+  
+  color: $textColor;
+}
+
+.footer {
+  font-size: $fontSmallSize;
+  margin-bottom: $lineHeight;
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footer-well {
+  padding: 0 $padding;
+}
