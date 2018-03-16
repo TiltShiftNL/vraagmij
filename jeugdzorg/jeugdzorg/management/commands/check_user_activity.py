@@ -4,6 +4,7 @@ from django.db import connection
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
+from django.core.management.base import BaseCommand
 from jeugdzorg.models import EventItem
 UserModel = get_user_model()
 from django.utils import timezone
@@ -22,7 +23,7 @@ def get_users():
     return (u for u in active_users if u.has_usable_password())
 
 
-class Command(createsuperuser.Command):
+class Command(BaseCommand):
     help = 'check user activity'
 
     def handle(self, *args, **options):
