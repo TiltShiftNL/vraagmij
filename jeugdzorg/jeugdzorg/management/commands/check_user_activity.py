@@ -31,6 +31,7 @@ class Command(BaseCommand):
         # day = 60 * 60 * 24
         treshold = 60 * 60 * 24 * 30 * 6
         for u in get_users():
+            print(u.email)
             exist = EventItem.objects.filter(**{
                 'user': u,
                 'url__endswith': '/profiel/bewerken',

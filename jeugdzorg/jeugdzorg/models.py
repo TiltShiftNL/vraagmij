@@ -639,8 +639,8 @@ class Profiel(models.Model):
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
 
-    def stadsdeel_lijst(self):
-        stadsdelen= []
+    def alle_gebieden(self):
+        out = {}
         gebied_lijst_choices = []
         for k, gl in groupby(self.gebied_lijst.all().order_by('stadsdeel'), lambda x: x.stadsdeel):
             gebied_lijst_choices.append([k, [[g.id, g.naam] for g in gl]])

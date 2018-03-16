@@ -19,10 +19,15 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
+from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import SetPasswordForm
+
 UserModel = get_user_model()
 
-
+def file_size(value): # add this to some file where you can import it from
+    limit = 5 * 1024 * 1024
+    if value.size > limit:
+        raise ValidationError('De bestandsgrootte van de foto is meer dan 5M.')
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
     file = forms.FileField(
@@ -102,7 +107,7 @@ class RegelingModelForm(forms.ModelForm):
 
 
 class ProfielModelForm(forms.ModelForm):
-
+    pasfoto = forms.ImageField(required=False, validators=[file_size])
     custom_m2m = (
         ('thema_lijst', 'thema'),
         ('regeling_lijst', 'regeling'),
