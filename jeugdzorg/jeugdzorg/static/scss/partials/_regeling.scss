@@ -467,51 +467,51 @@
 }
 
 [data-view="compact"] {
-  .regelingen {
-    display: inline;
-    margin: 0;
-    li {
+  .overzicht {
+    .regelingen {
       display: inline;
       margin: 0;
-      padding: 0;
+      li {
+        display: inline;
+        margin: 0;
+        padding: 0;
+      }
     }
-  }
-  .regeling {
-    padding: 0;
-    margin: 0;
-    border: none;
-    .regeling-meta {
+    .regeling {
+      padding: 0;
       margin: 0;
       border: none;
-    }
-    .regeling-samenvatting,
-    .regeling-meta li {
-      display: none;
-    }
-    .regeling-meta .regeling-link {
-      display: block;
-      &:before {
+      .regeling-meta {
+        margin: 0;
+        border: none;
+      }
+      .regeling-samenvatting,
+      .regeling-meta li {
         display: none;
       }
-      a:hover {
-        background-color: transparent;
+      .regeling-meta .regeling-link {
+        display: block;
+        &:before {
+          display: none;
+        }
+        a:hover {
+          background-color: transparent;
+        }
       }
-    }
-    .regeling-titel {
-      color: $textColor;
-      padding: 0 0 .5em 0;
-      margin: 0;
-      background-color: transparent;
-      font-size: $fontSize;
-      i {
-        &, &:before {
-          border-color: $textColor;
+      .regeling-titel {
+        color: $textColor;
+        padding: 0 0 .5em 0;
+        margin: 0;
+        background-color: transparent;
+        font-size: $fontSize;
+        i {
+          &, &:before {
+            border-color: $textColor;
+          }
+          &:after {
+            background-color: #fff;
+          }
         }
-        &:after {
-          background-color: #fff;
-        }
-        
-//        display: none;
       }
     }
   }
