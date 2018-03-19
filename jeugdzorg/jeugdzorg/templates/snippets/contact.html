@@ -4,8 +4,7 @@
     <figure class="contact-avatar">
       <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span>
     </figure>
-{#    staddelen#}
-{#    {{ item.stadsdeel_lijst }}#}
+
     <dl class="contact-meta">
       <dt class="contact-naam">naam</dt><dd><strong>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> <span>{{ item.voornaam }}</span></dd>
       {% if item.functie %}
@@ -14,9 +13,14 @@
       {% for organisatie in item.organisatie_lijst.all %}
         <dt class="contact-organisatie">organisatie</dt><dd>{{ organisatie.naam }}</dd>
       {% endfor %}
-      {% for gebied in item.gebied_lijst.all %}
-        <dt class="contact-gebied">gebied</dt><dd>{{ gebied.naam }}</dd>
-      {% endfor %}
+      {% with alle_gebieden=item.alle_gebieden %}
+        {% for v in alle_gebieden.stadsdeel_lijst %}
+            <dt class="contact-gebied">stadsdeel</dt><dd>{{ v.naam }}</dd>
+        {% endfor %}
+        {% for v in alle_gebieden.gebied_lijst %}
+            <dt class="contact-gebied">gebied</dt><dd>{{ v.naam }}</dd>
+        {% endfor %}
+      {% endwith %}
 
     {% if item.email %}
         <dt class="contact-email">email</dt><dd data-label="email"><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ item.email }}</a></dd>
