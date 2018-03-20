@@ -27,7 +27,7 @@ from rest_framework import routers
 from .api import RegelingViewSet
 
 router = routers.DefaultRouter()
-router.register(r'regelingen', RegelingViewSet)
+router.register(r'regelingen', RegelingViewSet, base_name='regeling')
 
 urlpatterns = [
     # path('', CheckUserModel.as_view(), name='test'),

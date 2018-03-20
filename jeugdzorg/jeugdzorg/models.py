@@ -154,7 +154,6 @@ class Regeling(models.Model):
         to='Thema',
         blank=True,
     )
-
     datum_gecreeerd = models.DateTimeField(
         verbose_name=_('Datum gecreëerd'),
         auto_now_add=True,
@@ -173,11 +172,11 @@ class Regeling(models.Model):
         through_fields=('regeling', 'contact'),
     )
 
+    def voorwaarde_lijst(self):
+        return Voorwaarde.objects.all()
+
     def profielen_zichtbaar(self):
         return self.regelingnaarprofiel.filter(profiel__zichtbaar=True)
-
-    def contacten(self):
-        return self.contact.through.objects.filter(regeling=self)
 
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''
