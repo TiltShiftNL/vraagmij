@@ -1701,7 +1701,7 @@ hr {
   width: 8rem;
   margin-left: 2rem;
   margin-bottom: 0; }
-.contact dt.contact-gebied + dd {
+.contact dt.contact-gebied ~ dd {
   display: none; }
 .contact dt.contact-functie + dd {
   font-style: italic; }

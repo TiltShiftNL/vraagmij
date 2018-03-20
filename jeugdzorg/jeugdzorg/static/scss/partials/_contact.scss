@@ -79,7 +79,7 @@ dt.contact-naam + dd {
   }
   
   dt.contact-gebied {
-    & + dd {
+    & ~ dd {
       display: none;
     }
   }
