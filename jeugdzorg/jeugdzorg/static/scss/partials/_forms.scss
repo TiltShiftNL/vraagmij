@@ -324,7 +324,9 @@ form.well {
     z-index: 2;
     
     bottom: 0;
-    padding: $padding / 2 0;
+    padding-top: $padding / 2;
+    padding-bottom: $padding / 2;
+    margin-bottom: -$padding / 2;
     
     &:before {
       content: '';
@@ -335,7 +337,7 @@ form.well {
       bottom: 0;
       top: 0;
       
-      opacity: .7;
+      opacity: 1;
       
       background: -moz-linear-gradient(top, rgba($lightColor, 0) 0%, rgba($lightColor, 1) $padding / 2, rgba($lightColor, 1) 100%);
       background: -webkit-linear-gradient(top, rgba($lightColor, 0) 0%,rgba($lightColor, 1) $padding / 2, rgba($lightColor, 1) 100%);
