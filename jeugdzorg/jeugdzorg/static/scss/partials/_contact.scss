@@ -5,7 +5,7 @@
   padding: 0;
   .contact {
     margin-bottom: 0;
-    min-height: 100%;
+//    min-height: 100%;
   }
 }
 .contact-naam,
@@ -48,32 +48,31 @@ dt.contact-naam + dd {
   background-color: #f7f7f7;
   box-shadow: 0 2px 5px 0 rgba(#000, .2);
   
-  dt.contact-naam {
-    display: none;
+  min-height: 12rem;
+  dl {
+    font-size: 0;
   }
-  dt.contact-functie,
-  dt.contact-organisatie,
-  dt.contact-gebied {
-    display: none;
-    & + dd {
-      color: rgba($textColor, .8);
-      padding-right: calc(1em + 8rem);
+  
+  dt {
+    font-size: 0;
+    display: block;
+    height: 1em;
+  }
+  dd {
+    display: inline;
+    font-size: $fontSize;
+  }
+  dd + dd {
+    &:before {
+      content: ', ';
     }
   }
-  .contact-naam,
+  
+  
   dt.contact-naam + dd {
-    line-height: 1;
-    font-size: 2.4rem;
-    margin: 0 0 .5em 0;
+    font-size: 1.8rem;
   }
-  dt.contact-functie,
-  dt.contact-organisatie,
-  dt.contact-gebied
-  dt.contact-naam {
-    & + dd {
-      padding-right: calc(1em + 8rem);
-    }
-  }
+  
   
   .contact-avatar {
     width: 8rem;
@@ -88,57 +87,6 @@ dt.contact-naam + dd {
   }
 }
 dl.contact-meta {
-  display: flex;
-  flex-wrap: wrap;
-  
-  overflow: hidden;
-  
-  font-size: 1.8rem;
-
-  dd {
-    padding-right: 1em;
-    
-  }
-  .contact-naam + dd, 
-  .contact-organisatie + dd,
-  .contact-functie + dd,
-  .contact-gebied + dd {
-    flex-basis: 100%;
-  }
-  .contact-naam + dd, 
-  .contact-organisatie + dd,
-  .contact-functie + dd {
-    min-height: 1em;
-  }
-  
-  .contact-email,
-  .contact-telefoon {
-    display: none;
-    & + dd {
-      font-size: $fontSize;
-      margin-top: 2.2em;
-      position: relative;
-      padding-top: $lineHeight;
-      &:before {
-        content: attr(data-label);
-        position: absolute;
-        font-weight: 700;
-        left: 0;
-        top: 0;
-      }
-      &:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: -1em;
-        width: 100vw;
-        height: 1px;
-        background-color: $borderColor;
-      }
-      
-    }
-  }
-  
   a {
     text-decoration: none;
   }
@@ -321,6 +269,7 @@ dl.contact-meta {
       margin: 0;
       background: none;
       box-shadow: none;
+      min-height: auto;
     }
     .contact .contact-avatar {
       left: 0;
