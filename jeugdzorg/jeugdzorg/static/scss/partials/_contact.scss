@@ -5,7 +5,7 @@
   padding: 0;
   .contact {
     margin-bottom: 0;
-//    min-height: 100%;
+    min-height: 100%;
   }
 }
 .contact-naam,
@@ -45,8 +45,8 @@ dt.contact-naam + dd {
   
   padding: 2rem;
   box-sizing: border-box;
-  background-color: #f7f7f7;
-  box-shadow: 0 2px 5px 0 rgba(#000, .2);
+  background-color: $lightColor;
+  box-shadow: 0 1px 3px 0 rgba(#000, .2);
   
   dl {
     font-size: 0;
@@ -55,7 +55,6 @@ dt.contact-naam + dd {
   dt {
     font-size: 0;
     display: block;
-    height: 1em;
   }
   dd {
     display: inline;
@@ -71,8 +70,6 @@ dt.contact-naam + dd {
   dt.contact-naam + dd {
     font-size: 1.8rem;
   }
-  
-  
   .contact-avatar {
     float: right;
     width: 8rem;
@@ -80,6 +77,24 @@ dt.contact-naam + dd {
     margin-bottom: 0;
     
   }
+  
+  dt.contact-gebied {
+    & + dd {
+      display: none;
+    }
+  }
+  dt.contact-functie {
+    & + dd {
+      font-style: italic;
+    }
+  }
+  dt.contact-email {
+    margin-top: $lineHeight;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
   .contact-meta {
     margin-bottom: 0;
     width: 100%;
@@ -90,6 +105,15 @@ dt.contact-naam + dd {
     overflow: hidden;
     display: block;
     clear: both;
+  }
+  .icon-mail, .icon-phone {
+    transform: scale(.8);
+    opacity: .8;
+  }
+  a:hover {
+    .icon-mail, .icon-phone {
+      opacity: 1;
+    }
   }
 }
 dl.contact-meta {
@@ -271,22 +295,28 @@ dl.contact-meta {
       }
     }
     .contact {
-      padding: 0 0 0 1.4em;
+      padding: 0;
       margin: 0;
       background: none;
       box-shadow: none;
+      min-height: auto;
     }
     .contact .contact-avatar {
-      left: 0;
-      right: auto;
-      top: -.2em;
-      width: 1em;   
+      float: left;
+      margin: -.2em .5em 0 0;
+      padding-left: 0;
+      width: 1em;
     }
-    .contact dt.contact-naam + dd {
+    .contact dd {
       font-size: $fontSize;
-      & ~ * {
-        display: none;
-      }
+      display: none;
     }
+    .contact dt:first-child + dd {
+      display: block;
+    }
+    dt.contact-email {
+      margin-top: 0;
+    }
+    
   }
 }

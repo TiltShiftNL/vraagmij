@@ -307,3 +307,82 @@
 //    border-right: 2px solid #fff;
   }
 }
+
+.icon-mail {
+  position: relative;
+  overflow: hidden;
+  
+  display: inline-block;
+  vertical-align: middle;
+  top: -1px;
+  
+  height: 10px;
+  width: 14px;
+  
+  background-color: $lightColor;
+  border-radius: 2px;
+  border: 2px solid $textColor;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -13px;
+    right: -2px;
+    height: 0;
+    padding-top: 100%;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    border: 2px solid $textColor;
+    background-color: $lightColor;
+    transition: all .3s;
+  }
+  &:after {
+    display: none;
+  }
+  
+}
+
+.icon-phone {
+  position: relative;
+  top: -2px;
+  
+  display: inline-block;
+  vertical-align: middle;
+  
+  height: 8px;
+  width: 8px;
+  margin-left: 2px;
+  margin-right: 3px;
+  
+  border: 2px solid $textColor;
+  border-top-width: 5px;
+  border-bottom-width: 5px;
+  
+  background-color: $lightColor;
+  border-radius: 2px;
+  
+  background-color: rgba(#fff, .2);
+  
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    
+    background-color: $lightColor;
+  }
+  &:after {
+    left: 2px;
+    right: 2px;
+    top: -3px;
+    height: 1px;
+  }
+  &:before {
+    content: '';
+    left: 3px;
+    width: 2px;
+    height: 2px;
+    bottom: -3px;
+    border-radius: 50%;
+  }
+ 
+}

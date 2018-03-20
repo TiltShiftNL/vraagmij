@@ -24,9 +24,19 @@
           <dd>{{ organisatie.naam }}</dd>
         {% endfor %}
       {% endif %}
+
+      <dt class="contact-email">email</dt>
+      {% if item.email %}
+          <dd data-label="email"><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email"><i class="icon-mail"></i> {{ item.email }}</a></dd>
+      {% endif %}
+
+      {% if item.telefoonnummer %}
+          <dt class="contact-telefoon">telefoon</dt><dd data-label="telefoon"><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel"><i class="icon-phone"></i> {{ item.telefoonnummer }}</a></dd>
+      {% endif %}
+      
       
       {% with alle_gebieden=item.alle_gebieden %}
-
+      
         {% if alle_gebieden.stadsdeel_lijst %}
           <dt class="contact-gebied">stadsdeel</dt>
           {% for v in alle_gebieden.stadsdeel_lijst %}
@@ -49,14 +59,6 @@
           <dd>{{ gebied.naam }}</dd>
         {% endfor %}
       {% endif %}
-
-    {% if item.email %}
-        <dt class="contact-email">email</dt><dd data-label="email"><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ item.email }}</a></dd>
-    {% endif %}
-
-    {% if item.telefoonnummer %}
-        <dt class="contact-telefoon">telefoon</dt><dd data-label="telefoon"><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel">{{ item.telefoonnummer }}</a></dd>
-    {% endif %}
 
     </dl>
 

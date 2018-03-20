@@ -48,7 +48,7 @@ button::-moz-focus-inner {
   background-color: #f5f5f5;
   margin-bottom: 2.2rem;
   border-bottom: 1px solid #bdbdbd;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
 .well > *:last-child {
   margin-bottom: 0; }
 @media (max-width: 900px) {
@@ -471,6 +471,65 @@ body {
   bottom: auto; }
 .icon-view-compact:after {
   display: none; }
+
+.icon-mail {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  top: -1px;
+  height: 10px;
+  width: 14px;
+  background-color: #f5f5f5;
+  border-radius: 2px;
+  border: 2px solid #333; }
+.icon-mail:before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: -13px;
+  right: -2px;
+  height: 0;
+  padding-top: 100%;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  border: 2px solid #333;
+  background-color: #f5f5f5;
+  transition: all .3s; }
+.icon-mail:after {
+  display: none; }
+
+.icon-phone {
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 8px;
+  width: 8px;
+  margin-left: 2px;
+  margin-right: 3px;
+  border: 2px solid #333;
+  border-top-width: 5px;
+  border-bottom-width: 5px;
+  background-color: #f5f5f5;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.2); }
+.icon-phone:before, .icon-phone:after {
+  content: '';
+  position: absolute;
+  background-color: #f5f5f5; }
+.icon-phone:after {
+  left: 2px;
+  right: 2px;
+  top: -3px;
+  height: 1px; }
+.icon-phone:before {
+  content: '';
+  left: 3px;
+  width: 2px;
+  height: 2px;
+  bottom: -3px;
+  border-radius: 50%; }
 
 .header {
   max-width: 1400px;
@@ -1600,7 +1659,8 @@ hr {
   margin-bottom: 2.2rem;
   padding: 0; }
 .contacten .contact {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  min-height: 100%; }
 
 .contact-naam strong:after, dt.contact-naam + dd strong:after {
   content: ', '; }
@@ -1622,14 +1682,13 @@ hr {
   position: relative;
   padding: 2rem;
   box-sizing: border-box;
-  background-color: #f7f7f7;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
+  background-color: #f5f5f5;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
 .contact dl {
   font-size: 0; }
 .contact dt {
   font-size: 0;
-  display: block;
-  height: 1em; }
+  display: block; }
 .contact dd {
   display: inline;
   font-size: 1.6rem; }
@@ -1642,6 +1701,14 @@ hr {
   width: 8rem;
   margin-left: 2rem;
   margin-bottom: 0; }
+.contact dt.contact-gebied + dd {
+  display: none; }
+.contact dt.contact-functie + dd {
+  font-style: italic; }
+.contact dt.contact-email {
+  margin-top: 2.2rem; }
+.contact dt.contact-email:first-child {
+  margin-top: 0; }
 .contact .contact-meta {
   margin-bottom: 0;
   width: 100%; }
@@ -1651,6 +1718,11 @@ hr {
   overflow: hidden;
   display: block;
   clear: both; }
+.contact .icon-mail, .contact .icon-phone {
+  transform: scale(0.8);
+  opacity: .8; }
+.contact a:hover .icon-mail, .contact a:hover .icon-phone {
+  opacity: 1; }
 
 dl.contact-meta a {
   text-decoration: none; }
@@ -1774,19 +1846,23 @@ dl.contact-meta a {
   margin: 0;
   padding: 0; }
 [data-view="compact"] .overzicht .contact {
-  padding: 0 0 0 1.4em;
+  padding: 0;
   margin: 0;
   background: none;
-  box-shadow: none; }
+  box-shadow: none;
+  min-height: auto; }
 [data-view="compact"] .overzicht .contact .contact-avatar {
-  left: 0;
-  right: auto;
-  top: -.2em;
+  float: left;
+  margin: -.2em .5em 0 0;
+  padding-left: 0;
   width: 1em; }
-[data-view="compact"] .overzicht .contact dt.contact-naam + dd {
-  font-size: 1.6rem; }
-[data-view="compact"] .overzicht .contact dt.contact-naam + dd ~ * {
+[data-view="compact"] .overzicht .contact dd {
+  font-size: 1.6rem;
   display: none; }
+[data-view="compact"] .overzicht .contact dt:first-child + dd {
+  display: block; }
+[data-view="compact"] .overzicht dt.contact-email {
+  margin-top: 0; }
 
 .themas {
   list-style: none;
