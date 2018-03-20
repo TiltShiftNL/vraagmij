@@ -4,9 +4,8 @@
     <figure class="contact-avatar">
       <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span>
     </figure>
-{#    staddelen#}
-{#    {{ item.stadsdeel_lijst }}#}
     <dl class="contact-meta">
+
       {% if item.achternaam or item.voornaam %}
         <dt class="contact-naam">naam</dt>
         <dd>
@@ -14,15 +13,36 @@
             {% if item.voornaam %}<span>{{ item.voornaam }}</span>{% endif %}
         </dd>
       {% endif %}
+
       {% if item.functie %}
         <dt class="contact-functie">functie</dt><dd>{{ item.functie }}</dd>
       {% endif %}
+
       {% if item.organisatie_lijst.all %}
         <dt class="contact-organisatie">organisatie</dt>
         {% for organisatie in item.organisatie_lijst.all %}
           <dd>{{ organisatie.naam }}</dd>
         {% endfor %}
       {% endif %}
+      
+      {% with alle_gebieden=item.alle_gebieden %}
+
+        {% if alle_gebieden.stadsdeel_lijst %}
+          <dt class="contact-gebied">stadsdeel</dt>
+          {% for v in alle_gebieden.stadsdeel_lijst %}
+            <dd>{{ v.naam }}</dd>
+          {% endfor %}
+        {% endif %}
+
+        {% if alle_gebieden.gebied_lijst %}
+          <dt class="contact-gebied">gebied</dt>
+          {% for v in alle_gebieden.gebied_lijst %}
+            <dd>{{ v.naam }}</dd>
+          {% endfor %}
+        {% endif %}
+
+      {% endwith %}
+      
       {% if item.gebied_lijst.all %}
         <dt class="contact-gebied">gebied</dt>
         {% for gebied in item.gebied_lijst.all %}

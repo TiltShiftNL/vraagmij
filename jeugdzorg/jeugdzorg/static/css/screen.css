@@ -1623,8 +1623,7 @@ hr {
   padding: 2rem;
   box-sizing: border-box;
   background-color: #f7f7f7;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-  min-height: 12rem; }
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
 .contact dl {
   font-size: 0; }
 .contact dt {
@@ -1639,13 +1638,19 @@ hr {
 .contact dt.contact-naam + dd {
   font-size: 1.8rem; }
 .contact .contact-avatar {
+  float: right;
   width: 8rem;
-  position: absolute;
-  right: 2rem;
-  top: 2rem; }
+  margin-left: 2rem;
+  margin-bottom: 0; }
 .contact .contact-meta {
   margin-bottom: 0;
   width: 100%; }
+.contact:after {
+  content: '';
+  height: 0;
+  overflow: hidden;
+  display: block;
+  clear: both; }
 
 dl.contact-meta a {
   text-decoration: none; }
@@ -1772,12 +1777,11 @@ dl.contact-meta a {
   padding: 0 0 0 1.4em;
   margin: 0;
   background: none;
-  box-shadow: none;
-  min-height: auto; }
+  box-shadow: none; }
 [data-view="compact"] .overzicht .contact .contact-avatar {
   left: 0;
   right: auto;
-  top: -.3em;
+  top: -.2em;
   width: 1em; }
 [data-view="compact"] .overzicht .contact dt.contact-naam + dd {
   font-size: 1.6rem; }
