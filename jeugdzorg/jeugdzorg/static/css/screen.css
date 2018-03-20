@@ -895,7 +895,9 @@ form.well .choices strong {
   position: -webkit-sticky;
   z-index: 2;
   bottom: 0;
-  padding: 1.5rem 0; }
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: -1.5rem; }
 .buttons.sticky:before {
   content: '';
   position: absolute;
@@ -904,7 +906,7 @@ form.well .choices strong {
   right: 0;
   bottom: 0;
   top: 0;
-  opacity: .7;
+  opacity: 1;
   background: -moz-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
   background: -webkit-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
   background: linear-gradient(to bottom, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
@@ -1598,8 +1600,7 @@ hr {
   margin-bottom: 2.2rem;
   padding: 0; }
 .contacten .contact {
-  margin-bottom: 0;
-  min-height: 100%; }
+  margin-bottom: 0; }
 
 .contact-naam strong:after, dt.contact-naam + dd strong:after {
   content: ', '; }
@@ -1622,20 +1623,21 @@ hr {
   padding: 2rem;
   box-sizing: border-box;
   background-color: #f7f7f7;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2); }
-.contact dt.contact-naam {
-  display: none; }
-.contact dt.contact-functie, .contact dt.contact-organisatie, .contact dt.contact-gebied {
-  display: none; }
-.contact dt.contact-functie + dd, .contact dt.contact-organisatie + dd, .contact dt.contact-gebied + dd {
-  color: rgba(51, 51, 51, 0.8);
-  padding-right: calc(1em + 8rem); }
-.contact .contact-naam, .contact dt.contact-naam + dd {
-  line-height: 1;
-  font-size: 2.4rem;
-  margin: 0 0 .5em 0; }
-.contact dt.contact-functie + dd, .contact dt.contact-organisatie + dd, .contact dt.contact-gebied dt.contact-naam + dd {
-  padding-right: calc(1em + 8rem); }
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+  min-height: 12rem; }
+.contact dl {
+  font-size: 0; }
+.contact dt {
+  font-size: 0;
+  display: block;
+  height: 1em; }
+.contact dd {
+  display: inline;
+  font-size: 1.6rem; }
+.contact dd + dd:before {
+  content: ', '; }
+.contact dt.contact-naam + dd {
+  font-size: 1.8rem; }
 .contact .contact-avatar {
   width: 8rem;
   position: absolute;
@@ -1645,38 +1647,6 @@ hr {
   margin-bottom: 0;
   width: 100%; }
 
-dl.contact-meta {
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
-  font-size: 1.8rem; }
-dl.contact-meta dd {
-  padding-right: 1em; }
-dl.contact-meta .contact-naam + dd, dl.contact-meta .contact-organisatie + dd, dl.contact-meta .contact-functie + dd, dl.contact-meta .contact-gebied + dd {
-  flex-basis: 100%; }
-dl.contact-meta .contact-naam + dd, dl.contact-meta .contact-organisatie + dd, dl.contact-meta .contact-functie + dd {
-  min-height: 1em; }
-dl.contact-meta .contact-email, dl.contact-meta .contact-telefoon {
-  display: none; }
-dl.contact-meta .contact-email + dd, dl.contact-meta .contact-telefoon + dd {
-  font-size: 1.6rem;
-  margin-top: 2.2em;
-  position: relative;
-  padding-top: 2.2rem; }
-dl.contact-meta .contact-email + dd:before, dl.contact-meta .contact-telefoon + dd:before {
-  content: attr(data-label);
-  position: absolute;
-  font-weight: 700;
-  left: 0;
-  top: 0; }
-dl.contact-meta .contact-email + dd:after, dl.contact-meta .contact-telefoon + dd:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: -1em;
-  width: 100vw;
-  height: 1px;
-  background-color: #e2e2e2; }
 dl.contact-meta a {
   text-decoration: none; }
 
@@ -1802,7 +1772,8 @@ dl.contact-meta a {
   padding: 0 0 0 1.4em;
   margin: 0;
   background: none;
-  box-shadow: none; }
+  box-shadow: none;
+  min-height: auto; }
 [data-view="compact"] .overzicht .contact .contact-avatar {
   left: 0;
   right: auto;

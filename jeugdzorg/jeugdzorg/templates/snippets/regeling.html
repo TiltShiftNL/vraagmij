@@ -10,8 +10,13 @@
       {% if regeling.profielen_zichtbaar %}
           <li><a href="{% url 'detail_regeling' regeling.id %}#contacten"><strong>{{ regeling.profielen_zichtbaar|length }}</strong> contact{% if regeling.profielen_zichtbaar|length != 1 %}en{% endif %}</a></li>
       {% endif %}
-    
-    <li class="regeling-link"><a href="{% url 'detail_regeling' regeling.id %}">Meer details</a>
+      <li class="regeling-link">
+        {% if sub_view == 'thema' %}
+          <a href="{% url 'detail_thema_regeling' thema.slug regeling.id %}">Meer details</a>
+        {% else %}
+          <a href="{% url 'detail_regeling' regeling.id %}">Meer details</a>
+        {% endif %}
+      </li>
   </ul>
 
 </div>

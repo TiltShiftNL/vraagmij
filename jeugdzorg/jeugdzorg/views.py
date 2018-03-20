@@ -85,6 +85,8 @@ class RegelingList(ListView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+        data.update(self.kwargs);
+        
         data['beeld'] = self.request.GET.get('beeld', 'alfabet')
         data['ordening'] = self.request.GET.get('ordening', 'oplopend')
         
@@ -105,15 +107,31 @@ class RegelingDetail(DetailView):
       data = super().get_context_data(**kwargs)
       data.update(self.kwargs);
       
+      # TODO: Mauricify
+      data['parent'] = self.request.path.split('/regeling/')[0] + '/'
+      
       return data
 
 
 class ThemaList(ListView):
     model = Thema
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data.update(self.kwargs);
+        
+        return data
+    
 
 
 class ThemaDetail(DetailView):
     model = Thema
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data.update(self.kwargs);
+        
+        return data
 
 
 class GebiedList(ListView):
@@ -133,6 +151,8 @@ class ProfielList(UserPassesTestMixin, ListView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+        data.update(self.kwargs);
+        
         data['beeld'] = self.request.GET.get('beeld', 'alfabet')
         data['ordening'] = self.request.GET.get('ordening', 'oplopend')
 

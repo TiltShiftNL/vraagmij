@@ -7,16 +7,28 @@
 {#    staddelen#}
 {#    {{ item.stadsdeel_lijst }}#}
     <dl class="contact-meta">
-      <dt class="contact-naam">naam</dt><dd><strong>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> <span>{{ item.voornaam }}</span></dd>
+      {% if item.achternaam or item.voornaam %}
+        <dt class="contact-naam">naam</dt>
+        <dd>
+            {% if item.achternaam %}<strong>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> {% endif %}
+            {% if item.voornaam %}<span>{{ item.voornaam }}</span>{% endif %}
+        </dd>
+      {% endif %}
       {% if item.functie %}
         <dt class="contact-functie">functie</dt><dd>{{ item.functie }}</dd>
       {% endif %}
-      {% for organisatie in item.organisatie_lijst.all %}
-        <dt class="contact-organisatie">organisatie</dt><dd>{{ organisatie.naam }}</dd>
-      {% endfor %}
-      {% for gebied in item.gebied_lijst.all %}
-        <dt class="contact-gebied">gebied</dt><dd>{{ gebied.naam }}</dd>
-      {% endfor %}
+      {% if item.organisatie_lijst.all %}
+        <dt class="contact-organisatie">organisatie</dt>
+        {% for organisatie in item.organisatie_lijst.all %}
+          <dd>{{ organisatie.naam }}</dd>
+        {% endfor %}
+      {% endif %}
+      {% if item.gebied_lijst.all %}
+        <dt class="contact-gebied">gebied</dt>
+        {% for gebied in item.gebied_lijst.all %}
+          <dd>{{ gebied.naam }}</dd>
+        {% endfor %}
+      {% endif %}
 
     {% if item.email %}
         <dt class="contact-email">email</dt><dd data-label="email"><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email">{{ item.email }}</a></dd>
