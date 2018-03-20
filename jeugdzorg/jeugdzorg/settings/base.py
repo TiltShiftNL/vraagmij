@@ -210,6 +210,8 @@ DEFAULT_FROM_EMAIL = 'info@fixxx7.amsterdam.nl'
 
 # djangorestframework
 REST_FRAMEWORK = {
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+            'rest_framework.serializers.HyperlinkedModelSerializer',
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [],
