@@ -156,7 +156,7 @@ body, .font-normal, legend small, [type="text"], [type="search"], [type="email"]
   font-size: 1.6rem;
   font-family: "AvenirNextLTW01-Regular", verdana, sans-serif; }
 
-.bold, legend, dl.contact-extended, b, strong {
+.bold, legend, dl.contact-extended, .ken-ik span, b, strong {
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif; }
 
 body {
@@ -530,6 +530,15 @@ body {
   height: 2px;
   bottom: -3px;
   border-radius: 50%; }
+
+.icon-ken-ik {
+  font-style: normal;
+  position: relative;
+  z-index: 1;
+  display: inline-block; }
+.icon-ken-ik:before {
+  content: '⭑';
+  font-family: arial; }
 
 .header {
   max-width: 1400px;
@@ -1757,8 +1766,7 @@ hr {
   transition: all .3s; }
 .contact.active {
   z-index: 2;
-  margin-right: -10rem;
-  outline: 2000px solid rgba(51, 51, 51, 0.1); }
+  margin-right: -10rem; }
 .contact.active .contact-meta {
   padding-right: 20rem;
   min-height: 13rem; }
@@ -2054,6 +2062,70 @@ dl.contact-extended .contact-regeling ~ dd {
   padding: 0; }
 .thema .thema-meta {
   margin-bottom: -2rem; }
+
+.ken-ik {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  text-decoration: none; }
+.ken-ik span {
+  opacity: 0;
+  position: absolute;
+  font-size: 1.2rem;
+  right: 0;
+  bottom: 90%;
+  margin-bottom: -.5em;
+  margin-right: 1em;
+  background-color: #6db5d6;
+  color: #fff;
+  padding: .4em .6em;
+  display: inline-block;
+  white-space: nowrap;
+  transition: all .3s; }
+.ken-ik span:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: .7em;
+  bottom: -.3em;
+  width: 1em;
+  height: 1em;
+  background-color: #6db5d6;
+  transform: rotate(45deg); }
+.ken-ik .icon-ken-ik {
+  color: #333;
+  line-height: 4rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 1rem;
+  font-size: 4rem;
+  line-height: 4.8rem; }
+.ken-ik .icon-ken-ik:before {
+  color: #333; }
+.ken-ik:hover span {
+  opacity: 1;
+  bottom: 100%; }
+.ken-ik:hover .icon-ken-ik:before {
+  transition: all .3s;
+  color: rgba(109, 181, 214, 0.4); }
+
+.regeling .ken-ik .icon-ken-ik:before {
+  color: #fff; }
+
+.regeling .ken-ik, .contact .ken-ik, .thema .ken-ik {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  transition: all .3s; }
+.regeling:hover .ken-ik, .contact:hover .ken-ik, .thema:hover .ken-ik {
+  z-index: 5;
+  opacity: .1; }
+.regeling:hover .ken-ik:hover, .contact:hover .ken-ik:hover, .thema:hover .ken-ik:hover {
+  opacity: 1; }
 
 .login {
   position: relative; }

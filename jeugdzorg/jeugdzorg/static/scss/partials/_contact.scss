@@ -165,7 +165,6 @@ dt.contact-naam + dd {
   &.active {
     z-index: 2;
     margin-right: -10rem;
-    outline: 2000px solid rgba($textColor, .1);
     .contact-meta {
       padding-right: 20rem;
       min-height: 13rem;
