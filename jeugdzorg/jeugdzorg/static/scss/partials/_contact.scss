@@ -42,6 +42,8 @@ dt.contact-naam + dd {
 .contact {
   
   position: relative;
+  transition: margin .3s;
+  z-index: 1;
   
   padding: 2rem;
   box-sizing: border-box;
@@ -71,21 +73,28 @@ dt.contact-naam + dd {
     font-size: 1.8rem;
   }
   .contact-avatar {
-    float: right;
-    width: 8rem;
-    margin-left: 2rem;
-    margin-bottom: 0;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
     
-  }
-  
-  dt.contact-gebied {
-    & ~ dd {
-      display: none;
+    width: 8rem;
+    
+    [data-view="normaal"] & {
+      transition: width .3s;
     }
   }
+  
   dt.contact-functie {
     & + dd {
       font-style: italic;
+    }
+  }
+  dt.contact-email,
+  dt.contact-telefoon {
+    & + dd {
+      &:before {
+        content: '';
+      }
     }
   }
   dt.contact-email {
@@ -97,7 +106,9 @@ dt.contact-naam + dd {
   
   .contact-meta {
     margin-bottom: 0;
-    width: 100%;
+    padding-right: 10rem;
+    min-height: 8rem;
+    transition: all .3s;
   }
   &:after {
     content: '';
@@ -115,10 +126,149 @@ dt.contact-naam + dd {
       opacity: 1;
     }
   }
+  
+  .contact-meer-details {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 0;
+    background-color: rgba($textColor, 0);
+    transition: background-color .3s;
+    
+    text-decoration: none;
+    
+    &:hover {
+      background-color: rgba($textColor, 0.05);
+    }
+    
+    &:before {
+      content: '×';
+      
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+
+      font-size: 4rem;
+      font-weight: 700;
+      
+      opacity: 0;
+      transition: all .3s;
+    }
+  }
+  &.active {
+    z-index: 2;
+    margin-right: -10rem;
+    outline: 2000px solid rgba($textColor, .1);
+    .contact-meta {
+      padding-right: 20rem;
+      min-height: 13rem;
+    }
+    .contact-avatar {
+      width: 14rem;
+//      right: 5rem;
+    }
+    .contact-meer-details {
+      left: auto;
+      width: 44px;
+      height: 44px;
+      &:before {
+        opacity: 1;
+      }
+      &:hover {
+        background-color: rgba($textColor, 0);
+        &:before {
+          color: $accentColor;
+        }
+      }
+      
+    }
+  }
+}
+.js .contact-extended {
+  max-height: 0;
+  padding-top: 0;
+  overflow: hidden;
+  transition: all .3s;
+//  transition-delay: .4s;
+  z-index: 3;
+}
+.js .active {
+  .contact-extended {
+    padding-top: 3rem;
+    max-height: 2000px;
+  }
 }
 dl.contact-meta {
   a {
+    position: relative;
+    z-index: 3;
     text-decoration: none;
+    background-color: rgba($textColor, 0);
+    transition: all .3s;
+    display: inline-block;
+    padding: .4em .6em;
+    margin: -.2em -.6em;
+    &:hover {
+      z-index: 4;
+      background-color: rgba($textColor, .05);
+    }
+  }
+}
+dl.contact-extended {
+  position: relative;
+  z-index: 2;
+
+  line-height: 1.2;
+  @extend .bold !optional;
+  
+  margin: 0 -1rem 0 0;
+  
+  box-sizing: border-box;
+  padding-top: 3rem;
+  
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    top: 3rem;
+    border-bottom: 1px solid $borderColor;
+  }
+  
+  a {
+    display: block;
+    background-color: rgba($textColor, .1);
+    padding: .4em .6em;
+    text-decoration: none;
+    transition: all .3s;
+    &:hover {
+      color: #fff;
+      background-color: rgba($textColor, 1);
+    }
+  }
+  dt {
+    display: block;
+    text-transform: capitalize;
+    font-size: $fontSize;
+    margin-top: 3rem;
+  }
+  dd {
+    font-size: $fontSmallSize;
+    display: inline-block;
+    margin: 1rem 1rem 0 0;
+    &:before {
+      display: none;
+    }
+  }
+  .contact-regeling ~ dd {
+    display: block;
   }
 }
 
@@ -174,6 +324,11 @@ dl.contact-meta {
     bottom: -1.5em;
     pointer-events: none;
   }
+}
+.contact-acties {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .contact-status {
@@ -283,6 +438,11 @@ dl.contact-meta {
   }
 }
 
+.contact-ken-ik {
+  display: none;
+}
+
+
 [data-view="compact"] {
   .overzicht {
     .contacten {
@@ -300,11 +460,27 @@ dl.contact-meta {
       background: none;
       box-shadow: none;
       min-height: auto;
+      padding-left: 1.4em;
+    }
+    .contact-meta {
+      min-height: auto;
+      padding-right: 0;
+      a {
+        padding: 0;
+        margin: 0;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+    .contact .contact-acties {
+      display: none;
     }
     .contact .contact-avatar {
-      float: left;
-      margin: -.2em .5em 0 0;
-      padding-left: 0;
+      left: 0;
+      top: -.1em;
+      margin: 0;
+      right: auto;
       width: 1em;
     }
     .contact dd {

@@ -1,9 +1,10 @@
 {% load static thumbnail %}
-<div class="contact">
+<div class="contact" id="contact-{{ item.id }}">
 
     <figure class="contact-avatar">
       <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span>
     </figure>
+
     <dl class="contact-meta">
 
       {% if item.achternaam or item.voornaam %}
@@ -34,32 +35,42 @@
           <dt class="contact-telefoon">telefoon</dt><dd data-label="telefoon"><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel"><i class="icon-phone"></i> {{ item.telefoonnummer }}</a></dd>
       {% endif %}
       
+    </dl>
+    
+    <dl class="contact-extended">
       
+      {% if item.thema_lijst.all %}
+        <dt class="contact-thema">thema's</dt>
+        {% for thema in item.thema_lijst.all %}
+          <dd><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></dd>
+        {% endfor %}
+      {% endif %}
+
       {% with alle_gebieden=item.alle_gebieden %}
-      
-        {% if alle_gebieden.stadsdeel_lijst %}
-          <dt class="contact-gebied">stadsdeel</dt>
+        {% if alle_gebieden.stadsdeel_lijst or alle_gebieden.gebied_lijst %}
+          <dt class="contact-gebied">gebieden</dt>
           {% for v in alle_gebieden.stadsdeel_lijst %}
             <dd>{{ v.naam }}</dd>
           {% endfor %}
         {% endif %}
-
-        {% if alle_gebieden.gebied_lijst %}
-          <dt class="contact-gebied">gebied</dt>
-          {% for v in alle_gebieden.gebied_lijst %}
-            <dd>{{ v.naam }}</dd>
-          {% endfor %}
-        {% endif %}
-
+        {% for v in alle_gebieden.gebied_lijst %}
+          <dd>{{ v.naam }}</dd>
+        {% endfor %}
       {% endwith %}
       
-      {% if item.gebied_lijst.all %}
-        <dt class="contact-gebied">gebied</dt>
-        {% for gebied in item.gebied_lijst.all %}
-          <dd>{{ gebied.naam }}</dd>
+      {% if item.regeling_lijst.all %}
+        <dt class="contact-regeling">regelingen</dt>
+        {% for regeling in item.regeling_lijst.all %}
+          <dd><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></dd>
         {% endfor %}
       {% endif %}
-
+      
+      
     </dl>
+    
+    <ul class="contact-acties">
+      <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="toggle">Details</a></li>
+      <li><a href="#" class="contact-ken-ik" data-handler="ken-ik" data-item-id="{{ item.id }}">Ken ik</a></li>
+    </ul>
 
 </div>
