@@ -640,18 +640,18 @@ class Profiel(models.Model):
     is_zichtbaar = ProfielIsZichtbaarManager()
 
     def alle_gebieden(self):
-        out = {}
-        gebied_lijst_choices = []
+        out = {
+            'gebied_lijst': [],
+            'stadsdeel_lijst': [],
+        }
         for k, gl in groupby(self.gebied_lijst.all().order_by('stadsdeel'), lambda x: x.stadsdeel):
-            gebied_lijst_choices.append([k, [[g.id, g.naam] for g in gl]])
-        for gl in gebied_lijst_choices:
-            print(gl[0])
-            print(len(gl[1]))
-            print(Gebied.objects.filter(stadsdeel=gl[0]).count())
-            print('---')
-            if Gebied.objects.filter(stadsdeel=gl[0]).count() == len(gl[1]):
-                stadsdelen.append(gl[0])
-        return stadsdelen
+            items = [g for g in gl]
+            if Gebied.objects.filter(stadsdeel=k).count() == len(items):
+                out['stadsdeel_lijst'].append(k)
+            else:
+                for gebied in items:
+                    out['gebied_lijst'].append(gebied)
+        return out
 
     def first_letter(self):
         return self.achternaam and self.achternaam[0].upper() or ''
@@ -700,6 +700,11 @@ class Gebied(models.Model):
     )
 
     def __str__(self):
+        if self.stadsdeel:
+            return '%s - %s' % (
+                self.naam,
+                self.stadsdeel,
+            )
         return self.naam
 
     def profielen_zichtbaar(self):

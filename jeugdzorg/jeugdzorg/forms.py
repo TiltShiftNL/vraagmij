@@ -24,10 +24,13 @@ from django.contrib.auth.forms import SetPasswordForm
 
 UserModel = get_user_model()
 
+
 def file_size(value): # add this to some file where you can import it from
     limit = 5 * 1024 * 1024
     if value.size > limit:
-        raise ValidationError('De bestandsgrootte van de foto is meer dan 5M.')
+        print('max')
+        raise ValidationError('De bestandsgrootte van de foto is meer dan 5M.', code='invalid')
+
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
     file = forms.FileField(
@@ -107,7 +110,7 @@ class RegelingModelForm(forms.ModelForm):
 
 
 class ProfielModelForm(forms.ModelForm):
-    pasfoto = forms.ImageField(required=False, validators=[file_size])
+    #pasfoto = forms.ImageField(required=False, validators=[file_size])
     custom_m2m = (
         ('thema_lijst', 'thema'),
         ('regeling_lijst', 'regeling'),
@@ -131,6 +134,14 @@ class ProfielModelForm(forms.ModelForm):
 
         for f in self.custom_m2m:
             self.fields[f[0]].required = False
+
+    def clean_pasfoto(self):
+        value = self.cleaned_data.get('pasfoto')
+        limit = 5 * 1024 * 1024
+        if value.size > limit:
+            raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5M.', code='invalid')
+        return value
+
 
     def _save_m2m(self):
         """

@@ -347,9 +347,11 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
             if profiel.is_valid():
                 profiel.instance = self.object
                 profiel.save()
-
-        messages.add_message(self.request, messages.INFO, "Je profiel is aangepast.")
-        return super().form_valid(form)
+                messages.add_message(self.request, messages.INFO, "Je profiel is aangepast.")
+                return super().form_valid(form)
+            else:
+                print(profiel.errors)
+                return self.form_invalid(form)
 
 
 class EventView(View):

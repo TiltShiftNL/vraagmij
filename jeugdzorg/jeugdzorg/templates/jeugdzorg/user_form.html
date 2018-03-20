@@ -11,9 +11,16 @@
   </p>
 
   <div class="container container-small">
-    {% if form.errors %}
-      <div class="systeem-berichten">
+    {% if form.errors or profiel.errors %}
+      <div class="systeem-berichten{% if profiel.errors %} fout{% endif %}">
       {{ form.errors.as_ul }}
+      <ul>
+          {% for e in profiel.errors %}
+          {% for k, v in e.items %}
+              <li><a href="#id_profiel-0-{{ k }}">{{ v }}</a></li>
+          {% endfor %}
+          {% endfor %}
+            </ul>
       </div>
     {% endif %}
     <form action="{% url 'update_profiel' %}" method="post" class="well"  enctype="multipart/form-data">
@@ -29,7 +36,7 @@
 
         <div class="form-aside">
 
-          <div class="contact-avatar" data-decorator="avatar">
+          <div class="contact-avatar{% if profiel.forms.0.pasfoto.errors %} errors{% endif %}" data-decorator="avatar">
             <span class="icon-avatar" {% if profiel.forms.0.pasfoto.value %}style="background-image: url('{{ profiel.forms.0.pasfoto.value|thumbnail_url:'avatar_xx' }}')"{% endif %}></span>
             
             <div class="contact-avatar-controls">
@@ -42,9 +49,6 @@
             
         </div>
         <div class="inputs">
-            {% if object.date_saved|date:"Y-m-d|H:i:s" == object.date_joined|date:"Y-m-d|H:i:s" %}
-            Stel hier je profiel samen zodat je collega's je beter kunnen vinden.
-            {% endif %}
           <p class="row">
           {{ form.email }}
           </p>
@@ -100,7 +104,7 @@
               </label>
           </p>
           <p class="row">
-              <label>
+              <label{% if profiel.forms.0.telefoonnummer.errors %} class="errors"{% endif %}>
                   <strong>{{ profiel.forms.0.telefoonnummer.label }}</strong>
                   {{ profiel.forms.0.telefoonnummer }}
               </label>
