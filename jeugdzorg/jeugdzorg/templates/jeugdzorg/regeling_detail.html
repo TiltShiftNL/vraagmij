@@ -18,10 +18,14 @@
   <article class="regeling-detail" id="regeling-{{ regeling.id }}">
 
       <header class="regeling-header">
+        
+        {% if request.user|has_group:"editor" %}
+            <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
+        {% endif %}
+        
           <h1 class="regeling-title">
-              {% if request.user|has_group:"editor" %}
-                  <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
-              {% endif %}
+              
+              <a href="#regeling.{{ regeling.id }}" class="ken-ik" data-handler="ken-ik"><span>Hier weet ik wat van!</span> <i class="icon-ken-ik"></i></a>
 
               {{ regeling.titel }}
 

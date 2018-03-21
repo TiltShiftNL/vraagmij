@@ -535,7 +535,8 @@ body {
   font-style: normal;
   position: relative;
   z-index: 1;
-  display: inline-block; }
+  display: inline-block;
+  text-shadow: 1px 1px 0 #999999, 1px 0px 0 #999999, 1px -1px 0 #999999, 0px -1px 0 #999999, 0px 1px 0 #999999, -1px 0px 0 #999999, -1px -1px 0 #999999, -1px 1px 0 #999999; }
 .icon-ken-ik:before {
   content: '⭑';
   font-family: arial; }
@@ -1060,12 +1061,18 @@ form.well .choices strong {
 .shortcut a:hover {
   text-decoration: underline; }
 
+.tabs-container {
+  padding: 0 3rem; }
+@media (max-width: 900px) {
+  .tabs-container {
+    padding: 0 10px; } }
+
 .tabs {
   display: flex;
   justify-content: flex-start;
   list-style: none;
-  padding: 0;
   margin: 0 0 2.2rem 0;
+  padding: 0;
   border-bottom: 3px solid #e5e5e5; }
 .tabs.tabs-center {
   justify-content: center; }
@@ -2078,18 +2085,18 @@ dl.contact-extended .contact-regeling ~ dd {
   margin-right: 1em;
   background-color: #6db5d6;
   color: #fff;
-  padding: .4em .6em;
+  padding: .5em .6em;
   display: inline-block;
   white-space: nowrap;
   transition: all .3s; }
 .ken-ik span:before {
   content: '';
   position: absolute;
-  z-index: -1;
-  right: .7em;
+  z-index: 1;
+  right: .9em;
   bottom: -.3em;
-  width: 1em;
-  height: 1em;
+  width: .6em;
+  height: .6em;
   background-color: #6db5d6;
   transform: rotate(45deg); }
 .ken-ik .icon-ken-ik {
@@ -2126,6 +2133,20 @@ dl.contact-extended .contact-regeling ~ dd {
   opacity: .1; }
 .regeling:hover .ken-ik:hover, .contact:hover .ken-ik:hover, .thema:hover .ken-ik:hover {
   opacity: 1; }
+
+.contact .ken-ik {
+  top: auto;
+  bottom: 0; }
+
+.regeling-detail .ken-ik, .thema-detail .ken-ik {
+  float: right;
+  color: #6db5d6;
+  margin: -.6em 0 0 1em; }
+.regeling-detail .ken-ik .icon-ken-ik:before, .thema-detail .ken-ik .icon-ken-ik:before {
+  color: #fff; }
+
+.thema-detail .ken-ik {
+  margin-top: -.4em; }
 
 .login {
   position: relative; }

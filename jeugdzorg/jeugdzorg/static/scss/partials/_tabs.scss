@@ -1,3 +1,9 @@
+.tabs-container {
+  padding: 0 $padding;
+  @include medium {
+    padding: 0 10px;
+  }
+}
 .tabs {
   display: flex;
   justify-content: flex-start;
@@ -10,8 +16,9 @@
   }
 
   list-style: none;
-  padding: 0;
+
   margin: 0 0 $lineHeight 0;
+  padding: 0;
   
   border-bottom: 3px solid #e5e5e5;
 
