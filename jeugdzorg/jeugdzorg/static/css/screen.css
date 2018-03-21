@@ -1812,7 +1812,8 @@ dl.contact-meta a {
   transition: all .3s;
   display: inline-block;
   padding: .4em .6em;
-  margin: -.2em -.6em; }
+  margin: -.2em -.6em;
+  white-space: nowrap; }
 dl.contact-meta a:hover {
   z-index: 4;
   background-color: rgba(51, 51, 51, 0.05); }

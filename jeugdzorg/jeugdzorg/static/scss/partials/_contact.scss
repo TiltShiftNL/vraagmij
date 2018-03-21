@@ -215,6 +215,8 @@ dl.contact-meta {
     padding: .4em .6em;
     margin: -.2em -.6em;
     
+    white-space: nowrap;
+    
     &:hover {
       z-index: 4;
       background-color: rgba($textColor, .05);
