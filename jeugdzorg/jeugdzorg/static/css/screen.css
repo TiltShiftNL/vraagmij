@@ -1292,12 +1292,15 @@ hr {
 .cards {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -2.2rem; }
+  margin-left: -1.1rem;
+  margin-right: -1.1rem;
+  margin-top: -1.1rem;
+  margin-bottom: 1.1rem; }
 .cards > * {
-  box-sizing: border-box;
-  margin-right: 2.2rem;
-  margin-bottom: 2.2rem;
-  flex-basis: calc(33.33% - 2.2rem); }
+  padding: 1.1rem;
+  overflow: hidden;
+  flex-basis: calc(33.33% - 2.2rem);
+  overflow: hidden; }
 @media (max-width: 1290px) {
   .cards > * {
     flex-basis: calc(50% - 2.2rem); } }
@@ -1307,7 +1310,6 @@ hr {
 
 .regelingen {
   list-style: none;
-  margin-left: 0;
   padding: 0; }
 .regelingen .regeling {
   min-height: 100%;
@@ -1674,8 +1676,6 @@ hr {
 
 .contacten {
   list-style: none;
-  margin-left: 0;
-  margin-bottom: 2.2rem;
   padding: 0; }
 .contacten .contact {
   margin-bottom: 0;
@@ -1811,9 +1811,14 @@ dl.contact-meta a {
   background-color: rgba(51, 51, 51, 0);
   transition: all .3s;
   display: inline-block;
+  box-sizing: border-box;
   padding: .4em .6em;
   margin: -.2em -.6em;
-  white-space: nowrap; }
+  transition: all .3s;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 dl.contact-meta a:hover {
   z-index: 4;
   background-color: rgba(51, 51, 51, 0.05); }
@@ -2014,8 +2019,6 @@ dl.contact-extended .contact-regeling ~ dd {
 
 .themas {
   list-style: none;
-  margin-left: 0;
-  margin-bottom: 2.2rem;
   padding: 0; }
 .themas .thema {
   margin-bottom: 0;
@@ -2078,7 +2081,8 @@ dl.contact-extended .contact-regeling ~ dd {
   position: relative;
   width: 5rem;
   height: 5rem;
-  text-decoration: none; }
+  text-decoration: none;
+  display: none !important; }
 .ken-ik span {
   opacity: 0;
   position: absolute;
