@@ -11,7 +11,7 @@ from sendgrid.helpers.mail import *
 from django.conf import settings
 from django.template import loader
 from itertools import chain
-from .widgets import ProfielCheckboxSelectMultiple
+from .widgets import *
 from .fields import *
 from django.forms.utils import ErrorList
 from itertools import groupby
@@ -331,10 +331,10 @@ UserFormSet = forms.inlineformset_factory(
         'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices choices-full'}),
         'organisatie_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
         'thema_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
-        'gebied_lijst': ProfielCheckboxSelectMultiple(
+        'gebied_lijst': ProfielCheckboxSelectMultipleGebied(
             attrs={
                 'class': 'choices',
-            },
+            }
         )
     },
 
