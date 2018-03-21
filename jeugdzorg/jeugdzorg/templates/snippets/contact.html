@@ -45,6 +45,11 @@
           <dd><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></dd>
         {% endfor %}
       {% endif %}
+      
+      {% if item.vaardigheden %}
+        <dt class="contact-vaardigheden">vaardigheden</dt>
+        <dd>{{ item.vaardigheden|escape }}</dd>
+      {% endif %}
 
       {% with alle_gebieden=item.alle_gebieden %}
         {% if alle_gebieden.stadsdeel_lijst or alle_gebieden.gebied_lijst %}
@@ -65,11 +70,10 @@
         {% endfor %}
       {% endif %}
       
-      
     </dl>
     
-    <ul class="contact-acties">
+    <!-- <ul class="contact-acties">
       <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="contact">Details</a></li>
-    </ul>
+    </ul> -->
 
 </div>

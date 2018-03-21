@@ -160,48 +160,10 @@ dt.contact-naam + dd {
       transition: all .3s;
     }
   }
-  &.active {
-    z-index: 2;
-    margin-right: -10rem;
-    .contact-meta {
-      padding-right: 20rem;
-      min-height: 13rem;
-    }
-    .contact-avatar {
-      width: 14rem;
-//      right: 5rem;
-    }
-    .contact-meer-details {
-      left: auto;
-      width: 44px;
-      height: 44px;
-      &:before {
-        opacity: 1;
-      }
-      &:hover {
-        background-color: rgba($textColor, 0);
-        &:before {
-          color: $accentColor;
-        }
-      }
-      
-    }
-  }
 }
-.js .contact-extended {
-  max-height: 0;
-  padding-top: 0;
-  overflow: hidden;
-  transition: all .3s;
-//  transition-delay: .4s;
-  z-index: 3;
-}
-.js .active {
-  .contact-extended {
-    padding-top: 3rem;
-    max-height: 2000px;
-  }
-}
+//.js .contact-extended {
+//  display: none;
+//}
 dl.contact-meta {
   a {
     position: relative;
@@ -212,7 +174,7 @@ dl.contact-meta {
     display: inline-block;
     box-sizing: border-box;
     padding: .4em .6em;
-    margin: -.2em -.6em;
+    margin: -.4em -.6em;
     
     transition: all .3s;
     
@@ -273,7 +235,15 @@ dl.contact-extended {
       display: none;
     }
   }
-  .contact-regeling ~ dd {
+
+  dt.contact-gebied + dd + dd {
+    &:before {
+      display: inline;
+      margin-left: -1rem;
+    }
+  }
+  
+  dt.contact-regeling ~ dd {
     display: block;
   }
 }
@@ -501,4 +471,44 @@ dl.contact-extended {
     }
     
   }
+}
+
+.contact.active {
+  position: fixed;
+//  z-index: 2;
+//  margin-right: -10rem;
+//  .contact-meta {
+//    padding-right: 20rem;
+//    min-height: 13rem;
+//  }
+//  .contact-avatar {
+//    width: 14rem;
+////      right: 5rem;
+//  }
+//  .contact-meer-details {
+//    left: auto;
+//    width: 44px;
+//    height: 44px;
+//    &:before {
+//      opacity: 1;
+//    }
+//    &:hover {
+//      background-color: rgba($textColor, 0);
+//      &:before {
+//        color: $accentColor;
+//      }
+//    }
+//
+//  }
+}
+
+
+
+.contact-ghost {
+  display: none;
+  height: 5rem;
+  background-color: #ff3300;
+}
+.contact.active + .contact-ghost {
+  display: block;
 }

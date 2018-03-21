@@ -110,6 +110,35 @@
         this.handled = true;
         modal.parentNode.removeChild(modal);
       }
+    },
+    
+    'contact': function(e) {
+      var 
+        hash = this.hash.substr(1),
+        card = document.getElementById(hash);
+      if (!card) return;
+      
+      var placeholder = card.querySelector('.contact-ghost');
+      
+      if (!placeholder) {
+        placeholder = document.createElement('a');
+        placeholder.dataset.handler = 'toggle';
+        placeholder.href = this.hash;
+        placeholder.classList.add('contact-ghost');
+        card.parentNode.appendChild(placeholder);
+      }
+      
+      placeholder.style.width = card.getBoundingClientRect().width + 'px';
+      placeholder.style.height = card.getBoundingClientRect().height + 'px';
+      
+      card.classList.add('active');
+      
+      
+      // var card = this.cloneNode(true);
+      
+      
+      // card.classList.add('active');
+      // document.body.appendChild
     }
     
   };
