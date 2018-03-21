@@ -768,11 +768,27 @@ class EventItem(models.Model):
         verbose_name_plural = _("Gebruikers gedragingen")
 
 
-# class Instelling(models.Model):
-#     site = models.OneToOneField(
-#         to=Site
-#     )
-    # update_mail
+class Instelling(models.Model):
+    site = models.OneToOneField(
+        to=Site,
+        verbose_name=_('Site'),
+        on_delete=models.CASCADE,
+    )
+    update_mail_frequentie = models.CharField(
+        verbose_name=_('Update mail frequentie'),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW CMD'"),
+        max_length=30,
+        default='0 0 1 * *',
+    )
+    update_mail_content = models.TextField(
+        verbose_name=_('Update mail content'),
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = _('Instelling')
+        verbose_name_plural = _("Instellingen")
 
 # from django.apps import apps
 # from django.contrib.auth import get_user_model

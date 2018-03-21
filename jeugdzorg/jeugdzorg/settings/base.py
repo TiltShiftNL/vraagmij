@@ -26,6 +26,7 @@ POSTGRES_HOST = os.getenv("POSTGRES_HOST", "notset")
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
 SECRET_KEY = os.getenv("SECRET_KEY", "default-secret")
+SITE_ID = os.getenv("SITE_ID ", 1)
 
 # swift storage
 SWIFT_USERNAME = os.getenv("SWIFT_USERNAME")

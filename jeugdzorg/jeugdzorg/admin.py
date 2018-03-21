@@ -93,6 +93,11 @@ class ProfielAdmin(admin.ModelAdmin):
     ]
 
 
+@admin.register(Instelling)
+class InstellingAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(User)
 class UserAdmin(UserAdmin):
     list_display = ['email', 'is_active', 'is_staff', 'is_superuser', 'wijzig_profiel']
