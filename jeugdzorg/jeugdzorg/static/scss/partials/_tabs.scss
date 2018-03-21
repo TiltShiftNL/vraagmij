@@ -1,5 +1,8 @@
 .tabs-container {
+  max-width: $maxWidth;
+  box-sizing: border-box;
   padding: 0 $padding;
+  margin: 0 auto;
   @include medium {
     padding: 0 10px;
   }

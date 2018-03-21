@@ -61,13 +61,15 @@
   
   {% block tabs %}
   
-  <nav class="container tabs-container">
-      <ul class="tabs">
-          <li><a{% if sub_view == 'thema' %} class="active"{% endif %} data-counter="click.homepage.tab.themas" href="{% url 'themas' %}" data-count="{{ THEMA_COUNT }}">Thema's</a></li>
-          <li><a{% if sub_view == 'contact' %} class="active"{% endif %} data-counter="click.homepage.tab.contacten" href="{% url 'contacten' %}" data-count="{{ PROFIEL_COUNT }}">Contacten</a></li>
-          <li><a{% if sub_view == 'regeling' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}" data-count="{{ REGELING_COUNT }}">Regelingen</a></li>
-      </ul>
-      {% block sort_options %}<div class="sort"></div>{% endblock %}
+  <nav class="tabs-container">
+      <div class="container">
+          <ul class="tabs">
+              <li><a{% if sub_view == 'thema' %} class="active"{% endif %} data-counter="click.homepage.tab.themas" href="{% url 'themas' %}" data-count="{{ THEMA_COUNT }}">Thema's</a></li>
+              <li><a{% if sub_view == 'contact' %} class="active"{% endif %} data-counter="click.homepage.tab.contacten" href="{% url 'contacten' %}" data-count="{{ PROFIEL_COUNT }}">Contacten</a></li>
+              <li><a{% if sub_view == 'regeling' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}" data-count="{{ REGELING_COUNT }}">Regelingen</a></li>
+          </ul>
+          {% block sort_options %}<div class="sort"></div>{% endblock %}
+      </div>
   </nav>
   
   

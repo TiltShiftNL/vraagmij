@@ -1062,7 +1062,10 @@ form.well .choices strong {
   text-decoration: underline; }
 
 .tabs-container {
-  padding: 0 3rem; }
+  max-width: 1400px;
+  box-sizing: border-box;
+  padding: 0 3rem;
+  margin: 0 auto; }
 @media (max-width: 900px) {
   .tabs-container {
     padding: 0 10px; } }
