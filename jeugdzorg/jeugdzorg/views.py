@@ -22,6 +22,7 @@ from django.views.generic import *
 from sendgrid.helpers.mail import *
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AnonymousUser
+from django.shortcuts import get_object_or_404
 
 from .auth import auth_test
 from .forms import *
@@ -86,12 +87,12 @@ class RegelingList(ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data.update(self.kwargs);
-        
+
         data['beeld'] = self.request.GET.get('beeld', 'alfabet')
         data['ordening'] = self.request.GET.get('ordening', 'oplopend')
-        
+
         data['themas'] = Thema.objects.all
-        
+
         if data['beeld'] not in ['alfabet', 'thema', 'aanbieder']:
             data['beeld'] = 'alfabet'
 
@@ -102,26 +103,27 @@ class RegelingList(ListView):
 
 class RegelingDetail(DetailView):
     model = Regeling
-    
+
     def get_context_data(self, **kwargs):
-      data = super().get_context_data(**kwargs)
-      data.update(self.kwargs);
-      
-      # TODO: Mauricify
-      data['parent'] = self.request.path.split('/regeling/')[0] + '/'
-      
-      return data
+        data = super().get_context_data(**kwargs)
+        data.update(self.kwargs)
+
+        if data.get('slug'):
+            # TODO: Mauricify
+            data['parent'] = self.request.path.split('/regeling/')[0] + '/'
+            data['thema'] = get_object_or_404(Thema, slug=data.get('slug'))
+
+        return data
 
 
 class ThemaList(ListView):
     model = Thema
-    
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data.update(self.kwargs);
-        
+
         return data
-    
 
 
 class ThemaDetail(DetailView):
@@ -130,7 +132,7 @@ class ThemaDetail(DetailView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data.update(self.kwargs);
-        
+
         return data
 
 
@@ -152,7 +154,7 @@ class ProfielList(UserPassesTestMixin, ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data.update(self.kwargs);
-        
+
         data['beeld'] = self.request.GET.get('beeld', 'alfabet')
         data['ordening'] = self.request.GET.get('ordening', 'oplopend')
 
@@ -189,7 +191,6 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
         return data
 
     def delete(self, request, *args, **kwargs):
-
         """
         Call the delete() method on the fetched object and then redirect to the
         success URL.
@@ -204,7 +205,7 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
 class RegelingCreate(UserPassesTestMixin, CreateView):
     model = Regeling
     form_class = RegelingModelForm
-    #fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
+    # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -252,7 +253,7 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
 class RegelingUpdate(UserPassesTestMixin, UpdateView):
     model = Regeling
     form_class = RegelingModelForm
-    #fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
+    # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -440,6 +441,3 @@ def load_jeugdzorg(request):
     else:
         form = UploadJeugdzorgFixtureFileForm()
     return render(request, 'snippets/upload_fixture.html', {'form': form})
-
-
-
