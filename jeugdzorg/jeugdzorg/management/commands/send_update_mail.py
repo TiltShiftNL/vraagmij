@@ -7,4 +7,4 @@ class Command(BaseCommand):
     help = 'Send update mail'
 
     def handle(self, *args, **options):
-        pass
+        print('Send update mail')
