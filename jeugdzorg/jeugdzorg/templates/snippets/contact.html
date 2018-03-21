@@ -28,7 +28,7 @@
 
       <dt class="contact-email">email</dt>
       {% if item.email %}
-          <dd data-label="email"><a href="mailto:{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email"><i class="icon-mail"></i> {{ item.email }}</a></dd>
+          <dd data-label="email"><a href="mailto:{{ item.email }}" title="{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email"><i class="icon-mail"></i> {{ item.email }}</a></dd>
       {% endif %}
 
       {% if item.telefoonnummer %}
@@ -69,7 +69,7 @@
     </dl>
     
     <ul class="contact-acties">
-      <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="toggle">Details</a></li>
+      <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="contact">Details</a></li>
     </ul>
 
 </div>
