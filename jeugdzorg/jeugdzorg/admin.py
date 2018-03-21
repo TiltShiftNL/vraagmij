@@ -71,6 +71,11 @@ class StadsdeelAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('naam',), }
 
 
+@admin.register(Thema)
+class ThemaAdmin(admin.ModelAdmin):
+    list_display = ['titel', ]
+
+
 @admin.register(EventItem)
 class EventItemAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'value', 'timestamp', 'url', 'session_id', 'user']
