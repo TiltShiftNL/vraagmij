@@ -136,6 +136,7 @@ class ProfielModelForm(forms.ModelForm):
             self.fields[f[0]].required = False
 
         self.fields['telefoonnummer'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
+        self.fields['telefoonnummer_2'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
 
     def clean_pasfoto(self):
         value = self.cleaned_data.get('pasfoto')
@@ -323,6 +324,7 @@ UserFormSet = forms.inlineformset_factory(
         'vaardigheden',
         'email',
         'telefoonnummer',
+        'telefoonnummer_2',
         'organisatie_lijst',
         'regeling_lijst',
         'thema_lijst',

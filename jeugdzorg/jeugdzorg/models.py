@@ -572,6 +572,11 @@ class Profiel(models.Model):
         blank=True,
         null=True,
     )
+    telefoonnummer_2 = PhoneNumberField(
+        verbose_name=_('Secundair telefoonnummer'),
+        blank=True,
+        null=True,
+    )
     gebruik_email = models.BooleanField(
         verbose_name=_('Gebruik e-mailadres'),
         default=True,
