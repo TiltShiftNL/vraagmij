@@ -9,4 +9,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         with open('/etc/cron.d/crontab', 'a') as crontabfile:
             crontabfile.write('* * * * * root . /root/project_env.sh; /usr/local/bin/update_regelingen.sh >> /var/log/cron.log 2>&1\n')
-        crontabfile.write('\n')
+            crontabfile.write('\n')
