@@ -135,13 +135,14 @@ class ProfielModelForm(forms.ModelForm):
         for f in self.custom_m2m:
             self.fields[f[0]].required = False
 
+        self.fields['telefoonnummer'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
+
     def clean_pasfoto(self):
         value = self.cleaned_data.get('pasfoto')
         limit = 5 * 1024 * 1024
         if value.size > limit:
             raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5M.', code='invalid')
         return value
-
 
     def _save_m2m(self):
         """
@@ -169,6 +170,7 @@ class ProfielModelForm(forms.ModelForm):
     def save(self, commit=True):
         instance = forms.ModelForm.save(self, False)
         old_save_m2m = self.save_m2m
+
         def save_m2m():
             # todo normal m2m not saved
             old_save_m2m()
