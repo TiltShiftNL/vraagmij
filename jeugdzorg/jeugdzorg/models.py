@@ -17,6 +17,7 @@ from django.db.models.signals import post_save
 from .fields import EmailToLowerField
 from django.conf import settings
 from itertools import groupby
+from django.contrib.sites.models import Site
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
@@ -766,6 +767,12 @@ class EventItem(models.Model):
         verbose_name = _('Gebruikers gedrag')
         verbose_name_plural = _("Gebruikers gedragingen")
 
+
+# class Instelling(models.Model):
+#     site = models.OneToOneField(
+#         to=Site
+#     )
+    # update_mail
 
 # from django.apps import apps
 # from django.contrib.auth import get_user_model
