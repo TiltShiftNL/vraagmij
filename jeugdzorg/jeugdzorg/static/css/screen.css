@@ -1990,6 +1990,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   display: block; }
 [data-view="compact"] .overzicht dt.contact-email {
   margin-top: 0; }
+[data-view="compact"] .overzicht .contact-extended {
+  display: none; }
 
 .contact.active {
   position: fixed; }
