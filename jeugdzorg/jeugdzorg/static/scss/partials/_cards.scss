@@ -1,12 +1,15 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -$lineHeight;
+  margin-left: -$lineHeight / 2;
+  margin-right: -$lineHeight / 2;
+  margin-top: -$lineHeight / 2;
+  margin-bottom: $lineHeight / 2;
   > * {
-    box-sizing: border-box;
-    margin-right: $lineHeight;
-    margin-bottom: $lineHeight;
+    padding: $lineHeight / 2;
+    overflow: hidden;
     flex-basis: calc(33.33% - #{$lineHeight});
+    overflow: hidden;
     @include large {
       flex-basis: calc(50% - #{$lineHeight});
     }

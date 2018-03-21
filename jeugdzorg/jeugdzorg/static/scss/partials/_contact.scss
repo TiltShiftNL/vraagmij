@@ -1,7 +1,5 @@
 .contacten {
   list-style: none;
-  margin-left: 0;
-  margin-bottom: $lineHeight;
   padding: 0;
   .contact {
     margin-bottom: 0;
@@ -212,10 +210,16 @@ dl.contact-meta {
     background-color: rgba($textColor, 0);
     transition: all .3s;
     display: inline-block;
+    box-sizing: border-box;
     padding: .4em .6em;
     margin: -.2em -.6em;
     
+    transition: all .3s;
+    
     white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     
     &:hover {
       z-index: 4;
