@@ -60,9 +60,9 @@ class Command(BaseCommand):
                         Email(u.email),
                         Content("text/plain", body)
                     )
-                    print(body)
+                    # print(body)
 
-                    if not settings.DEBUG:
+                    if settings.ENV != 'develop':
                         sg.client.mail.send.post(request_body=mail.get())
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
