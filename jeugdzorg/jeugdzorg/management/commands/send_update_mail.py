@@ -62,6 +62,6 @@ class Command(BaseCommand):
                     o.update(data)
                     template = django_engine.from_string(site.instelling.update_mail_content)
                     body = template.render(o)
-                    
+
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
