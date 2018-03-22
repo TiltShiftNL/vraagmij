@@ -141,7 +141,7 @@ class ProfielModelForm(forms.ModelForm):
     def clean_pasfoto(self):
         value = self.cleaned_data.get('pasfoto')
         limit = 5 * 1024 * 1024
-        if value.size > limit:
+        if value and value.size > limit:
             raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5M.', code='invalid')
         return value
 
