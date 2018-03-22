@@ -407,3 +407,25 @@
     
   }
 }
+
+.icon-info {
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  margin-right: .5em;
+  background-color: #7bc6f3;
+  line-height: 4rem;
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  
+  font-style: normal;
+  
+  font-family: "Times New Roman";
+  font-weight: 700;
+  
+  &:before {
+    color: #fff;
+    content: 'i';
+  }
+}
