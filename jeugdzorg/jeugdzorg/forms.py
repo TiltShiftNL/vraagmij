@@ -11,7 +11,7 @@ from sendgrid.helpers.mail import *
 from django.conf import settings
 from django.template import loader
 from itertools import chain
-from .widgets import ProfielCheckboxSelectMultiple
+from .widgets import *
 from .fields import *
 from django.forms.utils import ErrorList
 from itertools import groupby
@@ -135,13 +135,15 @@ class ProfielModelForm(forms.ModelForm):
         for f in self.custom_m2m:
             self.fields[f[0]].required = False
 
+        self.fields['telefoonnummer'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
+        self.fields['telefoonnummer_2'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
+
     def clean_pasfoto(self):
         value = self.cleaned_data.get('pasfoto')
         limit = 5 * 1024 * 1024
         if value.size > limit:
             raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5M.', code='invalid')
         return value
-
 
     def _save_m2m(self):
         """
@@ -169,6 +171,7 @@ class ProfielModelForm(forms.ModelForm):
     def save(self, commit=True):
         instance = forms.ModelForm.save(self, False)
         old_save_m2m = self.save_m2m
+
         def save_m2m():
             # todo normal m2m not saved
             old_save_m2m()
@@ -321,6 +324,7 @@ UserFormSet = forms.inlineformset_factory(
         'vaardigheden',
         'email',
         'telefoonnummer',
+        'telefoonnummer_2',
         'organisatie_lijst',
         'regeling_lijst',
         'thema_lijst',
@@ -331,10 +335,10 @@ UserFormSet = forms.inlineformset_factory(
         'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices choices-full'}),
         'organisatie_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
         'thema_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
-        'gebied_lijst': ProfielCheckboxSelectMultiple(
+        'gebied_lijst': ProfielCheckboxSelectMultipleGebied(
             attrs={
                 'class': 'choices',
-            },
+            }
         )
     },
 

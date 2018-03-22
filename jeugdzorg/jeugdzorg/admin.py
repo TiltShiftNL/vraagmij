@@ -42,7 +42,7 @@ class ProfielInline(admin.TabularInline):
 
 @admin.register(Regeling)
 class RegelingAdmin(SortableAdmin):
-    list_display = ['titel', 'bron_veranderd']
+    list_display = ['titel', 'bron_veranderd', 'datum_gecreeerd', 'datum_opgeslagen']
 
     inlines = [
         VoorwaardeInline,
@@ -91,6 +91,11 @@ class ProfielAdmin(admin.ModelAdmin):
         ProfielNaarThemaInline,
         ProfielNaarOrganisatieInline,
     ]
+
+
+@admin.register(Instelling)
+class InstellingAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(User)

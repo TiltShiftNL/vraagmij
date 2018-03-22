@@ -13,10 +13,12 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from phonenumber_field.modelfields import PhoneNumberField
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from .fields import EmailToLowerField
 from django.conf import settings
 from itertools import groupby
+from django.contrib.sites.models import Site
+from django.core.management import call_command
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
@@ -572,6 +574,11 @@ class Profiel(models.Model):
         blank=True,
         null=True,
     )
+    telefoonnummer_2 = PhoneNumberField(
+        verbose_name=_('Secundair telefoonnummer'),
+        blank=True,
+        null=True,
+    )
     gebruik_email = models.BooleanField(
         verbose_name=_('Gebruik e-mailadres'),
         default=True,
@@ -615,6 +622,10 @@ class Profiel(models.Model):
         null=True,
         blank=True,
     )
+    hou_me_op_de_hoogte_mail = models.BooleanField(
+        verbose_name=_('Hou me op de hoogte via e-mail'),
+        default=False,
+    )
     organisatie_lijst = models.ManyToManyField(
         to='Organisatie',
         through='ProfielNaarOrganisatie',
@@ -637,6 +648,22 @@ class Profiel(models.Model):
     )
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
+
+    @property
+    def naam_volledig(self):
+        if not self.voornaam and not self.achternaam:
+            return ''
+        if not self.achternaam:
+            return '%s' % self.voornaam
+        if not self.voornaam and self.tussenvoegsel:
+            return '%s %s' % (self.tussenvoegsel, self.achternaam)
+        if not self.tussenvoegsel:
+            return '%s %s' % (self.voornaam, self.achternaam)
+        return '%s %s %s' % (
+            self.voornaam,
+            self.tussenvoegsel,
+            self.achternaam,
+        )
 
     def alle_gebieden(self):
         out = {
@@ -762,6 +789,43 @@ class EventItem(models.Model):
         verbose_name_plural = _("Gebruikers gedragingen")
 
 
+class Instelling(models.Model):
+    __original_update_mail_frequentie = None
+
+    site = models.OneToOneField(
+        to=Site,
+        verbose_name=_('Site'),
+        on_delete=models.CASCADE,
+    )
+    update_mail_frequentie = models.CharField(
+        verbose_name=_('Update mail frequentie'),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW CMD'"),
+        max_length=30,
+        default='0 0 1 * *',
+    )
+    update_mail_content = models.TextField(
+        verbose_name=_('Update mail content'),
+        null=True,
+        blank=True,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__original_update_mail_frequentie = self.update_mail_frequentie
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        data = {}
+        if self.update_mail_frequentie != self.__original_update_mail_frequentie:
+            data.update({
+                'update_fields': ['update_mail_frequentie', ]
+            })
+        super().save(force_insert, force_update, *args, **data)
+        self.__original_update_mail_frequentie = self.update_mail_frequentie
+
+    class Meta:
+        verbose_name = _('Instelling')
+        verbose_name_plural = _("Instellingen")
+
 # from django.apps import apps
 # from django.contrib.auth import get_user_model
 # from django.core.signals import setting_changed
@@ -785,4 +849,12 @@ def save_profile(sender, instance, **kwargs):
         p.achternaam = instance.last_name
         p.save()
 
+
+def save_instelling(sender, update_fields, instance, **kwargs):
+    if update_fields:
+        if 'update_mail_frequentie' in update_fields:
+            call_command('create_crontabs')
+
+
 post_save.connect(save_profile, sender=User)
+post_save.connect(save_instelling, sender=Instelling)
