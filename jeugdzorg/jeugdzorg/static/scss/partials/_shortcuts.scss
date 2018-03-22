@@ -39,13 +39,13 @@
   }
   
   @include medium {
-    height: 2em;
+    display: block;
     margin-left: -10px;
     margin-right: -10px;
     padding-left: 10px;
     padding-right: 10px;
-    overflow-y: auto;
-    padding-bottom: $padding;
+    padding-bottom: 0;
+    overflow-y: hidden;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
