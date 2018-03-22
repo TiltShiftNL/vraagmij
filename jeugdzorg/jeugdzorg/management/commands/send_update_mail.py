@@ -10,6 +10,9 @@ from django.utils import timezone
 from datetime import timedelta
 import dateutil.relativedelta
 from django.urls import reverse
+from sendgrid.helpers.mail import *
+from django.conf import settings
+import sendgrid
 
 
 class Command(BaseCommand):
@@ -18,6 +21,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         site = Site.objects.get_current()
         if site.instelling:
+            sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
             bullet = u"\u2022"
             now = timezone.now()
             now = now + dateutil.relativedelta.relativedelta(months=-1)
@@ -62,6 +66,13 @@ class Command(BaseCommand):
                     o.update(data)
                     template = django_engine.from_string(site.instelling.update_mail_content)
                     body = template.render(o)
-                    print(body.encode('utf-8'))
+                    subject = 'VraagMij - updates maand %s' % now.strftime('%B')
+                    mail = Mail(
+                        Email('noreply@fixxx7.amsterdam.nl'),
+                        subject,
+                        Email(u.email),
+                        Content("text/plain", body)
+                    )
+                    sg.client.mail.send.post(request_body=mail.get())
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
