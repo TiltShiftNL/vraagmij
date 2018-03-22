@@ -1,4 +1,5 @@
 .systeem-berichten {
+  position: relative;
   background: $lightColor;
   padding: $padding;
   list-style: none;
@@ -17,12 +18,25 @@
   ul > li:last-child {
     margin-bottom: 0;
   }
+  &.compact {
+    padding: $padding / 2;
+  }
   &.fout {
     background-color: rgba(red, .1);
   }
   &.goed {
     background-color: rgba(green, .1);
   }
+  
+  &.info {
+    font-weight: 700;
+    background-color: #d7effc;
+    &, * {
+      color: #4d96c3;
+    }
+  }
+  
+  
   
   .well & {
     background-color: rgba(#fff, .5);
@@ -53,6 +67,39 @@
         left: 0;
         top: 0;
         content: '-';
+      }
+    }
+  }
+  
+  &.has-icon {
+    padding-left: calc(#{$padding} + 44px + #{$padding});
+    &:before {
+      
+      position: absolute;
+      left: $padding;
+      top: $padding;
+      
+      content: 'i';
+      width: 4rem;
+      height: 4rem;
+      margin-right: .5em;
+      background-color: #7bc6f3;
+      line-height: 4rem;
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+  
+      font-style: normal;
+  
+      font-family: "Times New Roman";
+      font-weight: 700;
+    }
+    &.compact {
+      padding: 2.5rem $padding / 2;
+      padding-left: calc(#{$padding/2} + 4rem + #{$padding/2});
+      &:before {
+        left: $padding / 2;
+        top: $padding / 2;
       }
     }
   }
