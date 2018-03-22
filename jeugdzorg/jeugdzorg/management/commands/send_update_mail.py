@@ -36,9 +36,9 @@ class Command(BaseCommand):
                 'datum_opgeslagen__gt': now,
             })
 
-            regeling_nieuw_str = [[r.titel, '%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id}))] for r in regeling_nieuw]
-            regeling_gewijzigd_str = [[r.titel, '%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id}))] for r in regeling_gewijzigd]
-            gebruikers_nieuw_str = [[r.profiel.naam_volledig, '%s%s' % (site.domain, reverse('detail_contact', kwargs={'pk': r.id}))] for r in gebruikers_nieuw]
+            regeling_nieuw_str = [[r.titel, 'https://%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id}))] for r in regeling_nieuw]
+            regeling_gewijzigd_str = [[r.titel, 'https://%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id}))] for r in regeling_gewijzigd]
+            gebruikers_nieuw_str = [[r.profiel.naam_volledig, 'https://%s%s' % (site.domain, reverse('detail_contact', kwargs={'pk': r.id}))] for r in gebruikers_nieuw]
 
             django_engine = engines['django']
             data = {
@@ -55,11 +55,13 @@ class Command(BaseCommand):
                     body = template.render(o)
                     subject = 'VraagMij - updates maand %s' % now.strftime('%B')
                     mail = Mail(
-                        Email('noreply@fixxx7.amsterdam.nl'),
+                        Email('noreply@%s' % site.domain),
                         subject,
                         Email(u.email),
                         Content("text/plain", body)
                     )
+                    print(body)
+
                     if not settings.DEBUG:
                         sg.client.mail.send.post(request_body=mail.get())
                     print('Send mail to: %s' % u.profiel.naam_volledig)
