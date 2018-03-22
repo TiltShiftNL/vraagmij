@@ -122,12 +122,8 @@
 }
 .regeling-detail {
   position: relative;
-  padding-left: 130px;
   p, li {
     max-width: 45em;
-  }
-  @include medium {
-    padding-left: 0;
   }
 }
 
@@ -140,8 +136,9 @@
   li {
     position: relative;
     padding-left: 44px;
-    padding-right: 150px;
+
     max-width: none;
+
     &:before {
       position: absolute;
       left: 0;
@@ -160,9 +157,6 @@
       line-height: 30px;
       text-align: center;
     }
-    @include medium {
-      padding-right: 110px;
-    }
   }
   
   li {
@@ -176,222 +170,6 @@
 
 .regeling-samenvatting {
   margin-bottom: 2 * $lineHeight;
-}
-
-
-.regeling-progress {
-  $progressWidth: 88px;
-  $progressBarWidth: 4px;
-  position: relative;
-  
-  display: inline-block;
-  text-align: center;
-
-  width: $progressWidth;
-  height: $progressWidth;
-  
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: darken($lightColor, 10);
-  
-  .result {
-    position: absolute;
-    z-index: 3;
-    line-height: $progressWidth - ($progressBarWidth * 2);
-    font-weight: 700;
-    font-size: 1.2em;
-    letter-spacing: -.05em;
-    width: $progressWidth - ($progressBarWidth * 2);
-    height: $progressWidth - ($progressBarWidth * 2);
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    background-color: #fff;
-    border-radius: 50%;
-    
-    color: rgba($textColor, .3);
-    
-    transition: all .3s;
-    transition-delay: .3s;
-
-    &:after {
-      content: '%';
-      display: inline-block;
-      font-size: .6em;
-      font-weight: normal;
-      opacity: .6;
-      width: .5em;
-      margin-left: .1em;
-      vertical-align: baseline;
-    }
-  }
-
-  .yes-1,
-  .yes-2,
-  .no-1,
-  .no-2 {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    clip: rect(0, $progressWidth, $progressWidth, $progressWidth/2);
-    transform: rotate(360deg);
-    
-    span {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: $progressWidth;
-      height: $progressWidth;
-      clip: rect(0, $progressWidth / 2, $progressWidth, 0);
-      border-radius: 50%;
-      background-color: $yesColor;
-      transform: rotate(0);
-    }
-
-  }
-  .yes-2,
-  .no-2 {
-    clip: rect(0 , $progressWidth/2, $progressWidth, 0);
-    span {
-      transform: rotate(-180deg);
-    }
-  }
-  
-  .no-1,
-  .no-2 {
-    z-index: 1;
-    span {
-      background-color: $noColor;
-    }
-  }
-
-  &.started {
-    .result {
-      color: rgba($textColor, 1);
-    }
-  }
-  &.complete-yes {
-    .result {
-      color: $yesColor;
-    }
-  }
-  &.complete-no {
-    .result {
-      color: $noColor;
-    }
-  }
-
-  .regeling-detail & {
-    position: relative;
-    position: sticky;
-    position: -webkit-sticky;
-    z-index: 2;
-    display: block;
-    top: $padding;
-
-    margin-left: -130px;
-    margin-bottom: -55px;
-    
-    @include medium {
-      top: $padding / 2;
-      margin: $lineHeight auto;
-      overflow: visible;
-    }
-    
-    
-    &:before {
-      content: '';
-      position: absolute;
-      left: -$padding / 2;
-      top: -$padding / 2;
-      right: -$padding / 2;
-      bottom: -$padding / 2;
-      border-radius: 50%;
-      opacity: .8;
-      background-color: #fff;
-      
-      transition: all 2s;
-    }
-    
-  }
-}
-
-.regeling-voorwaarde-yesno {
-  position: absolute;
-  right: 0;
-  top: -.5em;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  input {
-    position: absolute;
-    left: -1000px;
-    opacity: 0;
-  }
-  label {
-    cursor: pointer;
-    padding: .5em 0;
-    display: inline-block;
-    border-radius: 3px 0 0 3px;
-    width: 3.5em;
-    text-align: center;
-    color: #000;
-    background-color: #ebeaea;
-    box-shadow: 0 2px 2px 0 rgba(#000, .2);
-    
-    transition: all .3s;
-  }
-  label ~ label {
-    border-radius: 0 3px 3px 0;
-    border-left: 1px solid rgba(#000, .2);
-  }
-  [for*="-yes"]:hover{
-    background-color: lighten($yesColor, 35);
-  }
-  [for*="-no"]:hover{
-    background-color: lighten($noColor, 15);
-  }
-
-  [id*="-no"]:checked ~ [for*="-no"]{
-    background-color: $noColor;
-    color: #fff;
-  }
-  [id*="-yes"]:checked ~ [for*="-yes"]{
-    background-color: $yesColor;
-    color: #fff;
-  }
-  [for*="-initial"] {
-    position: absolute;
-    
-    top: 0;
-    bottom: 0;
-    display: none;
-    width: 50%;
-    
-    background-color: #000;
-    opacity: 0;
-    overflow: hidden;
-    
-  }
-  [id*="-yes"]:checked ~ [for*="-initial"],
-  [id*="-no"]:checked ~ [for*="-initial"] {
-    display: block;
-  }
-  
-  [id*="-yes"]:checked ~ [for*="-initial"] {
-    left: 0;
-  }
-  
-  [id*="-no"]:checked ~ [for*="-initial"] {
-    right: 0;
-  }
-  
 }
 
 .input-volgorde,

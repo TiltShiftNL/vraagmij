@@ -315,7 +315,6 @@ body {
   border-radius: 50%;
   overflow: hidden;
   background-color: #d8d8d8;
-  transition: all .3s;
   background-size: cover;
   background-position: 50% 50%; }
 .icon-avatar:before, .icon-avatar:after {
@@ -1049,6 +1048,20 @@ form.well .choices strong {
   cursor: not-allowed; }
 .shortcuts a.disabled:hover {
   border-color: #f5f5f5; }
+@media (max-width: 900px) {
+  .shortcuts {
+    height: 2em;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-y: auto;
+    padding-bottom: 3rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap; }
+  .shortcuts li:last-child {
+    margin-right: 50vw; } }
 
 .shortcut {
   font-size: 2.2rem;
@@ -1401,13 +1414,9 @@ hr {
   transition: opacity .3s; }
 
 .regeling-detail {
-  position: relative;
-  padding-left: 130px; }
+  position: relative; }
 .regeling-detail p, .regeling-detail li {
   max-width: 45em; }
-@media (max-width: 900px) {
-  .regeling-detail {
-    padding-left: 0; } }
 
 .regeling-voorwaarden {
   list-style: none;
@@ -1418,7 +1427,6 @@ hr {
 .regeling-voorwaarden li {
   position: relative;
   padding-left: 44px;
-  padding-right: 150px;
   max-width: none; }
 .regeling-voorwaarden li:before {
   position: absolute;
@@ -1433,9 +1441,6 @@ hr {
   font-weight: 700;
   line-height: 30px;
   text-align: center; }
-@media (max-width: 900px) {
-  .regeling-voorwaarden li {
-    padding-right: 110px; } }
 .regeling-voorwaarden li {
   margin-bottom: 2.2rem; }
 
@@ -1444,154 +1449,6 @@ hr {
 
 .regeling-samenvatting {
   margin-bottom: 4.4rem; }
-
-.regeling-progress {
-  position: relative;
-  display: inline-block;
-  text-align: center;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: gainsboro; }
-.regeling-progress .result {
-  position: absolute;
-  z-index: 3;
-  line-height: 80px;
-  font-weight: 700;
-  font-size: 1.2em;
-  letter-spacing: -.05em;
-  width: 80px;
-  height: 80px;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  background-color: #fff;
-  border-radius: 50%;
-  color: rgba(51, 51, 51, 0.3);
-  transition: all .3s;
-  transition-delay: .3s; }
-.regeling-progress .result:after {
-  content: '%';
-  display: inline-block;
-  font-size: .6em;
-  font-weight: normal;
-  opacity: .6;
-  width: .5em;
-  margin-left: .1em;
-  vertical-align: baseline; }
-.regeling-progress .yes-1, .regeling-progress .yes-2, .regeling-progress .no-1, .regeling-progress .no-2 {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  clip: rect(0, 88px, 88px, 44px);
-  transform: rotate(360deg); }
-.regeling-progress .yes-1 span, .regeling-progress .yes-2 span, .regeling-progress .no-1 span, .regeling-progress .no-2 span {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 88px;
-  height: 88px;
-  clip: rect(0, 44px, 88px, 0);
-  border-radius: 50%;
-  background-color: #8ac640;
-  transform: rotate(0); }
-.regeling-progress .yes-2, .regeling-progress .no-2 {
-  clip: rect(0, 44px, 88px, 0); }
-.regeling-progress .yes-2 span, .regeling-progress .no-2 span {
-  transform: rotate(-180deg); }
-.regeling-progress .no-1, .regeling-progress .no-2 {
-  z-index: 1; }
-.regeling-progress .no-1 span, .regeling-progress .no-2 span {
-  background-color: #ff9191; }
-.regeling-progress.started .result {
-  color: #333333; }
-.regeling-progress.complete-yes .result {
-  color: #8ac640; }
-.regeling-progress.complete-no .result {
-  color: #ff9191; }
-.regeling-detail .regeling-progress {
-  position: relative;
-  position: sticky;
-  position: -webkit-sticky;
-  z-index: 2;
-  display: block;
-  top: 3rem;
-  margin-left: -130px;
-  margin-bottom: -55px; }
-@media (max-width: 900px) {
-  .regeling-detail .regeling-progress {
-    top: 1.5rem;
-    margin: 2.2rem auto;
-    overflow: visible; } }
-.regeling-detail .regeling-progress:before {
-  content: '';
-  position: absolute;
-  left: -1.5rem;
-  top: -1.5rem;
-  right: -1.5rem;
-  bottom: -1.5rem;
-  border-radius: 50%;
-  opacity: .8;
-  background-color: #fff;
-  transition: all 2s; }
-
-.regeling-voorwaarde-yesno {
-  position: absolute;
-  right: 0;
-  top: -.5em;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-.regeling-voorwaarde-yesno input {
-  position: absolute;
-  left: -1000px;
-  opacity: 0; }
-.regeling-voorwaarde-yesno label {
-  cursor: pointer;
-  padding: .5em 0;
-  display: inline-block;
-  border-radius: 3px 0 0 3px;
-  width: 3.5em;
-  text-align: center;
-  color: #000;
-  background-color: #ebeaea;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
-  transition: all .3s; }
-.regeling-voorwaarde-yesno label ~ label {
-  border-radius: 0 3px 3px 0;
-  border-left: 1px solid rgba(0, 0, 0, 0.2); }
-.regeling-voorwaarde-yesno [for*="-yes"]:hover {
-  background-color: #deefc9; }
-.regeling-voorwaarde-yesno [for*="-no"]:hover {
-  background-color: #ffdede; }
-.regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-no"] {
-  background-color: #ff9191;
-  color: #fff; }
-.regeling-voorwaarde-yesno [id*="-yes"]:checked ~ [for*="-yes"] {
-  background-color: #8ac640;
-  color: #fff; }
-.regeling-voorwaarde-yesno [for*="-initial"] {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  display: none;
-  width: 50%;
-  background-color: #000;
-  opacity: 0;
-  overflow: hidden; }
-.regeling-voorwaarde-yesno [id*="-yes"]:checked ~ [for*="-initial"], .regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-initial"] {
-  display: block; }
-.regeling-voorwaarde-yesno [id*="-yes"]:checked ~ [for*="-initial"] {
-  left: 0; }
-.regeling-voorwaarde-yesno [id*="-no"]:checked ~ [for*="-initial"] {
-  right: 0; }
 
 .input-volgorde, .input-delete {
   opacity: 0;
@@ -1699,12 +1556,12 @@ hr {
 
 .contact {
   position: relative;
-  transition: margin .3s;
-  z-index: 1;
+  z-index: 2;
   padding: 2rem;
   box-sizing: border-box;
   background-color: #f5f5f5;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
 .contact dl {
   font-size: 0; }
 .contact dt {
@@ -1722,8 +1579,6 @@ hr {
   right: 2rem;
   top: 2rem;
   width: 8rem; }
-[data-view="normaal"] .contact .contact-avatar {
-  transition: width .3s; }
 .contact dt.contact-functie + dd {
   font-style: italic; }
 .contact dt.contact-email + dd:before, .contact dt.contact-telefoon + dd:before {
@@ -1774,6 +1629,12 @@ hr {
   font-weight: 700;
   opacity: 0;
   transition: all .3s; }
+
+.js .contact-extended {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding-top: 0; }
 
 dl.contact-meta a {
   position: relative;
@@ -1976,7 +1837,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
 [data-view="compact"] .overzicht .contact-meta a:hover {
   background-color: transparent; }
 [data-view="compact"] .overzicht .contact .contact-acties {
-  display: none; }
+  opacity: 0; }
 [data-view="compact"] .overzicht .contact .contact-avatar {
   left: 0;
   top: -.1em;
@@ -1993,17 +1854,95 @@ dl.contact-extended dt.contact-regeling ~ dd {
 [data-view="compact"] .overzicht .contact-extended {
   display: none; }
 
-.contact.active {
-  position: fixed; }
+.contact.ghost {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2) inset; }
+.contact.ghost > * {
+  opacity: 0; }
 
-.contact-ghost {
+[data-view="compact"] .contact.ghost > * {
+  opacity: 1; }
+
+.modal-contact {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding-bottom: 3rem;
+  -webkit-overflow-scrolling: touch;
   display: none;
-  height: 5rem;
-  background-color: #ff3300; }
-
-.contact.active + .contact-ghost {
+  background-color: rgba(51, 51, 51, 0.2); }
+.modal-contact .contact {
+  margin-bottom: 3rem;
+  overflow: hidden;
+  min-height: 12rem; }
+.modal-contact .contact:before {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3rem;
+  background: -moz-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 100%);
+  background: -webkit-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 100%);
+  background: linear-gradient(to bottom, rgba(245, 245, 245, 0) 0%, whitesmoke 100%); }
+.modal-contact .contact-meta {
+  transition: padding 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.modal-contact .contact-avatar {
+  transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.modal-contact .modal-close {
+  right: 3rem;
+  top: 3rem;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity .3s; }
+.modal-contact .modal-close:before {
+  background-color: rgba(51, 51, 51, 0);
+  right: 2rem; }
+.modal-contact.focus .modal-close {
+  opacity: 1; }
+.modal-contact.active {
   display: block; }
 
+.modal-contact.focus .contact {
+  transform: translate3d(calc(50vw - 300px), 30px, 0) !important; }
+.modal-contact.focus .contact .contact-meer-details {
+  display: none; }
+
+.modal-contact.on .contact {
+  width: 600px !important;
+  height: auto !important; }
+.modal-contact.on .contact .contact-meta {
+  padding-right: 14rem;
+  min-height: 11rem; }
+.modal-contact.on .contact .contact-avatar {
+  width: 12rem; }
+
+.modal-contact.extended .contact .contact-extended {
+  padding-top: 3rem;
+  max-height: 2000px; }
+
+@media (max-width: 900px) {
+  .modal-contact {
+    padding: 10px; }
+  .modal-contact .contact {
+    padding: 10px; }
+  .modal-contact .contact:before {
+    display: none; }
+  .modal-contact .contact-extended, .modal-contact .contact-avatar, .modal-contact .contact-meta {
+    transition: none; }
+
+  .modal-contact.active .contact {
+    width: auto !important;
+    height: auto !important;
+    transform: none !important; }
+
+  .modal-contact .modal-close:before {
+    right: 0; } }
 .themas {
   list-style: none;
   padding: 0; }

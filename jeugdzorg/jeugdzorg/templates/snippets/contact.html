@@ -47,7 +47,7 @@
       {% endif %}
       
       {% if item.vaardigheden %}
-        <dt class="contact-vaardigheden">vaardigheden</dt>
+        <dt class="contact-vaardigheden">Bijzonderheden</dt>
         <dd>{{ item.vaardigheden|escape }}</dd>
       {% endif %}
 
@@ -70,10 +70,11 @@
         {% endfor %}
       {% endif %}
       
+      
     </dl>
     
-    <!-- <ul class="contact-acties">
+    <ul class="contact-acties">
       <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="contact">Details</a></li>
-    </ul> -->
+    </ul>
 
 </div>

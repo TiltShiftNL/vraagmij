@@ -118,214 +118,91 @@
         card = document.getElementById(hash);
       if (!card) return;
       
-      var placeholder = card.querySelector('.contact-ghost');
+      e.preventDefault();
       
-      if (!placeholder) {
-        placeholder = document.createElement('a');
-        placeholder.dataset.handler = 'toggle';
-        placeholder.href = this.hash;
-        placeholder.classList.add('contact-ghost');
-        card.parentNode.appendChild(placeholder);
+      var _position = function(){
+        
+        var placeholderBC = card.getBoundingClientRect();
+        
+        card.clone.style.transform = 'translate3d(' + placeholderBC.left + 'px, ' + placeholderBC.top + 'px, 0)';
+        
+      
+        card.clone.style.width = placeholderBC.width + 'px';
+        card.clone.style.height = placeholderBC.height + 'px';
+        
+      };
+      
+      
+      
+      if (!card.modal) {
+        card.modal = document.createElement('div');
+        card.modal.classList.add('modal-contact');
+        card.clone = card.cloneNode(true);
+        card.modal.appendChild(card.clone);
+        
+        var closeModal = document.createElement('a');
+        closeModal.classList.add('modal-close');
+        closeModal.href = this.hash;
+        closeModal.dataset.handler = 'contact';
+        
+        card.modal.appendChild(closeModal);
+        
+        card.clone.removeAttribute('id');
+        
+        document.body.appendChild(card.modal);
+        
+        
       }
+      _position();
       
-      placeholder.style.width = card.getBoundingClientRect().width + 'px';
-      placeholder.style.height = card.getBoundingClientRect().height + 'px';
-      
-      card.classList.add('active');
-      
-      
-      // var card = this.cloneNode(true);
-      
-      
-      // card.classList.add('active');
-      // document.body.appendChild
+      if (card.modal.classList.contains('active')) {
+        
+        card.modal.classList.remove('extended');
+        card.modal.classList.remove('on');
+        card.modal.classList.remove('focus');
+        card.modal.classList.remove('active');
+        card.classList.remove('ghost');
+        
+        
+        // with animation
+        
+        // d.classList.remove('has-modal-contact');
+        //
+        // card.modal.classList.remove('extended');
+        //
+        // setTimeout(function(){
+        //   card.modal.classList.remove('on');
+        //   setTimeout(function(){
+        //     card.modal.classList.remove('focus');
+        //     setTimeout(function(){
+        //       card.modal.classList.remove('active');
+        //       card.classList.remove('ghost');
+        //     }, 200);
+        //   }, 400);
+        // },300);
+        
+      } else {
+
+        card.classList.add('ghost');
+        card.modal.classList.add('active');
+        
+        setTimeout(function(){
+          card.modal.classList.add('focus');
+          setTimeout(function(){
+            card.modal.classList.add('on');
+            setTimeout(function(){
+              card.modal.classList.add('extended');
+            }, 300);
+          }, 400);
+        }, 100);
+
+      }
+
     }
     
   };
   
   var decorators = {
-    
-    'progress': function(){
-      
-
-      var 
-        el = this,
-        id = el.dataset.regelingId,
-        items = el.children,
-        prevResult = [0,0],
-        result = [0,0],
-        animation,
-        regeling = _closest(el, '.regeling-detail');
-
-      var hashIcons = {
-        yes: '1',
-        no: '0',
-        maybe: '_'
-      };
-
-      var hasAanvragen = document.getElementById('regeling-aanvragen');
-      var progress = document.createElement(hasAanvragen ? 'a' : 'span');
-      
-      if (hasAanvragen) {
-        progress.href = '#regeling-aanvragen';
-        progress.dataset.handler = 'scroll';
-      }
-      progress.classList.add('regeling-progress');
-      progress.innerHTML = '<span class="result"></span>';
-      progress.innerHTML += '<span class="yes-1"><span></span></span><span class="yes-2"><span></span></span>';
-      progress.innerHTML += '<span class="no-1"><span></span></span><span class="no-2"><span></span></span>';
-      
-      
-      regeling.insertBefore(progress, regeling.firstChild);
-
-      var 
-        resultEl = progress.querySelector('.result'),
-        yesEls = [progress.querySelector('.yes-1 span'), progress.querySelector('.yes-2 span')],
-        noEls = [progress.querySelector('.no-1 span'), progress.querySelector('.no-2 span')],
-        noEl = [progress.querySelector('.no-1'), progress.querySelector('.no-2')];
-      
-      var _update = function(y, n, t){
-        
-        resultEl.innerHTML = Math.round(y / t * 100);
-        
-        var 
-          yesResult = (y / t * 360),
-          noResult =  (n / t * 360);
-
-        _render(yesResult, noResult);
-        
-      };
-      
-      var _updateByPercentages = function(a, b) {
-        
-        resultEl.innerHTML = a;
-        
-        var 
-          yesResult = (a/100 * 360),
-          noResult =  (b/100 * 360);
-          
-        _render(yesResult, noResult);
-
-      };
-      
-      var _render = function(yesResult, noResult) {
-        yesEls[0].style.transform = 'rotate(' + Math.min(180, yesResult) + 'deg)';
-        yesEls[1].style.transform = 'rotate(' + Math.max(-180, yesResult - 360) + 'deg)';
-        
-        noEl[0].style.transform = 'rotate(' + yesResult + 'deg)';
-        noEl[1].style.transform = 'rotate(' + yesResult + 'deg)';
-        
-        noEls[0].style.transform = 'rotate(' + Math.min(180, noResult) + 'deg)';
-        noEls[1].style.transform = 'rotate(' + Math.max(-180, noResult - 360) + 'deg)';
-      };
-      
-      var _change = function(){
-        var 
-          total = items.length,
-          maybe = 0,
-          yes = 0,
-          no = 0;
-          resultHash = [];
-
-        animation && cancelAnimationFrame(animation);
-
-        resultHash.push('[');
-          
-        for (var i=0; i<items.length; i++) {
-          if (items[i].querySelectorAll('[value="yes"]:checked').length) {
-            resultHash.push(hashIcons.yes);
-            yes++;
-          }
-          else if (items[i].querySelectorAll('[value="no"]:checked').length) {
-            resultHash.push(hashIcons.no);
-            no++;
-          }
-          else if (items[i].querySelectorAll('[value="maybe"]:checked').length) {
-            resultHash.push(hashIcons.maybe);
-          }
-        }
-        resultHash.push(']');
-        // document.location.hash = resultHash.join('');
-
-        // setting counters
-        progress.dataset.counter = 'click.detail.progress.' + (hasAanvragen ? 'aanvragen' : 'indicatief') + '.total.' + total + '.yes.' + yes + '.no.' + no;
-
-        result = [Math.round(yes*100/total), Math.round(no*100/total)];
-        
-        var step = [prevResult[0] < result[0] ? 1 : -1, prevResult[1] < result[1] ? 1 : -1];
-        
-        var _animate = function(){
-          animating = false;
-          _updateByPercentages(prevResult[0], prevResult[1])
-          if (prevResult[0] != result[0]) {
-            prevResult[0] = prevResult[0] + step[0];
-            animating = true;
-          }
-          if (prevResult[1] != result[1]) {
-            prevResult[1] = prevResult[1] + step[1];
-            animating = true;
-          }
-          if (animating) {
-            animation = requestAnimationFrame(_animate);
-          }
-
-        }
-        
-        window.requestAnimationFrame ? _animate() : _update(yes, no, total);
-        
-        
-        progress.classList[(yes + no == total) ? 'add' : 'remove']('complete');
-        progress.classList[(yes + no > 0) ? 'add' : 'remove']('started');
-        
-        progress.classList.remove('complete-no');
-        progress.classList.remove('complete-yes');
-        
-        if (yes + no == total) {
-          if (yes == total) {
-            progress.classList.add('complete-yes');
-          } else {
-            progress.classList.add('complete-no');
-          }
-        }
-        
-      };
-
-      for (var i=0; i<items.length; i++) {
-        var yesno = document.createElement('div');
-        yesno.classList.add('regeling-voorwaarde-yesno');
-        yesno.innerHTML = '';
-        
-        yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="yes">';
-        yesno.innerHTML += '<label data-counter="click.voorwaarde.' + items[i].dataset.voorwaardeId + '.yes mouseout.voorwaarde.' + items[i].dataset.voorwaardeId + '.yes mouseover.voorwaarde.' + items[i].dataset.voorwaardeId + '.yes" for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-yes">Ja</label>';
-
-        yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="no">';
-        yesno.innerHTML += '<label data-counter="click.voorwaarde.' + items[i].dataset.voorwaardeId + '.no mouseout.voorwaarde.' + items[i].dataset.voorwaardeId + '.no mouseover.voorwaarde.' + items[i].dataset.voorwaardeId + '.no" for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-no">Nee</label>';
-
-        yesno.innerHTML += '<input id="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial" name="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '" type="radio" value="maybe" checked>';
-        yesno.innerHTML += '<label data-counter="click.voorwaarde.' + items[i].dataset.voorwaardeId + '.initial mouseout.voorwaarde.' + items[i].dataset.voorwaardeId + '.initial mouseover.voorwaarde.' + items[i].dataset.voorwaardeId + '.initial" for="voorwaarde-' + id + '-' + items[i].dataset.voorwaardeId + '-initial">Misschien</label>';
-        items[i].appendChild(yesno);
-      }
-      
-      // setting initial state based on hash
-      
-      if (w.location.hash) {
-        var initial = w.location.hash.match(/\[([\+-_]*)\]/);
-        if (initial && initial[1]) {
-          var state = initial[1].split('');
-          
-          if (items.length == state.length) {
-          
-            for (var i=0; i<state.length; i++) {
-              if (state[i] == hashIcons.yes) items[i].querySelectorAll('[value="yes"]')[0].checked = true;
-              else if (state[i] == hashIcons.no) items[i].querySelectorAll('[value="no"]')[0].checked = true;
-            }
-            
-          }
-        }
-      }
-      
-      el.addEventListener('change', _change); _change();
-    },
     
     'list': function(){
       

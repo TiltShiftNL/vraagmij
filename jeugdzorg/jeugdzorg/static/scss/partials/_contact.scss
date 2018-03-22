@@ -40,13 +40,15 @@ dt.contact-naam + dd {
 .contact {
   
   position: relative;
-  transition: margin .3s;
-  z-index: 1;
+  z-index: 2;
   
   padding: 2rem;
   box-sizing: border-box;
   background-color: $lightColor;
   box-shadow: 0 1px 3px 0 rgba(#000, .2);
+  
+  transition: transform .3s $transition-ease-default, width .3s $transition-ease-default;
+  
   
   dl {
     font-size: 0;
@@ -77,9 +79,6 @@ dt.contact-naam + dd {
     
     width: 8rem;
     
-    [data-view="normaal"] & {
-      transition: width .3s;
-    }
   }
   
   dt.contact-functie {
@@ -141,10 +140,10 @@ dt.contact-naam + dd {
     &:hover {
       background-color: rgba($textColor, 0.05);
     }
-    
+//
     &:before {
       content: '×';
-      
+
       position: absolute;
       right: 0;
       top: 0;
@@ -155,15 +154,18 @@ dt.contact-naam + dd {
 
       font-size: 4rem;
       font-weight: 700;
-      
+
       opacity: 0;
       transition: all .3s;
     }
   }
 }
-//.js .contact-extended {
-//  display: none;
-//}
+.js .contact-extended {
+  max-height: 0;
+  overflow: hidden;
+  transition: all .3s $transition-ease-default;
+  padding-top: 0;
+}
 dl.contact-meta {
   a {
     position: relative;
@@ -450,7 +452,7 @@ dl.contact-extended {
       }
     }
     .contact .contact-acties {
-      display: none;
+      opacity: 0;
     }
     .contact .contact-avatar {
       left: 0;
@@ -477,42 +479,177 @@ dl.contact-extended {
   }
 }
 
-.contact.active {
+.contact.ghost {
+  box-shadow: 0 1px 3px 0 rgba(#000, .2) inset;
+  > * {
+    opacity: 0;
+  }
+}
+
+[data-view="compact"] {
+  .contact.ghost {
+    > * {
+      opacity: 1;
+    }
+  }
+  
+}
+
+.modal-contact {
   position: fixed;
-//  z-index: 2;
-//  margin-right: -10rem;
-//  .contact-meta {
-//    padding-right: 20rem;
-//    min-height: 13rem;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding-bottom: $padding;
+  -webkit-overflow-scrolling: touch;
+  
+  display: none;
+  
+  background-color: rgba($textColor, .2);
+  
+  .contact {
+    margin-bottom: $padding;
+    overflow: hidden;
+    
+    min-height: 12rem;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: $padding;
+
+      background: -moz-linear-gradient(top, rgba($lightColor, 0) 0%, rgba($lightColor, 1) 100%);
+      background: -webkit-linear-gradient(top, rgba($lightColor, 0) 0%, rgba($lightColor, 1) 100%);
+      background: linear-gradient(to bottom, rgba($lightColor, 0) 0%, rgba($lightColor, 1) 100%);
+      
+    }
+    
+  }
+  
+  .contact-meta {
+    transition: padding .3s $transition-ease-default;
+  }
+  
+  .contact-avatar {
+    transition: width .3s $transition-ease-default;
+  }
+  
+  .modal-close {
+    
+    right: $padding;
+    top: $padding;
+    
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity .3s;
+    
+    &:before {
+      background-color: rgba($textColor, 0);
+      right: 2rem;
+    }
+  }
+  &.focus {
+    .modal-close {
+      opacity: 1;
+    }
+  }
+  
+  &.active {
+    display: block;
+    
+  }
+}
+.modal-contact.focus .contact {
+  transform: translate3d(calc(50vw - 300px), 30px, 0) !important;
+  
+  .contact-meer-details {
+    display: none;
+  }
+  
+}
+.modal-contact.on .contact {
+
+  width: 600px !important;
+  height: auto !important;
+  
+  .contact-meta {
+    padding-right: 14rem;
+    min-height: 11rem;
+  }
+  .contact-avatar {
+    width: 12rem;
+  }
+ 
+}
+
+.modal-contact.extended .contact {
+  .contact-extended {
+    padding-top: 3rem;
+    max-height: 2000px;
+  } 
+}
+@include medium {
+  .modal-contact {
+    padding: 10px;
+    .contact {
+      padding: 10px;
+      &:before {
+        display: none;
+      }
+    }
+    .contact-extended,
+    .contact-avatar,
+    .contact-meta {
+      transition: none;
+    }
+  }
+  .modal-contact.active .contact {
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+    
+  }
+  
+  .modal-contact {
+    .modal-close {
+      &:before {
+        right: 0;
+      }
+    }
+  }
+}
+//@include medium {
+//  .modal-contact {
+//    display: none !important;
 //  }
-//  .contact-avatar {
-//    width: 14rem;
-////      right: 5rem;
-//  }
-//  .contact-meer-details {
-//    left: auto;
-//    width: 44px;
-//    height: 44px;
-//    &:before {
+//  .contact.ghost {
+//    box-shadow: 0 1px 3px 0 rgba(#000, .2);
+//    > * {
 //      opacity: 1;
 //    }
-//    &:hover {
-//      background-color: rgba($textColor, 0);
-//      &:before {
-//        color: $accentColor;
+//  }
+//
+//  .js .contact.ghost {
+//    .contact-meta {
+//      dd {
+//        display: block;
 //      }
 //    }
-//
+//    .contact-extended {
+//      display: block;
+//      padding-top: 3rem;
+//      max-height: 2000px;
+//    }
+//    dd {
+//      display: block;
+//    }
 //  }
-}
-
-
-
-.contact-ghost {
-  display: none;
-  height: 5rem;
-  background-color: #ff3300;
-}
-.contact.active + .contact-ghost {
-  display: block;
-}
+//
+//}
