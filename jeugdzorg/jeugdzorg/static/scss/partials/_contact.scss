@@ -88,7 +88,9 @@ dt.contact-naam + dd {
   }
   dt.contact-email,
   dt.contact-telefoon {
-    & + dd {
+    & + dd,
+    & + dd + dd {
+      display: block;
       &:before {
         content: '';
       }
@@ -597,9 +599,11 @@ dl.contact-extended {
 }
 @include medium {
   .modal-contact {
-    padding: 10px;
+    padding: 44px 10px 10px 10px;
     .contact {
       padding: 10px;
+      transition: none;
+      
       &:before {
         display: none;
       }
@@ -609,16 +613,32 @@ dl.contact-extended {
     .contact-meta {
       transition: none;
     }
+
+    .contact-extended {
+      max-height: 4000px;
+      padding-top: 3rem;
+    }
+
+    .contact-meta {
+      padding-right: 14rem;
+      min-height: 11rem;
+    }
+    .contact-avatar {
+      width: 12rem;
+    }
   }
+
   .modal-contact.active .contact {
     width: auto !important;
     height: auto !important;
     transform: none !important;
     
   }
-  
+
   .modal-contact {
     .modal-close {
+      right: 10px;
+      top: 10px;
       &:before {
         right: 0;
       }
