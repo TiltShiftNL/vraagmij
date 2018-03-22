@@ -99,6 +99,30 @@
   
   .sort-label {
     margin-right: 1em;
+    font-weight: bold;
+  }
+  
+  @include medium {
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    .sort-label {
+      display: none;
+      position: absolute;
+    }
+    .sort,
+    .sort-view {
+      margin-bottom: 10px;
+    }
+    .sort {
+      margin-left: -.5em;
+      li:first-child .active {
+        margin-left: .5em;
+      }
+      li:last-child {
+        margin-right: 2em;
+      }
+    }
   }
   
 }
+
