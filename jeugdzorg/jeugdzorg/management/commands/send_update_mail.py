@@ -10,6 +10,9 @@ from django.utils import timezone
 from datetime import timedelta
 import dateutil.relativedelta
 from django.urls import reverse
+from sendgrid.helpers.mail import *
+from django.conf import settings
+import sendgrid
 
 
 class Command(BaseCommand):
@@ -18,6 +21,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         site = Site.objects.get_current()
         if site.instelling:
+            sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
             bullet = u"\u2022"
             now = timezone.now()
             now = now + dateutil.relativedelta.relativedelta(months=-1)
@@ -32,23 +36,10 @@ class Command(BaseCommand):
                 'datum_opgeslagen__gt': now,
             })
 
-            regeling_nieuw_str = '\n'.join(['%s %s - https://%s' % (
-                bullet,
-                r.titel,
-                '%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id})),
-            ) for r in regeling_nieuw])
+            regeling_nieuw_str = [[r.titel, 'https://%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id}))] for r in regeling_nieuw]
+            regeling_gewijzigd_str = [[r.titel, 'https://%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id}))] for r in regeling_gewijzigd]
+            gebruikers_nieuw_str = [[r.profiel.naam_volledig, 'https://%s%s' % (site.domain, reverse('detail_contact', kwargs={'pk': r.id}))] for r in gebruikers_nieuw]
 
-            regeling_gewijzigd_str = '\n'.join(['%s %s - https://%s' % (
-                bullet,
-                r.titel,
-                '%s%s' % (site.domain, reverse('detail_regeling', kwargs={'pk': r.id})),
-            ) for r in regeling_gewijzigd])
-
-            gebruikers_nieuw_str = '\n'.join(['%s %s - https://%s' % (
-                bullet,
-                r.profiel.naam_volledig,
-                '%s%s' % (site.domain, reverse('detail_contact', kwargs={'pk': r.id})),
-            ) for r in gebruikers_nieuw])
             django_engine = engines['django']
             data = {
                 'regeling_nieuw': regeling_nieuw_str,
@@ -62,6 +53,16 @@ class Command(BaseCommand):
                     o.update(data)
                     template = django_engine.from_string(site.instelling.update_mail_content)
                     body = template.render(o)
+                    subject = 'VraagMij - updates maand %s' % now.strftime('%B')
+                    mail = Mail(
+                        Email('noreply@%s' % site.domain),
+                        subject,
+                        Email(u.email),
+                        Content("text/plain", body)
+                    )
+                    # print(body)
 
+                    if settings.ENV != 'develop':
+                        sg.client.mail.send.post(request_body=mail.get())
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
