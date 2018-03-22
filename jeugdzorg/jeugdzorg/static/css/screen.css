@@ -540,6 +540,23 @@ body {
   content: '⭑';
   font-family: arial; }
 
+.icon-info {
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  margin-right: .5em;
+  background-color: #7bc6f3;
+  line-height: 4rem;
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  font-style: normal;
+  font-family: "Times New Roman";
+  font-weight: 700; }
+.icon-info:before {
+  color: #fff;
+  content: 'i'; }
+
 .header {
   max-width: 1400px;
   box-sizing: border-box;
@@ -1050,13 +1067,13 @@ form.well .choices strong {
   border-color: #f5f5f5; }
 @media (max-width: 900px) {
   .shortcuts {
-    height: 2em;
+    display: block;
     margin-left: -10px;
     margin-right: -10px;
     padding-left: 10px;
     padding-right: 10px;
-    overflow-y: auto;
-    padding-bottom: 3rem;
+    padding-bottom: 0;
+    overflow-y: hidden;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap; }
@@ -1254,9 +1271,26 @@ form.well .choices strong {
 .sort-container .sort {
   margin-right: auto; }
 .sort-container .sort-label {
-  margin-right: 1em; }
+  margin-right: 1em;
+  font-weight: bold; }
+@media (max-width: 900px) {
+  .sort-container {
+    flex-wrap: wrap;
+    margin-bottom: 0; }
+  .sort-container .sort-label {
+    display: none;
+    position: absolute; }
+  .sort-container .sort, .sort-container .sort-view {
+    margin-bottom: 10px; }
+  .sort-container .sort {
+    margin-left: -.5em; }
+  .sort-container .sort li:first-child .active {
+    margin-left: .5em; }
+  .sort-container .sort li:last-child {
+    margin-right: 2em; } }
 
 .systeem-berichten {
+  position: relative;
   background: #f5f5f5;
   padding: 3rem;
   list-style: none;
@@ -1270,10 +1304,17 @@ form.well .choices strong {
   margin-bottom: .5em; }
 .systeem-berichten > *:last-child, .systeem-berichten ul > li:last-child {
   margin-bottom: 0; }
+.systeem-berichten.compact {
+  padding: 1.5rem; }
 .systeem-berichten.fout {
   background-color: rgba(255, 0, 0, 0.1); }
 .systeem-berichten.goed {
   background-color: rgba(0, 128, 0, 0.1); }
+.systeem-berichten.info {
+  font-weight: 700;
+  background-color: #d7effc; }
+.systeem-berichten.info, .systeem-berichten.info * {
+  color: #4d96c3; }
 .well .systeem-berichten {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 1.5rem; }
@@ -1294,6 +1335,30 @@ form.well .choices strong {
   left: 0;
   top: 0;
   content: '-'; }
+.systeem-berichten.has-icon {
+  padding-left: calc(3rem + 44px + 3rem); }
+.systeem-berichten.has-icon:before {
+  position: absolute;
+  left: 3rem;
+  top: 3rem;
+  content: 'i';
+  width: 4rem;
+  height: 4rem;
+  margin-right: .5em;
+  background-color: #7bc6f3;
+  line-height: 4rem;
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  font-style: normal;
+  font-family: "Times New Roman";
+  font-weight: 700; }
+.systeem-berichten.has-icon.compact {
+  padding: 2.5rem 1.5rem;
+  padding-left: calc(1.5rem + 4rem + 1.5rem); }
+.systeem-berichten.has-icon.compact:before {
+  left: 1.5rem;
+  top: 1.5rem; }
 
 hr {
   height: 1px;
@@ -1581,7 +1646,9 @@ hr {
   width: 8rem; }
 .contact dt.contact-functie + dd {
   font-style: italic; }
-.contact dt.contact-email + dd:before, .contact dt.contact-telefoon + dd:before {
+.contact dt.contact-email + dd, .contact dt.contact-email + dd + dd, .contact dt.contact-telefoon + dd, .contact dt.contact-telefoon + dd + dd {
+  display: block; }
+.contact dt.contact-email + dd:before, .contact dt.contact-email + dd + dd:before, .contact dt.contact-telefoon + dd:before, .contact dt.contact-telefoon + dd + dd:before {
   content: ''; }
 .contact dt.contact-email {
   margin-top: 2.2rem; }
@@ -1928,19 +1995,31 @@ dl.contact-extended dt.contact-regeling ~ dd {
 
 @media (max-width: 900px) {
   .modal-contact {
-    padding: 10px; }
+    padding: 44px 10px 10px 10px; }
   .modal-contact .contact {
-    padding: 10px; }
+    padding: 10px;
+    transition: none; }
   .modal-contact .contact:before {
     display: none; }
   .modal-contact .contact-extended, .modal-contact .contact-avatar, .modal-contact .contact-meta {
     transition: none; }
+  .modal-contact .contact-extended {
+    max-height: 4000px;
+    padding-top: 3rem; }
+  .modal-contact .contact-meta {
+    padding-right: 14rem;
+    min-height: 11rem; }
+  .modal-contact .contact-avatar {
+    width: 12rem; }
 
   .modal-contact.active .contact {
     width: auto !important;
     height: auto !important;
     transform: none !important; }
 
+  .modal-contact .modal-close {
+    right: 10px;
+    top: 10px; }
   .modal-contact .modal-close:before {
     right: 0; } }
 .themas {
