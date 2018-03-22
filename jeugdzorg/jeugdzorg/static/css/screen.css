@@ -870,17 +870,18 @@ form .row {
   margin-bottom: 2.2rem; }
 form .group {
   display: flex; }
-form .group label {
+form .group label, form .group .label {
   margin-right: 1em; }
-form .group label:last-child {
+form .group label:last-child, form .group .label:last-child {
   margin-right: 0; }
-form label {
+form label, form .label {
   position: relative;
-  cursor: pointer;
   display: block; }
-form label strong {
+form label strong, form .label strong {
   display: block;
   margin-bottom: 5px; }
+form label {
+  color: pointer; }
 form .choices {
   list-style: none;
   padding: 0;

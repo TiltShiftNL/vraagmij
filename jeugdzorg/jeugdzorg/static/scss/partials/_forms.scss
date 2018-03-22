@@ -163,22 +163,26 @@ form {
   .group {
     display: flex;
     
-    label {
+    label,
+    .label {
       margin-right: 1em;
       &:last-child {
         margin-right: 0;
       }
     }
   }
-  label {
+  label,
+  .label {
     position: relative;
-    cursor: pointer;
     strong {
       display: block;
       margin-bottom: 5px;
     }
     
     display: block;
+  }
+  label {
+    color: pointer;
   }
   .choices {
     list-style: none;
