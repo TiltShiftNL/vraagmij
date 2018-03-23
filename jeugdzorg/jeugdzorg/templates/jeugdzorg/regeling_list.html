@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block sort_options %}
+
+    <div class="systeem-berichten compact info has-icon">
+      <p>Nog niet alle regelingen zijn toegevoegd aan dit overzicht! Weet je zelf een regeling die hier thuishoort? <a href="mailto:rutger.dik@amsterdam.nl">Meld</a> het ons!.
+    </div>
+
+
     <div class="sort-container">
       <span class="sort-label">Sortering</span>
       <ul class="sort">
@@ -10,7 +16,6 @@
           <li>
             <a{% if beeld == 'thema' %} class="active"{% endif %} href=".?beeld=thema">thema</a>
           </li>
-          <!-- <li><a{% if beeld == 'aanbieder' %} class="active"{% endif %} href=".?beeld=aanbieder">Aanbieder</a></li> -->
       </ul>
       <span class="sort-label js-show">Weergave</span>
       <ul class="sort-view js-show" data-decorator="view">
@@ -21,13 +26,6 @@
 {% endblock %}
 
 {% block main %}
-
-<div class="container">
-  <div class="systeem-berichten compact info has-icon">
-    <p>Nog niet alle regelingen zijn toegevoegd aan dit overzicht! Weet je zelf een regeling die hier thuishoort? <a href="mailto:rutger.dik@amsterdam.nl">Meld</a> het ons!.
-  </div>
-</div>
-
 
 {{ block.super }}
 
