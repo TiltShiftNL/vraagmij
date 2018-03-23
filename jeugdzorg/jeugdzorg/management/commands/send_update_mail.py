@@ -13,6 +13,7 @@ from django.urls import reverse
 from sendgrid.helpers.mail import *
 from django.conf import settings
 import sendgrid
+from jeugdzorg.context_processors import app_settings
 
 
 class Command(BaseCommand):
@@ -22,7 +23,7 @@ class Command(BaseCommand):
         site = Site.objects.get_current()
         if site.instelling:
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            bullet = u"\u2022"
+
             now = timezone.now()
             now = now + dateutil.relativedelta.relativedelta(months=-1)
             regeling_nieuw = Regeling.objects.filter(**{
@@ -51,6 +52,7 @@ class Command(BaseCommand):
                 if u.profiel.hou_me_op_de_hoogte_mail:
                     o = {'naam': u.profiel.naam_volledig}
                     o.update(data)
+                    o.update(app_settings())
                     template = django_engine.from_string(site.instelling.update_mail_content)
                     body = template.render(o)
                     subject = 'VraagMij - updates maand %s' % now.strftime('%B')

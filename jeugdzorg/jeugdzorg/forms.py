@@ -17,6 +17,7 @@ from django.forms.utils import ErrorList
 from itertools import groupby
 from django.contrib.sites.models import Site
 from django.urls import reverse, reverse_lazy
+from django.template import RequestContext
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
@@ -50,7 +51,6 @@ class MailAPIPasswordResetForm(PasswordResetForm):
 
     def send_mail(self, subject_template_name, email_template_name,
                   context, from_email, to_email, html_email_template_name=None):
-
         body = loader.render_to_string(email_template_name, context)
         print(body)
 
