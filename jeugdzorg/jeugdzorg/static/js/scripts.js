@@ -58,7 +58,7 @@
     
     'view': function(e){
       e.preventDefault();
-      d.dataset.view = this.hash.substr(1);
+      d.setAttribute('data-view', this.hash.substr(1));
       w.localStorage && w.localStorage.setItem('view', d.dataset.view);
     },
     

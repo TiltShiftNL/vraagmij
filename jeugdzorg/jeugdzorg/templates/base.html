@@ -8,7 +8,7 @@
 
     <title>Jeugdzorg - {% block title %}Regelingen{% endblock %}</title>
     
-    <script type="text/javascript">!function(w,d,v){if(v)d.dataset.view=v}(window, document.documentElement,window.localStorage&&window.localStorage.getItem('view'))</script>
+    <script type="text/javascript">!function(w,d,v){if(v)d.setAttribute('data-view', v)}(window, document.documentElement,window.localStorage&&window.localStorage.getItem('view'))</script>
 
     <link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}?v={% if ENV == 'develop' %}{% now "U" %}_{% endif %}{{ SOURCE_COMMIT }}"/>
     
