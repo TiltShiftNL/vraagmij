@@ -3,28 +3,27 @@
     <div class="overzicht compact-columns">
     
         {% if ordening == 'aflopend' %}
-              <div class="group">
-                <ul class="contacten cards">
-                  {% for profiel in profiel_list|dictsort:"seconden_niet_gebruikt" reversed %}
-                      <li>
-                          {% include 'snippets/contact.html' with item=profiel %}
-                      </li>
-                  {% endfor %}
-                </ul>
-              </div>
+            <div class="group">
+              <ul class="contacten cards">
+                {% for profiel in profiel_list|dictsort:"seconden_niet_gebruikt" reversed %}
+                    <li>
+                        {% include 'snippets/contact.html' with item=profiel %}
+                    </li>
+                {% endfor %}
+              </ul>
+            </div>
     
         {% else %}
     
-              <div class="group">
-                <ul class="contacten cards">
-                  {% for profiel in profiel_list|dictsort:"seconden_niet_gebruikt" %}
-                      <li>
-                          {% include 'snippets/contact.html' with item=profiel %}
-                      </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            
+            <div class="group">
+              <ul class="contacten cards">
+                {% for profiel in profiel_list|dictsort:"seconden_niet_gebruikt" %}
+                    <li>
+                        {% include 'snippets/contact.html' with item=profiel %}
+                    </li>
+                {% endfor %}
+              </ul>
+            </div>
     
         {% endif %}
     </div>

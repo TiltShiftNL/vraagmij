@@ -89,34 +89,36 @@
   background-color: #d8d8d8;
   
   
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    z-index: 2;
-    background-color: #545454;
-    top: 30%;
-    left: 50%;
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    overflow: hidden;
-    transform: translate3d(-50%, 0, 0);
-  }
-  &:after {
-    z-index: 1;
-    top: 64%;
-    height: 70%;
-    width: 69%;
-  }
+//  &:before, &:after {
+//    content: '';
+//    position: absolute;
+//    z-index: 2;
+//    background-color: #545454;
+//    top: 30%;
+//    left: 50%;
+//    width: 40%;
+//    height: 40%;
+//    border-radius: 50%;
+//    overflow: hidden;
+//    transform: translate3d(-50%, 0, 0);
+//  }
+//  &:after {
+//    z-index: 1;
+//    top: 64%;
+//    height: 70%;
+//    width: 69%;
+//  }
+
+  background-image: url('../images/ico_avatar.png');
   
   background-size: cover;
   background-position: 50% 50%;
   
-  &[style*="background-image"] {
-    &:before, &:after {
-      display: none;
-    }
-  }
+//  &[style*="background-image"] {
+//    &:before, &:after {
+//      display: none;
+//    }
+//  }
 
 }
 

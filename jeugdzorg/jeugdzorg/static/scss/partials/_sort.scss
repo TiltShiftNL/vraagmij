@@ -13,6 +13,7 @@
   a {
     text-decoration: none;
     display: inline-block;
+    white-space: nowrap;
     padding: .5em;
     background-color: rgba($textColor, 0);
     transition: all .3s;
