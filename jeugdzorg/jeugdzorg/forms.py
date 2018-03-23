@@ -15,6 +15,7 @@ from .widgets import *
 from .fields import *
 from django.forms.utils import ErrorList
 from itertools import groupby
+from django.contrib.sites.models import Site
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
@@ -54,6 +55,7 @@ class MailAPIPasswordResetForm(PasswordResetForm):
         print(body)
 
         if settings.ENV != 'develop':
+            site = Site.objects.get_current()
             mail = Mail()
             print(to_email)
             try:
@@ -73,14 +75,14 @@ class MailAPIPasswordResetForm(PasswordResetForm):
             # from_email = Email(from_email)
             # to_email = Email(to_email)
 
-            mail.from_email = Email("noreply@fixxx7.amsterdam.nl")
+            mail.from_email = Email('noreply@%s' % site.domein)
             mail.reply_to = Email(to_email)
             mail.subject = subject
 
             #mail.add_content(Content("text/plain", body))
             #mail.add_content(Content("text/html", html_body))
 
-            mail = Mail(Email('noreply@fixxx7.amsterdam.nl'), subject, Email(to_email), Content("text/plain", body))
+            mail = Mail(Email('noreply@%s' % site.domein), subject, Email(to_email), Content("text/plain", body))
             # print(response.status_code)
             # print(response.body)
             # print(response.headers)
@@ -95,14 +97,6 @@ class MailAPIPasswordResetForm(PasswordResetForm):
 
 
 class RegelingModelForm(forms.ModelForm):
-    thema_lijst = forms.ModelMultipleChoiceField(
-        required=False,
-        widget=ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
-        queryset=Thema.objects.all(),
-    )
-    custom_m2m = (
-        ('thema_lijst', 'thema'),
-    )
 
     class Meta:
         model = Regeling
@@ -114,17 +108,8 @@ class RegelingModelForm(forms.ModelForm):
             'einddatum': widgets.DateInput(
                 attrs={'type': 'date'},
             ),
+            'themas': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
         }
-
-    def save(self, commit=True):
-        cleaned_data = self.cleaned_data
-        if commit:
-            print(self.instance.thema_set.all())
-
-            for thema in cleaned_data.get('thema_lijst'):
-
-                print(thema)
-        return super().save(commit)
 
 
 class ProfielModelForm(forms.ModelForm):
@@ -160,7 +145,7 @@ class ProfielModelForm(forms.ModelForm):
         value = self.cleaned_data.get('pasfoto')
         limit = 5 * 1024 * 1024
         if value and value.size > limit:
-            raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5M.', code='invalid')
+            raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5MB.', code='invalid')
         return value
 
     def _save_m2m(self):

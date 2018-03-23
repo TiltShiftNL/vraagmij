@@ -205,7 +205,6 @@ class RegelingDelete(UserPassesTestMixin, DeleteView):
 class RegelingCreate(UserPassesTestMixin, CreateView):
     model = Regeling
     form_class = RegelingModelForm
-    # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -216,11 +215,8 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES)
-            data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES)
-
         else:
             data['voorwaarde'] = VoorwaardeFormSet()
-            data['dfs'] = ThemaFormSet()
         return data
 
     def get_success_url(self):
@@ -231,15 +227,11 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
-        dfs = context['dfs']
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
                 voorwaarde.save()
-            if dfs.is_valid():
-                dfs.instance = self.object
-                dfs.save()
         messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangemaakt." % self.object.titel)
         return super(RegelingCreate, self).form_valid(form)
 
@@ -247,7 +239,6 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
 class RegelingUpdate(UserPassesTestMixin, UpdateView):
     model = Regeling
     form_class = RegelingModelForm
-    # fields = ['titel', 'samenvatting', 'bron', 'aanvraag_url', 'bron_url', 'startdatum', 'einddatum']
     success_url = reverse_lazy('regelingen')
 
     def test_func(self):
@@ -263,27 +254,19 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
-            # data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES, instance=self.object)
-
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
-            # data['dfs'] = ThemaFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
-        # dfs = context['dfs']
 
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
                 voorwaarde.save()
-            # if dfs.is_valid():
-            #     dfs.instance = self.object
-            #     dfs.save()
-        print(self.request.POST)
         messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangepast." % self.object.titel)
         return super(RegelingUpdate, self).form_valid(form)
 
