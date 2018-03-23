@@ -10,7 +10,7 @@
       <li><a href="{% url 'detail_thema' thema.slug %}#regelingen" data-counter="click.themas.thema.{{ thema.slug }}.regelingen"><strong>{{ thema.regeling_set.all|length }}</strong> regeling{% if thema.regeling_set.all|length != 1 %}en{% endif %}</a></li>
     {% endif %}
     {% if thema.profielen_zichtbaar %}
-      <li><a href="{% url 'detail_thema' thema.slug %}#contacten" data-counter="click.themas.thema.{{ thema.slug }}.contacten"><strong>{{ thema.profielen_zichtbaar|length }}</strong> contact{% if thema.profielen_zichtbaar|length != 1 %}en{% endif %}</a></li>
+      <li><a href="{% url 'detail_thema' thema.slug %}#contacten" data-counter="click.themas.thema.{{ thema.slug }}.contacten"><strong>{{ thema.profielen_zichtbaar|length }}</strong> {% if thema.profielen_zichtbaar|length != 1 %}contactpersonen{% else %}contactpersoon{% endif %}</a></li>
     {% endif %}
     
     <li class="thema-link"><a href="{% url 'detail_thema' thema.slug %}" data-counter="click.themas.thema.{{ thema.slug }}.link">Meer details</a>
