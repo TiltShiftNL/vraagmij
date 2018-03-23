@@ -889,6 +889,9 @@ form .choices {
   margin-bottom: calc(2.2rem - 10px);
   display: flex;
   flex-wrap: wrap; }
+@media (max-width: 900px) {
+  form .choices {
+    display: block; } }
 form .choices li {
   flex-basis: 33.33%; }
 form .choices li ul {
@@ -979,26 +982,18 @@ form.well .choices strong {
 .buttons.sticky {
   position: sticky;
   position: -webkit-sticky;
-  z-index: 2;
-  bottom: 0;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  margin-bottom: -1.5rem; }
-.buttons.sticky:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  opacity: 1;
-  background: -moz-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
-  background: -webkit-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
-  background: linear-gradient(to bottom, rgba(245, 245, 245, 0) 0%, whitesmoke 1.5rem, whitesmoke 100%);
-  transition: opacity .3s; }
+  z-index: 10;
+  bottom: 1.5rem;
+  padding: 1.5rem;
+  margin: -1.5rem;
+  background-color: rgba(255, 255, 255, 0.95); }
 .buttons.sticky:hover:before {
   opacity: 1; }
+@media (max-width: 900px) {
+  .buttons.sticky {
+    bottom: 5px;
+    padding: 5px;
+    margin: -5px; } }
 
 .row-delete strong {
   display: inline; }
@@ -1161,7 +1156,7 @@ form.well .choices strong {
   bottom: 0;
   padding: 6rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1203,6 +1198,13 @@ form.well .choices strong {
   font-size: 3rem;
   line-height: 3rem; }
 
+@media (max-width: 900px) {
+  .modal {
+    padding: 44px 10px 10px 10px; }
+
+  .modal-inner {
+    margin: 0;
+    max-width: none; } }
 .sort, .sort-view {
   list-style: none;
   margin: 0 0 2.2rem 0;
@@ -1900,11 +1902,13 @@ dl.contact-extended dt.contact-regeling ~ dd {
   min-height: auto;
   padding-right: 0; }
 [data-view="compact"] .overzicht .contact-meta a {
+  display: block;
   padding: 0;
   margin: 0; }
 [data-view="compact"] .overzicht .contact-meta a:hover {
   background-color: transparent; }
-[data-view="compact"] .overzicht .contact .contact-acties {
+[data-view="compact"] .overzicht .contact-meer-details {
+  z-index: 5;
   opacity: 0; }
 [data-view="compact"] .overzicht .contact .contact-avatar {
   left: 0;
@@ -1919,6 +1923,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   display: block; }
 [data-view="compact"] .overzicht dt.contact-email {
   margin-top: 0; }
+[data-view="compact"] .overzicht .icon-mail, [data-view="compact"] .overzicht .icon-phone {
+  display: none; }
 [data-view="compact"] .overzicht .contact-extended {
   display: none; }
 
@@ -1945,6 +1951,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
 .modal-contact .contact {
   margin-bottom: 3rem;
   overflow: hidden;
+  background-color: #fff;
   min-height: 12rem; }
 .modal-contact .contact:before {
   content: '';
@@ -1977,7 +1984,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
   display: block; }
 
 .modal-contact.focus .contact {
-  transform: translate3d(calc(50vw - 300px), 30px, 0) !important; }
+  transform: translate3d(calc(50vw - 300px), 9rem, 0) !important; }
 .modal-contact.focus .contact .contact-meer-details {
   display: none; }
 

@@ -8,7 +8,7 @@
  padding: 2 * $padding;
  
  display: flex;
- align-items: center;
+ align-items: flex-start;
  justify-content: center;
  
  overflow-y: auto;
@@ -20,7 +20,6 @@
  &.active {
    opacity: 1;
  }
- 
  
 }
 .modal-inner {
@@ -64,5 +63,14 @@
     font-size: 3rem;
     line-height: $padding;
     
+  }
+}
+@include medium {
+  .modal {
+    padding: 44px 10px 10px 10px;
+  }
+  .modal-inner {
+    margin: 0;
+    max-width: none;
   }
 }

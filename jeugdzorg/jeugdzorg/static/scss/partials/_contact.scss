@@ -446,6 +446,7 @@ dl.contact-extended {
       min-height: auto;
       padding-right: 0;
       a {
+        display: block;
         padding: 0;
         margin: 0;
         &:hover {
@@ -453,7 +454,8 @@ dl.contact-extended {
         }
       }
     }
-    .contact .contact-acties {
+    .contact-meer-details {
+      z-index: 5;
       opacity: 0;
     }
     .contact .contact-avatar {
@@ -473,7 +475,9 @@ dl.contact-extended {
     dt.contact-email {
       margin-top: 0;
     }
-    
+    .icon-mail, .icon-phone {
+      display: none;
+    }
     .contact-extended {
       display: none;
     }
@@ -515,6 +519,8 @@ dl.contact-extended {
   .contact {
     margin-bottom: $padding;
     overflow: hidden;
+    
+    background-color: #fff;
     
     min-height: 12rem;
     &:before {
@@ -569,7 +575,7 @@ dl.contact-extended {
   }
 }
 .modal-contact.focus .contact {
-  transform: translate3d(calc(50vw - 300px), 30px, 0) !important;
+  transform: translate3d(calc(50vw - 300px), ((2*$padding) + 3rem), 0) !important;
   
   .contact-meer-details {
     display: none;
