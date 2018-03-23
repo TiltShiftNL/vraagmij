@@ -82,7 +82,7 @@
       
       {% if messages %}
           <div class="container">
-              <ul class="systeem-berichten">
+              <ul class="systeem-berichten{% for message in messages %} {{ message.tags }}{% endfor %}">
                   {% for message in messages %}
                       <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                   {% endfor %}
@@ -97,7 +97,7 @@
     <a href="#top" data-handler="scroll" data-counter="click.nav.top">⇡</a>
   </p>
 
-  <div class="version" data-counter="mouseover.app.version">
+  <div class="version version-{{ ENV }}" data-counter="mouseover.app.version">
     <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>
 
