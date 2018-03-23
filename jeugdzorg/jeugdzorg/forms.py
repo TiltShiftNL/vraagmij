@@ -119,7 +119,10 @@ class RegelingModelForm(forms.ModelForm):
     def save(self, commit=True):
         cleaned_data = self.cleaned_data
         if commit:
+            print(self.instance.thema_set.all())
+
             for thema in cleaned_data.get('thema_lijst'):
+
                 print(thema)
         return super().save(commit)
 
