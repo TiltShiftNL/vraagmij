@@ -47,7 +47,7 @@ dt.contact-naam + dd {
   background-color: $lightColor;
   box-shadow: 0 1px 3px 0 rgba(#000, .2);
   
-  transition: transform .3s $transition-ease-default, width .3s $transition-ease-default;
+  transition: margin .3s $transition-ease-default;
   
   
   dl {
@@ -107,7 +107,6 @@ dt.contact-naam + dd {
     margin-bottom: 0;
     padding-right: 10rem;
     min-height: 8rem;
-    transition: all .3s;
   }
   &:after {
     content: '';
@@ -163,10 +162,7 @@ dt.contact-naam + dd {
   }
 }
 .js .contact-extended {
-  max-height: 0;
-  overflow: hidden;
-  transition: all .3s $transition-ease-default;
-  padding-top: 0;
+  display: none;
 }
 dl.contact-meta {
   a {
@@ -174,13 +170,11 @@ dl.contact-meta {
     z-index: 3;
     text-decoration: none;
     background-color: rgba($textColor, 0);
-    transition: all .3s;
+    transition: background-color .3s;
     display: inline-block;
     box-sizing: border-box;
     padding: .4em .6em;
     margin: -.4em -.6em;
-    
-    transition: all .3s;
     
     white-space: nowrap;
     max-width: 100%;
@@ -503,7 +497,7 @@ dl.contact-extended {
 
 .modal-contact {
   position: fixed;
-  z-index: 100;
+  z-index: 300;
   left: 0;
   top: 0;
   right: 0;
@@ -514,7 +508,7 @@ dl.contact-extended {
   
   display: none;
   
-  background-color: rgba($textColor, .2);
+  background-color: rgba($textColor, .4);
   
   .contact {
     margin-bottom: $padding;
@@ -523,6 +517,7 @@ dl.contact-extended {
     background-color: #fff;
     
     min-height: 12rem;
+    
     &:before {
       content: '';
       position: absolute;
@@ -539,14 +534,6 @@ dl.contact-extended {
       
     }
     
-  }
-  
-  .contact-meta {
-    transition: padding .3s $transition-ease-default;
-  }
-  
-  .contact-avatar {
-    transition: width .3s $transition-ease-default;
   }
   
   .modal-close {
@@ -575,7 +562,10 @@ dl.contact-extended {
   }
 }
 .modal-contact.focus .contact {
-  transform: translate3d(calc(50vw - 300px), ((2*$padding) + 3rem), 0) !important;
+//  transform: translate3d(50vw, 80px, 0) !important;
+  margin-left: calc(50vw - 300px) !important;
+  margin-top: 104px !important;
+//  
   
   .contact-meer-details {
     display: none;
@@ -599,8 +589,8 @@ dl.contact-extended {
 
 .modal-contact.extended .contact {
   .contact-extended {
-    padding-top: 3rem;
-    max-height: 2000px;
+    display: block;
+    
   } 
 }
 @include medium {
@@ -621,8 +611,7 @@ dl.contact-extended {
     }
 
     .contact-extended {
-      max-height: 4000px;
-      padding-top: 3rem;
+      display: block;
     }
 
     .contact-meta {
@@ -637,7 +626,7 @@ dl.contact-extended {
   .modal-contact.active .contact {
     width: auto !important;
     height: auto !important;
-    transform: none !important;
+    margin: 0 !important;
     
   }
 
@@ -651,31 +640,3 @@ dl.contact-extended {
     }
   }
 }
-//@include medium {
-//  .modal-contact {
-//    display: none !important;
-//  }
-//  .contact.ghost {
-//    box-shadow: 0 1px 3px 0 rgba(#000, .2);
-//    > * {
-//      opacity: 1;
-//    }
-//  }
-//
-//  .js .contact.ghost {
-//    .contact-meta {
-//      dd {
-//        display: block;
-//      }
-//    }
-//    .contact-extended {
-//      display: block;
-//      padding-top: 3rem;
-//      max-height: 2000px;
-//    }
-//    dd {
-//      display: block;
-//    }
-//  }
-//
-//}

@@ -124,7 +124,9 @@
         
         var placeholderBC = card.getBoundingClientRect();
         
-        card.clone.style.transform = 'translate3d(' + placeholderBC.left + 'px, ' + placeholderBC.top + 'px, 0)';
+        // card.clone.style.transform = 'translate3d(' + placeholderBC.left + 'px, ' + placeholderBC.top + 'px, 0)';
+        card.clone.style.marginLeft = placeholderBC.left + 'px';
+        card.clone.style.marginTop = placeholderBC.top + 'px';
         
       
         card.clone.style.width = placeholderBC.width + 'px';
@@ -190,9 +192,7 @@
           card.modal.classList.add('focus');
           setTimeout(function(){
             card.modal.classList.add('on');
-            setTimeout(function(){
-              card.modal.classList.add('extended');
-            }, 300);
+            card.modal.classList.add('extended');
           }, 400);
         }, 100);
 

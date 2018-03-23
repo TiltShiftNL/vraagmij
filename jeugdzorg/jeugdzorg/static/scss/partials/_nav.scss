@@ -9,7 +9,7 @@
   
   .container {
     position: relative;
-    z-index: 100;
+    z-index: 200;
   }
   
   @include medium {
@@ -67,7 +67,7 @@
 
 .nav-container {
   position: absolute;
-  z-index: 100;
+  z-index: 200;
   right: 0;
   top: 0;
   text-align: right;

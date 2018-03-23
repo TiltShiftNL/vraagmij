@@ -568,7 +568,7 @@ body {
   padding: 3rem; }
 .header .container {
   position: relative;
-  z-index: 100; }
+  z-index: 200; }
 @media (max-width: 900px) {
   .header {
     padding: 10px; } }
@@ -608,7 +608,7 @@ body {
 
 .nav-container {
   position: absolute;
-  z-index: 100;
+  z-index: 200;
   right: 0;
   top: 0;
   text-align: right;
@@ -1639,7 +1639,7 @@ hr {
   box-sizing: border-box;
   background-color: #f5f5f5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+  transition: margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
 .contact dl {
   font-size: 0; }
 .contact dt {
@@ -1670,8 +1670,7 @@ hr {
 .contact .contact-meta {
   margin-bottom: 0;
   padding-right: 10rem;
-  min-height: 8rem;
-  transition: all .3s; }
+  min-height: 8rem; }
 .contact:after {
   content: '';
   height: 0;
@@ -1711,22 +1710,18 @@ hr {
   transition: all .3s; }
 
 .js .contact-extended {
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  padding-top: 0; }
+  display: none; }
 
 dl.contact-meta a {
   position: relative;
   z-index: 3;
   text-decoration: none;
   background-color: rgba(51, 51, 51, 0);
-  transition: all .3s;
+  transition: background-color .3s;
   display: inline-block;
   box-sizing: border-box;
   padding: .4em .6em;
   margin: -.4em -.6em;
-  transition: all .3s;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
@@ -1948,7 +1943,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
 
 .modal-contact {
   position: fixed;
-  z-index: 100;
+  z-index: 300;
   left: 0;
   top: 0;
   right: 0;
@@ -1957,7 +1952,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
   padding-bottom: 3rem;
   -webkit-overflow-scrolling: touch;
   display: none;
-  background-color: rgba(51, 51, 51, 0.2); }
+  background-color: rgba(51, 51, 51, 0.4); }
 .modal-contact .contact {
   margin-bottom: 3rem;
   overflow: hidden;
@@ -1975,10 +1970,6 @@ dl.contact-extended dt.contact-regeling ~ dd {
   background: -moz-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 100%);
   background: -webkit-linear-gradient(top, rgba(245, 245, 245, 0) 0%, whitesmoke 100%);
   background: linear-gradient(to bottom, rgba(245, 245, 245, 0) 0%, whitesmoke 100%); }
-.modal-contact .contact-meta {
-  transition: padding 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
-.modal-contact .contact-avatar {
-  transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
 .modal-contact .modal-close {
   right: 3rem;
   top: 3rem;
@@ -1994,7 +1985,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   display: block; }
 
 .modal-contact.focus .contact {
-  transform: translate3d(calc(50vw - 300px), 9rem, 0) !important; }
+  margin-left: calc(50vw - 300px) !important;
+  margin-top: 104px !important; }
 .modal-contact.focus .contact .contact-meer-details {
   display: none; }
 
@@ -2008,8 +2000,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
   width: 12rem; }
 
 .modal-contact.extended .contact .contact-extended {
-  padding-top: 3rem;
-  max-height: 2000px; }
+  display: block; }
 
 @media (max-width: 900px) {
   .modal-contact {
@@ -2022,8 +2013,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
   .modal-contact .contact-extended, .modal-contact .contact-avatar, .modal-contact .contact-meta {
     transition: none; }
   .modal-contact .contact-extended {
-    max-height: 4000px;
-    padding-top: 3rem; }
+    display: block; }
   .modal-contact .contact-meta {
     padding-right: 14rem;
     min-height: 11rem; }
@@ -2033,7 +2023,7 @@ dl.contact-extended dt.contact-regeling ~ dd {
   .modal-contact.active .contact {
     width: auto !important;
     height: auto !important;
-    transform: none !important; }
+    margin: 0 !important; }
 
   .modal-contact .modal-close {
     right: 10px;
