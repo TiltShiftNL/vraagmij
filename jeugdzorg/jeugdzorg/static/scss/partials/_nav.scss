@@ -22,14 +22,14 @@
   position: relative;
   display: inline-block;
 
-  font-size: 2.3rem;
+  font-size: 1.3rem;
+  width: 6em;
   line-height: 1;
   color: $accentColor;
 
   text-decoration: none;
-  width: 6em;
   padding-left: 3rem;
-  min-height: 3em;
+  min-height: 7rem;
 
   font-family: "Avenir Next LT W01 Demi", verdana, sans-serif;
 
@@ -43,10 +43,21 @@
     width: 2rem;
     height: 6.8rem;
   }
+  sup {
+//    position: relative;
+    font-size: 1em;
+//    top: .05em;
+//    border-bottom: 3px solid #000;
+  }
   
   strong {
+    position: absolute;
+    top: 0;
+    left: 14rem;
+    font-size: 2.8rem;
+    line-height: 1;
     white-space: nowrap;
-    color: $textColor;
+    color: #000;
     font-weight: normal;
   }
   &:hover {

@@ -22,7 +22,10 @@
 <body id="top" data-decorator="scroller">
   <header class="header">
     <div class="container">
-      <a href="/" class="logo" data-counter="click.nav.logo"><i class="icon-andreas"></i>Gemeente Amsterdam</a>
+      <a href="/" class="logo" data-counter="click.nav.logo">
+        <i class="icon-andreas"></i>Gemeente Amsterdam
+        <strong>VraagMij</strong>
+      </a>
       {% block login %}
         <div class="nav-container">
           {% if user.is_authenticated %}
