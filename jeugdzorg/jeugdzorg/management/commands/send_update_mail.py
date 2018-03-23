@@ -66,3 +66,8 @@ class Command(BaseCommand):
                         sg.client.mail.send.post(request_body=mail.get())
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
+            response = sg.client.suppression.bounces.get()
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+
