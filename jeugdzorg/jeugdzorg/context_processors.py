@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from jeugdzorg.models import Regeling
-from jeugdzorg.models import Profiel
-from jeugdzorg.models import Thema
+from jeugdzorg.models import *
 from django.contrib.sites.models import Site
 
 

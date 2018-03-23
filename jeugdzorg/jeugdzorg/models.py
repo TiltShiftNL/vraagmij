@@ -875,6 +875,7 @@ def save_profile(sender, instance, **kwargs):
 
 
 def save_instelling(sender, update_fields, instance, **kwargs):
+    Site.objects.clear_cache()
     if update_fields:
         if 'update_mail_frequentie' in update_fields:
             call_command('create_crontabs')
@@ -882,3 +883,4 @@ def save_instelling(sender, update_fields, instance, **kwargs):
 
 post_save.connect(save_profile, sender=User)
 post_save.connect(save_instelling, sender=Instelling)
+post_save.connect(save_instelling, sender=Site)
