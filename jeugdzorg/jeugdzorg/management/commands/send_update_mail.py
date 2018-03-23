@@ -70,7 +70,7 @@ class Command(BaseCommand):
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            response = sg.client._("suppression/bounces").get({
+            response = sg.client._("suppression/bounces").get(**{
                 'start_time': 1521557086,
                 'end_time': 1521816286,
             })
