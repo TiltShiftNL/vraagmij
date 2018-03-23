@@ -3,6 +3,7 @@
   padding: 0;
   margin: 0 0 calc(#{$lineHeight} - 1em) 0;
   
+  
   font-size: 0;
   
   li {
@@ -15,7 +16,10 @@
     
     font-size: $fontSmallSize;
     
+    background-color: lighten($lightColor, 2);
+    
     border: 1px solid $lightColor;
+    
     min-width: 1em;
     height: 1em;
     line-height: 1;
@@ -31,6 +35,7 @@
     &.disabled {
       opacity: .2;
       cursor: not-allowed;
+      background-color: transparent;
       &:hover {
         border-color: $lightColor;
       }
