@@ -217,12 +217,10 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES)
             data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES)
-            data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES)
 
         else:
             data['voorwaarde'] = VoorwaardeFormSet()
             data['dfs'] = ThemaFormSet()
-            data['crfs'] = ContactNaarRegelingFormSet()
         return data
 
     def get_success_url(self):
@@ -233,16 +231,12 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
-        crfs = context['crfs']
         dfs = context['dfs']
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
                 voorwaarde.save()
-            if crfs.is_valid():
-                crfs.instance = self.object
-                crfs.save()
             if dfs.is_valid():
                 dfs.instance = self.object
                 dfs.save()
@@ -269,32 +263,27 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
         post = self.request.POST
         if post:
             data['voorwaarde'] = VoorwaardeFormSet(self.request.POST, self.request.FILES, instance=self.object)
-            data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES, instance=self.object)
-            data['crfs'] = ContactNaarRegelingFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            # data['dfs'] = ThemaFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
         else:
             data['voorwaarde'] = VoorwaardeFormSet(instance=self.object)
-            data['dfs'] = ThemaFormSet(instance=self.object)
-            data['crfs'] = ContactNaarRegelingFormSet(instance=self.object)
+            # data['dfs'] = ThemaFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         voorwaarde = context['voorwaarde']
-        crfs = context['crfs']
-        dfs = context['dfs']
+        # dfs = context['dfs']
+
         with transaction.atomic():
             self.object = form.save()
             if voorwaarde.is_valid():
                 voorwaarde.instance = self.object
                 voorwaarde.save()
-            if crfs.is_valid():
-                crfs.instance = self.object
-                crfs.save()
-            if dfs.is_valid():
-                dfs.instance = self.object
-                dfs.save()
-
+            # if dfs.is_valid():
+            #     dfs.instance = self.object
+            #     dfs.save()
+        print(self.request.POST)
         messages.add_message(self.request, messages.INFO, "De regeling '%s' is aangepast." % self.object.titel)
         return super(RegelingUpdate, self).form_valid(form)
 
@@ -330,12 +319,6 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
             data['profiel'] = profiel_formset
         else:
             profiel_formset = UserFormSet(instance=self.object)
-            # for subform in profiel_formset.forms:
-            #     subform.initial = {
-            #         'email': self.object.email,
-            #         'achternaam': self.object.last_name,
-            #         'voornaam': self.object.first_name,
-            #     }
             data['profiel'] = profiel_formset
             data['object'] = self.object
         return data
