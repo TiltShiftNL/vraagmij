@@ -95,7 +95,7 @@ class ProfielAdmin(admin.ModelAdmin):
 
 @admin.register(Instelling)
 class InstellingAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['site', 'app_naam', 'standaard_contact_naam', 'standaard_contact_email', ]
 
 
 @admin.register(User)
