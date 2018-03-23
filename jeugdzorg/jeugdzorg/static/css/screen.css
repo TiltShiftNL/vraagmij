@@ -546,10 +546,12 @@ body {
   height: 4rem;
   margin-right: .5em;
   background-color: #7bc6f3;
+  border-radius: 3px;
+  overflow: hidden;
   line-height: 4rem;
   text-align: center;
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.6rem;
   font-style: normal;
   font-family: "Times New Roman";
   font-weight: 700; }
@@ -1355,10 +1357,12 @@ form.well .choices strong {
   height: 4rem;
   margin-right: .5em;
   background-color: #7bc6f3;
+  border-radius: 3px;
+  overflow: hidden;
   line-height: 4rem;
   text-align: center;
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.6rem;
   font-style: normal;
   font-family: "Times New Roman";
   font-weight: 700; }
