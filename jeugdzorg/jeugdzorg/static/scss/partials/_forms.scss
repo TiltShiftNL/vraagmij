@@ -134,10 +134,8 @@ legend {
   font-weight: 700;
   line-height: 1;
   
-  padding-bottom: 1em;
   margin-bottom: 1em;
-  border-bottom: 1px solid rgba($textColor, .2);
-  
+
   small {
     @extend .font-normal !optional;
     font-size: $fontSmallSize;
@@ -155,6 +153,9 @@ fieldset {
   border-bottom: 1px solid $lightColor;
   padding-bottom: $lineHeight;
   margin-bottom: $lineHeight;
+  .well & {
+    border-bottom: 1px solid rgba($textColor, .2);
+  }
 }
 form {
   .row {
@@ -182,7 +183,7 @@ form {
     display: block;
   }
   label {
-    color: pointer;
+    cursor: pointer;
   }
   .choices {
     list-style: none;
@@ -301,6 +302,7 @@ form.well {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  
   > * {
     margin-right: 2em;
     margin-bottom: 0;
@@ -333,7 +335,7 @@ form.well {
     
     bottom: $padding / 2;
     padding: $padding / 2;
-    margin: -$padding / 2;;
+    margin: $lineHeight -$padding / 2 -$padding / 2 -$padding / 2;
     
     background-color: rgba(lighten($lightColor, 5), .95);
     

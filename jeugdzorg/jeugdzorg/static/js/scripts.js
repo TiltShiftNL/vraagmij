@@ -159,7 +159,6 @@
       
       if (card.modal.classList.contains('active')) {
         
-        card.modal.classList.remove('extended');
         card.modal.classList.remove('on');
         card.modal.classList.remove('focus');
         card.modal.classList.remove('active');
@@ -193,7 +192,7 @@
           setTimeout(function(){
             card.modal.classList.add('on');
             card.modal.classList.add('extended');
-          }, 400);
+          }, 300);
         }, 100);
 
       }
