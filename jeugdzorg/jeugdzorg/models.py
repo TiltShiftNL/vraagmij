@@ -797,6 +797,30 @@ class Instelling(models.Model):
         verbose_name=_('Site'),
         on_delete=models.CASCADE,
     )
+    app_naam = models.CharField(
+        verbose_name=_('App naam'),
+        default='VraagMij',
+        max_length=30,
+        null=True,
+        blank=True,
+    )
+    standaard_contact_naam = models.CharField(
+        verbose_name=_('Standaard contact naam'),
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+    standaard_contact_email = models.EmailField(
+        verbose_name=_('Standaard contact e-mailadres'),
+        null=True,
+        blank=True,
+    )
+        # update_mail_ = models.PositiveIntegerField(
+        #     verbose_name=_('Deactiveer limit'),
+        #     help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW CMD'"),
+        #     max_length=30,
+        #     default='0 0 1 * *',
+        # )
     update_mail_frequentie = models.CharField(
         verbose_name=_('Update mail frequentie'),
         help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW CMD'"),

@@ -23,6 +23,7 @@ from sendgrid.helpers.mail import *
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import get_object_or_404
+from django.template import RequestContext
 
 from .auth import auth_test
 from .forms import *
@@ -357,12 +358,15 @@ def logout(request):
 
 @csrf_protect
 def password_reset_new_user(request, flow):
+    from .context_processors import app_settings
+
     data = {
         'template_name': 'registration/reset_password.html',
         'password_reset_form': MailAPIPasswordResetForm,
         'email_template_name': 'registration/password_reset_email_%s.html' % flow,
         'post_reset_redirect': reverse_lazy('herstel_wachtwoord_klaar'),
         'subject_template_name': 'registration/password_reset_subject.txt',
+        'extra_email_context': app_settings(),
     }
     if flow == 'new':
         data.update({
@@ -370,6 +374,7 @@ def password_reset_new_user(request, flow):
                 'email': request.GET.get('email'),
                 'flow': flow,
             },
+
             'post_reset_redirect': reverse_lazy('wachtwoord_instellen_klaar'),
             'subject_template_name': 'registration/password_reset_subject_new.txt',
         })

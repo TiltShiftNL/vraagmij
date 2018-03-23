@@ -23,6 +23,7 @@ from .views import *
 from .forms import *
 from django.urls import re_path
 from django.views.static import serve
+from django.views.generic import TemplateView
 from rest_framework import routers
 from .api import RegelingViewSet
 
@@ -56,6 +57,10 @@ urlpatterns = [
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
     path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
     path('admin/logs/', ConfigView.as_view(), name='logs'),
+    path('admin/email-template/', TemplateView.as_view(template_name='email/update_mail.html'), {
+        'site': {'hostname': 'hostdus'},
+        'title': 'VraagMij',
+    }, name='email-template'),
 
     url('^', include('django.contrib.auth.urls')),
 
