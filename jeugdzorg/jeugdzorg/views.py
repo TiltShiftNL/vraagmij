@@ -339,6 +339,22 @@ class EventView(View):
         return JsonResponse({'status': 'ok'}, safe=False)
 
 
+def logout(request):
+    data = {
+        'next_page': reverse_lazy('login'),
+    }
+    response = auth_views.logout(request, **data)
+
+    if issubclass(HttpResponseRedirect, response.__class__):
+        messages.add_message(
+            request,
+            messages.INFO,
+            "Je bent nu uitgelogd."
+        )
+
+    return response
+
+
 @csrf_protect
 def password_reset_new_user(request, flow):
     data = {
