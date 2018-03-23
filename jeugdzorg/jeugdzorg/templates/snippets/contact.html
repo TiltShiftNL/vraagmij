@@ -28,17 +28,17 @@
 
       <dt class="contact-email">email</dt>
       {% if item.email %}
-          <dd><a href="mailto:{{ item.email }}" title="{{ item.email }}" data-counter="click.detail.contact.email mouseover.detail.contact.email"><i class="icon-mail"></i> {{ item.email }}</a></dd>
+          <dd><a href="mailto:{{ item.email }}" title="{{ item.email }}" data-counter="click.detail.contact.{{ item.id }}.email mouseover.detail.contact.{{ item.id }}.email"><i class="icon-mail"></i> {{ item.email }}</a></dd>
       {% endif %}
 
       {% if item.telefoonnummer or item.telefoonnummer_2 %}
           <dt class="contact-telefoon">telefoon</dt>
       {% endif %}
       {% if item.telefoonnummer %}
-          <dd><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.tel mouseover.detail.contact.tel"><i class="icon-phone"></i> {{ item.telefoonnummer }}</a></dd>
+          <dd><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.{{ item.id }}.tel mouseover.detail.contact.{{ item.id }}.tel"><i class="icon-phone"></i> {{ item.telefoonnummer }}</a></dd>
       {% endif %}
       {% if item.telefoonnummer_2 %}
-          <dd><a href="tel:{{ item.telefoonnummer_2 }}" data-counter="click.detail.contact.tel2 mouseover.detail.contact.tel2"><i class="icon-phone"></i> {{ item.telefoonnummer_2 }}</a></dd>
+          <dd><a href="tel:{{ item.telefoonnummer_2 }}" data-counter="click.detail.contact.{{ item.id }}.tel2 mouseover.detail.contact.{{ item.id }}.tel2"><i class="icon-phone"></i> {{ item.telefoonnummer_2 }}</a></dd>
       {% endif %}
       
       
@@ -81,7 +81,7 @@
     </dl>
     
     <ul class="contact-acties">
-      <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="contact">Details</a></li>
+      <li><a href="#contact-{{ item.id }}" class="contact-meer-details" data-handler="contact" data-copy-details="details" data-copy-sluiten="sluiten" data-counter="click.detail.contact.{{ item.id }}.large ">Details</a></li>
     </ul>
 
 </div>
