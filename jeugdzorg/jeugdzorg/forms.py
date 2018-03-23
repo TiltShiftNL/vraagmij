@@ -248,6 +248,13 @@ ContactNaarRegelingFormSet = forms.inlineformset_factory(
 )
 
 
+class LoginForm(AuthenticationForm):
+    error_messages = {
+        'invalid_login': 'Ongeldig e-mailadres of wachtwoord.',
+        'inactive': "Dit account is niet actief.",
+    }
+
+
 class ThemaModelForm(forms.ModelForm):
     class Meta:
         model = Thema

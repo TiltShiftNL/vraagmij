@@ -45,7 +45,9 @@ urlpatterns = [
     path('contact/<int:pk>/', ProfielDetail.as_view(), {'sub_view': 'contact'}, name='detail_contact'),
     path('profiel/bewerken/', ProfielUpdateView.as_view(), {'sub_view': 'contact'}, name='update_profiel'),
 
-    path('login/', auth_views.login, name='login'),
+    path('login/', auth_views.login, {
+        'authentication_form': LoginForm,
+    }, name='login'),
     path('logout/', logout, name='logout'),
 
     path('event/add', EventView.as_view(), name='add_event'),
