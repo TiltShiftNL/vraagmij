@@ -352,6 +352,7 @@ UserFormSet = forms.inlineformset_factory(
         'email',
         'telefoonnummer',
         'telefoonnummer_2',
+        'hou_me_op_de_hoogte_mail',
         'organisatie_lijst',
         'regeling_lijst',
         'thema_lijst',

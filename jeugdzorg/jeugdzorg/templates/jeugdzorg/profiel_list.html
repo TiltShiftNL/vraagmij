@@ -6,13 +6,20 @@
 
         <ul class="sort">
             <li>
+              <a{% if beeld == 'recent' %} class="active"{% endif %} href=".?beeld=recent{% if beeld == 'recent' and ordening != 'aflopend' %}&amp;ordening=aflopend{% endif %}">recent <i class="icon-sort-{% if ordening == 'aflopend' %}desc{% else %}asc{% endif %}"></i></a>
+            </li>
+            <li>
               <a{% if beeld == 'alfabet' %} class="active"{% endif %} href=".?beeld=alfabet{% if beeld == 'alfabet' and ordening != 'aflopend' %}&amp;ordening=aflopend{% endif %}">alfabetisch <i class="icon-sort-{% if ordening == 'aflopend' %}desc{% else %}asc{% endif %}"></i></a>
             </li>
-            <li><a{% if request.GET.beeld == 'thema' %} class="active"{% endif %} href=".?beeld=thema">thema</a></li>
+            <li>
+              <a{% if request.GET.beeld == 'thema' %} class="active"{% endif %} href=".?beeld=thema">thema</a>
+            </li>
             <li>
               <a{% if beeld == 'organisatie' %} class="active"{% endif %} href=".?beeld=organisatie{% if beeld == 'organisatie' and ordening != 'aflopend' %}&amp;ordening=aflopend{% endif %}">organisatie <i class="icon-sort-{% if ordening == 'aflopend' %}desc{% else %}asc{% endif %}"></i></a>
             </li>
-            <li><a{% if request.GET.beeld == 'gebied' %} class="active"{% endif %} href=".?beeld=gebied">gebied</a></li>
+            <li>
+              <a{% if request.GET.beeld == 'gebied' %} class="active"{% endif %} href=".?beeld=gebied">gebied</a>
+            </li>
         </ul>
 
       <span class="sort-label js-show">Weergave</span>

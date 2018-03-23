@@ -162,7 +162,7 @@ class ProfielList(UserPassesTestMixin, ListView):
         data['organisaties'] = Organisatie.objects.all
         data['gebieden'] = Gebied.objects.all
 
-        if data['beeld'] not in ['alfabet', 'thema', 'organisatie', 'gebied']:
+        if data['beeld'] not in ['alfabet', 'thema', 'organisatie', 'gebied', 'recent']:
             data['beeld'] = 'alfabet'
 
         data['list_template'] = 'snippets/contact_list_%s.html' % data['beeld']
