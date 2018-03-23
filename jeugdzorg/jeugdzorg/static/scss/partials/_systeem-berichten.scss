@@ -21,14 +21,20 @@
   &.compact {
     padding: $padding / 2;
   }
-  &.fout {
-    background-color: rgba(red, .1);
-  }
+  &.info,
   &.goed {
     background-color: rgba(green, .1);
   }
   
-  &.info {
+  &.error,
+  &.info.error,
+  &.fout {
+    background-color: rgba(red, .1);
+    color: red;
+  }
+  
+  
+  &.letop {
     font-weight: 700;
     background-color: #d7effc;
     &, * {
