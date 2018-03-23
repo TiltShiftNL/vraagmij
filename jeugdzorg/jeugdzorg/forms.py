@@ -95,6 +95,14 @@ class MailAPIPasswordResetForm(PasswordResetForm):
 
 
 class RegelingModelForm(forms.ModelForm):
+    thema_lijst = forms.ModelMultipleChoiceField(
+        required=False,
+        widget=ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),
+        queryset=Thema.objects.all(),
+    )
+    custom_m2m = (
+        ('thema_lijst', 'thema'),
+    )
 
     class Meta:
         model = Regeling
@@ -107,6 +115,16 @@ class RegelingModelForm(forms.ModelForm):
                 attrs={'type': 'date'},
             ),
         }
+
+    def save(self, commit=True):
+        cleaned_data = self.cleaned_data
+        if commit:
+            print(self.instance.thema_set.all())
+
+            for thema in cleaned_data.get('thema_lijst'):
+
+                print(thema)
+        return super().save(commit)
 
 
 class ProfielModelForm(forms.ModelForm):
@@ -225,10 +243,16 @@ class CustomUserChangeForm(UserChangeForm):
         exclude = []
 
 
+class VoorwaardeModelForm(forms.ModelForm):
+    class Meta:
+        model = Regeling
+        exclude = []
+
+
 VoorwaardeFormSet = forms.inlineformset_factory(
     Regeling,
     Voorwaarde,
-    form=RegelingModelForm,
+    form=VoorwaardeModelForm,
     extra=1
 )
 ContactNaarRegelingFormSet = forms.inlineformset_factory(
@@ -237,10 +261,21 @@ ContactNaarRegelingFormSet = forms.inlineformset_factory(
     form=RegelingModelForm,
     extra=1
 )
+
+
+class ThemaModelForm(forms.ModelForm):
+    class Meta:
+        model = Thema
+        exclude = []
+
+    def save(self, commit=True):
+        return super().save(commit)
+
+
 ThemaFormSet = forms.inlineformset_factory(
     Regeling,
     Regeling.themas.through,
-    form=RegelingModelForm,
+    form=ThemaModelForm,
     extra=1,
 )
 

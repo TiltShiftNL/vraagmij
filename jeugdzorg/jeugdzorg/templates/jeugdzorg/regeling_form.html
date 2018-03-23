@@ -55,28 +55,31 @@
           
           
         <fieldset class="regeling-set">
-
-          <legend>Thema's</legend>
-          {{ dfs.management_form }}
-          <ol class="form-list" data-decorator="list">
-              {% for form in dfs.forms %}
-              <li>
-                  <label>
-                      <strong>Thema</strong>
-                      {% for field in form.visible_fields %}
-                          {% if forloop.first %}
-                              {% for hidden in form.hidden_fields %}
-                                  {{ hidden }}
-                              {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field }}
-                      {% endfor %}
-                  </label>
-              </li>
-              {% endfor %}
-          </ol>
+            {{ form.thema_lijst }}
         </fieldset>
+{#        <fieldset class="regeling-set">#}
+{##}
+{#          <legend>Thema's</legend>#}
+{#          {{ dfs.management_form }}#}
+{#          <ol class="form-list" data-decorator="list">#}
+{#              {% for form in dfs.forms %}#}
+{#              <li>#}
+{#                  <label>#}
+{#                      <strong>Thema</strong>#}
+{#                      {% for field in form.visible_fields %}#}
+{#                          {% if forloop.first %}#}
+{#                              {% for hidden in form.hidden_fields %}#}
+{#                                  {{ hidden }}#}
+{#                              {% endfor %}#}
+{#                          {% endif %}#}
+{#                          {{ field.errors.as_ul }}#}
+{#                          {{ field }}#}
+{#                      {% endfor %}#}
+{#                  </label>#}
+{#              </li>#}
+{#              {% endfor %}#}
+{#          </ol>#}
+{#        </fieldset>#}
     
         <fieldset class="regeling-set">
 
@@ -97,30 +100,6 @@
                           {{ field }}
                       {% endfor %}
                   </label>
-              </li>
-              {% endfor %}
-          </ol>
-        </fieldset>
-  
-        <fieldset class="regeling-set">
-
-          <legend>Contacten</legend>
-          {{ crfs.management_form }}
-          <ol class="form-list" data-decorator="list">
-              {% for form in crfs.forms %}
-              <li class="group">
-                  {% for field in form.visible_fields %}
-                      <label class="input-{{ field.label|slugify }}">
-                          <strong>{{ field.label }}</strong>
-                          {{ field }}
-                      </label>
-                      {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                              {{ hidden }}
-                          {% endfor %}
-                      {% endif %}
-                      {{ field.errors.as_ul }}
-                  {% endfor %}
               </li>
               {% endfor %}
           </ol>
