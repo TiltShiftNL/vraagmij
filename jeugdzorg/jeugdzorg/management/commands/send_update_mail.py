@@ -69,12 +69,13 @@ class Command(BaseCommand):
                         sg.client.mail.send.post(request_body=mail.get())
                     print('Send mail to: %s' % u.profiel.naam_volledig)
 
-            print(settings.SENDGRID_API_KEY)
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            response = sg.client._("suppression/bounces").get(**{
+            url = "suppression/bounces?start_time={start_time}&end_time={end_time}".format(**{
                 'start_time': 1521557086,
                 'end_time': 1521816286,
             })
+            print(url)
+            response = sg.client._(url).get()
             print(response.status_code)
             print(response.body)
             print(response.headers)
