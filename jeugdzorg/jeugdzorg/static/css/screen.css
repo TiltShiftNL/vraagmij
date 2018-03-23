@@ -989,7 +989,7 @@ form.well .choices strong {
 .buttons.sticky {
   position: sticky;
   position: -webkit-sticky;
-  z-index: 10;
+  z-index: 101;
   bottom: 1.5rem;
   padding: 1.5rem;
   margin: -1.5rem;

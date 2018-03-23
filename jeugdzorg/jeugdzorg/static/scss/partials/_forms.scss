@@ -329,7 +329,7 @@ form.well {
   &.sticky {
     position: sticky;
     position: -webkit-sticky;
-    z-index: 10;
+    z-index: 101;
     
     bottom: $padding / 2;
     padding: $padding / 2;
