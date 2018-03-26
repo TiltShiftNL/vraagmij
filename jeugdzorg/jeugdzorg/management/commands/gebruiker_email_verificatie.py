@@ -60,9 +60,9 @@ class Command(BaseCommand):
             for k, v in results.items():
                 if u.email in [r.get('email') for r in v]:
                     r = dict((r.get('email'), r) for r in v).get(u.email)
-                    u.profiel.gebruiker_email_verificatie = '%s | %s' % (
-                        k, ','.join(['%s: %s' % (k, v) for k, v in r.items() if k != 'email'])
-                    )
+                    u.profiel.gebruiker_email_verificatie = k
+                    u.profiel.gebruiker_email_verificatie_details = ','.join(['%s: %s' % (k, v) for k, v in r.items()
+                                                                              if k != 'email'])
                     u.profiel.save()
 
 

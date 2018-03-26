@@ -633,6 +633,13 @@ class Profiel(models.Model):
         null=True,
         blank=True,
     )
+    gebruiker_email_verificatie_details = models.CharField(
+        verbose_name=_('Gebruiker email verificatie details'),
+        max_length=100,
+        default='valid',
+        null=True,
+        blank=True,
+    )
     organisatie_lijst = models.ManyToManyField(
         to='Organisatie',
         through='ProfielNaarOrganisatie',
