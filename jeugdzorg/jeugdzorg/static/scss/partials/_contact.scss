@@ -674,9 +674,16 @@ dl.contact-extended {
         min-height: 14rem;
       }
       .contact-meer-details {
-        &:after {
-          right: 10px;
+        
+        &:before {
+          opacity: 1;
         }
+        &:after {
+          content: attr(data-copy-sluiten);
+          right: 10px;
+          bottom: 3rem;
+        }
+        
       }
       
       .contact-avatar {

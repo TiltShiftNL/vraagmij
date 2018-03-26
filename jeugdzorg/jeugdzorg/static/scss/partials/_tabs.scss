@@ -3,9 +3,6 @@
   box-sizing: border-box;
   padding: 0 $padding;
   margin: 0 auto;
-  @include medium {
-    padding: 0 10px;
-  }
 }
 .tabs {
   display: flex;
@@ -88,5 +85,28 @@
       padding: .6em 1em;
     }
   }
+  
+}
+
+@include small {
+  .tabs-container {
+    padding: 0 10px;
+    .tabs {
+      margin-left: -10px;
+      margin-right: -10px;
+      
+      li {
+        margin-right: 1px;
+      }
+    
+      a {
+        padding: 10px;
+      }
+      
+      [data-count]:after {
+        margin-left: 3px;
+      }
+    }
+  }  
   
 }

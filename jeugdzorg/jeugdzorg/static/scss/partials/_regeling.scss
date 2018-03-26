@@ -287,6 +287,9 @@
           &:after {
             background-color: #fff;
           }
+          @include medium {
+            top: 0px;
+          }
         }
       }
     }

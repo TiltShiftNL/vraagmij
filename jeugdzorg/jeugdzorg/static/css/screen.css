@@ -589,6 +589,17 @@ body {
   font-weight: normal; }
 .logo:hover {
   color: #ec0000; }
+@media (max-width: 900px) {
+  .logo {
+    font-size: 14px;
+    padding-left: 22px;
+    min-height: 41px; }
+  .logo strong {
+    font-size: 18px;
+    left: 120px;
+    top: -1px; }
+  .logo .icon-andreas {
+    height: 41px; } }
 
 .nav-container {
   position: absolute;
@@ -597,6 +608,9 @@ body {
   top: 0;
   text-align: right;
   margin-left: 28rem; }
+@media (max-width: 700px) {
+  .nav-container {
+    margin-left: 200px; } }
 
 .nav-login {
   display: inline-block;
@@ -614,6 +628,9 @@ body {
   margin: 0 .2em; }
 .nav-login a {
   text-decoration: none; }
+@media (max-width: 700px) {
+  .nav-login .icon-avatar {
+    top: 0; } }
 
 .nav {
   position: relative;
@@ -676,6 +693,10 @@ body {
   .nav-open .icon-menu, .nav-open .icon-close, .nav-close .icon-menu, .nav-close .icon-close {
     top: -7px;
     right: -5px; } }
+@media (max-width: 700px) {
+  .nav-open, .nav-close {
+    font-size: 0;
+    height: 30px; } }
 
 .nav-close {
   position: absolute;
@@ -1088,9 +1109,6 @@ form.well .choices strong {
   box-sizing: border-box;
   padding: 0 3rem;
   margin: 0 auto; }
-@media (max-width: 900px) {
-  .tabs-container {
-    padding: 0 10px; } }
 
 .tabs {
   display: flex;
@@ -1143,6 +1161,18 @@ form.well .choices strong {
     font-size: 1.6rem;
     padding: .6em 1em; } }
 
+@media (max-width: 700px) {
+  .tabs-container {
+    padding: 0 10px; }
+  .tabs-container .tabs {
+    margin-left: -10px;
+    margin-right: -10px; }
+  .tabs-container .tabs li {
+    margin-right: 1px; }
+  .tabs-container .tabs a {
+    padding: 10px; }
+  .tabs-container .tabs [data-count]:after {
+    margin-left: 3px; } }
 .modal {
   position: fixed;
   z-index: 300;
@@ -1597,6 +1627,9 @@ hr {
   border-color: #333; }
 [data-view="compact"] .overzicht .regeling .regeling-titel i:after {
   background-color: #fff; }
+@media (max-width: 900px) {
+  [data-view="compact"] .overzicht .regeling .regeling-titel i {
+    top: 0px; } }
 
 .contacten {
   list-style: none;
@@ -2041,8 +2074,12 @@ dl.contact-extended dt.contact-regeling ~ dd {
   .modal-contact.active .contact .contact-meta {
     padding-right: 16rem;
     min-height: 14rem; }
+  .modal-contact.active .contact .contact-meer-details:before {
+    opacity: 1; }
   .modal-contact.active .contact .contact-meer-details:after {
-    right: 10px; }
+    content: attr(data-copy-sluiten);
+    right: 10px;
+    bottom: 3rem; }
   .modal-contact.active .contact .contact-avatar {
     width: 12rem;
     right: 3rem;

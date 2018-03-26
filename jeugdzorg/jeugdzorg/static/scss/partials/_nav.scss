@@ -63,6 +63,20 @@
   &:hover {
     color: $accentColor;
   }
+  
+  @include medium {
+    font-size: 14px;
+    padding-left: 22px;
+    min-height: 41px;
+    strong {
+      font-size: 18px;
+      left: 120px;
+      top: -1px;
+    }
+    .icon-andreas {
+      height: 41px;
+    }
+  }
 }
 
 .nav-container {
@@ -72,6 +86,9 @@
   top: 0;
   text-align: right;
   margin-left: 28rem;
+  @include small {
+    margin-left: 200px;
+  }
 }
 
 .nav-login {
@@ -92,6 +109,11 @@
   }
   a {
     text-decoration: none;
+  }
+  @include small {
+    .icon-avatar {
+      top: 0;
+    }
   }
 }
 
@@ -172,6 +194,11 @@
       right: -5px;
     }
     
+  }
+  
+  @include small {
+    font-size: 0;
+    height: 30px;
   }
   
 }
