@@ -626,6 +626,13 @@ class Profiel(models.Model):
         verbose_name=_('Hou me op de hoogte via e-mail'),
         default=False,
     )
+    gebruiker_email_verificatie = models.CharField(
+        verbose_name=_('Gebruiker email verificatie'),
+        max_length=100,
+        default='valid',
+        null=True,
+        blank=True,
+    )
     organisatie_lijst = models.ManyToManyField(
         to='Organisatie',
         through='ProfielNaarOrganisatie',
@@ -790,7 +797,9 @@ class EventItem(models.Model):
 
 
 class Instelling(models.Model):
-    __original_update_mail_frequentie = None
+    # __update_mail_frequentie = None
+    # __gebruiker_email_verificatie_frequentie = None
+    # __original_update_mail_frequentie = None
 
     site = models.OneToOneField(
         to=Site,
@@ -823,7 +832,7 @@ class Instelling(models.Model):
         # )
     update_mail_frequentie = models.CharField(
         verbose_name=_('Update mail frequentie'),
-        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW CMD'"),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
         max_length=30,
         default='0 0 1 * *',
     )
@@ -832,19 +841,41 @@ class Instelling(models.Model):
         null=True,
         blank=True,
     )
+    gebruiker_email_verificatie_frequentie = models.CharField(
+        verbose_name=_('Gebruiker email verificatie frequentie'),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
+        max_length=30,
+        default='0 0 1 * *',
+    )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.__original_update_mail_frequentie = self.update_mail_frequentie
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.__original_update_mail_frequentie = self.update_mail_frequentie
+    #     self.__original_gebruiker_email_verificatie_frequentie = self.gebruiker_email_verificatie_frequentie
 
-    def save(self, force_insert=False, force_update=False, *args, **kwargs):
-        data = {}
-        if self.update_mail_frequentie != self.__original_update_mail_frequentie:
-            data.update({
-                'update_fields': ['update_mail_frequentie', ]
-            })
-        super().save(force_insert, force_update, *args, **data)
-        self.__original_update_mail_frequentie = self.update_mail_frequentie
+    # def save(self, force_insert=False, force_update=False, *args, **kwargs):
+    #     data = {}
+    #     update_fields = []
+    #     if self.gebruiker_email_verificatie_frequentie != self.__original_gebruiker_email_verificatie_frequentie:
+    #         update_fields.append('gebruiker_email_verificatie_frequentie')
+    #     if self.update_mail_frequentie != self.__original_update_mail_frequentie:
+    #         update_fields.append('update_mail_frequentie')
+    #     print(data)
+    #     print(update_fields)
+    #     data.update({
+    #         'update_fields': update_fields
+    #     })
+    #     print(data)
+    #     super().save(force_insert, force_update, *args, **data)
+    #     self.__original_update_mail_frequentie = self.update_mail_frequentie
+    #     self.__original_gebruiker_email_verificatie_frequentie = self.gebruiker_email_verificatie_frequentie
+
+    @staticmethod
+    def track_field_names():
+        return (
+            'update_mail_frequentie',
+            'gebruiker_email_verificatie_frequentie',
+        )
 
     class Meta:
         verbose_name = _('Instelling')
@@ -874,13 +905,28 @@ def save_profile(sender, instance, **kwargs):
         p.save()
 
 
+def save_site(sender, update_fields, instance, **kwargs):
+    Site.objects.clear_cache()
+
+
 def save_instelling(sender, update_fields, instance, **kwargs):
     Site.objects.clear_cache()
-    if update_fields:
-        if 'update_mail_frequentie' in update_fields:
+    if hasattr(sender, 'track_field_names'):
+        call_create_crontabs = [field_name for field_name in sender.track_field_names() if getattr(instance, '__%s' % field_name) != getattr(instance, '%s' % field_name)]
+        if call_create_crontabs:
             call_command('create_crontabs')
+
+
+def pre_save_instance(sender, instance, *args, **kwargs):
+    if instance.id:
+        if hasattr(sender, 'track_field_names'):
+            for field_name in sender.track_field_names():
+                setattr(instance, '__%s' % field_name, getattr(instance.__class__.objects.get(id=instance.id), field_name))
 
 
 post_save.connect(save_profile, sender=User)
 post_save.connect(save_instelling, sender=Instelling)
-post_save.connect(save_instelling, sender=Site)
+post_save.connect(save_site, sender=Site)
+
+pre_save.connect(pre_save_instance, sender=Instelling)
+

@@ -9,14 +9,17 @@ class Command(BaseCommand):
     help = 'Create crontabs from code'
 
     def handle(self, *args, **options):
-        update_mail_frequentie = '0 0 1 * *'
+        update_mail_frequentie = '0 0 0 1 *'
+        gebruiker_email_verificatie_frequentie = '0 0 0 1 *'
         try:
             site = Site.objects.get_current()
             instelling = Instelling.objects.get(site=site)
-            f = instelling.update_mail_frequentie
-            len(f.strip().split(' '))
-            if len(f.strip().split(' ')) == 5:
-                update_mail_frequentie = f.strip()
+            umf = instelling.update_mail_frequentie
+            gevf = instelling.gebruiker_email_verificatie_frequentie
+            if len(umf.strip().split(' ')) == 5:
+                update_mail_frequentie = umf.strip()
+            if len(gevf.strip().split(' ')) == 5:
+                gebruiker_email_verificatie_frequentie = gevf.strip()
         except:
             pass
 
@@ -24,4 +27,5 @@ class Command(BaseCommand):
             crontabfile.write('*/20 * * * * root . /root/project_env.sh; /usr/local/bin/update_regelingen.sh >> /var/log/cron.log 2>&1\n')
             crontabfile.write('*/20 * * * * root . /root/project_env.sh; /usr/local/bin/check_user_activity.sh >> /var/log/cron.log 2>&1\n')
             crontabfile.write('%s root . /root/project_env.sh; /usr/local/bin/send_update_mail.sh >> /var/log/cron.log 2>&1\n' % update_mail_frequentie)
+            crontabfile.write('%s root . /root/project_env.sh; /usr/local/bin/gebruiker_email_verificatie.sh >> /var/log/cron.log 2>&1\n' % gebruiker_email_verificatie_frequentie)
             crontabfile.write('\n')
