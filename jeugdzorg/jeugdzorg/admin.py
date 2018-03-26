@@ -84,8 +84,8 @@ class EventItemAdmin(admin.ModelAdmin):
 
 @admin.register(Profiel)
 class ProfielAdmin(admin.ModelAdmin):
-    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer', 'seconden_niet_gebruikt']
-
+    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'gebruiker_email_verificatie', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer', 'seconden_niet_gebruikt']
+    list_filter = ['gebruiker_email_verificatie', ]
     inlines = [
         ProfielNaarRegelingInline,
         ProfielNaarThemaInline,
