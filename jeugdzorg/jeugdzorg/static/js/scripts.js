@@ -79,9 +79,10 @@
           modal.classList.add('active');
         }, 300);
       };
-        
+      
       if (el) {
         content = el.innerHTML;
+        _render(content);
       } else if (url) {
         helpers.ajax(url, function(response){
           if (response.status >= 200 && response.status < 400) {
@@ -97,6 +98,42 @@
       }
       
       
+    },
+    
+    'choices': function(e){
+      var 
+        el = this.hash && document.getElementById(this.hash.substring(1)),
+        template = '<div class="modal-inner">[[CONTENT]]</div><a href="#" class="modal-close" data-handler="modal-close">SLUITEN</a>',
+        modal;
+      
+      var _render = function(content){
+        modal = document.createElement('div');
+        modal.classList.add('modal');
+        modal.innerHTML = template.replace('[[CONTENT]]', content);
+        document.body.appendChild(modal);
+        setTimeout(function(){
+          modal.classList.add('active');
+        }, 300);
+      };
+      
+      var _change = function(e) {
+        var els = modal.querySelectorAll('input');
+        for (var i = 0; i < els.length; i++) {
+          if (els[i].checked) {
+            document.getElementById(els[i].dataset.id).setAttribute('checked', 'checked');
+          } else {
+            document.getElementById(els[i].dataset.id).removeAttribute('checked');
+          }
+          
+        }
+      }
+      
+      if (el) {
+        e.preventDefault();
+        var fieldset = _closest(el, 'fieldset');
+        _render('<div class="well">' + fieldset.innerHTML.replace(/ (for|id)="/gi, ' data-id="') + '</div>');
+        modal.addEventListener('change', _change); _change();
+      }
     },
     
     'back': function(e){

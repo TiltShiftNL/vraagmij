@@ -1,0 +1,119 @@
+.choices {
+  list-style: none;
+  padding: 0;
+  margin: -10px;
+  margin-bottom: calc(#{$lineHeight} - 10px);
+  display: flex;
+  flex-wrap: wrap;
+  @include medium {
+    display: block;
+  }
+  
+  li {
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      
+    }
+  }
+  &.choices-full li {
+    flex-basis: 100%;
+  }
+  input[type="checkbox"] + strong {
+    display: block;
+    
+    background-color: $lightColor;
+    padding: 10px;
+    padding-left: calc(10px + 2em);
+    margin: 10px;
+    transition: all .3s;
+    
+    border: 1px solid rgba(#000, .1);
+    
+    &:before, &:after {
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+  }
+  b {
+    padding: 10px;
+  }
+  
+  label:hover strong {
+    border: 1px solid rgba(#000, .4);
+  }
+  &.inlineformset-checkbox {
+    input {
+      position: static;
+      opacity: 1;
+    }
+  }
+  
+
+}
+
+.well {
+  .choices {
+    input[type="checkbox"] + strong {
+      background-color: #fff;
+    }
+  }
+}
+
+.choices-modal {
+  .choices-close {
+    display: none;
+  }
+  .choices-nieuw {
+    text-decoration: none;
+  }
+  
+  .modal & {
+    .buttons {
+      flex-direction: row-reverse;
+    }
+    .choices-close {
+      display: inline-block;
+      margin-right: 0;
+    }
+    .choices-nieuw {
+      display: none;
+    }
+    
+  }
+  
+  fieldset & {
+    input[type="checkbox"] + strong {
+      display: none;
+    }
+    input[type="checkbox"]:checked + strong {
+      display: inline-block;
+      padding: 10px 40px 10px 10px;
+      &:after {
+        display: none;
+      }
+      &:before {
+        content: '×';
+        left: auto;
+        font-weight: bold;
+        font-size: 30px;
+        right: 0;
+        text-align: center;
+        padding: 0;
+        border: none;
+        margin: 4px 1px;
+        background-color: transparent;
+      }
+      &:hover {
+        &:before {
+          color: red;
+        }
+      }
+    }
+    .choices-full input[type="checkbox"]:checked + strong {
+      display: block;
+    }
+    
+  }
+}
