@@ -12,6 +12,7 @@ from django.contrib.sites.models import Site
 from jeugdzorg.models import Instelling
 from django.conf import settings
 import sendgrid
+import json
 
 
 def get_users():
@@ -40,28 +41,29 @@ class Command(BaseCommand):
         invalid_emails_base_url = 'suppression/invalid_emails'
         spam_reports_base_url = 'suppression/spam_reports'
 
-        bounces = sg.client._(bounces_base_url).get()
-        invalid_emails = sg.client._(invalid_emails_base_url).get()
-        spam_reports = sg.client._(spam_reports_base_url).get()
-
-        print(bounces)
-        print(invalid_emails)
-        print(spam_reports)
+        bounces = sg.client._(bounces_base_url.format(**{
+            'start_time': start_time,
+        })).get()
+        invalid_emails = sg.client._(invalid_emails_base_url.format(**{
+            'start_time': start_time,
+        })).get()
+        spam_reports = sg.client._(spam_reports_base_url.format(**{
+            'start_time': start_time,
+        })).get()
 
         results = {
-            'bounces': bounces,
-            'invalid_emails': invalid_emails,
-            'spam_reports': spam_reports,
+            'bounces': json.loads(bounces.body),
+            'invalid_emails': json.loads(invalid_emails.body),
+            'spam_reports': json.loads(spam_reports.body),
         }
-
         for u in get_users():
             for k, v in results.items():
                 if u.email in [r.get('email') for r in v]:
                     r = dict((r.get('email'), r) for r in v).get(u.email)
-                    u.gebruiker_email_verificatie = '%s| %s' % (
+                    u.profiel.gebruiker_email_verificatie = '%s | %s' % (
                         k, ','.join(['%s: %s' % (k, v) for k, v in r.items() if k != 'email'])
                     )
-                    u.save()
+                    u.profiel.save()
 
 
 
