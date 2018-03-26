@@ -292,7 +292,7 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
         if post:
             profiel_formset = UserFormSet(self.request.POST, self.request.FILES, instance=self.object)
 
-            print(profiel_formset.errors)
+            #print(profiel_formset.errors)
             # for subform in profiel_formset.forms:
             #     subform.initial = {
             #         'email': self.object.email,

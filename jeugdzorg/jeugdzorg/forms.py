@@ -27,11 +27,22 @@ from django.contrib.auth.forms import SetPasswordForm
 UserModel = get_user_model()
 
 
-def file_size(value): # add this to some file where you can import it from
+def file_size(value):
     limit = 5 * 1024 * 1024
-    if value.size > limit:
+    if value and value.size > limit:
         print('max')
-        raise ValidationError('De bestandsgrootte van de foto is meer dan 5M.', code='invalid')
+        raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5MB.', code='error_code')
+
+
+def file_type(value):
+    file_types = [
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/gif',
+    ]
+    if value.content_type not in file_types:
+        raise ValidationError('Je mag voor de pasfoto alleen .jpg, .png en .gif bestanden gebruiken.', code='error_code')
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
@@ -90,12 +101,6 @@ class MailAPIPasswordResetForm(PasswordResetForm):
             sg.client.mail.send.post(request_body=mail.get())
 
 
-# class SetPasswordNewForm(SetPasswordForm):
-#     def save(self, commit=True):
-#         messages.add_message(self.request, messages.INFO, "Je wachtwoord is ingesteld.")
-#         return super().save(commit)
-
-
 class RegelingModelForm(forms.ModelForm):
 
     class Meta:
@@ -113,7 +118,10 @@ class RegelingModelForm(forms.ModelForm):
 
 
 class ProfielModelForm(forms.ModelForm):
-    #pasfoto = forms.ImageField(required=False, validators=[file_size])
+    pasfoto = forms.FileField(
+        required=False,
+        validators=[file_size, file_type],
+    )
     custom_m2m = (
         ('thema_lijst', 'thema'),
         ('regeling_lijst', 'regeling'),
@@ -141,12 +149,6 @@ class ProfielModelForm(forms.ModelForm):
         self.fields['telefoonnummer'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
         self.fields['telefoonnummer_2'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
 
-    def clean_pasfoto(self):
-        value = self.cleaned_data.get('pasfoto')
-        limit = 5 * 1024 * 1024
-        if value and value.size > limit:
-            raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5MB.', code='invalid')
-        return value
 
     def _save_m2m(self):
         """

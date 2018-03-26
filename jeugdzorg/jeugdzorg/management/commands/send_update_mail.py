@@ -74,7 +74,6 @@ class Command(BaseCommand):
                 'start_time': 1521557086,
                 'end_time': 1521816286,
             })
-            print(url)
             response = sg.client._(url).get()
             print(response.status_code)
             print(response.body)
