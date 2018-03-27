@@ -913,11 +913,12 @@ def save_profile(sender, instance, **kwargs):
 
 
 def save_site(sender, update_fields, instance, **kwargs):
-    Site.objects.clear_cache()
+    #Site.objects.clear_cache()
+    pass
 
 
 def save_instelling(sender, update_fields, instance, **kwargs):
-    Site.objects.clear_cache()
+    #Site.objects.clear_cache()
     if hasattr(sender, 'track_field_names'):
         call_create_crontabs = [field_name for field_name in sender.track_field_names() if getattr(instance, '__%s' % field_name) != getattr(instance, '%s' % field_name)]
         if call_create_crontabs:
