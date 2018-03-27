@@ -77,14 +77,11 @@
       if (xhr.status >= 200 && xhr.status < 400) {
         counters = [];
         w.localStorage && w.localStorage.removeItem('counters');
-        console.log(payload);
       } else {
-        console.log('error sending playload.');
       }
       processing = false;
     };
     var str = JSON.stringify(payload.event_list);
-    console.log(str);
     xhr.send(str);
     
 
