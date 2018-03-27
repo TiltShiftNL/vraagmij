@@ -238,8 +238,7 @@
   max-width: $maxContentWidth;
   width: 100%;
   padding: 0 $padding;
-  box-sizing: border-box;
-
+  
   margin-left: auto;
   margin-right: auto;
   text-align: right;
@@ -274,12 +273,20 @@
     
   }
   
+  @include large {
+    width: auto;
+    transform: none;
+    left: 0;
+    right: 0;
+  }
+  
   @include medium {
     left: auto;
-    right: $padding / 2;
+    right: 10px;
     top: auto;
-    bottom: $padding / 2;
+    bottom: 10px;
     transform: none;
+    padding: 0;
   }
   
   
