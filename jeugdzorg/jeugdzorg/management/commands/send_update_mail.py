@@ -98,7 +98,6 @@ class Command(BaseCommand):
                 'gebruikers_nieuw': gebruikers_nieuw_str,
                 'subject': subject,
             }
-            print(int(now.strftime('%-m')))
 
             for u in User.objects.exclude(profiel=None):
                 if u.profiel.hou_me_op_de_hoogte_mail:
@@ -115,14 +114,6 @@ class Command(BaseCommand):
                     body = template.render(o)
 
                     mail_settings = MailSettings()
-                    # mail_settings.bcc_settings = BCCSettings(True, Email("test@example.com"))
-                    # mail_settings.bypass_list_management = BypassListManagement(True)
-                    # mail_settings.footer_settings = FooterSettings(True, "Footer Text",
-                    #                                                ("<html><body>Footer "
-                    #                                                 "Text</body></html>"))
-                    # mail_settings.sandbox_mode = SandBoxMode(False)
-                    # mail_settings.spam_check = SpamCheck(True, 1,
-                    #                                      "https://spamcatcher.sendgrid.com")
                     mail = Mail(
                         Email('noreply@%s' % site.domain),
                         subject,
@@ -131,8 +122,6 @@ class Command(BaseCommand):
                     )
                     mail.mail_settings = mail_settings
                     mail.add_content(Content("text/html", body_html))
-                                             # mail.add_content(Content("text/html", '<html><body>some text here<br><img alt="Logo" src="cid:image-logo" width="180" height="73" \
-                    #              border="0"></body></html>'))
                     #
                     # mail.add_attachment(build_logo())
                     # h1 = Header('Content-Id', '<gfgrtdtrdk9769875786thgjhbj>')
@@ -143,10 +132,5 @@ class Command(BaseCommand):
                         sg.client.mail.send.post(request_body=mail.get())
                     else:
                         print(body_html)
-                        print(os.path.join(settings.STATIC_ROOT, 'images/ico_andreas.svg'))
-                        response = sg.client.mail.send.post(request_body=mail.get())
-                        print(response.status_code)
-                        print(response.headers)
-                        print(response.body)
                     print('Send mail to: %s' % u.email)
 
