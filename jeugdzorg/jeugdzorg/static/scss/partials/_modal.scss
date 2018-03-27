@@ -17,6 +17,8 @@
  opacity: 0;
  transition: opacity .3s;
  
+ background-color: rgba(#000, .2);
+ 
  &.active {
    opacity: 1;
  }
@@ -53,10 +55,10 @@
     content: '';
     position: fixed;
     left: 0;
-    right: 0;
+    right: 2rem;
     top: 0;
     bottom: 0;
-    background-color: rgba(#000, .2);
+    
   }
   &:after {
     content: '×';
