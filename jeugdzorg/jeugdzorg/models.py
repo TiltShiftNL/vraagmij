@@ -848,6 +848,11 @@ class Instelling(models.Model):
         null=True,
         blank=True,
     )
+    update_mail_content_html = models.TextField(
+        verbose_name=_('Update mail content html'),
+        null=True,
+        blank=True,
+    )
     gebruiker_email_verificatie_frequentie = models.CharField(
         verbose_name=_('Gebruiker email verificatie frequentie'),
         help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),

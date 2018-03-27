@@ -119,11 +119,9 @@
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td align="left">
-                                            <img alt="Logo" src="cid:amsterdam-logo" width="180" height="73"
-                                                 style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px; width: 180px; height: 73px;"
-                                                 border="0">
+                                                <img alt="Logo" src="cid:gfgrtdtrdk9769875786thgjhbj" width="30" height="102" border="0"/>
                                             </td>
-                                            <td align="left" style="padding: 0; font-size: 30px; line-height: 50px; font-family: Helvetica, Arial, sans-serif; color: #333333; font-weight: 400;" class="padding-copy">VraagMij</td>
+                                            <td align="left" style="padding: 0; font-size: 30px; line-height: 50px; font-family: Helvetica, Arial, sans-serif; color: #333333; font-weight: 400;" class="padding-copy">{{ SITE_INSTELLINGEN.app_naam }}</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -137,43 +135,7 @@
                             <tr>
                                 <td style="padding: 10px 5% 10px 5%;">
                                     <!-- COPY -->
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Hallo{% if naam %} {{naam}}{% endif %},</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Hieronder een update van de veranderingen op "VraagMij" van de laatste maand.</td>
-                                        </tr>
-
-                                        {% if gebruikers_nieuw %}
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">
-                                            Onlangs toegevoegd:<br>
-                                            {% for gebruiker in gebruikers_nieuw %}
-                                                <li><a href="{{ gebruiker.1 }}" style="color: #000000;">{{ gebruiker.0 }}{% endif %}</a>
-                                            {% endfor %}
-                                            </td>
-                                        </tr>
-                                        {% endif %}
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">
-                                                <ul style="margin: 0; padding: 0 0 0 1em;">
-                                                    <li>
-                                                        <a href="https://google.com" style="color: #000000;">Link</a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est.</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">Cheers,<br>The Team</td>
-                                        </tr>
-                                    </table>
+                                {{ content }}
                                 </td>
                             </tr>
                         </table>
