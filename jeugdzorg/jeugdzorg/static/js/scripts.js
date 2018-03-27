@@ -119,12 +119,7 @@
       var _change = function(e) {
         var els = modal.querySelectorAll('input');
         for (var i = 0; i < els.length; i++) {
-          if (els[i].checked) {
-            document.getElementById(els[i].dataset.id).setAttribute('checked', 'checked');
-          } else {
-            document.getElementById(els[i].dataset.id).removeAttribute('checked');
-          }
-          
+          document.getElementById(els[i].dataset.id).checked = els[i].checked;
         }
       }
       
@@ -132,6 +127,12 @@
         e.preventDefault();
         var fieldset = _closest(el, 'fieldset');
         _render('<div class="well">' + fieldset.innerHTML.replace(/ (for|id)="/gi, ' data-id="') + '</div>');
+        
+        var els = modal.querySelectorAll('input');
+        for (var i = 0; i < els.length; i++) {
+          els[i].removeAttribute('checked');
+          if (document.getElementById(els[i].dataset.id).checked) els[i].setAttribute('checked', 'checked');
+        }
         modal.addEventListener('change', _change); _change();
       }
     },
