@@ -837,7 +837,7 @@ class Instelling(models.Model):
         #     max_length=30,
         #     default='0 0 1 * *',
         # )
-    update_mail_frequentie = models.CharField(
+    send_update_mail_frequentie = models.CharField(
         verbose_name=_('Update mail frequentie'),
         help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
         max_length=30,
@@ -850,6 +850,18 @@ class Instelling(models.Model):
     )
     gebruiker_email_verificatie_frequentie = models.CharField(
         verbose_name=_('Gebruiker email verificatie frequentie'),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
+        max_length=30,
+        default='0 0 1 * *',
+    )
+    update_regelingen_frequentie = models.CharField(
+        verbose_name=_('Regelingen webpagina controlle frequentie'),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
+        max_length=30,
+        default='0 0 1 * *',
+    )
+    check_user_activity_frequentie = models.CharField(
+        verbose_name=_('Gebruikers activiteit synchronisatie frequentie'),
         help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
         max_length=30,
         default='0 0 1 * *',
@@ -880,8 +892,10 @@ class Instelling(models.Model):
     @staticmethod
     def track_field_names():
         return (
-            'update_mail_frequentie',
+            'send_update_mail_frequentie',
             'gebruiker_email_verificatie_frequentie',
+            'update_regelingen_frequentie',
+            'check_user_activity_frequentie',
         )
 
     class Meta:
@@ -922,6 +936,7 @@ def save_instelling(sender, update_fields, instance, **kwargs):
     if hasattr(sender, 'track_field_names'):
         call_create_crontabs = [field_name for field_name in sender.track_field_names() if getattr(instance, '__%s' % field_name) != getattr(instance, '%s' % field_name)]
         if call_create_crontabs:
+            print('call')
             call_command('create_crontabs')
 
 
