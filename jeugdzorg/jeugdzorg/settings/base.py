@@ -166,7 +166,7 @@ PASSWORD_RESET_TIMEOUT_DAYS = 7
 
 LANGUAGE_CODE = 'nl-NL'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 

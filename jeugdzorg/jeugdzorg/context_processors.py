@@ -6,8 +6,10 @@ from django.contrib.sites.models import Site
 
 def app_settings(request=None):
     instelling = None
+
     try:
-        instelling = Site.objects.get_current().instelling
+        site = Site.objects.get_current()
+        instelling = Instelling.objects.get(site=site)
     except:
         pass
     return {

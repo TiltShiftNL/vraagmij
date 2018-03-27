@@ -84,8 +84,8 @@ class EventItemAdmin(admin.ModelAdmin):
 
 @admin.register(Profiel)
 class ProfielAdmin(admin.ModelAdmin):
-    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer', 'seconden_niet_gebruikt']
-
+    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'gebruiker_email_verificatie', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer', 'seconden_niet_gebruikt']
+    list_filter = ['gebruiker_email_verificatie', ]
     inlines = [
         ProfielNaarRegelingInline,
         ProfielNaarThemaInline,
@@ -96,11 +96,12 @@ class ProfielAdmin(admin.ModelAdmin):
 @admin.register(Instelling)
 class InstellingAdmin(admin.ModelAdmin):
     list_display = ['site', 'app_naam', 'standaard_contact_naam', 'standaard_contact_email', ]
+    save_on_top = True
 
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    list_display = ['email', 'is_active', 'is_staff', 'is_superuser', 'wijzig_profiel']
+    list_display = ['email', 'is_active', 'is_staff', 'is_superuser', 'wijzig_profiel', 'date_saved']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name')}),
