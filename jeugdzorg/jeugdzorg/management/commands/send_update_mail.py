@@ -22,8 +22,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         site = Site.objects.get_current()
         if site.instelling:
-
-
+            sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
             now = timezone.now()
             now = now + dateutil.relativedelta.relativedelta(months=-1)
             regeling_nieuw = Regeling.objects.filter(**{
@@ -62,20 +61,11 @@ class Command(BaseCommand):
                         Email(u.email),
                         Content("text/plain", body)
                     )
-                    # print(body)
 
                     if settings.ENV != 'develop':
-                        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
                         sg.client.mail.send.post(request_body=mail.get())
+                    else:
+                        # sg.client.mail.send.post(request_body=mail.get())
+                        print(body)
                     print('Send mail to: %s' % u.profiel.naam_volledig)
-
-            sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            url = "suppression/bounces?start_time={start_time}&end_time={end_time}".format(**{
-                'start_time': 1521557086,
-                'end_time': 1521816286,
-            })
-            response = sg.client._(url).get()
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
 
