@@ -6,7 +6,7 @@
 
     <meta name="robots" content="noindex">
 
-    <title>Jeugdzorg - {% block title %}Regelingen{% endblock %}</title>
+    <title>{% if SITE_INSTELLINGEN.app_naam %}{{ SITE_INSTELLINGEN.app_naam }}{% else %}VraagMij{% endif %} - {% block title %}Thema's{% endblock %}</title>
     
     <script type="text/javascript">!function(w,d,v){if(v)d.setAttribute('data-view', v)}(window, document.documentElement,window.localStorage&&window.localStorage.getItem('view'))</script>
 

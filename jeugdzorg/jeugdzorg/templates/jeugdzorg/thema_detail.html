@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load auth_tags %}
+
+{% block title %}Thema - {{ object.titel }}{% endblock %}
+
 {% block main %}
 
 {{ block.super }}

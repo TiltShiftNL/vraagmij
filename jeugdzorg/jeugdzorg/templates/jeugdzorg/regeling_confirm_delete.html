@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}Regeling verwijderen - {{ object.titel }}{% endblock %}
+
 {% block main %}
     <div class="container">
         <form action="" method="post">{% csrf_token %}
