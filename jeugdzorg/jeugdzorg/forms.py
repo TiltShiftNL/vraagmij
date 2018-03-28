@@ -242,12 +242,6 @@ VoorwaardeFormSet = forms.inlineformset_factory(
     form=VoorwaardeModelForm,
     extra=1
 )
-ContactNaarRegelingFormSet = forms.inlineformset_factory(
-    Regeling,
-    ContactNaarRegeling,
-    form=RegelingModelForm,
-    extra=1
-)
 
 
 class LoginForm(AuthenticationForm):

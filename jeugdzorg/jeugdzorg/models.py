@@ -168,11 +168,6 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
-    contact = models.ManyToManyField(
-        to='Contact',
-        through='ContactNaarRegeling',
-        through_fields=('regeling', 'contact'),
-    )
 
     def voorwaarde_lijst(self):
         return Voorwaarde.objects.all()
@@ -266,11 +261,6 @@ class Thema(Sortable):
         null=True,
         blank=True,
     )
-    contact = models.ManyToManyField(
-        to='Contact',
-        through='ContactNaarThema',
-        through_fields=('thema', 'contact'),
-    )
 
     def profielen_zichtbaar(self):
         return self.profiel_set.filter(zichtbaar=True)
@@ -304,83 +294,6 @@ class Organisatie(models.Model):
     class Meta:
         verbose_name = _('Organisatie')
         verbose_name_plural = _("Organisaties")
-
-
-class Contact(models.Model):
-    voornaam = models.CharField(
-        verbose_name=_('Voornaam'),
-        max_length=100,
-    )
-    achternaam = models.CharField(
-        verbose_name=_('Achternaam'),
-        max_length=100,
-    )
-    email = models.EmailField(
-        verbose_name=_('E-mailadres'),
-    )
-    telefoonnummer = models.CharField(
-        verbose_name=_('Primair telefoonnummer '),
-        max_length=20,
-        null=True,
-        blank=True,
-    )
-    telefoonnummer_2 = models.CharField(
-        verbose_name=_('Secundair telefoonnummer'),
-        max_length=20,
-        null=True,
-        blank=True,
-    )
-    photo = models.ImageField(
-        verbose_name=_('Pasfoto'),
-        upload_to='contact',
-        null=True,
-        blank=True,
-    )
-    organisatie = models.ManyToManyField(
-        to='Organisatie',
-        through='ContactNaarOrganisatie',
-        through_fields=('contact', 'organisatie'),
-    )
-    
-    def first_letter(self):
-        return self.achternaam and self.achternaam[0].upper() or ''
-
-    def __str__(self):
-        return '%s %s' % (self.voornaam, self.achternaam)
-
-    class Meta:
-        verbose_name = _('Contact')
-        verbose_name_plural = _('Contacten')
-
-
-class ContactNaarOrganisatie(models.Model):
-    contact = models.ForeignKey(
-        to=Contact,
-        verbose_name=_('Contact'),
-        related_name='contactnaarorganisatie',
-        on_delete=models.CASCADE,
-    )
-    organisatie = models.ForeignKey(
-        to=Organisatie,
-        verbose_name=_('Organistie'),
-        on_delete=models.CASCADE,
-    )
-    volgorde = models.IntegerField(
-        verbose_name=_('Volgorde'),
-        default=0,
-    )
-    rol = models.CharField(
-        verbose_name=_('Rol'),
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-
-    class Meta:
-        verbose_name = _('Contact naar organisatie')
-        verbose_name_plural = _('Contacten naar organisaties')
-        ordering = ('volgorde', )
-        unique_together = ('contact', 'organisatie', )
 
 
 class ProfielNaarOrganisatie(models.Model):
@@ -474,72 +387,6 @@ class ProfielNaarRegeling(models.Model):
         verbose_name_plural = _("Profielen naar regelingen")
         ordering = ('volgorde', )
         unique_together = ('profiel', 'regeling', )
-
-
-class ContactNaarRegeling(models.Model):
-    contact = models.ForeignKey(
-        to=Contact,
-        verbose_name=_('Contact'),
-        related_name='contactnaarregeling',
-        on_delete=models.CASCADE,
-    )
-    regeling = models.ForeignKey(
-        to=Regeling,
-        verbose_name=_('Regeling'),
-        on_delete=models.CASCADE,
-    )
-    volgorde = models.IntegerField(
-        verbose_name=_('Volgorde'),
-        default=0,
-    )
-    rol = models.CharField(
-        verbose_name=_('Rol'),
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-    #
-    # def __str__(self):
-    #     return '%s naar %s' % (self.contact, self.regeling)
-
-    class Meta:
-        verbose_name = _('Contact naar regeling')
-        verbose_name_plural = _('Contacten naar regelingen')
-        ordering = ('volgorde', )
-        unique_together = ('contact', 'regeling', )
-
-
-class ContactNaarThema(models.Model):
-    contact = models.ForeignKey(
-        to=Contact,
-        verbose_name=_('Contact'),
-        related_name='contactnaarthema',
-        on_delete=models.CASCADE,
-    )
-    thema = models.ForeignKey(
-        to=Thema,
-        verbose_name=_('Thema'),
-        on_delete=models.CASCADE,
-    )
-    volgorde = models.IntegerField(
-        verbose_name=_('Volgorde'),
-        default=0,
-    )
-    rol = models.CharField(
-        verbose_name=_('Rol'),
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-    #
-    # def __str__(self):
-    #     return '%s naar %s' % (self.contact, self.regeling)
-
-    class Meta:
-        verbose_name = _('Contact naar thema')
-        verbose_name_plural = _("Contacten naar thema's")
-        ordering = ('volgorde', )
-        unique_together = ('contact', 'thema', )
 
 
 class ProfielIsZichtbaarManager(models.Manager):
