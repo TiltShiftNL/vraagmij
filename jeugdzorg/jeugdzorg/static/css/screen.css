@@ -1030,6 +1030,8 @@ form label {
   padding: 0;
   margin: 0;
   list-style: none; }
+.choices label {
+  position: relative; }
 .choices.choices-full li {
   flex-basis: 100%; }
 .choices input[type="checkbox"] + strong {
@@ -1045,6 +1047,8 @@ form label {
   margin-top: 10px; }
 .choices b {
   padding: 10px; }
+.choices .group-label {
+  margin-right: auto; }
 .choices label:hover strong {
   border: 1px solid rgba(0, 0, 0, 0.4); }
 .choices.inlineformset-checkbox input {
@@ -1085,9 +1089,11 @@ fieldset .choices-modal input[type="checkbox"]:checked + strong:before {
   background-color: transparent; }
 fieldset .choices-modal input[type="checkbox"]:checked + strong:hover:before {
   color: red; }
+fieldset .choices-modal .choices ul {
+  display: flex; }
 fieldset .choices-modal .choices-full input[type="checkbox"]:checked + strong {
   display: block; }
-fieldset .choices-modal b {
+fieldset .choices-modal b, fieldset .choices-modal .group-label {
   display: none; }
 
 .shortcuts {
@@ -1985,7 +1991,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   background: none;
   box-shadow: none;
   min-height: auto;
-  padding-left: 1.4em; }
+  padding-left: 1.4em;
+  overflow: hidden; }
 [data-view="compact"] .overzicht .contact-meta {
   min-height: auto;
   padding-right: 0; }
