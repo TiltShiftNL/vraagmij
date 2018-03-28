@@ -8,7 +8,6 @@
   @include medium {
     display: block;
   }
-  
   li {
     ul {
       padding: 0;
@@ -17,6 +16,11 @@
       
     }
   }
+  
+  label {
+    position: relative;
+  }
+  
   &.choices-full li {
     flex-basis: 100%;
   }
@@ -38,6 +42,10 @@
   }
   b {
     padding: 10px;
+  }
+  
+  .group-label {
+    margin-right: auto;
   }
   
   label:hover strong {
@@ -112,11 +120,14 @@
         }
       }
     }
+    .choices ul {
+      display: flex;
+    }
     .choices-full input[type="checkbox"]:checked + strong {
       display: block;
     }
     
-    b {
+    b, .group-label {
       display: none;
     }
     

@@ -119,7 +119,10 @@
       var _change = function(e) {
         var els = modal.querySelectorAll('input');
         for (var i = 0; i < els.length; i++) {
-          document.getElementById(els[i].dataset.id).checked = els[i].checked;
+          var el = document.getElementById(els[i].dataset.id);
+          if (el) {
+            el.checked = els[i].checked;
+          }
         }
       }
       
@@ -131,7 +134,8 @@
         var els = modal.querySelectorAll('input');
         for (var i = 0; i < els.length; i++) {
           els[i].removeAttribute('checked');
-          if (document.getElementById(els[i].dataset.id).checked) els[i].setAttribute('checked', 'checked');
+          var el = document.getElementById(els[i].dataset.id);
+          if (el && el.checked) els[i].setAttribute('checked', 'checked');
         }
         modal.addEventListener('change', _change); _change();
       }
