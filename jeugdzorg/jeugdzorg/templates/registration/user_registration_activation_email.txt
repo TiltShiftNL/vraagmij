@@ -1,0 +1,10 @@
+{% autoescape off %}
+Beste {{ user.voornaam }} {% if user.tussenvoegsel %}{{ user.tussenvoegsel }} {% endif %}{{ user.achternaam }},
+
+Gebruik onderstaande link om je account te activeren:
+https://{{ domain }}{% url 'gebruiker_activeren' uidb64=uid token=token %}
+Hierna kun je inloggen en je profiel aanvullen zodat andere zorgprofessionals jou met de juiste informatie kunnen vinden.
+
+Vriendelijke groet,
+Het VraagMij team
+{% endautoescape %}

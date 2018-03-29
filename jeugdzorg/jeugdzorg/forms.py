@@ -2,7 +2,8 @@ from django import forms
 from django.forms import widgets
 from .models import *
 from django.core.management import call_command
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.forms.models import BaseInlineFormSet
 import sendgrid
@@ -14,9 +15,11 @@ from itertools import chain
 from .widgets import *
 from .fields import *
 from django.forms.utils import ErrorList
+from django.utils.safestring import mark_safe
 from itertools import groupby
 from django.contrib.sites.models import Site
 from django.urls import reverse, reverse_lazy
+from django.core.validators import validate_email, EmailValidator
 from django.template import RequestContext
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
@@ -45,6 +48,35 @@ def file_type(value):
         raise ValidationError('Je mag voor de pasfoto alleen .jpg, .png en .gif bestanden gebruiken.', code='error_code')
 
 
+def user_email_validation(value):
+    instelling = None
+    try:
+        site = Site.objects.get_current()
+        instelling = Instelling.objects.get(site=site)
+    except:
+        pass
+
+    domeinen = list(set([dd for d in Organisatie.objects.all() for dd in d.email_domeinen_lijst()]))
+    validator = EmailValidator()
+    try:
+        validator(value)
+    except ValidationError:
+        pass
+
+    if value.rsplit('@', 1)[1] not in domeinen:
+        raise ValidationError(
+            mark_safe('Dit e-mailadres kan niet worden gebruikt. '
+            'Het lijkt erop dat deze bijbehorende organisatie nog niet is aangemeld. '
+            'Stuur een mail naar <a href="mailto:%s">%s</a>' % (
+                instelling.standaard_contact_email,
+                instelling.standaard_contact_naam,
+            )),
+            code='invalid'
+        )
+
+    return True
+
+
 class UploadJeugdzorgFixtureFileForm(forms.Form):
     file = forms.FileField(
         label='Upload jeugdzorg.json'
@@ -56,6 +88,12 @@ def handle_uploaded_file(f):
         for chunk in f.chunks():
             destination.write(chunk)
     call_command('loaddata', '/opt/file_upload/jeugdzorg.json', app_label='jeugdzorg')
+
+
+class GebruikersToevoegenForm(forms.Form):
+    gebruikers_lijst = forms.CharField(
+        widget=forms.Textarea,
+    )
 
 
 class MailAPIPasswordResetForm(PasswordResetForm):
@@ -195,6 +233,29 @@ class ProfielModelForm(forms.ModelForm):
             instance.save()
             self.save_m2m()
         return instance
+
+
+class UserCreationForm(DefaultUserCreationForm):
+    email = forms.EmailField(
+        widget=forms.EmailInput,
+        validators=[user_email_validation]
+    )
+    voornaam = forms.CharField(
+        label='Voornaam',
+        required=False,
+    )
+    achternaam = forms.CharField(
+        label='Achternaam',
+        required=False,
+    )
+    tussenvoegsel = forms.CharField(
+        label='Tussenvoegsel',
+        required=False,
+    )
+
+    class Meta:
+        model = User
+        fields = ('email', 'voornaam', 'achternaam', 'tussenvoegsel', )
 
 
 class UserModelForm(forms.ModelForm):

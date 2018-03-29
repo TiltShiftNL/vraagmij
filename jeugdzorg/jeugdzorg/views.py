@@ -1,28 +1,24 @@
 import json
 import sys
-import warnings
 
-import sendgrid
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.tokens import default_token_generator
-from django.core.management import call_command
 from django.db import transaction
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
-from django.shortcuts import render, resolve_url
-from django.template.response import TemplateResponse
-from django.urls import reverse, reverse_lazy
-from django.utils.deprecation import RemovedInDjango21Warning
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import *
-from sendgrid.helpers.mail import *
-from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AnonymousUser
-from django.shortcuts import get_object_or_404
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from .tokens import account_activation_token
+from django.contrib.auth import models as auth_models
 
 from .auth import auth_test
 from .forms import *
@@ -271,6 +267,81 @@ class RegelingUpdate(UserPassesTestMixin, UpdateView):
         return super(RegelingUpdate, self).form_valid(form)
 
 
+class UserCreationView(CreateView):
+    model = User
+    template_name = 'jeugdzorg/user_form_create.html'
+    form_class = UserCreationForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+
+        user = form.save(commit=False)
+
+        # profiel = Profiel(gebruiker=user)
+        # profiel.voornaam = form.data.get('voornaam')
+        # profiel.achternaam = form.data.get('achternaam')
+        # profiel.tussenvoegsel = form.data.get('tussenvoegsel')
+        # profiel.save(commit=False)
+        user.is_active = False
+        user.save()
+        current_site = get_current_site(self.request)
+        data = {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+            'token': account_activation_token.make_token(user),
+        }
+        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
+        body = render_to_string('registration/user_registration_activation_email.txt', data)
+        if settings.ENV == 'develop':
+            print(body)
+        to_email = form.cleaned_data.get('email')
+        subject = 'VraagMij account activatie.'
+        email = Mail(Email('noreply@%s' % current_site.domain), subject, Email(to_email), Content("text/plain", body))
+        sg.client.mail.send.post(request_body=email.get())
+
+        messages.add_message(
+            self.request,
+            messages.INFO,
+            "Een link om je account te activeren is verstuurd naar het opgegeven e-mailadres."
+        )
+        return super().form_valid(form)
+
+
+class UserActivationView(TemplateView):
+    template_name = 'registration/user_registration_confirmation.html'
+
+    def get(self, request, *args, **kwargs):
+        try:
+            uid = force_text(urlsafe_base64_decode(self.kwargs['uidb64']))
+            user = User.objects.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+        if user is not None and account_activation_token.check_token(user, self.kwargs['token']):
+            user.is_active = True
+            user.save()
+            profiel = Profiel(
+                gebruiker=user,
+                voornaam=user.voornaam,
+                achternaam=user.achternaam,
+                tussenvoegsel=user.tussenvoegsel,
+                seconden_niet_gebruikt=(60 * 60 * 24 * 30 * 12),
+                zichtbaar=True,
+            )
+            profiel.save()
+            viewer_group = auth_models.Group.objects.filter(name='viewer')
+            if viewer_group:
+                user.groups.add(viewer_group[0])
+            # login(request, user)
+            messages.add_message(self.request, messages.INFO, "Je account is aangemaakt.")
+            return redirect(reverse_lazy('login'))
+            #return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        # else:
+        #     return HttpResponse('Activation link is invalid!')
+        return super().get(request, *args, **kwargs)
+
+
 class ProfielUpdateView(UserPassesTestMixin, UpdateView):
     model = User
     form_class = UserModelForm
@@ -337,6 +408,35 @@ class EventView(View):
                 pass
 
         return JsonResponse({'status': 'ok'}, safe=False)
+
+
+class GebruikersToevoegenView(UserPassesTestMixin, FormView):
+    template_name = 'snippets/gebruikers_toevoegen.html'
+    form_class = GebruikersToevoegenForm
+    success_url = reverse_lazy('gebruikers_toevoegen')
+
+    def test_func(self):
+        return auth_test(self.request.user, 'beheergebruikers')
+
+    def form_valid(self, form):
+        domeinen = list(set([dd for d in Organisatie.objects.all() for dd in d.email_domeinen_lijst()]))
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        print(domeinen)
+        validator = EmailValidator(whitelist=domeinen)
+        print(form.data.get('gebruikers_lijst'))
+        email_adressen = list(
+            set([e.strip() for e in form.data.get('gebruikers_lijst').split(',')])
+        )
+        print(email_adressen)
+        for email in email_adressen:
+            valid = validator(email)
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        # print(self.form_valid(self.f))
+
+        return super().post(request, *args, **kwargs)
 
 
 def logout(request):

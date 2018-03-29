@@ -61,6 +61,14 @@ urlpatterns = [
     }, name='login'),
     path('logout/', logout, name='logout'),
 
+    path('gebruiker-registreren/', UserCreationView.as_view(), name='gebruiker_registreren'),
+    url(r'^gebruiker-activeren/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        UserActivationView.as_view(),
+        name='gebruiker_activeren'
+    ),
+
+    path('gebruikers-toevoegen/', GebruikersToevoegenView.as_view(), name='gebruikers_toevoegen'),
+
     path('event/add', EventView.as_view(), name='add_event'),
 
     path('admin/', admin.site.urls),
@@ -70,6 +78,7 @@ urlpatterns = [
     path('admin/email-template/', TemplateView.as_view(template_name='email/update_mail.html'), testdata, name='email-template'),
 
     url('^', include('django.contrib.auth.urls')),
+
 
 
     url(r'^herstel-wachtwoord/$',

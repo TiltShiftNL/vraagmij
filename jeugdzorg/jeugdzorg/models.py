@@ -57,9 +57,14 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=150, blank=True)
-
+    voornaam = models.CharField(_('voornaam'), max_length=100, blank=True)
+    achternaam = models.CharField(_('achternaam'), max_length=150, blank=True)
+    tussenvoegsel = models.CharField(
+        verbose_name=_('Tussenvoegsel'),
+        max_length=20,
+        null=True,
+        blank=True,
+    )
     email = EmailToLowerField(unique=True, null=True)
     is_staff = models.BooleanField(
         _('staff status'),
@@ -284,6 +289,17 @@ class Organisatie(models.Model):
         verbose_name=_('Naam'),
         max_length=255,
     )
+    email_domeinen = models.TextField(
+        verbose_name=_('E-mailadres domeinen'),
+        help_text=_('Voer meerdere domeinnamen in door ze met een komma te scheiden.'),
+        null=True,
+        blank=True,
+    )
+
+    def email_domeinen_lijst(self):
+        if self.email_domeinen:
+            return [d.strip() for d in self.email_domeinen.split(',')]
+        return []
 
     def __str__(self):
         return self.naam
@@ -442,7 +458,7 @@ class Profiel(models.Model):
     )
     achternaam = models.CharField(
         verbose_name=_('Achternaam'),
-        max_length=100,
+        max_length=150,
         null=True,
         blank=True,
     )
@@ -719,28 +735,6 @@ class Instelling(models.Model):
         default='0 0 1 * *',
     )
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.__original_update_mail_frequentie = self.update_mail_frequentie
-    #     self.__original_gebruiker_email_verificatie_frequentie = self.gebruiker_email_verificatie_frequentie
-
-    # def save(self, force_insert=False, force_update=False, *args, **kwargs):
-    #     data = {}
-    #     update_fields = []
-    #     if self.gebruiker_email_verificatie_frequentie != self.__original_gebruiker_email_verificatie_frequentie:
-    #         update_fields.append('gebruiker_email_verificatie_frequentie')
-    #     if self.update_mail_frequentie != self.__original_update_mail_frequentie:
-    #         update_fields.append('update_mail_frequentie')
-    #     print(data)
-    #     print(update_fields)
-    #     data.update({
-    #         'update_fields': update_fields
-    #     })
-    #     print(data)
-    #     super().save(force_insert, force_update, *args, **data)
-    #     self.__original_update_mail_frequentie = self.update_mail_frequentie
-    #     self.__original_gebruiker_email_verificatie_frequentie = self.gebruiker_email_verificatie_frequentie
-
     @staticmethod
     def track_field_names():
         return (
@@ -754,41 +748,20 @@ class Instelling(models.Model):
         verbose_name = _('Instelling')
         verbose_name_plural = _("Instellingen")
 
-# from django.apps import apps
-# from django.contrib.auth import get_user_model
-# from django.core.signals import setting_changed
-# from django.dispatch import receiver
-#
-#
-# @receiver(setting_changed)
-# def user_model_swapped(**kwargs):
-#     print(kwargs)
-#     if kwargs['setting'] == 'AUTH_USER_MODEL':
-#         apps.clear_cache()
-#         from django.contrib.admin.models import LogEntry
-#         LogEntry.UserModel = get_user_model()
 
-
-def save_profile(sender, instance, **kwargs):
-    if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
-        p = Profiel(gebruiker=instance)
-        p.email = instance.email
-        p.voornaam = instance.first_name
-        p.achternaam = instance.last_name
-        p.save()
-
-
-def save_site(sender, update_fields, instance, **kwargs):
-    #Site.objects.clear_cache()
-    pass
+# def save_profile(sender, instance, **kwargs):
+#     if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
+#         p = Profiel(gebruiker=instance)
+#         p.email = instance.email
+#         p.voornaam = instance.first_name
+#         p.achternaam = instance.last_name
+#         p.save()
 
 
 def save_instelling(sender, update_fields, instance, **kwargs):
-    #Site.objects.clear_cache()
     if hasattr(sender, 'track_field_names'):
         call_create_crontabs = [field_name for field_name in sender.track_field_names() if getattr(instance, '__%s' % field_name) != getattr(instance, '%s' % field_name)]
         if call_create_crontabs:
-            print('call')
             call_command('create_crontabs')
 
 
@@ -799,9 +772,7 @@ def pre_save_instance(sender, instance, *args, **kwargs):
                 setattr(instance, '__%s' % field_name, getattr(instance.__class__.objects.get(id=instance.id), field_name))
 
 
-post_save.connect(save_profile, sender=User)
+# post_save.connect(save_profile, sender=User)
 post_save.connect(save_instelling, sender=Instelling)
-post_save.connect(save_site, sender=Site)
-
 pre_save.connect(pre_save_instance, sender=Instelling)
 
