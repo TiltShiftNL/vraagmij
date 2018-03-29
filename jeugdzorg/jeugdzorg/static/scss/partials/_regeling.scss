@@ -137,8 +137,6 @@
     position: relative;
     padding-left: 44px;
 
-    max-width: none;
-
     &:before {
       position: absolute;
       left: 0;
@@ -231,16 +229,13 @@
   padding: $padding;
 }
 
-.complete-yes ~ .regeling-aanvragen {
-  background-color: lighten($yesColor, 45);
-  .button {
-    background-color: $yesColor;
-    border-color: $yesColor;
-    .icon-external:after {
-      outline-color: $yesColor;
-    }
+.regeling-annuleren {
+  display: none;
+  .changed & {
+    display: inline-block;
   }
 }
+
 
 [data-view="compact"] {
   .overzicht {
@@ -293,5 +288,16 @@
         }
       }
     }
+  }
+}
+
+.aside-block.regeling-aanvraag {
+  background-color: #fde5e5;
+  font-weight: 700;
+  .icon-external {
+    margin-left: .5em;
+  }
+  .icon-external::after {
+    outline-color: #fde5e5;
   }
 }

@@ -207,7 +207,7 @@
 
       <p class="buttons right sticky">
         <button type="submit" class="button">Opslaan</button>
-        <a href="{{ request.META.HTTP_REFERER }}">Annuleren</a>
+        <a href="{% url 'update_profiel' %}" class="regeling-annuleren">Annuleren</a>
       </p>
     </form>
   </div>
