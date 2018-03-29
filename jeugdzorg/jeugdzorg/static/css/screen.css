@@ -132,11 +132,12 @@ button::-moz-focus-inner {
   display: inline-block;
   position: relative;
   top: -.2em;
-  font-size: .5em;
+  font-size: .6em;
   margin-left: 1em;
   padding: .2em .5em;
   text-align: center;
   background-color: #fff;
+  border-radius: 3px;
   color: #333; }
 
 .footer {
@@ -147,6 +148,17 @@ button::-moz-focus-inner {
 
 .footer-well {
   padding: 0 3rem; }
+
+.vraag-mij-maar-amsterdam {
+  position: fixed;
+  z-index: 1;
+  opacity: .1;
+  left: -10vw;
+  top: -10vh;
+  width: 120vw;
+  height: 120vh;
+  border: none;
+  pointer-events: none; }
 
 html {
   font-size: 62.5%; }
@@ -217,11 +229,12 @@ body {
   max-width: 45em; }
 
 .main {
+  position: relative;
+  z-index: 2;
   max-width: 1400px;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
-  background-color: #fff;
   padding: 3rem; }
 @media (max-width: 900px) {
   .main {
@@ -822,6 +835,10 @@ input[readonly], input[disabled] {
 input[readonly]:hover, input[readonly]:focus, input[disabled]:hover, input[disabled]:focus {
   border: 1px solid rgba(0, 0, 0, 0.1); }
 
+label {
+  position: relative;
+  cursor: pointer; }
+
 input[type="checkbox"] {
   opacity: 0;
   position: absolute;
@@ -900,8 +917,6 @@ form label, form .label {
 form label strong, form .label strong {
   display: block;
   margin-bottom: 5px; }
-form label {
-  cursor: pointer; }
 
 .form-list {
   list-style: none;
@@ -960,20 +975,17 @@ form label {
     margin-right: 0;
     margin-left: 2em; } }
 .buttons.sticky {
-  position: sticky;
-  position: -webkit-sticky;
   z-index: 101;
-  bottom: 1.5rem;
-  padding: 1.5rem;
-  margin: -2.3rem;
-  background-color: rgba(255, 255, 255, 0.95); }
-.buttons.sticky:hover:before {
-  opacity: 1; }
-@media (max-width: 900px) {
-  .buttons.sticky {
-    bottom: 5px;
-    padding: 5px;
-    margin: -5px; } }
+  left: 0;
+  right: 0;
+  bottom: -100px;
+  margin: 0;
+  transition: bottom 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.changed .buttons.sticky {
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(51, 51, 51, 0.3);
+  padding: 1.5rem; }
 
 .row-delete strong {
   display: inline; }
@@ -1030,8 +1042,6 @@ form label {
   padding: 0;
   margin: 0;
   list-style: none; }
-.choices label {
-  position: relative; }
 .choices.choices-full li {
   flex-basis: 100%; }
 .choices input[type="checkbox"] + strong {
@@ -1047,13 +1057,36 @@ form label {
   margin-top: 10px; }
 .choices b {
   padding: 10px; }
-.choices .group-label {
-  margin-right: auto; }
 .choices label:hover strong {
   border: 1px solid rgba(0, 0, 0, 0.4); }
 .choices.inlineformset-checkbox input {
   position: static;
   opacity: 1; }
+
+.group-label {
+  margin-right: auto;
+  display: block;
+  padding-bottom: 10px;
+  border-bottom: #333; }
+.group-label input[type="checkbox"] + strong {
+  display: block;
+  font-weight: 700;
+  background-color: #f5f5f5;
+  padding: 10px;
+  padding-left: calc(10px + 2em);
+  transition: all .3s;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: none;
+  border-right: none;
+  border-top: none; }
+.group-label input[type="checkbox"] + strong:before, .group-label input[type="checkbox"] + strong:after {
+  margin-left: 10px;
+  margin-top: 10px; }
+.well .choices .group-label input[type="checkbox"] + strong {
+  font-weight: 700;
+  background-color: transparent; }
+.choices .group-label {
+  padding-bottom: 0; }
 
 .well .choices input[type="checkbox"] + strong {
   background-color: #fff; }
@@ -1063,7 +1096,8 @@ form label {
 .choices-modal .choices-nieuw {
   text-decoration: none; }
 .modal .choices-modal .buttons {
-  flex-direction: row-reverse; }
+  flex-direction: row-reverse;
+  margin-bottom: 0; }
 .modal .choices-modal .choices-close {
   display: inline-block;
   margin-right: 0; }

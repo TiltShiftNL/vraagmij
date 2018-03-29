@@ -137,13 +137,14 @@
   top: -.2em;
   
 
-  font-size: .5em;
+  font-size: .6em;
   margin-left: 1em;
   padding: .2em .5em;
   
   text-align: center;
   
   background-color: #fff;
+  border-radius: 3px;
   
   color: $textColor;
 }
@@ -158,4 +159,16 @@
 
 .footer-well {
   padding: 0 $padding;
+}
+
+.vraag-mij-maar-amsterdam {
+  position: fixed;
+  z-index: 1;
+  opacity: .1;
+  left: -10vw;
+  top: -10vh;
+  width: 120vw;
+  height: 120vh;
+  border: none;
+  pointer-events: none;
 }

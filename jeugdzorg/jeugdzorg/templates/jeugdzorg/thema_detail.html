@@ -38,7 +38,7 @@
   
   {% if object.profielen_zichtbaar %}
 
-      <h2 class="shortcut" id="contacten"><strong>{{ object.profielen_zichtbaar|length }}</strong> contact{% if object.profielen_zichtbaar|length != 1 %}en{% endif %}</h2>
+      <h2 class="shortcut" id="contacten"><strong>{{ object.profielen_zichtbaar|length }}</strong> {% if object.profielen_zichtbaar|length != 1 %}contactpersonen{% else %}contactpersoon{% endif %}</h2>
       <p>
           Heeft u een inhoudelijke vraag over het thema "{{ object.titel }}"? 
           {% if request.user|has_group:"viewer" %}

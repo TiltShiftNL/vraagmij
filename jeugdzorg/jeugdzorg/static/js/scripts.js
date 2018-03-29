@@ -103,6 +103,7 @@
     'choices': function(e){
       var 
         el = this.hash && document.getElementById(this.hash.substring(1)),
+        form = el && _closest(el, 'form'),
         template = '<div class="modal-inner">[[CONTENT]]</div><a href="#" class="modal-close" data-handler="modal-close">SLUITEN</a>',
         modal;
       
@@ -117,14 +118,43 @@
       };
       
       var _change = function(e) {
-        var els = modal.querySelectorAll('input');
-        for (var i = 0; i < els.length; i++) {
-          var el = document.getElementById(els[i].dataset.id);
-          if (el) {
-            el.checked = els[i].checked;
+        
+        
+        if (e) {
+          var input = _closest(e.originalTarget, '.group-label');
+          if (input) {
+            
+            var inputs = input.nextElementSibling.querySelectorAll('input');
+            for (var l=0; l<inputs.length; l++) {
+              inputs[l].checked = input.querySelector('input').checked;
+            }
+
           }
         }
-      }
+        
+
+        setTimeout(function(){
+          var els = modal.querySelectorAll('.group-label');
+          for (var i = els.length; i > 0; i--) {
+            var 
+              input = els[(i-1)],
+              next = input.nextElementSibling;
+
+              input.querySelector('input').checked = (next.querySelectorAll('input').length == next.querySelectorAll(':checked').length);
+          }
+          
+        },100);
+        
+        var els = modal.querySelectorAll('input');
+        for (var i = 0; i < els.length; i++) {
+          var input = document.getElementById(els[i].dataset.id);
+          if (input) {
+            input.checked = els[i].checked;
+          }
+        }
+        
+
+      };
       
       if (el) {
         e.preventDefault();
@@ -134,10 +164,13 @@
         var els = modal.querySelectorAll('input');
         for (var i = 0; i < els.length; i++) {
           els[i].removeAttribute('checked');
-          var el = document.getElementById(els[i].dataset.id);
-          if (el && el.checked) els[i].setAttribute('checked', 'checked');
+          var input = document.getElementById(els[i].dataset.id);
+          if (input && input.checked) els[i].setAttribute('checked', 'checked');
         }
-        modal.addEventListener('change', _change); _change();
+        modal.addEventListener('change', function(e){
+          form.classList.add('changed');
+          _change(e);
+        }); _change(false);
       }
     },
     
@@ -314,6 +347,44 @@
           
       });
     },
+    
+    'change': function(){
+      this.addEventListener('change', function(){
+        this.classList.add('changed');
+      });
+      this.addEventListener('keyup', function(){
+        this.classList.add('changed');
+      });
+    },
+    
+    'vraag-mij-maar-amsterdam': function(){
+      var player;
+      
+      var
+        trigger = 'vraagmijmaaramsterdam',
+        keystroke = '';
+      
+      this.addEventListener('keyup', function(e){
+        var char = String.fromCharCode(e.keyCode).toLowerCase();
+        if (trigger.indexOf(keystroke) === 0) {
+          keystroke += char;
+        } else {
+          keystroke = '';
+        }
+        
+        console.log(keystroke);
+        
+        if (!player && keystroke == trigger) {
+          player = document.createElement('iframe');
+          player.classList.add('vraag-mij-maar-amsterdam');
+          player.src = 'https://www.youtube.com/embed/Z8XbFcl-yJg?autoplay=1';
+          player.allow = 'autoplay; encrypted-media';
+          
+          document.body.appendChild(player);
+
+        }
+      });
+    }
   
   };
   

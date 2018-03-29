@@ -66,6 +66,10 @@ input[disabled] {
     border: 1px solid rgba(#000, .1);
   }
 }
+label {
+  position: relative;
+  cursor: pointer;
+}
 input[type="checkbox"] {
   opacity: 0;
   position: absolute;
@@ -182,9 +186,6 @@ form {
     
     display: block;
   }
-  label {
-    cursor: pointer;
-  }
 }
 .form-list {
   list-style: none;
@@ -229,6 +230,7 @@ form {
   }
 }
 .buttons {
+  
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
@@ -259,30 +261,21 @@ form {
       
     }
   }
+  
   &.sticky {
-    position: sticky;
-    position: -webkit-sticky;
+
     z-index: 101;
-    
-    bottom: $padding / 2;
-    padding: $padding / 2;
-    margin: $lineHeight -$padding / 2 -$padding / 2 -$padding / 2;
-    
-    background-color: rgba(lighten($lightColor, 5), .95);
-    
-    
-    &:hover {
-      &:before {
-        opacity: 1;
-      }
+    left: 0;
+    right: 0;
+    bottom: -100px;
+    margin: 0;
+    transition: bottom .3s $transition-ease-default;
+    .changed & {
+      position: fixed;
+      bottom: 0;
+      background-color: rgba($textColor, .3);
+      padding: $padding / 2;
     }
-    
-    @include medium {
-      bottom: 5px;
-      padding: 5px;
-      margin: -5px;
-    }
-    
   }
 }
 .row-delete {

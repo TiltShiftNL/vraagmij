@@ -11,12 +11,13 @@ body {
   }
 }
 .main {
+  position: relative;
+  z-index: 2;
   max-width: $maxWidth;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
 
-  background-color: #fff;
   padding: $padding;
   @include medium {
     padding: 10px 10px (44px + 10px) 10px;

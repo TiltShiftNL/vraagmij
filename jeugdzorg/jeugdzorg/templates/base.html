@@ -19,7 +19,7 @@
 
 
 </head>
-<body id="top" data-decorator="scroller">
+<body id="top" data-decorator="scroller vraag-mij-maar-amsterdam">
   <header class="header">
     <div class="container">
       <a href="/" class="logo" data-counter="click.nav.logo">
@@ -71,7 +71,7 @@
               <li><a{% if sub_view == 'contact' %} class="active"{% endif %} data-counter="click.homepage.tab.contacten" href="{% url 'contacten' %}" data-count="{{ PROFIEL_COUNT }}">Contacten</a></li>
               <li><a{% if sub_view == 'regeling' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}" data-count="{{ REGELING_COUNT }}">Regelingen</a></li>
           </ul>
-          {% block sort_options %}<div class="sort"></div>{% endblock %}
+          {% block sort_options %}{% endblock %}
       </div>
   </nav>
   
