@@ -369,10 +369,8 @@
         if (trigger.indexOf(keystroke) === 0) {
           keystroke += char;
         } else {
-          keystroke = '';
+          keystroke = char;
         }
-        
-        console.log(keystroke);
         
         if (!player && keystroke == trigger) {
           player = document.createElement('iframe');
