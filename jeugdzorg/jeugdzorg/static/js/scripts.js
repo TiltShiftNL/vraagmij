@@ -121,17 +121,19 @@
         
         
         if (e) {
-          var input = _closest(e.originalTarget, '.group-label');
+          var t = e.srcElement || e.originalTarget;
+          var input = _closest(t, '.group-label');
+
           if (input) {
             
             var inputs = input.nextElementSibling.querySelectorAll('input');
+
             for (var l=0; l<inputs.length; l++) {
               inputs[l].checked = input.querySelector('input').checked;
             }
 
           }
         }
-        
 
         setTimeout(function(){
           var els = modal.querySelectorAll('.group-label');
@@ -199,10 +201,8 @@
         
         var placeholderBC = card.getBoundingClientRect();
         
-        // card.clone.style.transform = 'translate3d(' + placeholderBC.left + 'px, ' + placeholderBC.top + 'px, 0)';
         card.clone.style.marginLeft = placeholderBC.left + 'px';
         card.clone.style.marginTop = placeholderBC.top + 'px';
-        
       
         card.clone.style.width = placeholderBC.width + 'px';
         card.clone.style.height = placeholderBC.height + 'px';
@@ -228,7 +228,6 @@
         
         document.body.appendChild(card.modal);
         
-        
       }
       _position();
       
@@ -238,24 +237,6 @@
         card.modal.classList.remove('focus');
         card.modal.classList.remove('active');
         card.classList.remove('ghost');
-        
-        
-        // with animation
-        
-        // d.classList.remove('has-modal-contact');
-        //
-        // card.modal.classList.remove('extended');
-        //
-        // setTimeout(function(){
-        //   card.modal.classList.remove('on');
-        //   setTimeout(function(){
-        //     card.modal.classList.remove('focus');
-        //     setTimeout(function(){
-        //       card.modal.classList.remove('active');
-        //       card.classList.remove('ghost');
-        //     }, 200);
-        //   }, 400);
-        // },300);
         
       } else {
 
