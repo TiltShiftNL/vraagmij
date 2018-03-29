@@ -70,6 +70,11 @@
   }
   .thema & {
     margin-bottom: -2rem;
+  }  
+}
+
+.thema-detail {
+  > .cards:last-child {
+    margin-bottom: -1.1rem;
   }
-  
 }

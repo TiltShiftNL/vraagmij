@@ -15,68 +15,69 @@
   </p>
   
   
-  <article class="thema-detail" id="thema-{{ thema.id }}">
+  <div class="thema thema-detail">
+    <article id="thema-{{ thema.id }}">
 
-      <header class="thema-header">
+        <header class="thema-header">
 
-          <h1 class="thema-title">
+            <h1 class="thema-titel">
             
-              <a href="#thema.{{ object.id }}" class="ken-ik" data-handler="ken-ik"><span>Hier weet ik wat van!</span> <i class="icon-ken-ik"></i></a>
+                <a href="#thema.{{ object.id }}" class="ken-ik" data-handler="ken-ik"><span>Hier weet ik wat van!</span> <i class="icon-ken-ik"></i></a>
 
-              {{ object.titel }}
+                {{ object.titel }}
 
-          </h1>
+            </h1>
 
-          {% if object.omschrijving %}
-              <div class="thema-samenvatting">
-                  {{ object.omschrijving|linebreaks }}
-              </div>
-          {% endif %}
-      </header>
+            {% if object.omschrijving %}
+                <div class="thema-samenvatting">
+                    {{ object.omschrijving|linebreaks }}
+                </div>
+            {% endif %}
+        </header>
 
-  </article>
+    </article>
   
-  {% if object.profielen_zichtbaar %}
+    {% if object.profielen_zichtbaar %}
 
-      <h2 class="shortcut" id="contacten"><strong>{{ object.profielen_zichtbaar|length }}</strong> {% if object.profielen_zichtbaar|length != 1 %}contactpersonen{% else %}contactpersoon{% endif %}</h2>
-      <p>
-          Heeft u een inhoudelijke vraag over het thema "{{ object.titel }}"? 
-          {% if request.user|has_group:"viewer" %}
-              <br>Neem dan contact op met één van onderstaande contactpersonen.
-          {% else %}
-              <br>
-              <a href="{% url 'login' %}?next={% url 'detail_thema' object.slug %}" data-counter="click.thema.contact.login" data-handler="modal">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
-          {% endif %}
-      </p>
-      {% if request.user|has_group:"viewer" %}
-          <ul class="contacten cards">
-              {% for contact in object.profielen_zichtbaar %}
-                  <li>
-                      {% include "snippets/contact.html" with item=contact %}
-                  </li>
-              {% endfor %}
-          </ul>
-      {% endif %}
+        <h2 class="shortcut" id="contacten"><strong>{{ object.profielen_zichtbaar|length }}</strong> {% if object.profielen_zichtbaar|length != 1 %}contactpersonen{% else %}contactpersoon{% endif %}</h2>
+        <p>
+            Heeft u een inhoudelijke vraag over het thema "{{ object.titel }}"? 
+            {% if request.user|has_group:"viewer" %}
+                <br>Neem dan contact op met één van onderstaande contactpersonen.
+            {% else %}
+                <br>
+                <a href="{% url 'login' %}?next={% url 'detail_thema' object.slug %}" data-counter="click.thema.contact.login" data-handler="modal">Log dan in</a> om contactpersonen te raadplegen en te contacteren.
+            {% endif %}
+        </p>
+        {% if request.user|has_group:"viewer" %}
+            <ul class="contacten cards">
+                {% for contact in object.profielen_zichtbaar %}
+                    <li>
+                        {% include "snippets/contact.html" with item=contact %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-  {% endif %}
-  
-  
-  {% if object.regeling_set.all %}
-  
-
-      <h2 class="shortcut" id="regelingen"><strong>{{  object.regeling_set.all|length }}</strong> regeling{% if  object.regeling_set.all|length != 1 %}en{% endif %}</h2>
-      <ul class="regelingen cards">
-        {% for regeling in object.regeling_set.all %}
-            <li>
-                {% include 'snippets/regeling.html' %}
-            </li>
-        {% endfor %}
-      </ul>
-
-
-  {% endif %}
+    {% endif %}
   
   
+    {% if object.regeling_set.all %}
+  
+
+        <h2 class="shortcut" id="regelingen"><strong>{{  object.regeling_set.all|length }}</strong> regeling{% if  object.regeling_set.all|length != 1 %}en{% endif %}</h2>
+        <ul class="regelingen cards">
+          {% for regeling in object.regeling_set.all %}
+              <li>
+                  {% include 'snippets/regeling.html' %}
+              </li>
+          {% endfor %}
+        </ul>
+
+
+    {% endif %}
+  
+  </div>
 </div>
 
-{% endblock %}
+  {% endblock %}

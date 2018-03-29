@@ -2230,6 +2230,9 @@ dl.contact-extended dt.contact-regeling ~ dd {
 .thema .thema-meta {
   margin-bottom: -2rem; }
 
+.thema-detail > .cards:last-child {
+  margin-bottom: -1.1rem; }
+
 .ken-ik {
   position: relative;
   width: 5rem;
