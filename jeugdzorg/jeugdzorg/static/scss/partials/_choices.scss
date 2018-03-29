@@ -68,9 +68,9 @@
     transition: all .3s;
     
     border: 1px solid rgba(#000, .1);
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    border-left-color: rgba(#000, 0);
+    border-right-color: rgba(#000, 0);
+    border-top-color: rgba(#000, 0);
     
     &:before, &:after {
       margin-left: 10px;
