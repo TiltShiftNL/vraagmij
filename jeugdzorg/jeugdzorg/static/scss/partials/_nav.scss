@@ -265,6 +265,17 @@
     background-color: #fff;
     
     outline: 4000px solid rgba(#000, 0);
+    i {
+      position: relative;
+      transition: all .3s;
+      top: 18px;
+    }
+    
+    &:hover {
+      i {
+        top: 12px;
+      }
+    }
     
     .no-touch &:hover {
       outline: 4000px solid rgba(#000, .1);
