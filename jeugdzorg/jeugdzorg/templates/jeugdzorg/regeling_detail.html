@@ -16,40 +16,63 @@
       <a href="{% url 'regelingen' %}" data-counter="click.regeling.back" data-handler="back"><i class="icon-arrow-left"></i> Terug naar overzicht</a>
     {% endif %}
   </p>
-  
-  <article class="regeling-detail" id="regeling-{{ regeling.id }}">
+  <div class="article-container">
+      <article class="regeling-detail" id="regeling-{{ regeling.id }}">
 
-      <header class="regeling-header">
+          <header class="regeling-header">
         
-          <h1 class="regeling-title">
+              <h1 class="regeling-title">
               
-              <a href="#regeling.{{ regeling.id }}" class="ken-ik" data-handler="ken-ik"><span>Hier weet ik wat van!</span> <i class="icon-ken-ik"></i></a>
+                  <a href="#regeling.{{ regeling.id }}" class="ken-ik" data-handler="ken-ik"><span>Hier weet ik wat van!</span> <i class="icon-ken-ik"></i></a>
               
-              {% if request.user|has_group:"editor" %}
-                  <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
+                  {% if request.user|has_group:"editor" %}
+                      <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
+                  {% endif %}
+
+                  {{ regeling.titel }}
+
+              </h1>
+
+              {% if regeling.samenvatting %}
+                  <div class="regeling-samenvatting">
+                      {{ regeling.samenvatting|linebreaks }}
+                  </div>
+              {% endif %}
+          </header>
+
+          <div class="regeling-details">
+              {% if regeling.voorwaarde_set.all %}
+                  <ol class="regeling-voorwaarden" data-decorator="progress" data-regeling-id="{{ regeling.id }}" id="voorwaarden">
+                      {% for vw in regeling.voorwaarde_set.all %}
+                          <li data-voorwaarde-id="{{ vw.id }}" data-counter="mouseover.detail.voorwaarde.{{ vw.id }} mouseout.detail.voorwaarde.{{ vw.id }}">{{ vw.titel }}</li>
+                      {% endfor %}
+                  </ol>
               {% endif %}
 
-              {{ regeling.titel }}
+          </div>
 
-          </h1>
+        </article>
+        
+        <aside class="aside">
+          {% if regeling.aanvraag_url %}
+    
+            <p>
+              <a class="aside-block regeling-aanvraag" href="{{ regeling.aanvraag_url }}" target="_blank" {% if regeling.bron %}title="{{ regeling.bron }}"{% endif %}>Aanvraagformulier <i class="icon-external"></i></a>
+            </p>
 
-          {% if regeling.samenvatting %}
-              <div class="regeling-samenvatting">
-                  {{ regeling.samenvatting|linebreaks }}
-              </div>
           {% endif %}
-      </header>
-
-      <div class="regeling-details">
-          {% if regeling.voorwaarde_set.all %}
-              <ol class="regeling-voorwaarden" data-decorator="progress" data-regeling-id="{{ regeling.id }}" id="voorwaarden">
-                  {% for vw in regeling.voorwaarde_set.all %}
-                      <li data-voorwaarde-id="{{ vw.id }}" data-counter="mouseover.detail.voorwaarde.{{ vw.id }} mouseout.detail.voorwaarde.{{ vw.id }}">{{ vw.titel }}</li>
-                  {% endfor %}
-              </ol>
-          {% endif %}
-
-      </div>
+    
+          <div class="aside-block regeling-feedback">
+            <h3 class="aside-title">Feedback op deze regeling</h3>
+            <ul>
+              <li><a href="mailto:{{ SITE.instelling.standaard_contact_email }}?subject=Fout+melden+over+de+regeling:+'{{ regeling.titel|urlencode }}'&amp;body=Beste mensen,%0D%0A%0D%0AIk heb een fout gevonden op de pagina van de regeling '{{ regeling.titel|urlencode }}'.%0D%0A%0D%0ALink: {{ request.build_absolute_uri|urlencode }}"><i class="icon-arrow-right"></i> Fout melden</a></li>
+              <li><a href="mailto:{{ SITE.instelling.standaard_contact_email }}?subject=Suggestie+over+de+regeling:+'{{ regeling.titel|urlencode }}'&amp;body=Beste mensen,%0D%0A%0D%0AIk heb een suggestie over de regeling '{{ regeling.titel|urlencode }}'.%0D%0A%0D%0ALink: {{ request.build_absolute_uri|urlencode }}"><i class="icon-arrow-right"></i> Verbeter suggesties</a></li>
+            </ul>
+          </div>
+    
+        </aside>
+        
+    </div>
     
       {% if regeling.profielen_zichtbaar %}
           <div class="contacten-container">
@@ -79,20 +102,9 @@
 
       {% endif %}
     
-      {% if regeling.aanvraag_url %}
-          <div class="regeling-aanvragen" id="regeling-aanvragen">
-              <h2>Aanvragen</h2>
-              <p>
-                  Als u in aanmerking komt voor <strong>{{ regeling.titel }}</strong> kunt u deze op de website van <strong class="regeling-aanbieder">{% if regeling.bron %}{{ regeling.bron }}{% else %}de aanbieder{% endif %}</strong> aanvragen.
-              </p>
-              <p class="buttons">
-                  <a href="{{ regeling.aanvraag_url }}" target="_blank" class="button" data-counter="click.detail.aanvragen.regeling.{{ regeling.id }}">Nu aanvragen <i class="icon-external"></i></a>
-              </p>
-          </div>
-      {% endif %}
   
 
-  </article>
+
   
 </div>
 
