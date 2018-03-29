@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block login %}{% endblock %}
+{% block tabs %}{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="container container-small">
+
+            {% if form.errors %}
+                <div class="systeem-berichten fout">
+                    <ul>
+                        {% for e, v in form.errors.items %}
+                            <li>{{ v }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form method="post" action=".">
+                <h1>Registratie</h1>
+                <fieldset>
+                    <div class="systeem-berichten">
+                        <p>
+                            Je wachtwoord
+                        </p>
+                        <ul class="list">
+                            <li>mag niet lijken op je emailadres</li>
+                            <li>moet minimaal 8 karakters bevatten</li>
+                            <li>mag geen makkelijk wachtwoord zijn</li>
+                            <li>mag niet enkel bestaan uit cijfers</li>
+                        </ul>
+                    </div>
+                    {% csrf_token %}
+
+                    <div class="inputs">
+                        <p class="row">
+                            <label>
+                                <strong>E-mailadres</strong>
+                                {{ form.email }}
+                            </label>
+                        </p>
+                        <p class="row">
+                            <label>
+                                <strong>Wachtwoord</strong>
+                                {{ form.password1 }}
+                            </label>
+                        </p>
+                        <p class="row">
+                            <label>
+                                <strong>Bevestiging wachtwoord</strong>
+                                {{ form.password2 }}
+                            </label>
+                        </p>
+                        <p class="row">
+                            <label>
+                                <strong>Voornaam</strong>
+                                {{ form.voornaam }}
+                            </label>
+                        </p>
+
+                        <p class="row">
+                            <label>
+                                <strong>Achternaam</strong>
+                                {{ form.achternaam }}
+                            </label>
+                        </p>
+                        <p class="row">
+                            <label>
+                                <strong>Tussenvoegsel</strong>
+                                {{ form.tussenvoegsel }}
+                            </label>
+                        </p>
+                    </div>
+                    {#        {{ form.as_p }}#}
+                    <button class="button" type="submit">Maak aan</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
