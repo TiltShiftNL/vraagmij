@@ -1124,7 +1124,8 @@ fieldset .choices-modal input[type="checkbox"]:checked + strong:before {
 fieldset .choices-modal input[type="checkbox"]:checked + strong:hover:before {
   color: red; }
 fieldset .choices-modal .choices ul {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
 fieldset .choices-modal .choices-full input[type="checkbox"]:checked + strong {
   display: block; }
 fieldset .choices-modal b, fieldset .choices-modal .group-label {

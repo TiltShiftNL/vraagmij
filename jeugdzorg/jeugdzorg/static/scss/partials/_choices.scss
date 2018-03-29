@@ -150,6 +150,7 @@
     }
     .choices ul {
       display: flex;
+      flex-wrap: wrap;
     }
     .choices-full input[type="checkbox"]:checked + strong {
       display: block;
