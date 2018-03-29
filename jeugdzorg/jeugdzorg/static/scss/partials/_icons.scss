@@ -14,7 +14,8 @@
 .icon-arrow,
 .icon-arrow-left,
 .icon-arrow-right,
-.icon-arrow-bottom {
+.icon-arrow-bottom,
+.icon-arrow-up {
   position: relative;
   top: .4em;
   display: inline-block;
@@ -35,6 +36,9 @@
 }
 .icon-arrow-bottom {
   transform: rotate(135deg);
+}
+.icon-arrow-up {
+  transform: rotate(-45deg);
 }
 
 .icon-menu, .icon-close {
