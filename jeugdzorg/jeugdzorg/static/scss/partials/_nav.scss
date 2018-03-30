@@ -294,8 +294,6 @@
   @include medium {
     left: auto;
     right: 10px;
-    top: auto;
-    bottom: 10px;
     transform: none;
     padding: 0;
   }
@@ -315,9 +313,6 @@
 }
 
 .nav-back {
-  border-bottom: 1px solid #dfdfdf;
-  padding-bottom: $lineHeight;
-
   margin-bottom: $lineHeight;
   
   a {

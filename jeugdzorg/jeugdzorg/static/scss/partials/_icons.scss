@@ -414,3 +414,44 @@
     content: 'i';
   }
 }
+
+.icon-search {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 17px ;
+  height: 15px;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+  }
+  &:before {
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+  &:after{
+    width: 8px;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    border-top: 2px solid #fff;
+    transform: rotate(45deg);
+  } 
+}
+
+.icon-search-close {
+  position: relative;
+  font-style: normal;
+  color: $textColor;
+  width: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+  line-height: 1;
+  &:before {
+    content: '×';
+  }
+}

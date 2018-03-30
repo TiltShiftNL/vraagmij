@@ -1,0 +1,143 @@
+.zoeken {
+  padding: $padding;
+  
+  position: absolute;
+  z-index: 100;
+  right: -$padding;
+  top: -$padding;
+  
+  width: 100%;
+  max-width: 300px;
+  
+  transition: max-width .3s $transition-ease-default;
+  
+  legend {
+    display: none;
+  }
+  label strong {
+    position: absolute;
+    left: 0;
+    top: 1.2rem;
+    left: 2rem;
+    font-size: 0;
+    .icon-search {
+      display: none;
+      &:before, &:after {
+        border-color: $textColor;
+      }
+    }
+  }
+  
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    display: flex;
+  }
+  label {
+    width: 100%;
+  }
+  input {
+    padding: 0 1em;
+    min-height: 4rem;
+    &:focus {
+      border-color: $textColor;
+    }
+    
+  }
+  .zoeken-button {
+    pointer-events: none;
+  }
+  .zoeken-button,
+  .zoeken-annuleren {
+    flex-shrink: 0;
+    border: none;
+    background-color: $textColor;
+    color: #fff;
+    font-size: 0;
+    width: 4rem;
+    cursor: pointer;
+  }
+  .zoeken-annuleren {
+    
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4rem;
+    height: 4rem;
+    display: none;
+    background-color: transparent;
+  
+  }
+  .icon-search-close {
+    top: -.2rem;
+  }
+
+}
+
+.zoeken-container {
+  
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: rgba(#fff, .9);
+  
+  
+  
+  border: none;
+  padding: 0;
+  padding: 20rem $padding $padding $padding;
+
+
+  display: none;
+  
+}
+
+.search-mode {
+  .zoeken {
+    
+    background-color: #fff;
+    height: 4rem;
+    max-width: $maxContentWidth;
+  }
+  input {
+    padding-left: 5rem;
+  }
+  .zoeken-container {
+    display: block;
+  }
+  .nav-top {
+    display: none;
+  }
+  &.scrolled {
+    .zoeken {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  label strong .icon-search {
+    display: block;
+  }
+  .zoeken-button {
+    display: none;
+  }
+  .zoeken-annuleren {
+    display: block;
+  }
+}
+
+.search-empty {
+  max-width: 400px;
+  margin: 2 * $padding auto;
+  padding: 2 * $padding;
+  background-color: rgba($lightColor, .8);
+  font-size: 2.4rem;
+}

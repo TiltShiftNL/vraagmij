@@ -253,6 +253,11 @@
 
       }
 
+    },
+    
+    'search-close': function(e){
+      e.preventDefault();
+      d.classList.remove('search-mode');
     }
     
   };
@@ -338,6 +343,16 @@
       });
     },
     
+    'search': function(){
+      
+      this.addEventListener('focus', function(){
+        console.log('this', this);
+        d.classList.add('search-mode')
+      });
+    },
+    
+    
+    // Dit is niet een paasei
     'vraag-mij-maar-amsterdam': function(){
       var player;
       

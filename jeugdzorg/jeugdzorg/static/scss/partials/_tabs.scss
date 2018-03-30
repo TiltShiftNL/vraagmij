@@ -3,8 +3,13 @@
   box-sizing: border-box;
   padding: 0 $padding;
   margin: 0 auto;
+  .container {
+    position: relative;
+  }
 }
 .tabs {
+  position: relative;
+
   display: flex;
   justify-content: flex-start;
   

@@ -11,6 +11,8 @@
 }
 .sort {
   a {
+    position: relative;
+    z-index: 1;
     text-decoration: none;
     display: inline-block;
     white-space: nowrap;
