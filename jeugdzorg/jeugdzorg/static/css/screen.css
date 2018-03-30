@@ -1628,6 +1628,10 @@ hr {
   min-height: 4rem; }
 .zoeken input:focus {
   border-color: #333; }
+.zoeken input::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0; }
 .zoeken .zoeken-button {
   pointer-events: none; }
 .zoeken .zoeken-button, .zoeken .zoeken-annuleren {
