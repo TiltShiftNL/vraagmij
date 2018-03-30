@@ -20,19 +20,29 @@
             <form method="post" action=".">
                 <h1>Registratie</h1>
                 <fieldset>
-                    <div class="systeem-berichten">
-                        <p>
-                            Je wachtwoord
-                        </p>
-                        <ul class="list">
-                            <li>mag niet lijken op je emailadres</li>
-                            <li>moet minimaal 8 karakters bevatten</li>
-                            <li>mag geen makkelijk wachtwoord zijn</li>
-                            <li>mag niet enkel bestaan uit cijfers</li>
-                        </ul>
-                    </div>
-                    {% csrf_token %}
 
+                    {% csrf_token %}
+                    <div class="inputs">
+                        <p class="row">
+                            <label>
+                                <strong>Voornaam</strong>
+                                {{ form.voornaam }}
+                            </label>
+                        </p>
+                        <p class="row">
+                            <label>
+                                <strong>Tussenvoegsel</strong>
+                                {{ form.tussenvoegsel }}
+                            </label>
+                        </p>
+                        <p class="row">
+                            <label>
+                                <strong>Achternaam</strong>
+                                {{ form.achternaam }}
+                            </label>
+                        </p>
+
+                    </div>
                     <div class="inputs">
                         <p class="row">
                             <label>
@@ -40,6 +50,19 @@
                                 {{ form.email }}
                             </label>
                         </p>
+                    </div>
+                    <div class="inputs">
+                        <div class="systeem-berichten">
+                            <p>
+                                Je wachtwoord
+                            </p>
+                            <ul class="list">
+                                <li>mag niet lijken op je emailadres</li>
+                                <li>moet minimaal 8 karakters bevatten</li>
+                                <li>mag geen makkelijk wachtwoord zijn</li>
+                                <li>mag niet enkel bestaan uit cijfers</li>
+                            </ul>
+                        </div>
                         <p class="row">
                             <label>
                                 <strong>Wachtwoord</strong>
@@ -50,25 +73,6 @@
                             <label>
                                 <strong>Bevestiging wachtwoord</strong>
                                 {{ form.password2 }}
-                            </label>
-                        </p>
-                        <p class="row">
-                            <label>
-                                <strong>Voornaam</strong>
-                                {{ form.voornaam }}
-                            </label>
-                        </p>
-
-                        <p class="row">
-                            <label>
-                                <strong>Achternaam</strong>
-                                {{ form.achternaam }}
-                            </label>
-                        </p>
-                        <p class="row">
-                            <label>
-                                <strong>Tussenvoegsel</strong>
-                                {{ form.tussenvoegsel }}
                             </label>
                         </p>
                     </div>

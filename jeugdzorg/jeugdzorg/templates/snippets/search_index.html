@@ -1,0 +1,6 @@
+{% for item in profiel_lijst %}
+{%  include 'snippets/contact.html' %}
+{% endfor %}
+{% for item in profiel_lijst_rendered %}
+{{ item|safe }}
+{% endfor %}

@@ -173,6 +173,8 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+    objects = models.Manager()
+    search = models.Manager()
 
     def voorwaarde_lijst(self):
         return Voorwaarde.objects.all()
@@ -266,6 +268,8 @@ class Thema(Sortable):
         null=True,
         blank=True,
     )
+    objects = models.Manager()
+    search = models.Manager()
 
     def profielen_zichtbaar(self):
         return self.profiel_set.filter(zichtbaar=True)
@@ -525,6 +529,7 @@ class Profiel(models.Model):
     )
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
+    search = ProfielIsZichtbaarManager()
 
     @property
     def naam_volledig(self):
@@ -772,7 +777,15 @@ def pre_save_instance(sender, instance, *args, **kwargs):
                 setattr(instance, '__%s' % field_name, getattr(instance.__class__.objects.get(id=instance.id), field_name))
 
 
+def rebuild_index_check(sender, update_fields, instance, **kwargs):
+    call_command('rebuild_index')
+
+
 # post_save.connect(save_profile, sender=User)
 post_save.connect(save_instelling, sender=Instelling)
 pre_save.connect(pre_save_instance, sender=Instelling)
+
+post_save.connect(rebuild_index_check, sender=Thema)
+post_save.connect(rebuild_index_check, sender=Regeling)
+post_save.connect(rebuild_index_check, sender=Profiel)
 

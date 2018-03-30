@@ -228,3 +228,9 @@ THUMBNAIL_ALIASES = {
     },
 }
 
+SEARCH_MODELS = [
+    'Profiel',
+    'Thema',
+    'Regeling',
+]
+

@@ -21,6 +21,7 @@ node_modules
 celerybeat-schedule
 #static/*
 /jeugdzorg/static/
+/jeugdzorg/jeugdzorg/search_files/*
 /jeugdzorg/jeugdzorg/media/
 /jeugdzorg/media/
 /jeugdzorg/jeugdzorg/settings/local.py

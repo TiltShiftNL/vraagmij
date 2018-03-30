@@ -79,7 +79,8 @@ urlpatterns = [
 
     url('^', include('django.contrib.auth.urls')),
 
-
+    path('zoek/', SearchView.as_view(), name='zoek'),
+    # path('zoek/<str:model>/', SearchIndexView.as_view(), name='zoek_model'),
 
     url(r'^herstel-wachtwoord/$',
         password_reset_new_user,
