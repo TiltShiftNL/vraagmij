@@ -441,23 +441,35 @@ class SearchView(UserPassesTestMixin, TemplateView):
             # print(current_milli_time() - ms)
             ms = current_milli_time()
             root = html.fromstring(m[1])
-            e = root.find_class('profiel')
+            ss = ''
+            # e = root.find_class('profiel')
+            # e = root.xpath('..//div[text()="%s"]' % self.request.GET.get('q'))
+
+            for tags in root.iter('b'):  # root is the ElementTree object
+
+                print(tags.tag)
+                print(tags.tag)
+
             for r in root:
-                print(r.find_class('profiel'))
+                for rr in r:
+                # print(r.find_class('profiel'))
+                #     print(r.text_content())
+                    if self.request.GET.get('q').lower() in rr.text_content().lower():
+                        # print(html.tostring(r))
+                        ss += html.tostring(r).decode()
             # e = root.xpath('.//div[contains(text(),"%s")]' % self.request.GET.get('q'))
             # print(root)
             # print(e)
             # for tag in root.iter():
             #     if self.request.GET.get('q') in tag.text:
             #         print(tag)
-            soup = BeautifulSoup(m[1], "html.parser")
-            results = soup.find_all("div", {"class": m[0].lower()})
-            # print(current_milli_time() - ms)
-            ss = ''
-            for r in results:
-                result = r.find_all(text=re.compile(r'%s' % self.request.GET.get('q'), re.IGNORECASE))
-                if result:
-                    ss += str(r)
+            # soup = BeautifulSoup(m[1], "html.parser")
+            # results = soup.find_all("div", {"class": m[0].lower()})
+            # # print(current_milli_time() - ms)
+            # for r in results:
+            #     result = r.find_all(text=re.compile(r'%s' % self.request.GET.get('q'), re.IGNORECASE))
+            #     if result:
+            #         ss += str(r)
             if ss:
                 s += '<div class="zoeken-paneel %s-lijst">%s</div>' % (
                     m[0].lower(),
