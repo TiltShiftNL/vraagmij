@@ -107,7 +107,6 @@
   .modal & {
     .buttons {
       flex-direction: row-reverse;
-      margin-bottom: 0;
     }
     .choices-close {
       display: inline-block;
@@ -148,10 +147,23 @@
         }
       }
     }
-    .choices ul {
-      display: flex;
-      flex-wrap: wrap;
+    .choices {
+      font-size: 0;
+      display: inline-block;
+      ul, li {
+        display: inline-block;
+      }
     }
+    .choices-full {
+      display: block;
+      li {
+        display: block;
+      }
+    }
+//    .choices ul {
+//      display: flex;
+//      flex-wrap: wrap;
+//    }
     .choices-full input[type="checkbox"]:checked + strong {
       display: block;
     }

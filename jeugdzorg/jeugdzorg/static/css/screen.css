@@ -1185,8 +1185,7 @@ form label strong, form .label strong {
 .choices-modal .choices-nieuw {
   text-decoration: none; }
 .modal .choices-modal .buttons {
-  flex-direction: row-reverse;
-  margin-bottom: 0; }
+  flex-direction: row-reverse; }
 .modal .choices-modal .choices-close {
   display: inline-block;
   margin-right: 0; }
@@ -1212,9 +1211,15 @@ fieldset .choices-modal input[type="checkbox"]:checked + strong:before {
   background-color: transparent; }
 fieldset .choices-modal input[type="checkbox"]:checked + strong:hover:before {
   color: red; }
-fieldset .choices-modal .choices ul {
-  display: flex;
-  flex-wrap: wrap; }
+fieldset .choices-modal .choices {
+  font-size: 0;
+  display: inline-block; }
+fieldset .choices-modal .choices ul, fieldset .choices-modal .choices li {
+  display: inline-block; }
+fieldset .choices-modal .choices-full {
+  display: block; }
+fieldset .choices-modal .choices-full li {
+  display: block; }
 fieldset .choices-modal .choices-full input[type="checkbox"]:checked + strong {
   display: block; }
 fieldset .choices-modal b, fieldset .choices-modal .group-label {
