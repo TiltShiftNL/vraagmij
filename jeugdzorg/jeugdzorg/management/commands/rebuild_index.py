@@ -10,7 +10,7 @@ UserModel = get_user_model()
 from django.utils import timezone
 from jeugdzorg.models import *
 from django.conf import settings
-import sys
+import sys, os
 from django.template.loader import render_to_string
 
 
@@ -22,17 +22,16 @@ class Command(BaseCommand):
         for index in indexes:
             cls = getattr(sys.modules[__name__], index)
             if hasattr(cls, 'search'):
-                # print(cls)
                 r = cls.search.all()
                 s = None
                 try:
                     s = render_to_string('search/search_%s.html' % index.lower(), {'object_list': r})
-                    # print(s)
-
                 except:
                     print(index.lower())
                 if s:
-                    # print(s)
+                    dir = '/opt/app/jeugdzorg/search_files/'
+                    if not os.path.exists(dir):
+                        os.makedirs(dir)
                     text_file = open('/opt/app/jeugdzorg/search_files/search_%s.html' % index.lower(), "w+")
                     text_file.write(s)
                     text_file.close()
