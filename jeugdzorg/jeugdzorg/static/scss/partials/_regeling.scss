@@ -236,6 +236,26 @@
   }
 }
 
+.ik-weet-hier-iets-over {
+  line-height: 1.2;
+  padding-left: $padding + 3rem;
+  strong {
+    display: block;
+  }
+  .icon-avatar {
+    position: absolute;
+    left: $padding / 2;
+    top: $padding / 2;
+  }
+  .icon-arrow-right {
+    top: .3em;
+  }
+}
+
+.ik-weet-hier-iets-over.active {
+  background-color: rgba(green, .1);
+}
+
 
 [data-view="compact"] {
   .overzicht {

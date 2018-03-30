@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% load static %}
 {% load auth_tags %}
 
@@ -60,6 +61,27 @@
               <a class="aside-block regeling-aanvraag" href="{{ regeling.aanvraag_url }}" target="_blank" {% if regeling.bron %}title="{{ regeling.bron }}"{% endif %}>Aanvraagformulier <i class="icon-external"></i></a>
             </p>
 
+          {% endif %}
+          
+          {% if user.is_authenticated %}
+          
+            {% if regeling in user.profiel.regeling_lijst.all %}
+              <p>
+                <a href="{% url 'update_profiel' %}#regelingen" class="aside-block ik-weet-hier-iets-over active">
+                  <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span> 
+                  <strong>Jij bent een contactpersoon voor deze regeling. </strong>
+                  Collega hulpeverleners kunnen jou daarover vragen stellen! Dit kan je <u>hier</u> instellen.
+                </a>
+              </p>
+            {% else %}
+              <p>
+                <a href="{% url 'update_profiel' %}#regelingen" class="aside-block ik-weet-hier-iets-over">
+                  <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span> 
+                  <strong>Gebruik jij deze regeling vaker? </strong>
+                  Zou jij je collegas hiermee kunnen helpen en mogen zij jou daarover vragen stellen? Geef dat dan <u>hier</u> aan!
+                </a>
+              </p>
+            {% endif %}
           {% endif %}
     
           <div class="aside-block regeling-feedback">

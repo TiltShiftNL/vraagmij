@@ -189,6 +189,13 @@ dt.contact-naam + dd {
     }
     
   }
+  &.dit-ben-ik {
+    outline: 1rem solid rgba($brandColor2, .2);
+    outline: 1rem solid rgba(green, .1);
+//    .contact-meer-details {
+//      background-color: rgba($brandColor2, .2);
+//    }
+  }
 }
 .js .contact-extended {
   display: none;
@@ -514,6 +521,9 @@ dl.contact-extended {
       display: none;
     }
     
+  }
+  .contact.dit-ben-ik {
+    outline: none;
   }
 }
 

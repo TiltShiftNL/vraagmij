@@ -104,10 +104,11 @@ body {
   margin-bottom: .6em;
 }
 .aside-block {
+  position: relative;
   display: block;
   padding: $padding / 2;
   background-color: rgba($brandColor2, .2);
-  
+  text-decoration: none;
   > *:last-child {
     margin-bottom: 0;
   }

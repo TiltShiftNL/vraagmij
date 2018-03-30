@@ -299,9 +299,11 @@ body {
   margin-bottom: .6em; }
 
 .aside-block {
+  position: relative;
   display: block;
   padding: 1.5rem;
-  background-color: rgba(109, 181, 214, 0.2); }
+  background-color: rgba(109, 181, 214, 0.2);
+  text-decoration: none; }
 .aside-block > *:last-child {
   margin-bottom: 0; }
 
@@ -380,7 +382,8 @@ body {
   background-color: #d8d8d8;
   background-image: url("../images/ico_avatar.png");
   background-size: cover;
-  background-position: 50% 50%; }
+  background-position: 50% 50%;
+  background-repeat: no-repeat; }
 
 .icon-external {
   position: relative;
@@ -1728,6 +1731,21 @@ hr {
 .changed .regeling-annuleren {
   display: inline-block; }
 
+.ik-weet-hier-iets-over {
+  line-height: 1.2;
+  padding-left: 6rem; }
+.ik-weet-hier-iets-over strong {
+  display: block; }
+.ik-weet-hier-iets-over .icon-avatar {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem; }
+.ik-weet-hier-iets-over .icon-arrow-right {
+  top: .3em; }
+
+.ik-weet-hier-iets-over.active {
+  background-color: rgba(0, 128, 0, 0.1); }
+
 [data-view="compact"] .overzicht .regelingen {
   display: inline;
   margin: 0; }
@@ -1888,6 +1906,9 @@ hr {
   background-color: #333333; }
 .contact .contact-meer-details:hover:before {
   color: #ec0000; }
+.contact.dit-ben-ik {
+  outline: 1rem solid rgba(109, 181, 214, 0.2);
+  outline: 1rem solid rgba(0, 128, 0, 0.1); }
 
 .js .contact-extended {
   display: none; }
@@ -2116,6 +2137,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   display: none; }
 [data-view="compact"] .overzicht .contact-extended {
   display: none; }
+[data-view="compact"] .contact.dit-ben-ik {
+  outline: none; }
 
 .contact.ghost {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2) inset; }

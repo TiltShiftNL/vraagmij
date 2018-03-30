@@ -1,5 +1,5 @@
 {% load static thumbnail %}
-<div class="contact" id="contact-{{ item.id }}" data-seconden_niet_gebruikt="{{ item.seconden_niet_gebruikt }}">
+<div class="contact{% if user.profiel.id == item.id %} dit-ben-ik{% endif %}" id="contact-{{ item.id }}">
 
     <figure class="contact-avatar">
       <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span>
