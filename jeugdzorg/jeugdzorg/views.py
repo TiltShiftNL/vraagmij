@@ -434,7 +434,8 @@ class SearchView(UserPassesTestMixin, TemplateView):
     #     return data
 
     def get(self, request, *args, **kwargs):
-        from lxml.html import fromstring
+        if not self.request.GET.get('q'):
+            raise Http404
         s = ''
         indexes = get_search_indexes()
         for m in indexes:
@@ -444,11 +445,14 @@ class SearchView(UserPassesTestMixin, TemplateView):
             ss = ''
             # e = root.find_class('profiel')
             # e = root.xpath('..//div[text()="%s"]' % self.request.GET.get('q'))
-
-            for tags in root.iter('b'):  # root is the ElementTree object
-
+            for tags in root.iter():  # root is the ElementTree object
+                if tags.tag in ['i', 'dt', 'span', 'li'] or tags.xpath("//%s[@class='regeling-meta']" % tags.tag):
+                    continue
+                # print(tags.tag)
+                # print([a for a in tags.xpath("//%s[@class='regeling-meta']" % tags.tag)])
                 print(tags.tag)
-                print(tags.tag)
+
+                # print(tags.text)
 
             for r in root:
                 for rr in r:

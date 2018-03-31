@@ -23,17 +23,26 @@ class Command(BaseCommand):
             cls = getattr(sys.modules[__name__], index)
             if hasattr(cls, 'search'):
                 r = cls.search.all()
-                s = None
+                s, sj = None, None
+                sj = render_to_string('search/search_%s.json' % index.lower(), {'object_list': r})
                 try:
                     s = render_to_string('search/search_%s.html' % index.lower(), {'object_list': r})
                 except:
                     print(index.lower())
+
                 if s:
                     dir = '/opt/app/jeugdzorg/search_files/'
                     if not os.path.exists(dir):
                         os.makedirs(dir)
                     text_file = open('/opt/app/jeugdzorg/search_files/search_%s.html' % index.lower(), "w+")
                     text_file.write(s)
+                    text_file.close()
+                if sj:
+                    dir = '/opt/app/jeugdzorg/search_files/'
+                    if not os.path.exists(dir):
+                        os.makedirs(dir)
+                    text_file = open('/opt/app/jeugdzorg/search_files/search_%s.json' % index.lower(), "w+")
+                    text_file.write(sj)
                     text_file.close()
 
 

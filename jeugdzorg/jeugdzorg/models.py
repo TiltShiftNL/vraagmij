@@ -1,6 +1,9 @@
 from django.db import models
 from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
+from django.db.models import ManyToManyField
+from django.db.models.fields.files import ImageFieldFile, ImageField
+from django.forms import model_to_dict
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 from sortedm2m.fields import SortedManyToManyField
@@ -19,12 +22,56 @@ from django.conf import settings
 from itertools import groupby
 from django.contrib.sites.models import Site
 from django.core.management import call_command
+import json
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
 
 # fs = default_storage
 # fs.container_name = 'jeugdzorg_protected'
+
+
+class PrintableModel(models.Model):
+    printable_fields = []
+    printable_related_fields = []
+    # def __repr__(self):
+    #     return str(self.to_dict())
+
+    def to_dict(self, **kwargs):
+        opts = self._meta
+        data = {}
+
+        for f in opts.concrete_fields + opts.many_to_many:
+            if f.value_from_object(self) and f.name in self.printable_fields:
+                if isinstance(f, ManyToManyField):
+                    if self.pk is None:
+                        data[f.name] = []
+                    else:
+                        str_list = list([ff.__str__() for ff in f.value_from_object(self)])
+                        data[f.name] = str_list
+
+                elif isinstance(f, PhoneNumberField):
+                    pass
+                elif isinstance(f, ImageField):
+                    pass
+                    # print(f.value_from_object(self))
+                    # print(dir(f.value_from_object(self)))
+                    # if getattr(f.value_from_object(self), 'file'):
+                    #     data[f.name] = f.value_from_object(self).file.path
+                    # try:
+                    # except ValueError as e:
+                    #     pass
+                else:
+                    data[f.name] = f.value_from_object(self)
+        for f in self.printable_related_fields:
+            data['%s_set' % f] = list([ff.__str__() for ff in getattr(self, '%s_set' % f).all()])
+        return data
+
+    def to_json(self):
+        return json.dumps(self.to_dict())
+
+    class Meta:
+        abstract = True
 
 
 class UserManager(BaseUserManager):
@@ -103,7 +150,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _("Gebruikers")
 
 
-class Regeling(models.Model):
+class Regeling(PrintableModel, models.Model):
     titel = models.CharField(
         verbose_name=('titel'),
         max_length=255,
@@ -173,6 +220,16 @@ class Regeling(models.Model):
         null=True,
         blank=True,
     )
+
+    printable_fields = [
+        'titel',
+        'samenvatting',
+        'themas',
+    ]
+    printable_related_fields = [
+        'voorwaarde',
+    ]
+
     objects = models.Manager()
     search = models.Manager()
 
@@ -253,7 +310,7 @@ class TaggedRegeling(GenericTaggedItemBase):
     )
 
 
-class Thema(Sortable):
+class Thema(PrintableModel, Sortable):
     titel = models.CharField(
         verbose_name=_('Titel'),
         max_length=255,
@@ -270,6 +327,11 @@ class Thema(Sortable):
     )
     objects = models.Manager()
     search = models.Manager()
+
+    printable_fields = [
+        'titel',
+        'omschrijving',
+    ]
 
     def profielen_zichtbaar(self):
         return self.profiel_set.filter(zichtbaar=True)
@@ -414,7 +476,7 @@ class ProfielIsZichtbaarManager(models.Manager):
         return super().get_queryset().filter(zichtbaar=True)
 
 
-class Profiel(models.Model):
+class Profiel(PrintableModel, models.Model):
     seconden_niet_gebruikt = models.PositiveIntegerField(
         verbose_name=_('Seconden niet gebruikt'),
         null=True,
@@ -530,6 +592,23 @@ class Profiel(models.Model):
     objects = models.Manager()
     is_zichtbaar = ProfielIsZichtbaarManager()
     search = ProfielIsZichtbaarManager()
+
+    printable_fields = [
+        'id',
+        'seconden_niet_gebruikt',
+        'email',
+        'telefoonnummer',
+        'telefoonnummer_2',
+        'voornaam',
+        'achternaam',
+        'tussenvoegsel',
+        'functie',
+        'vaardigheden',
+        'organisatie_lijst',
+        'thema_lijst',
+        'regeling_lijst',
+        'gebied_lijst',
+    ]
 
     @property
     def naam_volledig(self):
