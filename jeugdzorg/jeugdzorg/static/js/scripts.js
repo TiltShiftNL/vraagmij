@@ -344,15 +344,97 @@
     },
     
     'search': function(){
-      
-      this.addEventListener('focus', function(){
+      var q = [],
+          cards = [],
+          contains =function(selector, text) {
+            var elements = document.querySelectorAll(selector),
+                results = [];
+            for(var i = 0; i < text.length; i++){
+              results.push(false);
+            }
+            console.log(text);
+
+            return Array.prototype.filter.call(elements, function(element){
+              var searchables = element.querySelectorAll('[data-zb]'),
+                  elResults = results.slice(0),
+                  i, j;
+
+              for (i = 0; i < searchables.length; i++){
+                var t = searchables[i].dataset.zb;
+                for(j = 0; j < text.length; j++){
+                  var r = RegExp(text[j] + '(?![^<>]*>)', 'gi');
+                  // var r = RegExp(text[j] + '(?!<mark>|</mark>)', 'gi');
+                  if (searchables[i].dataset.zb.search(r) >= 0) {
+                      elResults[j] = true;
+                      t = t.replace(r, '<mark>' + text[j] + '</mark>');
+                  }
+                }
+                searchables[i].innerHTML = t;
+              }
+              for (i = 0; i < elResults.length; i++){
+                if (!elResults[i]){
+                  return false
+                }
+              }
+              return true;
+            });
+          },
+          cleanQ = function (qRaw) {
+              var i;
+              qRaw = qRaw.trim();
+              var _q = (qRaw.split(' ').length > 0) ? qRaw.split(' ') : [qRaw];
+              for (i = 0; i < _q.length; i++){
+                _q[i] = _q[i].trim().replace('+', '').replace('\\', '');
+              }
+              _q = _q.filter(function(item, pos) {
+                  return _q.indexOf(item) === pos;
+              });
+              _q = Array.prototype.filter.call(_q, function(qu, index){
+                for (var i = 0; i < _q.length; i++){
+                  if (index !== i && _q[i].indexOf(qu) !== -1){
+                    return false;
+                  }
+                }
+                return true;
+              });
+              return _q;
+          },
+          zoek = function () {
+              var i;
+              for (i = 0; i < cards.length; i++){
+                cards[i].classList.add('verberg');
+              }
+              var foundlements = contains('.zr', q);
+
+              for (i = 0; i < foundlements.length; i++){
+                foundlements[i].classList.remove('verberg');
+              }
+          },
+          zoekContainer = document.getElementById('zoeken').querySelector(':scope > .container');
+
+      this.addEventListener('focus', function(e){
+
+        var input = this;
+        helpers.ajax('/zoek/', function(response){
+          if (response.status >= 200 && response.status < 400) {
+            zoekContainer.innerHTML = response.responseText;
+            cards = zoekContainer.querySelectorAll('.zr');
+            if (q.length > 0) {
+                zoek();
+            }
+            input.addEventListener('keyup', function(){
+              q = cleanQ(this.value);
+              zoek();
+            });
+          }
+        });
         d.classList.add('search-mode')
       });
     },
     
     'find': function(){
 
-      var 
+      var
         container = document.querySelector('#zoeken .container'),
         input = this.querySelector('input'),
         url = this.action;
@@ -370,8 +452,8 @@
         this.timeout = setTimeout(_find, 300);
       });
     },
-    
-    
+
+
     // Dit is niet een paasei
     'vraag-mij-maar-amsterdam': function(){
       var player;

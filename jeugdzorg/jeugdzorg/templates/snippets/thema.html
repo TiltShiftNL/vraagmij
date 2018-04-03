@@ -1,8 +1,8 @@
-<div class="thema">
+<div class="thema{% if search %} zr verberg{% endif %}" id="thema-{{ thema.id }}">
   
-  <h2 class="thema-titel">{{ thema.titel }}</h2>
+  <h2 class="thema-titel zb">{{ thema.titel }}</h2>
   <div class="thema-samenvatting">
-      <p>{{ thema.omschrijving|truncatechars_html:100 }}</p>
+      <p class="zb">{{ thema.omschrijving|truncatechars_html:100 }}</p>
   </div>
 
   <ul class="thema-meta">

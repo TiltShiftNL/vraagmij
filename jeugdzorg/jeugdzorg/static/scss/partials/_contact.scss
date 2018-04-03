@@ -196,6 +196,9 @@ dt.contact-naam + dd {
 //      background-color: rgba($brandColor2, .2);
 //    }
   }
+  &.verberg {
+    display: none;
+  }
 }
 .js .contact-extended {
   display: none;

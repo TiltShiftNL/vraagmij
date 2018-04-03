@@ -1,5 +1,5 @@
 {% load static thumbnail %}
-<div class="contact profiel{% if user.profiel.id == item.id %} dit-ben-ik{% endif %}" id="contact-{{ item.id }}">
+<div class="contact profiel{% if user.profiel.id == item.id %} dit-ben-ik{% endif %}{% if search %} zr verberg{% endif %}" id="contact-{{ item.id }}">
 
     <figure class="contact-avatar">
       <span class="icon-avatar" {% if item.pasfoto %}style="background-image: url('{{ item.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span>
@@ -10,35 +10,35 @@
       {% if item.achternaam or item.voornaam %}
         <dt class="contact-naam">naam</dt>
         <dd>
-            {% if item.achternaam %}<strong>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> {% endif %}
-            {% if item.voornaam %}<span>{{ item.voornaam }}</span>{% endif %}
+            {% if item.achternaam %}<strong {% if search %}data-zb="{% if item.tussenvoegsel %}{{ item.tussenvoegsel|escape }} {% endif %}{{ item.achternaam|escape }}"{% endif %}>{% if item.tussenvoegsel %}{{ item.tussenvoegsel }} {% endif %}{{ item.achternaam }}</strong> {% endif %}
+            {% if item.voornaam %}<span {% if search %}data-zb="{{ item.voornaam|escape }}"{% endif %}>{% if not search %}{{ item.voornaam }}{% endif %}</span>{% endif %}
         </dd>
       {% endif %}
 
       {% if item.functie %}
-        <dt class="contact-functie">functie</dt><dd>{{ item.functie }}</dd>
+        <dt class="contact-functie">functie</dt><dd {% if search %}data-zb="{{ item.functie|escape }}"{% endif %}>{% if not search %}{{ item.functie }}{% endif %}</dd>
       {% endif %}
 
       {% if item.organisatie_lijst.all %}
         <dt class="contact-organisatie">organisatie</dt>
         {% for organisatie in item.organisatie_lijst.all %}
-          <dd>{{ organisatie.naam }}</dd>
+          <dd {% if search %}data-zb="{{ organisatie.naam|escape }}"{% endif %}>{% if not search %}{{ organisatie.naam }}{% endif %}</dd>
         {% endfor %}
       {% endif %}
 
       <dt class="contact-email">email</dt>
       {% if item.email %}
-          <dd><a href="mailto:{{ item.email }}" title="{{ item.email }}" data-counter="click.detail.contact.{{ item.id }}.email mouseover.detail.contact.{{ item.id }}.email"><i class="icon-mail"></i> {{ item.email }}</a></dd>
+          <dd><a href="mailto:{{ item.email }}" title="{{ item.email }}" data-counter="click.detail.contact.{{ item.id }}.email mouseover.detail.contact.{{ item.id }}.email"><i class="icon-mail"></i><span {% if search %}data-zb="{{ item.email|escape }}"{% endif %}>{% if not search %}{{ item.email }}{% endif %}</span></a></dd>
       {% endif %}
 
       {% if item.telefoonnummer or item.telefoonnummer_2 %}
           <dt class="contact-telefoon">telefoon</dt>
       {% endif %}
       {% if item.telefoonnummer %}
-          <dd><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.{{ item.id }}.tel mouseover.detail.contact.{{ item.id }}.tel"><i class="icon-phone"></i> {{ item.telefoonnummer }}</a></dd>
+          <dd><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.{{ item.id }}.tel mouseover.detail.contact.{{ item.id }}.tel"><i class="icon-phone"></i> <span {% if search %}data-zb="{{ item.telefoonnummer|escape }}"{% endif %}>{% if not search %}{{ item.telefoonnummer }}{% endif %}</span></a></dd>
       {% endif %}
       {% if item.telefoonnummer_2 %}
-          <dd><a href="tel:{{ item.telefoonnummer_2 }}" data-counter="click.detail.contact.{{ item.id }}.tel2 mouseover.detail.contact.{{ item.id }}.tel2"><i class="icon-phone"></i> {{ item.telefoonnummer_2 }}</a></dd>
+          <dd><a href="tel:{{ item.telefoonnummer_2 }}" data-counter="click.detail.contact.{{ item.id }}.tel2 mouseover.detail.contact.{{ item.id }}.tel2"><i class="icon-phone"></i> <span {% if search %}data-zb="{{ item.telefoonnummer_2|escape }}"{% endif %}>{% if not search %}{{ item.telefoonnummer_2 }}{% endif %}</span></a></dd>
       {% endif %}
       
       
@@ -49,31 +49,31 @@
       {% if item.thema_lijst.all %}
         <dt class="contact-thema">thema's</dt>
         {% for thema in item.thema_lijst.all %}
-          <dd><a href="{% url 'detail_thema' thema.slug %}">{{ thema.titel }}</a></dd>
+          <dd><a href="{% url 'detail_thema' thema.slug %}" class="zb">{{ thema.titel }}</a></dd>
         {% endfor %}
       {% endif %}
       
       {% if item.vaardigheden %}
         <dt class="contact-vaardigheden">Bijzonderheden</dt>
-        <dd>{{ item.vaardigheden|escape }}</dd>
+        <dd class="zb">{{ item.vaardigheden|escape }}</dd>
       {% endif %}
 
       {% with alle_gebieden=item.alle_gebieden %}
         {% if alle_gebieden.stadsdeel_lijst or alle_gebieden.gebied_lijst %}
           <dt class="contact-gebied">gebieden</dt>
           {% for v in alle_gebieden.stadsdeel_lijst %}
-            <dd>{{ v.naam }}</dd>
+            <dd class="zb">{{ v.naam }}</dd>
           {% endfor %}
         {% endif %}
         {% for v in alle_gebieden.gebied_lijst %}
-          <dd>{{ v.naam }}</dd>
+          <dd class="zb">{{ v.naam }}</dd>
         {% endfor %}
       {% endwith %}
       
       {% if item.regeling_lijst.all %}
         <dt class="contact-regeling">regelingen</dt>
         {% for regeling in item.regeling_lijst.all %}
-          <dd><a href="{% url 'detail_regeling' regeling.id %}">{{ regeling.titel }}</a></dd>
+          <dd><a href="{% url 'detail_regeling' regeling.id %}" class="zb">{{ regeling.titel }}</a></dd>
         {% endfor %}
       {% endif %}
       

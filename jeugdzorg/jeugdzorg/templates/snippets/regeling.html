@@ -1,8 +1,8 @@
-<div class="regeling">
+<div class="regeling{% if search %} zr verberg{% endif %}" id="regeling-{{ regeling.id }}">
   
-  <h2 class="regeling-titel"><i class="icon-regeling"></i> {{ regeling.titel }}</h2>
+  <h2 class="regeling-titel"><i class="icon-regeling"></i> <span data-zb="{{ regeling.titel|escape }}">{% if not search %}{{ regeling.titel }}{% endif %}</span></h2>
   <div class="regeling-samenvatting">
-      <p>{{ regeling.samenvatting|truncatechars_html:100 }}</p>
+      <p class="zb" data-zb="{{ regeling.samenvatting|truncatechars_html:100|escape }}">{% if not search %}{{ regeling.samenvatting|truncatechars_html:100 }}{% endif %}</p>
   </div>
 
   <ul class="regeling-meta">

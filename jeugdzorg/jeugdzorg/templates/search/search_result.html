@@ -1,0 +1,9 @@
+{% for model in model_list %}
+<div class="zoeken-paneel {{ k }}-lijst">
+    {% with template_name=model.0|stringformat:"s"|add:".html" %}
+    {% for item in model.1 %}
+        {% include 'search/'|add:template_name %}
+    {% endfor %}
+    {% endwith %}
+</div>
+{% endfor %}

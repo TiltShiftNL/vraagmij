@@ -16,7 +16,9 @@
   
   display: flex;
   flex-flow: column;
-  
+  &.verberg {
+    display: none;
+  }
   .regeling-titel {
     background-color: #4c4c4c;
     font-size: $fontSize;

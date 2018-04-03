@@ -1716,6 +1716,8 @@ hr {
   margin-bottom: 2.2rem;
   display: flex;
   flex-flow: column; }
+.regeling.verberg {
+  display: none; }
 .regeling .regeling-titel {
   background-color: #4c4c4c;
   font-size: 1.6rem;
@@ -2052,6 +2054,8 @@ hr {
 .contact.dit-ben-ik {
   outline: 1rem solid rgba(109, 181, 214, 0.2);
   outline: 1rem solid rgba(0, 128, 0, 0.1); }
+.contact.verberg {
+  display: none; }
 
 .js .contact-extended {
   display: none; }
@@ -2410,6 +2414,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   margin-bottom: 2.2rem;
   display: flex;
   flex-flow: column; }
+.thema.verberg {
+  display: none; }
 
 .thema-titel {
   font-size: 2.4rem;

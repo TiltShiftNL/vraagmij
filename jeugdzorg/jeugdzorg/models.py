@@ -222,6 +222,7 @@ class Regeling(PrintableModel, models.Model):
     )
 
     printable_fields = [
+        'id',
         'titel',
         'samenvatting',
         'themas',
@@ -329,6 +330,7 @@ class Thema(PrintableModel, Sortable):
     search = models.Manager()
 
     printable_fields = [
+        'id',
         'titel',
         'omschrijving',
     ]

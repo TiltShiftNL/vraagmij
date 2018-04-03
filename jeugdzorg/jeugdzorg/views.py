@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.http import JsonResponse, response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
@@ -358,154 +358,29 @@ class UserActivationView(TemplateView):
             # login(request, user)
             messages.add_message(self.request, messages.INFO, "Je account is aangemaakt.")
             return redirect(reverse_lazy('login'))
-            #return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-        # else:
-        #     return HttpResponse('Activation link is invalid!')
         return super().get(request, *args, **kwargs)
 
 
 class SearchView(UserPassesTestMixin, TemplateView):
     http_method_names = ['get', ]
-    template_name = 'snippets/search_results.html'
+    template_name = 'search/search_result.html'
 
     def test_func(self):
         return auth_test(self.request.user, 'viewer')
 
-    # def get_context_data(self, **kwargs):
-    #     s = ''
-    #     for o in settings.SEARCH_MODELS:
-    #         filename = '/opt/app/jeugdzorg/search_files/search_%s.html' % o.lower()
-    #         if os.path.exists(filename):
-    #             fp = open(filename, "r")
-    #             content = fp.read()
-    #             fp.close()
-    #             soup = BeautifulSoup(content, "html.parser")
-    #             results = soup.find_all("div", {"class": o.lower()})
-    #             # print(o)
-    #             print(results)
-    #             for r in results:
-    #                 # print(r)
-    #                 result = r.find_all(text=re.compile(r'%s' % self.request.GET.get('q'), re.MULTILINE))
-    #                 if result:
-    #                     # print(r)
-    #                     s += str(r)
-    #
-    #     print(s)
-    #
-    #
-    #         # iv = SearchIndexView.as_view()(self.request, {'model': o})
-    #
-    #         # print(iv)
-    #     profiel_lijst = Profiel.is_zichtbaar.all()
-    #     rendered = render_to_string(self.get_template_names(), {'profiel_lijst': profiel_lijst})
-    #     soup = BeautifulSoup(rendered, "html.parser")
-    #     find = soup.find_all(text=re.compile(r'%s' % self.request.GET.get('q'), re.MULTILINE))
-    #     # print(find)
-    #     for f in find:
-    #         # print(f.parents[0])
-    #         for parent in f.parents:
-    #             if parent is None:
-    #                 pass
-    #                 # print(parent)
-    #             else:
-    #                 pass
-    #                 # print(parent.name)
-    #     profiel_lijst = soup.find_all("div", {"class": "contact"})
-    #     profiel_lijst_rendered = []
-    #     for profiel in profiel_lijst:
-    #         #print(profiel.find_all('dd'))
-    #         results = profiel.find_all(text=re.compile(r'%s' % self.request.GET.get('q'), re.MULTILINE))
-    #         # t = profiel.text.replace('De', '<de>De</de>')
-    #         # profiel.text.replace_with(t)
-    #         # print(profiel.text.replace('De', '<de>De</de>'))
-    #         # print(profiel.parent({"class": "contact"}))
-    #         if results:
-    #             profiel_lijst_rendered.append(str(profiel))
-    #             #print(str(profiel))
-    #
-    #
-    #     data = super().get_context_data(**kwargs)
-    #
-    #     # print(profiel_lijst_rendered)
-    #
-    #     data.update({
-    #         'profiel_lijst_rendered': profiel_lijst_rendered,
-    #     })
-    #     return data
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
 
-    def get(self, request, *args, **kwargs):
-        if not self.request.GET.get('q'):
-            raise Http404
-        s = ''
-        indexes = get_search_indexes()
-        for m in indexes:
-            # print(current_milli_time() - ms)
-            ms = current_milli_time()
-            root = html.fromstring(m[1])
-            ss = ''
-            # e = root.find_class('profiel')
-            # e = root.xpath('..//div[text()="%s"]' % self.request.GET.get('q'))
-            for tags in root.iter():  # root is the ElementTree object
-                if tags.tag in ['i', 'dt', 'span', 'li'] or tags.xpath("//%s[@class='regeling-meta']" % tags.tag):
-                    continue
-                # print(tags.tag)
-                # print([a for a in tags.xpath("//%s[@class='regeling-meta']" % tags.tag)])
-                print(tags.tag)
+        data.update({
+            'search': True,
+            'model_list': [
+                ('profiel', Profiel.is_zichtbaar.all(), ),
+                ('regeling', Regeling.objects.all(), ),
+                ('thema', Thema.objects.all(), ),
+            ]
+        })
 
-                # print(tags.text)
-
-            for r in root:
-                for rr in r:
-                # print(r.find_class('profiel'))
-                #     print(r.text_content())
-                    if self.request.GET.get('q').lower() in rr.text_content().lower():
-                        # print(html.tostring(r))
-                        ss += html.tostring(r).decode()
-            # e = root.xpath('.//div[contains(text(),"%s")]' % self.request.GET.get('q'))
-            # print(root)
-            # print(e)
-            # for tag in root.iter():
-            #     if self.request.GET.get('q') in tag.text:
-            #         print(tag)
-            # soup = BeautifulSoup(m[1], "html.parser")
-            # results = soup.find_all("div", {"class": m[0].lower()})
-            # # print(current_milli_time() - ms)
-            # for r in results:
-            #     result = r.find_all(text=re.compile(r'%s' % self.request.GET.get('q'), re.IGNORECASE))
-            #     if result:
-            #         ss += str(r)
-            if ss:
-                s += '<div class="zoeken-paneel %s-lijst">%s</div>' % (
-                    m[0].lower(),
-                    ss,
-                )
-        # print(current_milli_time() - ms)
-        return HttpResponse(s)
-
-    # def get(self, request, *args, **kwargs):
-    #     context = self.get_context_data(**kwargs)
-    #
-    #     rendered = render_to_string(self.get_template_names(), context)
-    #     profiel_lijst = soup.find_all(text=re.compile('Reiskostenvergoeding'))
-    #     profiel_lijst = soup.find_all("div", {"class": "contact", 'text': re.compile(r'skostenvergoedi', re.MULTILINE)})
-    #     print(profiel_lijst)
-    #     for profiel in profiel_lijst:
-    #         # print(profiel.text)
-    #         #results = profiel.find_all(text=re.compile(r'skostenvergoedi', re.MULTILINE))
-    #         # t = profiel.text.replace('De', '<de>De</de>')
-    #         # profiel.text.replace_with(t)
-    #         # print(profiel.text.replace('De', '<de>De</de>'))
-    #         # print(profiel.parent({"class": "contact"}))
-    #         print(profiel)
-    #         #if results:
-    #         #    print(results)
-    #
-    #
-    #     # print(soup)
-    #
-    #
-    #
-    #     return self.render_to_response(context)
+        return data
 
 
 class SearchIndexView(UserPassesTestMixin, TemplateView):
@@ -517,13 +392,13 @@ class SearchIndexView(UserPassesTestMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         data = self.get_context_data(**kwargs)
-        if kwargs.get('model') in settings.SEARCH_MODELS:
-            filename = '/opt/app/jeugdzorg/search_files/search_%s.html' % kwargs.get('model')
-            if os.path.exists(filename):
-                fp = open(filename, "r")
-                content = fp.read()
-                fp.close()
-                return HttpResponse(content)
+
+        filename = '/opt/app/jeugdzorg/search_files/search.html'
+        if os.path.exists(filename):
+            fp = open(filename, "r")
+            content = fp.read()
+            fp.close()
+            return HttpResponse(content)
 
         raise Http404
 
