@@ -59,27 +59,6 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        # sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-        # from_email = Email("info@fixxx7.com")
-        # to_email = Email("mguikema@gmail.com")
-        # subject = "Sending with SendGrid is Fun"
-        # content = Content("text/plain", "and easy to do anywhere, even with Python")
-        # mail = Mail(from_email, subject, to_email, content)
-        # response = sg.client.mail.send.post(request_body=mail.get())
-        # print(response.status_code)
-        # print(response.body)
-        # print(response.headers)
-
-        # mail = Mail()
-        # subject = "reset email subject"
-        # body = "body"
-        # sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-        #
-        # mail.from_email = Email("info@fixxx7.amsterdam.nl")
-        # mail.reply_to = Email("mguikema@gmail.com")
-        # mail.subject = subject
-        # mail.add_content(Content("text/plain", body))
-        # sg.client.mail.send.post(request_body=mail.get())
 
         logs = [
             ['nginx error', '/var/log/nginx/error.log'],

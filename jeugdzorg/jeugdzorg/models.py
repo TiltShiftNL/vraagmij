@@ -866,7 +866,7 @@ def rebuild_index_check(sender, update_fields, instance, **kwargs):
 post_save.connect(save_instelling, sender=Instelling)
 pre_save.connect(pre_save_instance, sender=Instelling)
 
-post_save.connect(rebuild_index_check, sender=Thema)
-post_save.connect(rebuild_index_check, sender=Regeling)
-post_save.connect(rebuild_index_check, sender=Profiel)
+# post_save.connect(rebuild_index_check, sender=Thema)
+# post_save.connect(rebuild_index_check, sender=Regeling)
+# post_save.connect(rebuild_index_check, sender=Profiel)
 
