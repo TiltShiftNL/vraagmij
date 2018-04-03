@@ -431,28 +431,6 @@
         d.classList.add('search-mode')
       });
     },
-    
-    'find': function(){
-
-      var
-        container = document.querySelector('#zoeken .container'),
-        input = this.querySelector('input'),
-        url = this.action;
-
-      if (!container) return;
-
-      var _find = function(){
-        helpers.ajax(url + '?q=' + input.value, function(request){
-          container.innerHTML = request.response;
-        });
-      };
-
-      input.addEventListener('keyup', function(e){
-        this.timeout && clearTimeout(this.timeout);
-        this.timeout = setTimeout(_find, 300);
-      });
-    },
-
 
     // Dit is niet een paasei
     'vraag-mij-maar-amsterdam': function(){
