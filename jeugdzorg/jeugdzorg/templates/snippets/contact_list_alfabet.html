@@ -1,3 +1,4 @@
+{% load form_tags %}
 <div class="container">
 
     {% regroup profiel_list by first_letter as title_list %}
@@ -33,7 +34,15 @@
                   {% for profiel in titel.list %}
                       <li>
                           {% include 'snippets/contact.html' with item=profiel %}
+
                       </li>
+                            {% if forloop.last %}
+                                <li>
+                                    <div data-decorator="gebruiker-uitnodigen">
+                                    {% get_gebruiker_uitnodigen_form %}
+                                    </div>
+                                </li>
+                            {% endif %}
                   {% endfor %}
                 </ul>
                 </div>

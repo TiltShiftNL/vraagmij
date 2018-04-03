@@ -428,5 +428,11 @@ UserFormSet = forms.inlineformset_factory(
     },
 
     form=ProfielModelForm,
-
 )
+
+class GebruikerUitnodigenForm(forms.Form):
+    email = forms.EmailField(
+        label='E-mailadres',
+        required=True,
+        validators=[user_email_validation]
+    )

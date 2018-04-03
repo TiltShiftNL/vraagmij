@@ -1,0 +1,9 @@
+{% if request.GET.success %}
+    Je contact is uitgenodigd.
+{% else %}
+<form method="post" action="{% url 'gebruiker_uitnodigen' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Uitnodigen</button>
+</form>
+{% endif %}

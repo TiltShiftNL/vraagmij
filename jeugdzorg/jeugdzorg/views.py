@@ -479,6 +479,48 @@ class GebruikersToevoegenView(UserPassesTestMixin, FormView):
         return super().post(request, *args, **kwargs)
 
 
+class GebruikerUitnodigenView(UserPassesTestMixin, FormView):
+    form_class = GebruikerUitnodigenForm
+    template_name = 'form/gebruiker_uitnodigen.html'
+
+    def test_func(self):
+        return auth_test(self.request.user, 'viewer')
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data.update({
+            'form': GebruikerUitnodigenForm(self.request.POST)
+        })
+        return data
+
+    def form_valid(self, form):
+        site = Site.objects.get_current()
+
+        sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
+        data = {
+            'naam': self.request.user.profiel.naam_volledig
+        }
+        body = render_to_string('email/gebruiker_uitnodigen.txt', context=data, request=self.request)
+        body_html = render_to_string('email/gebruiker_uitnodigen.html', data)
+        subject = 'VraagMij uitnoding'
+
+        mail = Mail(
+            Email('noreply@%s' % site.domain),
+            subject,
+            Email(form.cleaned_data.get('email')),
+            Content("text/plain", body)
+        )
+        mail.add_content(Content("text/html", body_html))
+        if settings.ENV != 'develop':
+            sg.client.mail.send.post(request_body=mail.get())
+        else:
+            print(body)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return '%s?success=1' % reverse_lazy('gebruiker_uitnodigen')
+
+
 def logout(request):
     data = {
         'next_page': reverse_lazy('login'),

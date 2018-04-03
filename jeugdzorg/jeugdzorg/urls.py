@@ -68,6 +68,7 @@ urlpatterns = [
     ),
 
     path('gebruikers-toevoegen/', GebruikersToevoegenView.as_view(), name='gebruikers_toevoegen'),
+    path('gebruiker-uitnodigen/', GebruikerUitnodigenView.as_view(), name='gebruiker_uitnodigen'),
 
     path('event/add', EventView.as_view(), name='add_event'),
 

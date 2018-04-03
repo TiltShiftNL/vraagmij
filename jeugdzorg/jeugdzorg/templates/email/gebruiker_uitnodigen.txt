@@ -1,0 +1,10 @@
+{% load i18n %}{% autoescape off %}
+Hallo,
+
+Je hebt deze uitnoding ontvangen van {% if naam %}{{ naam }}{% else %}een collega of bekende{% endif %} om deel te nemen aan het {{ SITE_INSTELLINGEN.app_naam }} platform.
+Open de onderstaande link in een browser om je aan te melden:
+https://{{ SITE_INSTELLINGEN.site.domain }}{% url 'gebruiker_registreren' %}
+
+Vriendelijke groet,
+Het {{ SITE_INSTELLINGEN.app_naam }} team
+{% endautoescape %}

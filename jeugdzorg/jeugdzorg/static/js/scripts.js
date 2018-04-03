@@ -431,6 +431,45 @@
         d.classList.add('search-mode')
       });
     },
+    'gebruiker-uitnodigen': function(){
+      var container = this,
+          form = container.querySelector('form'),
+          handler = function(e){
+            e.preventDefault();
+            var elements = form.querySelectorAll('input');
+            var obj ={};
+            for(var i = 0 ; i < elements.length ; i++){
+                var item = elements.item(i);
+                obj[item.name] = item.value;
+            }
+            post(form.getAttribute('action'), obj);
+          },
+          post = function (endpoint, data) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', endpoint, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onload = function() {
+              if (xhr.status >= 200 && xhr.status < 400) {
+                container.innerHTML = xhr.responseText;
+                form = container.querySelector('form');
+                form.addEventListener("submit", handler, false);
+              } else {
+                console.log(xhr.status);
+              }
+            };
+            var str = serialize(data);
+            xhr.send(str);
+          },
+          serialize = function(obj) {
+            var str = [];
+            for (var p in obj)
+              if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+              }
+            return str.join("&");
+          };
+      form.addEventListener("submit", handler, false);
+    },
 
     // Dit is niet een paasei
     'vraag-mij-maar-amsterdam': function(){
