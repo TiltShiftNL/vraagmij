@@ -76,11 +76,11 @@
           
           {% block search %}
           
-          <form class="zoeken">
+          <form class="zoeken" action="{% url 'zoek' %}" data-decorator="find">
             <fieldset class="container">
               <legend>Zoeken in thema's, contacten en regelingen</legend>
               <label>
-                <input type="search" placeholder="zoeken" data-decorator="search">
+                <input type="search" placeholder="zoeken" data-decorator="search" name="q">
                 <strong><i class="icon-search"></i></strong>
               </label>
               <button class="zoeken-button" type="submit" data-handler="search-close"><i class="icon-search"></i>Vind</button>
