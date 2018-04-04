@@ -80,7 +80,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
 
-        int_id = round(int('0x%s' % data['logs'][0][2][-1].split('\t')[1], 0) / 10000000000)
+        int_id = round(int('0x%s' % data['logs'][0][2][-1].split('\t')[1], 0) / 5000000000)
 
         data['int_id'] = int_id
 
