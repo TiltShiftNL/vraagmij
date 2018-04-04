@@ -18,3 +18,4 @@ markdown
 django-filter
 easy-thumbnails
 lxml
+croniter

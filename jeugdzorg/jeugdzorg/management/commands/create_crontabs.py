@@ -25,9 +25,10 @@ class Command(BaseCommand):
             instelling = Instelling.objects.get(site=site)
             with open('/etc/cron.d/crontab', 'w') as crontabfile:
                 for j in jobs:
+                    f = getattr(instelling, '%s_frequentie' % j[0], j[1])
                     crontabfile.write(
                         '%s %s%s%s' % (
-                            getattr(instelling, '%s_frequentie' % j[0], j[1]),
+                            f,
                             job_base_1,
                             j[0],
                             job_base_2,

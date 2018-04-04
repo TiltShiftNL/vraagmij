@@ -97,6 +97,7 @@ class ProfielAdmin(admin.ModelAdmin):
 class InstellingAdmin(admin.ModelAdmin):
     list_display = ['site', 'app_naam', 'standaard_contact_naam', 'standaard_contact_email', ]
     save_on_top = True
+    form = InstellingForm
 
 
 @admin.register(User)

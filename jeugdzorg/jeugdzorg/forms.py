@@ -27,8 +27,19 @@ from django.contrib.auth import (
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import SetPasswordForm as SetPasswordFormDefault
 from django.contrib.auth import models as auth_models
+from croniter import croniter
+from django.utils import timezone
 
 UserModel = get_user_model()
+
+
+def crontab_format_validator(value):
+    base = timezone.now()
+    try:
+        croniter(value, base)
+    except:
+        raise ValidationError('Dit crontab format is niet correct', code='error_code')
+    return True
 
 
 def file_size(value):
@@ -448,4 +459,27 @@ class GebruikerUitnodigenForm(forms.Form):
         label='E-mailadres',
         required=True,
         validators=[user_email_validation]
+    )
+
+
+class InstellingForm(forms.ModelForm):
+    check_user_activity_frequentie = forms.CharField(
+        validators=[crontab_format_validator],
+        label='Gebruikers activiteit synchronisatie frequentie',
+        help_text="Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'",
+    )
+    update_regelingen_frequentie = forms.CharField(
+        validators=[crontab_format_validator],
+        label='Regelingen webpagina controlle frequentie',
+        help_text="Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'",
+    )
+    gebruiker_email_verificatie_frequentie = forms.CharField(
+        validators=[crontab_format_validator],
+        label='Gebruiker email verificatie frequentie',
+        help_text="Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'",
+    )
+    send_update_mail_frequentie = forms.CharField(
+        validators=[crontab_format_validator],
+        label='Update mail frequentie',
+        help_text="Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'",
     )
