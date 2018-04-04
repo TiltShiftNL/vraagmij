@@ -67,7 +67,12 @@ class ConfigView(LoginRequiredMixin, TemplateView):
             ['cron log', '/var/log/cron.log'],
         ]
 
-        envvars = ['%s: %s' % (k, v) for k, v in os.environ.items()]
+        envvars = ['%s: %s' % (k, v) for k, v in os.environ.items() if k in [
+            'SECRET_KEY',
+            'SHLVL',
+            'GPG_KEY',
+            'HOSTNAME',
+        ]]
 
         for l in logs:
             try:
