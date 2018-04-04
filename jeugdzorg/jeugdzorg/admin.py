@@ -104,7 +104,7 @@ class UserAdmin(UserAdmin):
     list_display = ['email', 'is_active', 'is_staff', 'is_superuser', 'wijzig_profiel', 'date_saved']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('voornaam', 'achternaam')}),
+        (_('Personal info'), {'fields': ('voornaam', 'tussenvoegsel', 'achternaam')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
