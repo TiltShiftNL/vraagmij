@@ -79,7 +79,6 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
-        data['ip'] = socket.gethostbyname(socket.getfqdn())
 
         return data
 
