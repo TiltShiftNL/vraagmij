@@ -84,6 +84,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
         data['int_id'] = int_id
 
+
         return data
 
 
