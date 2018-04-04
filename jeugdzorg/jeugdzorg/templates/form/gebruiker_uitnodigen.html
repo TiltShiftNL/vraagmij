@@ -1,9 +1,30 @@
 {% if request.GET.success %}
     Je contact is uitgenodigd.
 {% else %}
-<form method="post" action="{% url 'gebruiker_uitnodigen' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="button">Uitnodigen</button>
-</form>
+    <form method="post" action="{% url 'gebruiker_uitnodigen' %}">
+        <h2>Mis je iemand?</h2>
+        <h3>Nodig een collega uit.</h3><br>
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="systeem-berichten fout">
+                <ul>
+                    {% for e, v in form.errors.items %}
+                        <li>{{ v }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <fieldset>
+            {% csrf_token %}
+            <div class="inputs">
+                <p class="row">
+                    <label>
+                        <strong>E-mailadres</strong>
+                        {{ form.email }}
+                    </label>
+                </p>
+            </div>
+        </fieldset>
+        <button type="submit" class="button">Uitnodigen</button>
+    </form>
 {% endif %}
