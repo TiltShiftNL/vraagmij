@@ -1,5 +1,7 @@
 {% if request.GET.success %}
-    Je contact is uitgenodigd.
+    <div class="systeem-berichten letop">
+        Je contact is uitgenodigd.
+    </div>
 {% else %}
     <form method="post" action="{% url 'gebruiker_uitnodigen' %}">
         <h2>Mis je iemand?</h2>
