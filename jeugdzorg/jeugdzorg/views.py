@@ -63,6 +63,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         data = super().get_context_data(**kwargs)
 
         logs = [
+            ['hostfile', '/etc/hosts'],
             ['nginx error', '/var/log/nginx/error.log'],
             ['nginx access', '/var/log/nginx/access.log'],
             ['cron log', '/var/log/cron.log'],
