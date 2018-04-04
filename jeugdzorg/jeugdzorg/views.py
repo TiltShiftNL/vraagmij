@@ -31,6 +31,7 @@ from .forms import *
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
+
 def get_search_indexes(models=None):
     out = []
     if not models:
@@ -277,12 +278,6 @@ class UserCreationView(CreateView):
         context = self.get_context_data()
 
         user = form.save(commit=False)
-
-        # profiel = Profiel(gebruiker=user)
-        # profiel.voornaam = form.data.get('voornaam')
-        # profiel.achternaam = form.data.get('achternaam')
-        # profiel.tussenvoegsel = form.data.get('tussenvoegsel')
-        # profiel.save(commit=False)
         user.is_active = False
         user.save()
         current_site = get_current_site(self.request)
@@ -555,7 +550,6 @@ def password_reset_new_user(request, flow):
                 'email': request.GET.get('email'),
                 'flow': flow,
             },
-
             'post_reset_redirect': reverse_lazy('wachtwoord_instellen_klaar'),
             'subject_template_name': 'registration/password_reset_subject_new.txt',
         })
@@ -569,6 +563,7 @@ def password_reset_confirm_new_user(request, uidb64=None, token=None):
     data = {
         'post_reset_redirect': reverse_lazy('login'),
         'template_name': 'registration/password_reset_confirm_new.html',
+        'set_password_form': SetPasswordForm,
     }
 
     response = auth_views.password_reset_confirm(request, uidb64=uidb64, token=token, **data)

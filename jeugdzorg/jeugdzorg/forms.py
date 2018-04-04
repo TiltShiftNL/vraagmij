@@ -25,7 +25,8 @@ from django.contrib.auth import (
     authenticate, get_user_model, password_validation,
 )
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.forms import SetPasswordForm as SetPasswordFormDefault
+from django.contrib.auth import models as auth_models
 
 UserModel = get_user_model()
 
@@ -96,6 +97,32 @@ class GebruikersToevoegenForm(forms.Form):
     )
 
 
+class SetPasswordForm(SetPasswordFormDefault):
+
+    def save(self, commit=True):
+        user = super().save(commit)
+        if commit and \
+                not Profiel.objects.filter(gebruiker=user) and \
+                not user.is_superuser and \
+                not user.is_staff:
+            profiel = Profiel(
+                gebruiker=user,
+                voornaam=user.voornaam,
+                achternaam=user.achternaam,
+                tussenvoegsel=user.tussenvoegsel,
+                email=user.email,
+                seconden_niet_gebruikt=(60 * 60 * 24 * 30 * 12),
+                zichtbaar=True,
+            )
+            profiel.save()
+            viewer_group = auth_models.Group.objects.filter(name='viewer')
+            if viewer_group:
+                user.groups.add(viewer_group[0])
+            user.is_active = True
+            user.save()
+        return user
+
+
 class MailAPIPasswordResetForm(PasswordResetForm):
 
     def send_mail(self, subject_template_name, email_template_name,
@@ -105,8 +132,6 @@ class MailAPIPasswordResetForm(PasswordResetForm):
 
         if settings.ENV != 'develop':
             site = Site.objects.get_current()
-            mail = Mail()
-            print(to_email)
             try:
                 context.update({
                     'profiel': User.objects.get(email=to_email).profiel
@@ -115,26 +140,10 @@ class MailAPIPasswordResetForm(PasswordResetForm):
                 pass
             subject = loader.render_to_string(subject_template_name, context)
             subject = "".join(subject.splitlines())
-            #body = 'body'#loader.render_to_string(email_template_name, context)
-            html_body = ''
-            if html_email_template_name is not None:
-                html_body = loader.render_to_string(html_email_template_name, context)
 
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            # from_email = Email(from_email)
-            # to_email = Email(to_email)
-
-            mail.from_email = Email('noreply@%s' % site.domain)
-            mail.reply_to = Email(to_email)
-            mail.subject = subject
-
-            #mail.add_content(Content("text/plain", body))
-            #mail.add_content(Content("text/html", html_body))
 
             mail = Mail(Email('noreply@%s' % site.domain), subject, Email(to_email), Content("text/plain", body))
-            # print(response.status_code)
-            # print(response.body)
-            # print(response.headers)
 
             sg.client.mail.send.post(request_body=mail.get())
 
@@ -183,6 +192,9 @@ class ProfielModelForm(forms.ModelForm):
 
         for f in self.custom_m2m:
             self.fields[f[0]].required = False
+
+        self.fields['voornaam'].required = True
+        self.fields['achternaam'].required = True
 
         self.fields['telefoonnummer'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
         self.fields['telefoonnummer_2'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
@@ -429,6 +441,7 @@ UserFormSet = forms.inlineformset_factory(
 
     form=ProfielModelForm,
 )
+
 
 class GebruikerUitnodigenForm(forms.Form):
     email = forms.EmailField(

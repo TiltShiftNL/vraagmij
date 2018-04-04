@@ -8,8 +8,10 @@
 {% endblock %}
 
 {% block nav-global %}
+    {% if request.user.is_superuser %}
     <a class="btn button" href="{% url 'dumpjeugdzorg' %}">Download jeugdzorg.json</a>
     {% if ENV != 'production' %}
     <a class="btn button" href="{% url 'loadjeugdzorg' %}">Upload jeugdzorg.json</a>
+    {% endif %}
     {% endif %}
 {% endblock %}
