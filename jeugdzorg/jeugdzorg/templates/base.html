@@ -72,33 +72,9 @@
               <li><a{% if sub_view == 'regeling' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}" data-count="{{ REGELING_COUNT }}">Regelingen</a></li>
           </ul>
           {% block sort_options %}{% endblock %}
-          
-          
-          {% block search %}
-          
-          <form class="zoeken" action="{% url 'zoek' %}" data-decorator="find">
-            <fieldset class="container">
-              <legend>Zoeken in thema's, contacten en regelingen</legend>
-              <label>
-                <input type="search" placeholder="zoeken" data-decorator="search" name="q">
-                <strong><i class="icon-search"></i></strong>
-              </label>
-              <button class="zoeken-button" type="submit" data-handler="search-close"><i class="icon-search"></i>Vind</button>
-              <button class="zoeken-annuleren" type="cancel" data-handler="search-close"><i class="icon-search-close"></i>Sluiten</button>
-            </fieldset>
-          </form>
-          
-          {% endblock %}
+
       </div>
   </nav>
-  
-  <div id="zoeken" class="zoeken-container">
-    <div class="container">
-      <p class="search-empty">
-        Je kan hier zoeken naar collega hulpverleners, regelingen, thema's en meer
-      </p>
-    </div>
-  </div>
   
   {% endblock %}
 
