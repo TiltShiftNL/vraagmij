@@ -25,6 +25,7 @@ import re
 import time
 from lxml import etree, html
 import lxml
+import socket
 
 from .auth import auth_test
 from .forms import *
@@ -67,12 +68,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
             ['cron log', '/var/log/cron.log'],
         ]
 
-        envvars = ['%s: %s' % (k, v) for k, v in os.environ.items() if k in [
-            'SECRET_KEY',
-            'SHLVL',
-            'GPG_KEY',
-            'HOSTNAME',
-        ]]
+        envvars = ['%s: %s' % (k, v) for k, v in os.environ.items()]
 
         for l in logs:
             try:
@@ -82,6 +78,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
 
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
+        data['ip'] = socket.gethostbyname(socket.getfqdn())
 
         return data
 
