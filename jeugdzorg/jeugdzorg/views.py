@@ -67,6 +67,8 @@ class ConfigView(LoginRequiredMixin, TemplateView):
             ['cron log', '/var/log/cron.log'],
         ]
 
+        envvars = ['%s: %s' % (k, v) for k, v in os.environ.items()]
+
         for l in logs:
             try:
                 l.append(open(l[1], 'r'))
@@ -74,6 +76,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
                 l.append([])
 
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
+        data['envvars'] = envvars
 
         return data
 
