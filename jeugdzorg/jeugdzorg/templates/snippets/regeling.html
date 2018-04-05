@@ -26,4 +26,7 @@
         </li>
         {% endif %}
   </ul>
+  {% if search %}
+    <div class="hidden" data-zb="{{ regeling.samenvatting|escape }}{% if regeling.voorwaarde_set.all %}{% for vw in regeling.voorwaarde_set.all %}{{ vw.titel|escape }}{% endfor %}{% endif %}"></div>
+  {% endif %}
 </div>
