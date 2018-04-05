@@ -843,6 +843,10 @@ class CronjobState(models.Model):
     datumtijd_command = models.DateTimeField(
         verbose_name='Datumtijd',
     )
+    datumtijd_string = models.CharField(
+        verbose_name='Datumtijd tekst',
+        max_length=255,
+    )
     log_command = models.TextField(
         verbose_name='Log',
         blank=True,
