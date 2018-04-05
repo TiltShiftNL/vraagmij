@@ -25,10 +25,10 @@ class Command(BaseCommand):
 
         cronjob = CronjobState.objects.filter(naam_command=self.name)
         if not cronjob:
-            cronjob = CronjobState(naam_command=self.name, datetime_command=now)
+            cronjob = CronjobState(naam_command=self.name, datumtijd_command=now)
             cronjob.save()
         else:
-            cronjob = cronjob.filter(datetime_command=now)
+            cronjob = cronjob.filter(datumtijd_command=now)
             if cronjob:
                 print('update_regeling_bron: SKIP')
                 return
