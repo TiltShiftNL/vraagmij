@@ -44,6 +44,8 @@ class ProfielInline(admin.TabularInline):
 class RegelingAdmin(SortableAdmin):
     list_display = ['titel', 'bron_veranderd', 'datum_gecreeerd', 'datum_opgeslagen']
 
+    save_on_top = True
+
     inlines = [
         VoorwaardeInline,
     ]
@@ -95,6 +97,7 @@ class ProfielAdmin(admin.ModelAdmin):
 
 @admin.register(CronjobState)
 class CronjobStateAdmin(admin.ModelAdmin):
+    list_display = ['naam_command', 'datumtijd_command', ]
     list_filter = ['naam_command', 'datumtijd_command', ]
 
 
