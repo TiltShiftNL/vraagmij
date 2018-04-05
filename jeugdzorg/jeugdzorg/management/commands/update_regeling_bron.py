@@ -22,6 +22,7 @@ class Command(BaseCommand):
         container_int = (float(get_container_int()) / 1000)
         print(container_int)
         time.sleep(container_int)
+        print(current_milli_time() - ms)
 
         cronjob = CronjobState.objects.filter(naam_command=self.name)
         if not cronjob:
