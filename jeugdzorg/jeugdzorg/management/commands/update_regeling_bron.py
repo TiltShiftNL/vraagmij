@@ -33,8 +33,8 @@ class Command(BaseCommand):
                 print('update_regeling_bron: SKIP')
                 return
             else:
-                cronjob.datetime_command = now
-                cronjob.save()
+                cronjob[0].datetime_command = now
+                cronjob[0].save()
 
         print('update_regeling_bron: DOING')
         update_regeling_bron_job()
