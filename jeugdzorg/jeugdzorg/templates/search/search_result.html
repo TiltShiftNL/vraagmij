@@ -1,9 +1,12 @@
 {% for model in model_list %}
-<div class="zoeken-paneel {{ k }}-lijst">
+<div class="zoeken-paneel {{ k }}-lijst overzicht compact-columns">
+    <h2>{{ k|capfirst }}</h2>
+    <ul class="cards">
     {% with template_name=model.0|stringformat:"s"|add:".html" %}
     {% for item in model.1 %}
-        {% include 'search/'|add:template_name %}
+        <li>{% include 'search/'|add:template_name %}</li>
     {% endfor %}
     {% endwith %}
+    </ul>
 </div>
 {% endfor %}
