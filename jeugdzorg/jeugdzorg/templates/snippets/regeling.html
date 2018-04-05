@@ -1,8 +1,9 @@
+{% load auth_tags %}
 <div class="regeling{% if search %} zr verberg{% endif %}" id="regeling-{{ regeling.id }}">
   
-  <h2 class="regeling-titel"><i class="icon-regeling"></i> <span data-zb="{{ regeling.titel|escape }}">{% if not search %}{{ regeling.titel }}{% endif %}</span></h2>
+  <h2 class="regeling-titel"><i class="icon-regeling"></i> <span {% if search %}data-zb="{{ regeling.titel|escape }}"{% endif %}>{% if not search %}{{ regeling.titel }}{% endif %}</span></h2>
   <div class="regeling-samenvatting">
-      <p class="zb" data-zb="{{ regeling.samenvatting|truncatechars_html:100|escape }}">{% if not search %}{{ regeling.samenvatting|truncatechars_html:100 }}{% endif %}</p>
+      <p {% if search %}class="zb" data-zb="{{ regeling.samenvatting|truncatechars_html:100|escape }}"{% endif %}>{% if not search %}{{ regeling.samenvatting|truncatechars_html:100 }}{% endif %}</p>
   </div>
 
   <ul class="regeling-meta">
@@ -17,6 +18,12 @@
           <a href="{% url 'detail_regeling' regeling.id %}">Meer details</a>
         {% endif %}
       </li>
+        {% if request.user|has_group:"viewer" %}
+        <li>
+            <a class="toggle {% if regeling in request.user.profiel.regeling_lijst.all  %}aan{% endif %}" href="#" data-decorator="profiel-connect" data-profiel-id="{{ request.user.profiel.id }}" data-connect-id="{{ regeling.id }}" data-connect-type="Regeling">
+                Ik weet hier iets van
+            </a>
+        </li>
+        {% endif %}
   </ul>
-
 </div>

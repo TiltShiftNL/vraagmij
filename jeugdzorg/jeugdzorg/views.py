@@ -244,6 +244,39 @@ class RegelingCreate(UserPassesTestMixin, CreateView):
         return super(RegelingCreate, self).form_valid(form)
 
 
+class ProfielConnectToggle(UserPassesTestMixin, View):
+    http_method_names = ['post', ]
+    data_types = [
+        'Regeling',
+    ]
+    def test_func(self):
+        return auth_test(self.request.user, 'viewer')
+
+    def post(self, request, *args, **kwargs):
+
+        out = {'status': 'toegevoegd'}
+        data = json.loads(request.body)
+        if not data.get('connect_type') or not data.get('profiel_id') or not data.get('connect_id'):
+            raise Http404
+        if data.get('connect_type') not in self.data_types:
+            raise Http404
+        connect_cls = getattr(sys.modules[__name__], data.get('connect_type'))
+        profiel = get_object_or_404(Profiel, id=data.get('profiel_id'))
+        connect = get_object_or_404(connect_cls, id=data.get('connect_id'))
+        connect_related = getattr(profiel, '%s_lijst' % data.get('connect_type').lower())
+        connect_data = dict(profiel=profiel)
+        connect_data[data.get('connect_type').lower()] = connect
+        if connect in connect_related.all():
+            remove = connect_related.through.objects.get(**connect_data)
+            remove.delete()
+            out['status'] = 'verwijderd'
+        else:
+            add = connect_related.through(**connect_data)
+            add.save()
+            out['status'] = 'toegevoegd'
+        return JsonResponse(out, safe=False)
+
+
 class RegelingUpdate(UserPassesTestMixin, UpdateView):
     model = Regeling
     form_class = RegelingModelForm

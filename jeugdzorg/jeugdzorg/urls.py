@@ -56,6 +56,8 @@ urlpatterns = [
     path('contact/<int:pk>/', ProfielDetail.as_view(), {'sub_view': 'contact'}, name='detail_contact'),
     path('profiel/bewerken/', ProfielUpdateView.as_view(), {'sub_view': 'contact'}, name='update_profiel'),
 
+    path('profiel-connect/', ProfielConnectToggle.as_view(), name='profiel_connect'),
+
     path('login/', auth_views.login, {
         'authentication_form': LoginForm,
     }, name='login'),

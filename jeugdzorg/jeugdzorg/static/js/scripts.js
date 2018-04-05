@@ -431,6 +431,41 @@
         d.classList.add('search-mode')
       });
     },
+    'profiel-connect': function () {
+        var el = this,
+            handler = function(e){
+              e.preventDefault();
+              console.log(this.dataset);
+              var data = {}
+              for (var k in this.dataset) {
+                data[k.replace(/(?:^|\.?)([A-Z])/g, function (x,y){return "_" + y.toLowerCase()}).replace(/^_/, "")] = this.dataset[k]
+              }
+              post('/profiel-connect/', data);
+            },
+            post = function(endpoint, data){
+              var xhr = new XMLHttpRequest();
+              xhr.open('post', endpoint, true);
+              xhr.setRequestHeader("X-CSRFToken", d.querySelector('script[data-counter-token]').dataset.counterToken);
+              xhr.setRequestHeader("Content-Type", "application/json");
+              xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                  console.log(JSON.parse(xhr.responseText));
+                  var status = JSON.parse(xhr.responseText).status;
+                  if (status === 'toegevoegd'){
+                    el.classList.add('aan');
+                  } else {
+                    el.classList.remove('aan');
+
+                  }
+                } else {
+                  console.log(xhr.status);
+                }
+              };
+              var str = JSON.stringify(data);
+              xhr.send(str);
+            };
+        this.addEventListener('click', handler);
+    },
     'gebruiker-uitnodigen': function(){
       var container = this,
           form = container.querySelector('form'),
