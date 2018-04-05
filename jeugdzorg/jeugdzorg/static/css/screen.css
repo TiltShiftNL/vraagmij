@@ -160,6 +160,9 @@ button::-moz-focus-inner {
   border: none;
   pointer-events: none; }
 
+mark {
+  background-color: rgba(109, 181, 214, 0.3); }
+
 html {
   font-size: 62.5%; }
 @media (max-width: 900px) {
@@ -643,9 +646,9 @@ body {
   content: '×'; }
 
 .toggle {
-  color: green; }
-.toggle.aan {
   color: red; }
+.toggle.aan {
+  color: green; }
 
 .header {
   max-width: 1400px;
