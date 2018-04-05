@@ -31,7 +31,7 @@ class Command(BaseCommand):
             cronjob.save()
         else:
             print(cronjob)
-            print(cronjob.filter(datetime_string=now_str))
+            print(cronjob.filter(datumtijd_string=now_str))
             if cronjob.filter(datumtijd_string=now_str):
                 print('update_regeling_bron: SKIP')
                 return
