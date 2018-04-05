@@ -64,7 +64,8 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         data = super().get_context_data(**kwargs)
 
         logs = [
-            ['hostfile', '/etc/hosts'],
+            # ['hostfile', '/etc/hosts'],
+            ['crontab', '/etc/cron.d/crontab'],
             ['nginx error', '/var/log/nginx/error.log'],
             ['nginx access', '/var/log/nginx/access.log'],
             ['cron log', '/var/log/cron.log'],
@@ -81,10 +82,7 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
 
-        int_id = round(int('0x%s' % data['logs'][0][2][-1].split('\t')[1], 0) / 50000000000)
-        print(int_id)
         data['int_id'] = get_container_int()
-
 
         return data
 
