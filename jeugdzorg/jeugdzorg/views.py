@@ -172,6 +172,9 @@ class ProfielList(UserPassesTestMixin, ListView):
 
         if data['beeld'] not in ['alfabet', 'thema', 'organisatie', 'gebied', 'recent']:
             data['beeld'] = 'alfabet'
+            
+        if data['beeld'] == 'recent' and not self.request.GET.get('ordening'):
+            data['ordening'] = 'aflopend'
 
         data['list_template'] = 'snippets/contact_list_%s.html' % data['beeld']
 

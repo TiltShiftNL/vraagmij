@@ -26,10 +26,6 @@
               
                   <a href="#regeling.{{ regeling.id }}" class="ken-ik" data-handler="ken-ik"><span>Hier weet ik wat van!</span> <i class="icon-ken-ik"></i></a>
               
-                  {% if request.user|has_group:"editor" %}
-                      <small class="regeling-edit"><a href="{% url 'update_regeling' regeling.id %}">[bewerken]</a></small>
-                  {% endif %}
-
                   {{ regeling.titel }}
 
               </h1>
