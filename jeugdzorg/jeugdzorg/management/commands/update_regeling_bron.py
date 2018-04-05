@@ -17,24 +17,28 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         ms = current_milli_time()
         now = timezone.now()
-        now = datetime(now.year, now.month, now.day, now.hour, now.minute)
-        print(now)
+        now = timezone.datetime(now.year, now.month, now.day, now.hour, now.minute)
+        now_str = now.strftime('%Y-%m-%d %H:%M:%S')
+        print(now_str)
         container_int = (float(get_container_int()) / 1000)
         print(container_int)
         time.sleep(container_int)
+        print(current_milli_time() - ms)
 
         cronjob = CronjobState.objects.filter(naam_command=self.name)
         if not cronjob:
-            cronjob = CronjobState(naam_command=self.name, datumtijd_command=now)
+            cronjob = CronjobState(naam_command=self.name, datumtijd_command=now, datumtijd_string=now_str)
             cronjob.save()
         else:
             print(cronjob)
-            print(cronjob.filter(datumtijd_command=now))
-            if cronjob.filter(datumtijd_command=now):
+            print(cronjob.filter(datumtijd_string=now_str))
+            if cronjob.filter(datumtijd_string=now_str):
                 print('update_regeling_bron: SKIP')
                 return
             else:
-                cronjob[0].datetime_command = now
+                print('update datetime')
+                cronjob[0].datumtijd_command = now
+                cronjob[0].datumtijd_string = now_str
                 cronjob[0].save()
 
         print('update_regeling_bron: DOING')
