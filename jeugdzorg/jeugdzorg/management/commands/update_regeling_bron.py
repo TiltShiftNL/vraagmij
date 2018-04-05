@@ -28,8 +28,8 @@ class Command(BaseCommand):
             cronjob = CronjobState(naam_command=self.name, datumtijd_command=now)
             cronjob.save()
         else:
-            cronjob = cronjob.filter(datumtijd_command=now)
-            if cronjob:
+            print(cronjob)
+            if cronjob.filter(datumtijd_command=now):
                 print('update_regeling_bron: SKIP')
                 return
             else:
