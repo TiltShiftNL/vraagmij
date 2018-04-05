@@ -93,6 +93,11 @@ class ProfielAdmin(admin.ModelAdmin):
     ]
 
 
+@admin.register(CronjobState)
+class CronjobStateAdmin(admin.ModelAdmin):
+    list_filter = ['naam_command', 'datumtijd_command', ]
+
+
 @admin.register(Instelling)
 class InstellingAdmin(admin.ModelAdmin):
     list_display = ['site', 'app_naam', 'standaard_contact_naam', 'standaard_contact_email', ]

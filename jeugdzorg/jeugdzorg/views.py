@@ -26,6 +26,7 @@ import time
 from lxml import etree, html
 import lxml
 import socket
+from .utils import *
 
 from .auth import auth_test
 from .forms import *
@@ -80,9 +81,9 @@ class ConfigView(LoginRequiredMixin, TemplateView):
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
 
-        int_id = round(int('0x%s' % data['logs'][0][2][-1].split('\t')[1], 0) / 5000000000)
-
-        data['int_id'] = int_id
+        int_id = round(int('0x%s' % data['logs'][0][2][-1].split('\t')[1], 0) / 50000000000)
+        print(int_id)
+        data['int_id'] = get_container_int()
 
 
         return data

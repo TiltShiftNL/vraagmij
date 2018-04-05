@@ -835,6 +835,28 @@ class Instelling(models.Model):
         verbose_name_plural = _("Instellingen")
 
 
+class CronjobState(models.Model):
+    naam_command = models.CharField(
+        verbose_name='Naam',
+        max_length=255,
+    )
+    datumtijd_command = models.DateTimeField(
+        verbose_name='Datumtijd',
+    )
+    log_command = models.TextField(
+        verbose_name='Log',
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return self.naam_command
+
+    class Meta:
+        verbose_name = _('Cronjob status')
+        verbose_name_plural = _("Cronjob statussen")
+
+
 # def save_profile(sender, instance, **kwargs):
 #     if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
 #         p = Profiel(gebruiker=instance)
