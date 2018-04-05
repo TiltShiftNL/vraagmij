@@ -346,7 +346,8 @@
     'search': function(){
       var q = [],
           cards = [],
-          contains =function(selector, text) {
+          zoekContainer = document.getElementById('zoeken').querySelector(':scope > .container'),
+          contains = function(selector, text) {
             var elements = document.querySelectorAll(selector),
                 results = [];
             for(var i = 0; i < text.length; i++){
@@ -400,17 +401,24 @@
               return _q;
           },
           zoek = function () {
-              var i;
-              for (i = 0; i < cards.length; i++){
-                cards[i].classList.add('verberg');
+              var panes = zoekContainer.querySelectorAll('[data-resultcount]');
+              
+              for (var i = 0; i < panes.length; i++) {
+                panes[i].dataset.resultcount = 0;
+              }
+              
+              for (var i = 0; i < cards.length; i++){
+                cards[i].parentNode.classList.add('zoeken-verberg');
               }
               var foundlements = contains('.zr', q);
 
-              for (i = 0; i < foundlements.length; i++){
-                foundlements[i].classList.remove('verberg');
+              for (var i = 0; i < foundlements.length; i++){
+                foundlements[i].parentNode.classList.remove('zoeken-verberg');
+                foundlements[i].parentNode.parentNode.parentNode.dataset.resultcount++;
+                
               }
-          },
-          zoekContainer = document.getElementById('zoeken').querySelector(':scope > .container');
+          };
+          
 
       this.addEventListener('focus', function(e){
 

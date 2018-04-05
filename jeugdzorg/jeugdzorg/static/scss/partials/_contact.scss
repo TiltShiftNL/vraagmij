@@ -6,6 +6,15 @@
     min-height: 100%;
   }
 }
+.profielen {
+  list-style: none;
+  padding: 0;
+  .contact {
+    margin-bottom: 0;
+    min-height: 100%;
+  }
+}
+
 .contact-naam,
 dt.contact-naam + dd {
   strong {
@@ -196,9 +205,7 @@ dt.contact-naam + dd {
 //      background-color: rgba($brandColor2, .2);
 //    }
   }
-  &.verberg {
-    display: none;
-  }
+  
 }
 .js .contact-extended {
   display: none;

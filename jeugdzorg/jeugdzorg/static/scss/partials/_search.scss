@@ -1,10 +1,11 @@
 .zoeken {
-  padding: $padding;
+  padding: $padding / 2;
+  outline: $padding / 2 solid rgba(#fff, 0);
   
   position: absolute;
   z-index: 100;
-  right: -$padding;
-  top: -$padding;
+  right: -$padding / 2;
+  top: -$padding / 2;
   
   width: 100%;
   max-width: 300px;
@@ -14,6 +15,7 @@
   legend {
     display: none;
   }
+
   label strong {
     position: absolute;
     left: 0;
@@ -33,11 +35,13 @@
     margin: 0;
     padding: 0;
     width: 100%;
-
-    display: flex;
   }
+  
   label {
     width: 100%;
+  }
+  .group label {
+    margin: 0;
   }
   input {
     padding: 0 1em;
@@ -83,32 +87,58 @@
 
 }
 
+
+
 .zoeken-container {
   
   position: fixed;
-  z-index: 3;
+  z-index: 201;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   overflow: auto;
-  background-color: rgba(#fff, .9);
-  
+  background-color: rgba(#b5daea, .9);
   
   
   border: none;
   padding: 0;
-  padding: 20rem $padding $padding $padding;
+  padding: 24rem $padding $padding $padding;
 
 
   display: none;
   
+  [data-model]:before {
+    content: attr(data-model) ' (' attr(data-resultcount) ')';
+    display: block;
+    
+    @extend .big !optional;
+    @extend .bold !optional;
+    
+    padding-bottom: $padding / 2;
+    margin-bottom: $padding;
+    border-bottom: 1px solid $lightColor;
+  }
+  
+}
+
+.zoeken-verberg {
+  display: none !important;
+}
+
+[data-resultcount="0"] {
+  display: none;
 }
 
 .search-mode {
+  &, body {
+    overflow: hidden;
+  }
+  
   .zoeken {
-    
-    background-color: #fff;
+    z-index: 202;
+    background-color: $brandColor2;
+    outline: $padding / 2 solid rgba($brandColor2, .7);
     height: 4rem;
     max-width: $maxContentWidth;
   }
@@ -142,8 +172,10 @@
 
 .search-empty {
   max-width: 400px;
+  text-align: center;
   margin: 2 * $padding auto;
-  padding: 2 * $padding;
-  background-color: rgba($lightColor, .8);
-  font-size: 2.4rem;
+  padding: $padding / 2;
+  color: #fff;
+  background-color: rgba($brandColor2, .9);
+
 }

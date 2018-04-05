@@ -17,9 +17,6 @@
   
   display: flex;
   flex-flow: column;
-  &.verberg {
-    display: none;
-  }
 }
 .thema-titel {
   font-size: 2.4rem;
