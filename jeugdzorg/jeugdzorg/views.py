@@ -560,6 +560,7 @@ class GebruikerUitnodigenView(UserPassesTestMixin, FormView):
         return '%s?success=1' % reverse_lazy('gebruiker_uitnodigen')
 
 
+
 def logout(request):
     data = {
         'next_page': reverse_lazy('login'),
