@@ -49,9 +49,6 @@
                 <li><a href="{% url 'contacten' %}" data-counter="click.nav.contacten">Contacten</a></li>
                 <li class="divider"><a href="{% url 'regelingen' %}" data-counter="click.nav.regelingen">Regelingen</a></li>
                 {% if user.is_authenticated %}
-                  {% if request.user|has_group:"editor" %}
-                  <li><a href="{% url 'create_regeling' %}" data-counter="click.nav.create_regeling">Regeling toevoegen</a></li>
-                  {% endif %}
                   <li><a href="{% url 'update_profiel' %}" data-counter="click.nav.update_profiel">Mijn profiel</a></li>
                   <li><a href="{% url 'logout' %}" data-counter="click.nav.logout">Uitloggen</a></li>
                 {% else %}
@@ -82,9 +79,42 @@
               <li><a{% if sub_view == 'regeling' %} class="active"{% endif %} data-counter="click.homepage.tab.regelingen" href="{% url 'regelingen' %}" data-count="{{ REGELING_COUNT }}">Regelingen</a></li>
           </ul>
           {% block sort_options %}{% endblock %}
+          
+          {% block search %}
+          
+            {% if user.is_authenticated %}
+          
+              <form class="zoeken" action="{% url 'zoek' %}" data-decorator="find">
+                <fieldset class="container">
+                  <legend>Zoeken in thema's, contacten en regelingen</legend>
+                  <label>
+                    <input type="search" placeholder="zoeken" data-decorator="search" name="q">
+                    <strong><i class="icon-search"></i></strong>
+                  </label>
+                  <button class="zoeken-button" type="submit" data-handler="search-close"><i class="icon-search"></i>Vind</button>
+                  <button class="zoeken-annuleren" type="cancel" data-handler="search-close"><i class="icon-search-close"></i>Sluiten</button>
+                </fieldset>
+              </form>
+            
+            {% endif %}
+  
+          {% endblock %}
 
       </div>
   </nav>
+  
+  {% if user.is_authenticated %}
+  
+    <div id="zoeken" class="zoeken-container">
+      <div class="container">
+        <p class="search-empty">
+          Je kan hier zoeken naar bijvoorbeeld collega hulpverleners, regelingen, en thema's
+        </p>
+      </div>
+    </div>
+  
+  {% endif %}
+  
   
   {% endblock %}
 
