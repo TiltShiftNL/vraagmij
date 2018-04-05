@@ -39,7 +39,13 @@ testdata = {
 # testdata.update(app_settings())
 # print(testdata.get('SITE_INSTELLINGEN').site.domain)
 
+def error_view(request):
+    e = 1/0
+    return HttpResponse('error')
+
+
 urlpatterns = [
+
     # path('', CheckUserModel.as_view(), name='test'),
     # path('', ThemaList.as_view(), name='homepage'),
     path('', ThemaList.as_view(), {'sub_view': 'thema'}, name='homepage'),
@@ -83,6 +89,7 @@ urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
 
     path('zoek/', SearchView.as_view(), name='zoek'),
+    path('error/', error_view, name='error'),
 
     url(r'^herstel-wachtwoord/$',
         password_reset_new_user,
