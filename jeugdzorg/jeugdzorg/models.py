@@ -820,6 +820,12 @@ class Instelling(models.Model):
         max_length=30,
         default='0 0 1 * *',
     )
+    mail_account_active_check_frequentie = models.CharField(
+        verbose_name=_('E-mailaccount actief check frequentie'),
+        help_text=_("Standaard is maandelijks. Crontab format 'MIN HOUR DOM MON DOW'"),
+        max_length=30,
+        default='0 0 1 */6 *',
+    )
 
     @staticmethod
     def track_field_names():
@@ -839,9 +845,6 @@ class CronjobState(models.Model):
     naam_command = models.CharField(
         verbose_name='Naam',
         max_length=255,
-    )
-    datumtijd_command = models.DateTimeField(
-        verbose_name='Datumtijd',
     )
     datumtijd_string = models.CharField(
         verbose_name='Datumtijd tekst',

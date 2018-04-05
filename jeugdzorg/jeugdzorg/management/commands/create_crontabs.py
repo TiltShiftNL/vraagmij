@@ -14,6 +14,7 @@ class Command(BaseCommand):
         job_base_1 = 'root . /root/project_env.sh; /usr/local/bin/'
         job_base_2 = '.sh >> /var/log/cron.log 2>&1\n'
         jobs = [
+            ('mail_account_active_check', '0 0 1 */6 *', ),
             ('update_regelingen', '0 0 0 1 *', ),
             ('check_user_activity', '0 0 0 1 *', ),
             ('send_update_mail', '0 0 0 1 *', ),

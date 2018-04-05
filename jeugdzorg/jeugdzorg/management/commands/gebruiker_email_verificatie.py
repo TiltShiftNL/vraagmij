@@ -34,6 +34,10 @@ class Command(BaseCommand):
     help = 'gebruiker email verificatie'
 
     def handle(self, *args, **options):
+        if not cronjob_container_check(self.__module__.split('.')[-1]):
+            return
+
+
         start_time = 1514764800
         end_time = int(timezone.now().timestamp())
         sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)

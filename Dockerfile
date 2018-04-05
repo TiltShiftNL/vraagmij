@@ -39,6 +39,7 @@ COPY jeugdzorg/check_user_activity.sh /usr/local/bin/check_user_activity.sh
 COPY jeugdzorg/send_update_mail.sh /usr/local/bin/send_update_mail.sh
 COPY jeugdzorg/gebruiker_email_verificatie.sh /usr/local/bin/gebruiker_email_verificatie.sh
 COPY jeugdzorg/create_crontabs.sh /usr/local/bin/create_crontabs.sh
+COPY jeugdzorg/mail_account_active_check.sh /usr/local/bin/mail_account_active_check.sh
 # COPY project_env.sh /root/project_env.sh
 
 RUN usermod -a -G root www-data
@@ -52,6 +53,7 @@ RUN chmod 777 /usr/local/bin/check_user_activity.sh
 RUN chmod 777 /usr/local/bin/send_update_mail.sh
 RUN chmod 777 /usr/local/bin/gebruiker_email_verificatie.sh
 RUN chmod 777 /usr/local/bin/create_crontabs.sh
+RUN chmod 777 /usr/local/bin/mail_account_active_check.sh
 RUN chmod 0644 /etc/cron.d/crontab
 RUN touch /var/log/cron.log
 #RUN chmod 777 /etc/nginx/sites-enabled/nginx_production.conf

@@ -16,6 +16,8 @@ import sendgrid
 from jeugdzorg.context_processors import app_settings
 import sys, os
 import base64
+from jeugdzorg.utils import *
+from jeugdzorg.statics import *
 
 
 def build_logo():
@@ -49,26 +51,13 @@ def build_logo():
     return attachment
 
 
-maanden = [
-    'januari',
-    'februari',
-    'maart',
-    'april',
-    'mei',
-    'juni',
-    'juli',
-    'augustus',
-    'september',
-    'oktober',
-    'november',
-    'december',
-]
-
-
 class Command(BaseCommand):
     help = 'Send update mail'
 
     def handle(self, *args, **options):
+        if not cronjob_container_check(self.__module__.split('.')[-1]):
+            return
+
         site = Site.objects.get_current()
         if site.instelling:
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)

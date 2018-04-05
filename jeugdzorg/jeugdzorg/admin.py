@@ -97,8 +97,8 @@ class ProfielAdmin(admin.ModelAdmin):
 
 @admin.register(CronjobState)
 class CronjobStateAdmin(admin.ModelAdmin):
-    list_display = ['naam_command', 'datumtijd_command', ]
-    list_filter = ['naam_command', 'datumtijd_command', ]
+    list_display = ['naam_command', 'datumtijd_string', ]
+    list_filter = ['naam_command', 'datumtijd_string', ]
 
 
 @admin.register(Instelling)
