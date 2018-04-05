@@ -19,7 +19,9 @@ def get_users():
     """
     active_users = UserModel._default_manager.filter(**{
         'is_active': True,
-    })
+        'is_superuser': False,
+        'is_staff': False,
+    }).exclude(profiel=None)
     return (u for u in active_users if u.has_usable_password())
 
 
