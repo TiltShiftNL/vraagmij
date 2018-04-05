@@ -1000,6 +1000,8 @@ form .group label, form .group .label {
   margin-right: 1em; }
 form .group label:last-child, form .group .label:last-child {
   margin-right: 0; }
+form .group .button {
+  margin: 0; }
 form label, form .label {
   position: relative;
   display: block; }
@@ -2237,6 +2239,28 @@ dl.contact-extended dt.contact-regeling ~ dd {
 .contact-ken-ik {
   display: none; }
 
+.contact-gemist .contact-meta {
+  min-height: 10rem; }
+.contact-gemist form, .contact-gemist form fieldset, .contact-gemist form p {
+  margin: 0;
+  padding: 0; }
+.contact-gemist form .button {
+  padding-left: 1em;
+  padding-right: 1em; }
+.contact-gemist .systeem-berichten {
+  padding: 1.5rem; }
+.contact-gemist .icon-avatar:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3rem;
+  text-align: center;
+  content: '?';
+  color: #fff;
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 700; }
+
 [data-view="compact"] .overzicht .contacten {
   display: inline;
   margin: 0; }
@@ -2286,6 +2310,17 @@ dl.contact-extended dt.contact-regeling ~ dd {
   display: none; }
 [data-view="compact"] .contact.dit-ben-ik {
   outline: none; }
+[data-view="compact"] .contacten .contact-gemist {
+  padding-left: 0; }
+[data-view="compact"] .contacten .contact-gemist .contact-avatar {
+  display: none; }
+[data-view="compact"] .contacten .contact-gemist .group {
+  width: 100%;
+  margin-right: 0; }
+[data-view="compact"] .contacten .contact-gemist .contact-meta dt.contact-naam + dd {
+  display: none; }
+[data-view="compact"] .contacten .contact-gemist .contact-meta dt.contact-gemist {
+  display: block; }
 
 .contact.ghost {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2) inset; }

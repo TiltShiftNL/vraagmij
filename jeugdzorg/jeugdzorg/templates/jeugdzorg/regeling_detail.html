@@ -85,10 +85,10 @@
           {% endif %}
     
           <div class="aside-block regeling-feedback">
-            <h3 class="aside-title">Feedback op deze regeling</h3>
+            <h3 class="aside-title">Feedback op deze regeling?</h3>
             <ul>
-              <li><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}?subject=Fout melden over de regeling: '{{ regeling.titel|urlencode }}'&amp;body=Beste mensen,%0D%0A%0D%0AIk heb een fout gevonden op de pagina van de regeling '{{ regeling.titel|urlencode }}'.%0D%0A%0D%0ALink: {{ request.build_absolute_uri|urlencode }}"><i class="icon-arrow-right"></i> Fout melden</a></li>
-              <li><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}?subject=Suggestie over de regeling: '{{ regeling.titel|urlencode }}'&amp;body=Beste mensen,%0D%0A%0D%0AIk heb een suggestie over de regeling '{{ regeling.titel|urlencode }}'.%0D%0A%0D%0ALink: {{ request.build_absolute_uri|urlencode }}"><i class="icon-arrow-right"></i> Verbeter suggesties</a></li>
+              <li><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}?subject=Fout melden over de regeling: '{{ regeling.titel|urlencode }}'&amp;body=Beste mensen,%0D%0A%0D%0AIk heb een fout gevonden op de pagina van de regeling '{{ regeling.titel|urlencode }}'.%0D%0A%0D%0ALink: {{ request.build_absolute_uri|urlencode }}"><i class="icon-mail"></i> Fout melden</a></li>
+              <li><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}?subject=Suggestie over de regeling: '{{ regeling.titel|urlencode }}'&amp;body=Beste mensen,%0D%0A%0D%0AIk heb een suggestie over de regeling '{{ regeling.titel|urlencode }}'.%0D%0A%0D%0ALink: {{ request.build_absolute_uri|urlencode }}"><i class="icon-mail"></i> Verbeter suggesties</a></li>
             </ul>
           </div>
     

@@ -1,3 +1,4 @@
+{% load form_tags %}
 <div class="container">
     
     <ul class="overzicht compact-columns contacten cards">
@@ -16,6 +17,15 @@
             {% endfor %}
         {% endif %}
 
+    </ul>
+
+    <h2 class="shortcut" id="collega">Mis je iemand?</h2>
+    <ul class="overzicht compact-columns contacten cards">
+      <li>
+        <div class="contact contact-gemist" data-decorator="gebruiker-uitnodigen">
+          {% get_gebruiker_uitnodigen_form %}
+        </div>
+      </li>
     </ul>
 
 </div>

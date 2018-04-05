@@ -1,3 +1,4 @@
+{% load form_tags %}
 <div class="container">
   
     {% if ordening == 'aflopend' %}
@@ -38,6 +39,17 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
+            </div>
+            
+            <div class="group">
+              <h2 class="shortcut" id="collega">Mis je iemand?</h2>
+              <ul class="contacten cards">
+                <li>
+                  <div class="contact contact-gemist" data-decorator="gebruiker-uitnodigen">
+                    {% get_gebruiker_uitnodigen_form %}
+                  </div>
+                </li>
+              </ul>
             </div>
             
         </div>
@@ -81,6 +93,18 @@
                     {% endfor %}
                 </ul>
             </div>
+            
+            <div class="group">
+              <h2 class="shortcut" id="collega">Mis je iemand?</h2>
+              <ul class="contacten cards">
+                <li>
+                  <div class="contact contact-gemist" data-decorator="gebruiker-uitnodigen">
+                    {% get_gebruiker_uitnodigen_form %}
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
         </div>
     
     {% endif %}

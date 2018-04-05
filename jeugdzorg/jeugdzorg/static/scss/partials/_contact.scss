@@ -458,6 +458,39 @@ dl.contact-extended {
   display: none;
 }
 
+.contact-gemist {
+  .contact-meta {
+    min-height: 10rem;
+  }
+  form {
+    &, fieldset, p {
+      margin: 0;
+      padding: 0;
+    }
+    .button {
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+  .systeem-berichten {
+    padding: $padding / 2;
+  }
+  .icon-avatar {
+    &:before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 3rem;
+      text-align: center;
+      content: '?';
+      color: #fff;
+      font-size: 3rem;
+      line-height: 1;
+      font-weight: 700;
+    }
+  }
+}
+
 
 [data-view="compact"] {
   .overzicht {
@@ -527,6 +560,25 @@ dl.contact-extended {
   }
   .contact.dit-ben-ik {
     outline: none;
+  }
+  
+  .contacten .contact-gemist {
+    padding-left: 0;
+    .contact-avatar {
+      display: none;
+    }
+    .group {
+      width: 100%;
+      margin-right: 0;
+    }
+    .contact-meta {
+      dt.contact-naam + dd {
+        display: none;
+      }
+      dt.contact-gemist {
+        display: block;
+      }
+    }
   }
 }
 
