@@ -1,10 +1,9 @@
 {% for model in model_list %}
-<div class="zoeken-paneel {{ k }}-lijst overzicht compact-columns">
-    <h2>{{ k|capfirst }}</h2>
-    <ul class="cards">
+<div class="{{ model.0 }}-lijst" data-resultcount="0" data-model="{% if model.0 == 'profiel' %}Contacten{% elif model.0 == 'regeling' %}Regelingen{% elif model.0 == 'thema' %}Thema's{% else %}{{ model.0 }}{% endif %}">
+    <ul class="cards {{ model.0 }}s {{ model.0 }}en">
     {% with template_name=model.0|stringformat:"s"|add:".html" %}
     {% for item in model.1 %}
-        <li>{% include 'search/'|add:template_name %}</li>
+        <li class="zoeken-verberg">{% include 'search/'|add:template_name %}</li>
     {% endfor %}
     {% endwith %}
     </ul>
