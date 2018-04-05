@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         ms = current_milli_time()
         now = timezone.now()
-        now = datetime(now.year, now.month, now.day, now.hour, now.minute)
+        now = timezone.datetime(now.year, now.month, now.day, now.hour, now.minute)
         print(now)
         container_int = (float(get_container_int()) / 1000)
         print(container_int)
