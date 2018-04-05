@@ -17,7 +17,7 @@
                 </div>
             {% endif %}
 
-            <form method="post" action=".">
+            <form method="post" action="." class="login well">
                 <h1>Registratie</h1>
                 <fieldset>
 
@@ -76,8 +76,10 @@
                             </label>
                         </p>
                     </div>
-                    {#        {{ form.as_p }}#}
-                    <button class="button" type="submit">Maak aan</button>
+                    <p class="buttons right">
+                      <button class="button" type="submit">Maak aan</button>
+                      <a href="{% url 'homepage' %}" data-handler="modal-close back" class="left" data-counter="click.register.cancel">Annuleren</a>
+                    </p>
                 </fieldset>
             </form>
         </div>

@@ -48,15 +48,15 @@
             <p class="buttons right">
                 <button type="submit" class="button" data-counter="click.login.login">Inloggen</button>
                 <a href="{% url 'herstel_wachtwoord' %}" class="login-forgot" data-counter="click.login.forgot">Wachtwoord vergeten</a>
-                <!-- <a href="#TODO" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a> -->
-                <a href="{% url 'regelingen' %}" data-handler="modal-close back" class="left" data-counter="click.login.cancel">Annuleren</a>
+                <a href="{% url 'gebruiker_registreren' %}" class="login-create" data-counter="click.login.create">Nog geen account? <u>Vraag het aan!</u></a>
+                <a href="{% url 'homepage' %}" data-handler="modal-close back" class="left" data-counter="click.login.cancel">Annuleren</a>
             </p>
             
         </form>
         
         <div class="footer footer-well text-center">
           <p>
-            Heb je nog geen account of heb je problemen met inloggen, mail dan naar <a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}">{{ SITE_INSTELLINGEN.standaard_contact_naam }}</a>.
+            Heb je problemen met inloggen, mail dan naar <a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}">{{ SITE_INSTELLINGEN.standaard_contact_naam }}</a>.
           </p>
         </div>
         
