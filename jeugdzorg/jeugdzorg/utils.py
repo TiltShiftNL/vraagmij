@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 def get_container_int():
-    return round(int('0x%s' % [l.strip() for l in open('/etc/hosts', 'r')][-1].split('\t')[1], 0) / 5000000000)
+    return round(int('0x%s' % [l.strip() for l in open('/etc/hosts', 'r')][-1].split('\t')[1], 0) / 1000000000)
 
 
 def cronjob_container_check(name):
