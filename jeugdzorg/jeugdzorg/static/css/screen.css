@@ -1634,6 +1634,8 @@ hr {
   top: 0;
   width: 100%;
   max-width: 300px;
+  padding: 3rem;
+  margin: -3rem;
   transition: max-width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
 .zoeken legend {
   display: none; }
@@ -1687,17 +1689,6 @@ hr {
   top: -.2rem; }
 
 .zoeken-container {
-  position: fixed;
-  z-index: 201;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  overflow: auto;
-  background-color: #fff;
-  border: none;
-  padding: 0;
-  padding: 24rem 3rem 3rem 3rem;
   display: none; }
 .zoeken-container [data-model]:before {
   content: attr(data-model) " (" attr(data-resultcount) ")";
@@ -1712,24 +1703,48 @@ hr {
 [data-resultcount="0"] {
   display: none; }
 
-.search-mode, .search-mode body {
-  overflow: hidden; }
+.search-mode .main {
+  display: none; }
+.search-mode .tabs, .search-mode .sort-container {
+  display: none; }
 .search-mode .zoeken {
   z-index: 202;
   background-color: #fff;
-  height: 4rem;
-  max-width: 1200px; }
+  max-width: 1200px;
+  background-color: #fff; }
+.search-mode .zoeken:before {
+  content: '';
+  position: absolute;
+  left: -100vw;
+  right: -100vw;
+  bottom: 0;
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.search-mode .tabs-container {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 4;
+  top: 3rem; }
 .search-mode input {
   padding-left: 5rem; }
 .search-mode .zoeken-container {
-  display: block; }
+  display: block;
+  max-width: 1400px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem;
+  padding: 3rem; }
+@media (max-width: 900px) {
+  .search-mode .zoeken-container {
+    padding: 10px 10px 54px 10px; } }
 .search-mode .nav-top {
   display: none; }
-.search-mode.scrolled .zoeken {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0); }
+.search-mode.scrolled .zoeken:before {
+  opacity: .2; }
 .search-mode label strong .icon-search {
   display: block; }
 .search-mode .zoeken-button {

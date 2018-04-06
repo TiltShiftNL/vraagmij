@@ -8,6 +8,9 @@
   width: 100%;
   max-width: 300px;
   
+  padding: $padding;
+  margin: -$padding;
+  
   transition: max-width .3s $transition-ease-default;
   
   legend {
@@ -85,24 +88,7 @@
 
 }
 
-
-
 .zoeken-container {
-  
-  position: fixed;
-  z-index: 201;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  overflow: auto;
-  background-color: #fff;
-  
-  
-  border: none;
-  padding: 0;
-  padding: 24rem $padding $padding $padding;
-
 
   display: none;
   
@@ -129,32 +115,75 @@
 }
 
 .search-mode {
-  &, body {
-    overflow: hidden;
+  .main {
+    display: none;
   }
-  
+  .tabs, .sort-container {
+    display: none;
+  }
   .zoeken {
+    
     z-index: 202;
     background-color: #fff;
-  
-    height: 4rem;
+    
     max-width: $maxContentWidth;
+    
+    background-color: #fff;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      left: -100vw;
+      right: -100vw;
+      bottom: 0;
+      top: 0;
+      
+      background-color: #fff;
+      
+      box-shadow: 0 3px 2px 0 rgba(0,0,0,.2);
+      opacity: 0;
+      
+      transition: opacity .3s $transition-ease-default;
+      
+    }
+    
+  }
+  
+  .tabs-container {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 4;
+    top: $padding;
   }
   input {
     padding-left: 5rem;
   }
   .zoeken-container {
     display: block;
+    max-width: $maxWidth;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    
+    margin-top: 6rem;
+
+    padding: $padding;
+    @include medium {
+      padding: 10px 10px (44px + 10px) 10px;
+    }
+    
   }
   .nav-top {
     display: none;
   }
   &.scrolled {
     .zoeken {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translate3d(-50%, 0, 0);
+      &:before {
+        opacity: .2;
+      }
+//      top: 0;
+//      left: 50%;
+//      transform: translate3d(-50%, 0, 0);
     }
   }
   label strong .icon-search {
@@ -173,7 +202,5 @@
   text-align: center;
   margin: 2 * $padding auto;
   padding: $padding / 2;
- 
- 
 
 }
