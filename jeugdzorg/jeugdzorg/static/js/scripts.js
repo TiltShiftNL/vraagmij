@@ -325,21 +325,19 @@
             for(var i = 0; i < text.length; i++){
               results.push(false);
             }
-            console.log(text);
-
             return Array.prototype.filter.call(elements, function(element){
               var searchables = element.querySelectorAll('[data-zb]'),
                   elResults = results.slice(0),
                   i, j;
-
               for (i = 0; i < searchables.length; i++){
                 var t = searchables[i].dataset.zb;
                 for(j = 0; j < text.length; j++){
-                  var r = RegExp(text[j] + '(?![^<>]*>)', 'gi');
-                  // var r = RegExp(text[j] + '(?!<mark>|</mark>)', 'gi');
-                  if (searchables[i].dataset.zb.search(r) >= 0) {
+                  var r = RegExp(text[j] + '(?![^<>]*>)', 'gi'),
+                      index_search = searchables[i].dataset.zb.search(r);
+                  if (index_search >= 0) {
+                    console.log(text[i]);
                       elResults[j] = true;
-                      t = t.replace(r, '<mark>' + text[j] + '</mark>');
+                      t = t.replace(RegExp(text[j], 'gi'), '<mark>' + text[j] + '</mark>');
                   }
                 }
                 searchables[i].innerHTML = t;
@@ -354,10 +352,10 @@
           },
           cleanQ = function (qRaw) {
               var i;
-              qRaw = qRaw.trim();
+              qRaw = qRaw.trim().replace(/\*|\[|\]|\+|\(|\)/g, '');
               var _q = (qRaw.split(' ').length > 0) ? qRaw.split(' ') : [qRaw];
               for (i = 0; i < _q.length; i++){
-                _q[i] = _q[i].trim().replace('+', '').replace('\\', '');
+                _q[i] = _q[i].trim();
               }
               _q = _q.filter(function(item, pos) {
                   return _q.indexOf(item) === pos;

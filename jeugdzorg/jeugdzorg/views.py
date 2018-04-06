@@ -327,7 +327,7 @@ class UserCreationView(CreateView):
     model = User
     template_name = 'jeugdzorg/user_form_create.html'
     form_class = UserCreationForm
-    success_url = '/'
+    success_url = '.?aangemaakt=1'
 
     def form_valid(self, form):
         context = self.get_context_data()
