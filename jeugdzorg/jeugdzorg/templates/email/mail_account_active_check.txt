@@ -1,0 +1,9 @@
+{% load i18n %}{% autoescape off %}
+Beste{% if naam %} {{ naam }}{% endif %},
+
+Om onze contactenlijst up-to-date te houden, sturen we ieder half jaar een mail om te checken of jij als contact nog actief wil zijn.
+Je ontvangt deze e-mail omdat je bij het {{ SITE_INSTELLINGEN.app_naam }} ingeschreven staat.
+
+Vriendelijke groet,
+Het {{ SITE_INSTELLINGEN.app_naam }} team
+{% endautoescape %}

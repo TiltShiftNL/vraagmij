@@ -261,7 +261,8 @@ class ProfielModelForm(forms.ModelForm):
 class UserCreationForm(DefaultUserCreationForm):
     email = forms.EmailField(
         widget=forms.EmailInput,
-        validators=[user_email_validation]
+        validators=[user_email_validation],
+        error_messages={'unique': "Er bestaat al gebruiker met dit e-mailadres."},
     )
     voornaam = forms.CharField(
         label='Voornaam',

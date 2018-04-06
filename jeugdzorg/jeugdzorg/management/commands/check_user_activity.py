@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand
 from jeugdzorg.models import EventItem
 UserModel = get_user_model()
 from django.utils import timezone
-
+from jeugdzorg.utils import *
 
 def get_users():
     """Given an email, return matching user(s) who should receive a reset.
@@ -29,9 +29,9 @@ class Command(BaseCommand):
     help = 'check user activity'
 
     def handle(self, *args, **options):
-        print('START JOB check user activity')
-        # day = 60 * 60 * 24
-        treshold = 60 * 60 * 24 * 30 * 6
+        if not cronjob_container_check(self.__module__.split('.')[-1]):
+            return
+
         for u in get_users():
             exist = EventItem.objects.filter(**{
                 'user': u,
@@ -43,6 +43,4 @@ class Command(BaseCommand):
                 div = round(div)
                 u.profiel.seconden_niet_gebruikt = div
                 u.profiel.save()
-                if div > treshold:
-                    print('TO OLD')
 

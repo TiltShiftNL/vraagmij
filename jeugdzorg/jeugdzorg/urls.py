@@ -82,12 +82,15 @@ urlpatterns = [
     path('admin/dumpjeugdzorg/', dump_jeugdzorg, name='dumpjeugdzorg'),
     path('admin/loadjeugdzorg/', load_jeugdzorg, name='loadjeugdzorg'),
     path('admin/logs/', ConfigView.as_view(), name='logs'),
+    path('admin/rebuild-crontabs/', RebuildCrontabsView.as_view(), name='rebuild_crontabs'),
     path('admin/email-template/', TemplateView.as_view(template_name='email/update_mail.html'), testdata, name='email-template'),
 
     url('^', include('django.contrib.auth.urls')),
 
     path('zoek/', SearchView.as_view(), name='zoek'),
-    path('error/', error_view, name='error'),
+    # path('error/', error_view, name='error'),
+
+
 
     url(r'^herstel-wachtwoord/$',
         password_reset_new_user,
