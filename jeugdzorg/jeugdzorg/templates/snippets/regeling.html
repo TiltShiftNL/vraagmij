@@ -9,7 +9,7 @@
   {% if request.user|has_group:"viewer" %}
   
     {% if regeling in request.user.profiel.regeling_lijst.all  %}
-      <a href="{% url 'update_profiel' %}" data-decorator="profiel-connect" data-profiel-id="{{ request.user.profiel.id }}" data-connect-id="{{ regeling.id }}" data-connect-type="Regeling">Hier weet ik iets van</a>
+      <!-- <a href="{% url 'update_profiel' %}" data-decorator="profiel-connect" data-profiel-id="{{ request.user.profiel.id }}" data-connect-id="{{ regeling.id }}" data-connect-type="Regeling">Hier weet ik iets van</a> -->
     {% endif %}
   {% endif %}
   
