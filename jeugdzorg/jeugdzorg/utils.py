@@ -15,7 +15,7 @@ def get_container_int():
 
 def cronjob_container_check(name):
     now = timezone.now()
-    now_str = now.strftime('%Y-%m-%d %H:%M:%S')
+    now_str = now.strftime('%Y-%m-%d %H:%M')
     container_int = (float(get_container_int()) / 1000)
     time.sleep(container_int)
     cronjob = CronjobState.objects.filter(naam_command=name)
@@ -24,10 +24,10 @@ def cronjob_container_check(name):
         cronjob.save()
     else:
         if cronjob.filter(datumtijd_string=now_str):
-            print('%s: SKIP' % name)
+            print('%s - %s: SKIP' % (name, now_str))
             return False
         else:
             cronjob[0].datumtijd_string = now_str
             cronjob[0].save()
-    print('%s: DOING' % name)
+    print('%s - %s: DOING' % (name, now_str))
     return True
