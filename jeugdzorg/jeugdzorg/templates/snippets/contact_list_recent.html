@@ -1,5 +1,17 @@
 {% load form_tags %}
 <div class="container">
+  
+    <p class="contact-gemist-trigger">
+      <a href="#contact-gemist" data-handler="modal" class="text-right"><strong>Mis je een collega?</strong> Nodig iemand uit!</a>
+    </p>
+
+    <div class="hidden" id="contact-gemist">
+      <div class="well" data-submitter="gebruiker-uitnodigen">
+        {% get_gebruiker_uitnodigen_form %}
+      </div>
+    </div>
+    
+    <h2 class="shortcut">Contactpersonen</h2>
     
     <ul class="overzicht compact-columns contacten cards">
     
@@ -17,15 +29,6 @@
             {% endfor %}
         {% endif %}
 
-    </ul>
-
-    <h2 class="shortcut" id="collega">Mis je iemand?</h2>
-    <ul class="overzicht compact-columns contacten cards">
-      <li>
-        <div class="contact contact-gemist" data-decorator="gebruiker-uitnodigen">
-          {% get_gebruiker_uitnodigen_form %}
-        </div>
-      </li>
     </ul>
 
 </div>

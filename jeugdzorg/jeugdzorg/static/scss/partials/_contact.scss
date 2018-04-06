@@ -466,9 +466,6 @@ dl.contact-extended {
 }
 
 .contact-gemist {
-  .contact-meta {
-    min-height: 10rem;
-  }
   form {
     &, fieldset, p {
       margin: 0;
@@ -482,19 +479,19 @@ dl.contact-extended {
   .systeem-berichten {
     padding: $padding / 2;
   }
-  .icon-avatar {
-    &:before {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 3rem;
-      text-align: center;
-      content: '?';
-      color: #fff;
-      font-size: 3rem;
-      line-height: 1;
-      font-weight: 700;
+}
+.contact-gemist-trigger {
+  text-align: right;
+  margin-bottom: -2 * $lineHeight;
+  a {
+    display: inline-block;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
     }
+  }
+  @include small {
+    margin-bottom: 0;
   }
 }
 

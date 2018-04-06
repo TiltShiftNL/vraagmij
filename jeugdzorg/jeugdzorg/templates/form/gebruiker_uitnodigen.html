@@ -3,17 +3,8 @@
         Je contact is uitgenodigd.
     </div>
 {% else %}
-
-    <figure class="contact-avatar">
-      <span class="icon-avatar"></span>
-    </figure>
-    <dl class="contact-meta">
-      <dt class="contact-naam">naam</dt>
-      <dd><strong>Collega</strong> <span>hulpverlener</span></dd>
-      <dt class="contact-gemist">Mis je iemand?</dt>
-      <dd>Mis je iemand die hierbij zou moeten staan?<br>Nodig een collega uit.</dd>
-    </dl>
-    
+    <h2>Nodig een collega uit</h2>
+    <p>Vul hieronder het e-mailadres in van de collega die je wilt uitnodigen.</p>
 
     <form method="post" action="{% url 'gebruiker_uitnodigen' %}">
         
@@ -28,13 +19,11 @@
                 </ul>
             </div>
         {% endif %}
-        <fieldset>
-            {% csrf_token %}
-            <p class="group">
-              <input name="email" required id="id_email" type="email" placeholder="collega@organisatie.nl">
-              <button type="submit" class="button">Uitnodigen</button>
-            </p>
-        </fieldset>
+
+        <p class="group">
+          <input name="email" required id="id_email" type="email" placeholder="collega@organisatie.nl">
+          <button type="submit" class="button">Uitnodigen</button>
+        </p>
         
     </form>
 {% endif %}

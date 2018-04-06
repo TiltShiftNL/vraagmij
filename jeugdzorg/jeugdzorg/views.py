@@ -130,6 +130,8 @@ class ThemaList(ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data.update(self.kwargs);
+        
+        data['ordening'] = self.request.GET.get('ordening', 'oplopend')
 
         return data
 

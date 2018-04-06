@@ -63,6 +63,7 @@
 .shortcut {
   font-size: $lineHeight;
   line-height: 1;
+  min-height: $lineHeight;
   padding: $lineHeight 0 $lineHeight/2 0;
   border-bottom: 1px solid $borderColor;
   margin-bottom: $lineHeight;

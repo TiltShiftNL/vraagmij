@@ -1,35 +1,7 @@
 !function(w, d){
   
   var handlers = {
-    'list-add': function(){
-      var 
-        template = this.template.cloneNode(true),
-        inputs = template.querySelectorAll('input, select');
-        
-      for (var i =0; i<inputs.length; i++) {
-        inputs[i].id = inputs[i].id.replace(/-\d-/, '-' + this.list.children.length + '-');
-        inputs[i].name = inputs[i].name.replace(/-\d-/, '-' + this.list.children.length + '-');
-      }
-      
-      this.list.appendChild(template);
-      
-      var totalInputs = this.list.parentNode.querySelectorAll('[id*="-TOTAL_FORMS"]');
-      
-      for (var i =0; i<totalInputs.length; i++) {
-        totalInputs[i].value = this.list.children.length;
-      
-      }
-    },
-    
-    'list-remove': function(){
-      var 
-        li = this.parentNode,
-        del = li.querySelectorAll('[name*="-DELETE"]');
 
-      if (del.length) del[0].checked = true;
-      li.classList.add('item-deleted');
-    },
-    
     'toggle': function(e) {
       var el = document.getElementById(this.hash.substr(1));
       if (el) {
@@ -474,45 +446,6 @@
             };
         this.addEventListener('click', handler);
     },
-    'gebruiker-uitnodigen': function(){
-      var container = this,
-          form = container.querySelector('form'),
-          handler = function(e){
-            e.preventDefault();
-            var elements = form.querySelectorAll('input');
-            var obj ={};
-            for(var i = 0 ; i < elements.length ; i++){
-                var item = elements.item(i);
-                obj[item.name] = item.value;
-            }
-            post(form.getAttribute('action'), obj);
-          },
-          post = function (endpoint, data) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('post', endpoint, true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.onload = function() {
-              if (xhr.status >= 200 && xhr.status < 400) {
-                container.innerHTML = xhr.responseText;
-                form = container.querySelector('form');
-                form.addEventListener("submit", handler, false);
-              } else {
-                console.log(xhr.status);
-              }
-            };
-            var str = serialize(data);
-            xhr.send(str);
-          },
-          serialize = function(obj) {
-            var str = [];
-            for (var p in obj)
-              if (obj.hasOwnProperty(p)) {
-                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-              }
-            return str.join("&");
-          };
-      form.addEventListener("submit", handler, false);
-    },
 
     // Dit is niet een paasei
     'vraag-mij-maar-amsterdam': function(){
@@ -544,6 +477,51 @@
   
   };
   
+  var submitters = {
+    'gebruiker-uitnodigen': function(e){
+      
+      var 
+        container = this,
+        form = container.querySelector('form');
+
+      var post = function (endpoint, data) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', endpoint, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onload = function() {
+          if (xhr.status >= 200 && xhr.status < 400) {
+            container.innerHTML = xhr.responseText;
+          } else {
+            console.log(xhr.status);
+          }
+        };
+        var str = serialize(data);
+        xhr.send(str);
+      };
+      var serialize = function(obj) {
+        var str = [];
+        for (var p in obj)
+          if (obj.hasOwnProperty(p)) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+        return str.join("&");
+      };
+      
+      e.preventDefault();
+      var elements = form.querySelectorAll('input');
+      var obj ={};
+      for(var i = 0 ; i < elements.length ; i++){
+          var item = elements.item(i);
+          obj[item.name] = item.value;
+      }
+      post(form.getAttribute('action'), obj);
+      
+    },
+    
+    
+    
+  };
+  
   var helpers = {
     'ajax': function(url, callback){
       var request = new XMLHttpRequest();
@@ -573,6 +551,8 @@
   }
   
   d.addEventListener('click',function(t){var k,e,a=t&&t.target;if(a=_closest(a,'[data-handler]')){var r=a.getAttribute('data-handler').split(/\s+/);if('A'==a.tagName&&(t.metaKey||t.shiftKey||t.ctrlKey||t.altKey))return;for(e=0;e<r.length;e++){k=r[e].split(/[\(\)]/);handlers[k[0]]&&handlers[k[0]].call(a,t,k[1])}}});
+  
+  d.addEventListener('submit',function(t){var k,e,f=t&&t.target;if(f=_closest(f,'[data-submitter]')){var r=f.getAttribute('data-submitter').split(/\s+/);for(e=0;e<r.length;e++){k=r[e].split(/[\(\)]/);submitters[k[0]]&&submitters[k[0]].call(f,t,k[1])}}});
 
   var scrollers=[];w.addEventListener('scroll',function(){requestAnimationFrame(function(){for(var l=0;l<scrollers.length;l++)scrollers[l].el&&scrollers[l].fn.call(scrollers[l].el)})},!1);
   

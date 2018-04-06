@@ -20,16 +20,20 @@
     background-color: rgba($textColor, 0);
     transition: all .3s;
     &:hover {
-      background-color: rgba($textColor, .05);
+      background-color: rgba($textColor, .1);
     }
     &.active {
-      background-color: rgba($textColor, .1);
+      color: #fff;
+      background-color: #959595;
     }
   }
   i {
     display: none;
     margin-left: .5em;
     margin-right: .5em;
+    &:before, &:after {
+      border-color: #fff;
+    }
   }
   .active i {
     display: inline-block;
@@ -63,7 +67,7 @@
 
 }
 [data-view="normaal"] .sort-view [href="#normaal"] {
-  background-color: rgba($textColor, .8);
+  background-color: #959595;
   color: #fff;
   .icon-view-normaal {
     border-color: #fff;
@@ -74,7 +78,7 @@
 }
 
 [data-view="compact"] .sort-view [href="#compact"] {
-  background-color: rgba($textColor, .8);
+  background-color: #959595;
   color: #fff;
   .icon-view-compact {
     &, &:before, &:after {
@@ -89,6 +93,11 @@
   align-items: center;
   
   font-size: $fontSmallSize;
+  
+  background-color: #e5e5e5;
+  padding: $padding / 4 $padding / 2;
+  
+  margin-bottom: $lineHeight;
   
   .sort, .sort-view {
     margin-bottom: 0;
@@ -106,13 +115,14 @@
   @include medium {
     flex-wrap: wrap;
     margin-bottom: 0;
+    padding: 0 10px;
     .sort-label {
       display: none;
       position: absolute;
     }
     .sort,
     .sort-view {
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
     .sort {
       margin-left: -.5em;
@@ -123,7 +133,17 @@
         margin-right: 2em;
       }
     }
+    .sort-view a {
+      margin-bottom: 0;
+    }
+  }
+  
+  @include small {
+    margin-left: -10px;
+    margin-right: -10px;
   }
   
 }
-
+.tabs + .sort-container {
+  margin-top: -$lineHeight;
+}

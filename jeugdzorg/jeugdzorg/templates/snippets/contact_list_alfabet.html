@@ -7,7 +7,17 @@
             <li><a href="#profiel-{{ letter }}" data-decorator="scroll">{{ letter }}</a></li>
         {% endfor %}
     </ul>
-    
+
+    <p class="contact-gemist-trigger">
+      <a href="#contact-gemist" data-handler="modal" class="text-right"><strong>Mis je een collega?</strong> Nodig iemand uit!</a>
+    </p>
+
+    <div class="hidden" id="contact-gemist">
+      <div class="well" data-submitter="gebruiker-uitnodigen">
+        {% get_gebruiker_uitnodigen_form %}
+      </div>
+    </div>
+
     <div class="overzicht compact-columns">
     
         {% if ordening == 'aflopend' %}
@@ -44,16 +54,6 @@
     
         {% endif %}
         
-        <div class="group">
-          <h2 class="shortcut" id="collega">Mis je iemand?</h2>
-          <ul class="contacten cards">
-            <li>
-              <div class="contact contact-gemist" data-decorator="gebruiker-uitnodigen">
-                {% get_gebruiker_uitnodigen_form %}
-              </div>
-            </li>
-          </ul>
-        </div>
     </div>
 
 </div>

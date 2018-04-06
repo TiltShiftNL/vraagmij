@@ -4,11 +4,6 @@
 
 {% block sort_options %}
 
-    <div class="systeem-berichten compact letop has-icon">
-      <p>Nog niet alle regelingen zijn toegevoegd aan dit overzicht. Weet je zelf een regeling die hier thuishoort? <a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}">Meld het aan {{ SITE_INSTELLINGEN.standaard_contact_naam }}</a>!
-    </div>
-
-
     <div class="sort-container">
       <span class="sort-label">Sortering</span>
       <ul class="sort">
@@ -25,6 +20,11 @@
         <li><a href="#compact" title="Compact" data-handler="view"><i class="icon-view-compact"></i></a></li>
       </ul>
     </div>
+    
+    <div class="systeem-berichten compact letop has-icon">
+      <p>Nog niet alle regelingen zijn toegevoegd aan dit overzicht. Weet je zelf een regeling die hier thuishoort? <a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}">Meld het aan {{ SITE_INSTELLINGEN.standaard_contact_naam }}</a>!
+    </div>
+    
 {% endblock %}
 
 {% block main %}

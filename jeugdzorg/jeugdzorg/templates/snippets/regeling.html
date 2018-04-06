@@ -5,6 +5,14 @@
   <div class="regeling-samenvatting">
       <p {% if search %}class="zb" data-zb="{{ regeling.samenvatting|truncatechars_html:100|escape }}"{% endif %}>{% if not search %}{{ regeling.samenvatting|truncatechars_html:100 }}{% endif %}</p>
   </div>
+  
+  {% if request.user|has_group:"viewer" %}
+  
+    {% if regeling in request.user.profiel.regeling_lijst.all  %}
+      <a href="{% url 'update_profiel' %}" data-decorator="profiel-connect" data-profiel-id="{{ request.user.profiel.id }}" data-connect-id="{{ regeling.id }}" data-connect-type="Regeling">Hier weet ik iets van</a>
+    {% endif %}
+  {% endif %}
+  
 
   <ul class="regeling-meta">
       <li><a href="{% url 'detail_regeling' regeling.id %}#voorwaarden"><strong>{{ regeling.voorwaarde_set.all|length }}</strong> voorwaarde{% if regeling.voorwaarde_set.all|length != 1 %}n{% endif %}</a></li>
@@ -18,13 +26,6 @@
           <a href="{% url 'detail_regeling' regeling.id %}">Meer details</a>
         {% endif %}
       </li>
-        {% if request.user|has_group:"viewer" %}
-        <li>
-            <a class="toggle {% if regeling in request.user.profiel.regeling_lijst.all  %}aan{% endif %}" href="#" data-decorator="profiel-connect" data-profiel-id="{{ request.user.profiel.id }}" data-connect-id="{{ regeling.id }}" data-connect-type="Regeling">
-                Ik weet hier iets van
-            </a>
-        </li>
-        {% endif %}
   </ul>
   {% if search %}
     <div class="hidden" data-zb="{{ regeling.samenvatting|escape }}{% if regeling.voorwaarde_set.all %}{% for vw in regeling.voorwaarde_set.all %}{{ vw.titel|escape }}{% endfor %}{% endif %}"></div>

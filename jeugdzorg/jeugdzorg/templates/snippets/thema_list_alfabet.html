@@ -1,11 +1,22 @@
 <div class="container">
     <h1 class="visually-hidden">Thema's</h1>
-    <ul class="themas cards">
-        {% for thema in thema_list %}
-            <li>
-                {% include 'snippets/thema.html' %}
-            </li>
-        {% endfor %}
-    </ul>
+    
+    {% if ordening == 'aflopend' %}
+        <ul class="themas cards">
+            {% for thema in thema_list reversed %}
+                <li>
+                    {% include 'snippets/thema.html' %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul class="themas cards">
+            {% for thema in thema_list %}
+                <li>
+                    {% include 'snippets/thema.html' %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 </div>

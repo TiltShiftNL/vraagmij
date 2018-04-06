@@ -646,11 +646,6 @@ body {
 .icon-search-close:before {
   content: '×'; }
 
-.toggle {
-  color: red; }
-.toggle.aan {
-  color: green; }
-
 .header {
   max-width: 1400px;
   box-sizing: border-box;
@@ -1281,6 +1276,7 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
 .shortcut {
   font-size: 2.2rem;
   line-height: 1;
+  min-height: 2.2rem;
   padding: 2.2rem 0 1.1rem 0;
   border-bottom: 1px solid #e2e2e2;
   margin-bottom: 2.2rem; }
@@ -1421,6 +1417,11 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
   .modal-inner {
     margin: 0;
     max-width: none; } }
+.modal-hidden {
+  display: none; }
+.modal .modal-hidden {
+  display: block; }
+
 .sort, .sort-view {
   list-style: none;
   margin: 0 0 2.2rem 0;
@@ -1441,13 +1442,16 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
   background-color: rgba(51, 51, 51, 0);
   transition: all .3s; }
 .sort a:hover {
-  background-color: rgba(51, 51, 51, 0.05); }
-.sort a.active {
   background-color: rgba(51, 51, 51, 0.1); }
+.sort a.active {
+  color: #fff;
+  background-color: #959595; }
 .sort i {
   display: none;
   margin-left: .5em;
   margin-right: .5em; }
+.sort i:before, .sort i:after {
+  border-color: #fff; }
 .sort .active i {
   display: inline-block; }
 
@@ -1470,7 +1474,7 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
   top: -2px; }
 
 [data-view="normaal"] .sort-view [href="#normaal"] {
-  background-color: rgba(51, 51, 51, 0.8);
+  background-color: #959595;
   color: #fff; }
 [data-view="normaal"] .sort-view [href="#normaal"] .icon-view-normaal {
   border-color: #fff; }
@@ -1478,7 +1482,7 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
   background-color: #fff; }
 
 [data-view="compact"] .sort-view [href="#compact"] {
-  background-color: rgba(51, 51, 51, 0.8);
+  background-color: #959595;
   color: #fff; }
 [data-view="compact"] .sort-view [href="#compact"] .icon-view-compact, [data-view="compact"] .sort-view [href="#compact"] .icon-view-compact:before, [data-view="compact"] .sort-view [href="#compact"] .icon-view-compact:after {
   border-color: #fff; }
@@ -1486,7 +1490,10 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
 .sort-container {
   display: flex;
   align-items: center;
-  font-size: 1.4rem; }
+  font-size: 1.4rem;
+  background-color: #e5e5e5;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 2.2rem; }
 .sort-container .sort, .sort-container .sort-view {
   margin-bottom: 0; }
 .sort-container .sort {
@@ -1497,18 +1504,28 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
 @media (max-width: 900px) {
   .sort-container {
     flex-wrap: wrap;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    padding: 0 10px; }
   .sort-container .sort-label {
     display: none;
     position: absolute; }
   .sort-container .sort, .sort-container .sort-view {
-    margin-bottom: 10px; }
+    margin-bottom: 6px; }
   .sort-container .sort {
     margin-left: -.5em; }
   .sort-container .sort li:first-child .active {
     margin-left: .5em; }
   .sort-container .sort li:last-child {
-    margin-right: 2em; } }
+    margin-right: 2em; }
+  .sort-container .sort-view a {
+    margin-bottom: 0; } }
+@media (max-width: 700px) {
+  .sort-container {
+    margin-left: -10px;
+    margin-right: -10px; } }
+
+.tabs + .sort-container {
+  margin-top: -2.2rem; }
 
 .systeem-berichten {
   position: relative;
@@ -2271,8 +2288,6 @@ dl.contact-extended dt.contact-regeling ~ dd {
 .contact-ken-ik {
   display: none; }
 
-.contact-gemist .contact-meta {
-  min-height: 10rem; }
 .contact-gemist form, .contact-gemist form fieldset, .contact-gemist form p {
   margin: 0;
   padding: 0; }
@@ -2281,17 +2296,18 @@ dl.contact-extended dt.contact-regeling ~ dd {
   padding-right: 1em; }
 .contact-gemist .systeem-berichten {
   padding: 1.5rem; }
-.contact-gemist .icon-avatar:before {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 3rem;
-  text-align: center;
-  content: '?';
-  color: #fff;
-  font-size: 3rem;
-  line-height: 1;
-  font-weight: 700; }
+
+.contact-gemist-trigger {
+  text-align: right;
+  margin-bottom: -4.4rem; }
+.contact-gemist-trigger a {
+  display: inline-block;
+  text-decoration: none; }
+.contact-gemist-trigger a:hover {
+  text-decoration: underline; }
+@media (max-width: 700px) {
+  .contact-gemist-trigger {
+    margin-bottom: 0; } }
 
 [data-view="compact"] .overzicht .contacten {
   display: inline;
