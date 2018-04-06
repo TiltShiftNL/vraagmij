@@ -10,7 +10,6 @@ class Command(BaseCommand):
     help = 'Create crontabs from code'
 
     def handle(self, *args, **options):
-        print(timezone.now().strftime('%Y-%m-%d %H:%M:%S'))
         job_base_1 = 'root . /root/project_env.sh; /usr/local/bin/'
         job_base_2 = '.sh >> /var/log/cron.log 2>&1\n'
         jobs = [

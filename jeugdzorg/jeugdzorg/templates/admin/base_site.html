@@ -7,11 +7,30 @@
 
 {% endblock %}
 
+{% block extrahead %}
+<style>
+    #header {
+        height: 70px;
+    }
+    #header .object-tools {
+        float: right;
+        margin: 0 -1em;
+
+    }
+</style>
+
+{% endblock %}
+
 {% block nav-global %}
     {% if request.user.is_superuser %}
-    <a class="btn button" href="{% url 'dumpjeugdzorg' %}">Download jeugdzorg.json</a>
+        <ul class="object-tools">
+        <li>
+    <li><a class="btn button" href="{% url 'rebuild_crontabs' %}">Rebuild crontabs</a></li>
+    <li><a class="btn button" href="{% url 'dumpjeugdzorg' %}">Download jeugdzorg.json</a></li>
     {% if ENV != 'production' %}
-    <a class="btn button" href="{% url 'loadjeugdzorg' %}">Upload jeugdzorg.json</a>
+    <li><a class="btn button" href="{% url 'loadjeugdzorg' %}">Upload jeugdzorg.json</a></li>
     {% endif %}
     {% endif %}
+
+    </ul>
 {% endblock %}

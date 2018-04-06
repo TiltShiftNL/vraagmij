@@ -27,7 +27,7 @@ from lxml import etree, html
 import lxml
 import socket
 from .utils import *
-
+from jeugdzorg.context_processors import app_settings
 from .auth import auth_test
 from .forms import *
 
@@ -48,17 +48,25 @@ def get_search_indexes(models=None):
     return out
 
 
-class CheckUserModel(TemplateView):
-    template_name = 'snippets/test.html'
+class RebuildCrontabsView(UserPassesTestMixin, View):
+    http_method_names = ['get', ]
+    template_name = 'admin/rebuild_crontabs_done.html'
 
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data['users'] = User.objects.all()
-        return data
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get(self, request, *args, **kwargs):
+        call_command('create_crontabs')
+        time.sleep(5)
+        messages.add_message(self.request, messages.INFO, "De crobtabs zijn vernieud." )
+        return HttpResponseRedirect('/admin/')
 
 
-class ConfigView(LoginRequiredMixin, TemplateView):
+class ConfigView(UserPassesTestMixin, TemplateView):
     template_name = 'snippets/config.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -540,9 +548,11 @@ class GebruikerUitnodigenView(UserPassesTestMixin, FormView):
         data = {
             'naam': self.request.user.profiel.naam_volledig
         }
+        data.update(app_settings())
+
         body = render_to_string('email/gebruiker_uitnodigen.txt', context=data, request=self.request)
         body_html = render_to_string('email/gebruiker_uitnodigen.html', data)
-        subject = 'VraagMij uitnoding'
+        subject = 'VraagMij uitnodiging'
 
         mail = Mail(
             Email('noreply@%s' % site.domain),
@@ -559,7 +569,6 @@ class GebruikerUitnodigenView(UserPassesTestMixin, FormView):
 
     def get_success_url(self):
         return '%s?success=1' % reverse_lazy('gebruiker_uitnodigen')
-
 
 
 def logout(request):
