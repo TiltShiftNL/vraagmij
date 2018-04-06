@@ -335,7 +335,6 @@
                   var r = RegExp(text[j] + '(?![^<>]*>)', 'gi'),
                       index_search = searchables[i].dataset.zb.search(r);
                   if (index_search >= 0) {
-                    console.log(text[i]);
                       elResults[j] = true;
                       t = t.replace(RegExp(text[j], 'gi'), '<mark>' + text[j] + '</mark>');
                   }
@@ -392,20 +391,30 @@
 
       this.addEventListener('focus', function(e){
 
-        var input = this;
+        var 
+          input = this,
+          hasData = false;
+
         helpers.ajax('/zoek/', function(response){
           if (response.status >= 200 && response.status < 400) {
             zoekContainer.innerHTML = response.responseText;
             cards = zoekContainer.querySelectorAll('.zr');
+            hasData = true;
             if (q.length > 0) {
-                zoek();
-            }
-            input.addEventListener('keyup', function(){
-              q = cleanQ(this.value);
               zoek();
-            });
+            }
           }
         });
+        input.addEventListener('keydown', function(e){
+          if (e.keyCode == 13) e.preventDefault();
+        });
+        input.addEventListener('keyup', function(e){
+          if (hasData) {
+            q = cleanQ(this.value);
+            zoek();
+          }
+        });
+        
         d.classList.add('search-mode')
       });
     },
@@ -413,7 +422,6 @@
         var el = this,
             handler = function(e){
               e.preventDefault();
-              console.log(this.dataset);
               var data = {}
               for (var k in this.dataset) {
                 data[k.replace(/(?:^|\.?)([A-Z])/g, function (x,y){return "_" + y.toLowerCase()}).replace(/^_/, "")] = this.dataset[k]
@@ -427,7 +435,7 @@
               xhr.setRequestHeader("Content-Type", "application/json");
               xhr.onload = function() {
                 if (xhr.status >= 200 && xhr.status < 400) {
-                  console.log(JSON.parse(xhr.responseText));
+
                   var status = JSON.parse(xhr.responseText).status;
                   if (status === 'toegevoegd'){
                     el.classList.add('aan');
