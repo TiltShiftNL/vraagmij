@@ -351,7 +351,7 @@
           },
           cleanQ = function (qRaw) {
               var i;
-              qRaw = qRaw.trim().replace(/\*|\[|\]|\+|\(|\)/g, '');
+              qRaw = qRaw.trim().replace(/\*|\.|\[|\]|\+|\(|\)/g, '');
               var _q = (qRaw.split(' ').length > 0) ? qRaw.split(' ') : [qRaw];
               for (i = 0; i < _q.length; i++){
                 _q[i] = _q[i].trim();
