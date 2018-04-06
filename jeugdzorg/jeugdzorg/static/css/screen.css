@@ -1628,12 +1628,10 @@ hr {
     flex-basis: calc(100% - 2.2rem); } }
 
 .zoeken {
-  padding: 1.5rem;
-  outline: 1.5rem solid rgba(255, 255, 255, 0);
   position: absolute;
   z-index: 100;
-  right: -1.5rem;
-  top: -1.5rem;
+  right: 0;
+  top: 0;
   width: 100%;
   max-width: 300px;
   transition: max-width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); }
@@ -1696,7 +1694,7 @@ hr {
   top: 0;
   bottom: 0;
   overflow: auto;
-  background-color: rgba(181, 218, 234, 0.9);
+  background-color: #fff;
   border: none;
   padding: 0;
   padding: 24rem 3rem 3rem 3rem;
@@ -1718,8 +1716,7 @@ hr {
   overflow: hidden; }
 .search-mode .zoeken {
   z-index: 202;
-  background-color: #6db5d6;
-  outline: 1.5rem solid rgba(109, 181, 214, 0.7);
+  background-color: #fff;
   height: 4rem;
   max-width: 1200px; }
 .search-mode input {
@@ -1744,9 +1741,7 @@ hr {
   max-width: 400px;
   text-align: center;
   margin: 6rem auto;
-  padding: 1.5rem;
-  color: #fff;
-  background-color: rgba(109, 181, 214, 0.9); }
+  padding: 1.5rem; }
 
 .regelingen {
   list-style: none;
@@ -2309,6 +2304,8 @@ dl.contact-extended dt.contact-regeling ~ dd {
   .contact-gemist-trigger {
     margin-bottom: 0; } }
 
+[data-view="compact"] .contact-gemist-trigger {
+  margin-bottom: 0; }
 [data-view="compact"] .overzicht .contacten {
   display: inline;
   margin: 0; }

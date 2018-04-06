@@ -497,6 +497,11 @@ dl.contact-extended {
 
 
 [data-view="compact"] {
+  
+  .contact-gemist-trigger {
+    margin-bottom: 0;
+  }
+  
   .overzicht {
     .contacten {
       display: inline;

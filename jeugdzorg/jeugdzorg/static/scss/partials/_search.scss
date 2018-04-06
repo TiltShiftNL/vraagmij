@@ -1,11 +1,9 @@
 .zoeken {
-  padding: $padding / 2;
-  outline: $padding / 2 solid rgba(#fff, 0);
   
   position: absolute;
   z-index: 100;
-  right: -$padding / 2;
-  top: -$padding / 2;
+  right: 0;
+  top: 0;
   
   width: 100%;
   max-width: 300px;
@@ -98,7 +96,7 @@
   top: 0;
   bottom: 0;
   overflow: auto;
-  background-color: rgba(#b5daea, .9);
+  background-color: #fff;
   
   
   border: none;
@@ -137,8 +135,8 @@
   
   .zoeken {
     z-index: 202;
-    background-color: $brandColor2;
-    outline: $padding / 2 solid rgba($brandColor2, .7);
+    background-color: #fff;
+  
     height: 4rem;
     max-width: $maxContentWidth;
   }
@@ -175,7 +173,7 @@
   text-align: center;
   margin: 2 * $padding auto;
   padding: $padding / 2;
-  color: #fff;
-  background-color: rgba($brandColor2, .9);
+ 
+ 
 
 }
