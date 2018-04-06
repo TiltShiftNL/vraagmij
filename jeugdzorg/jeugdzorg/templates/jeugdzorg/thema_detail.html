@@ -73,7 +73,7 @@
             <a href="{% url 'update_profiel' %}#themas" class="aside-block ik-weet-hier-iets-over active">
               <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span> 
               <strong>Jij bent een contactpersoon voor dit thema. </strong>
-              Collega hulpeverleners kunnen jou daarover vragen stellen! Dit kan je <u>hier</u> instellen.
+              Collega hulpverleners kunnen jou daarover vragen stellen! Dit kan je <u>hier</u> instellen.
             </a>
           </p>
         {% else %}
@@ -81,7 +81,7 @@
             <a href="{% url 'update_profiel' %}#themas" class="aside-block ik-weet-hier-iets-over">
               <span class="icon-avatar" {% if user.profiel.pasfoto %}style="background-image: url('{{ user.profiel.pasfoto|thumbnail_url:'avatar_x' }}')"{% endif %}></span> 
               <strong>Weet jij meer over dit thema? </strong>
-              Zou jij je collegas hiermee kunnen helpen en mogen zij jou daarover vragen stellen? Geef dat dan <u>hier</u> aan!
+              Zou jij je collega's hiermee kunnen helpen en mogen zij jou daarover vragen stellen? Geef dat dan <u>hier</u> aan!
             </a>
           </p>
         {% endif %}
