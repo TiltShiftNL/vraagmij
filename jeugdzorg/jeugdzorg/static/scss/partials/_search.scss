@@ -85,6 +85,17 @@
   .icon-search-close {
     top: -.2rem;
   }
+  @include large {
+    max-width: 200px;
+  }
+  @include medium {
+    max-width: 140px;
+  }
+  @include small {
+    margin-top: -$padding/ 2;
+    max-width: none;
+    position: static;
+  }
 
 }
 

@@ -1687,6 +1687,17 @@ hr {
   background-color: transparent; }
 .zoeken .icon-search-close {
   top: -.2rem; }
+@media (max-width: 1290px) {
+  .zoeken {
+    max-width: 200px; } }
+@media (max-width: 900px) {
+  .zoeken {
+    max-width: 140px; } }
+@media (max-width: 700px) {
+  .zoeken {
+    margin-top: -1.5rem;
+    max-width: none;
+    position: static; } }
 
 .zoeken-container {
   display: none; }
