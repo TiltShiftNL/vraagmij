@@ -1775,6 +1775,16 @@ hr {
   margin: 6rem auto;
   padding: 1.5rem; }
 
+.zoeken-container .container {
+  display: flex;
+  flex-flow: column; }
+
+.zoeken-regeling .regeling-lijst {
+  order: -1; }
+
+.zoeken-thema .thema-lijst {
+  order: -1; }
+
 .regelingen {
   list-style: none;
   padding: 0; }

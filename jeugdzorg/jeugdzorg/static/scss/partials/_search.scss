@@ -215,3 +215,15 @@
   padding: $padding / 2;
 
 }
+
+.zoeken-container .container {
+  display: flex;
+  flex-flow: column;
+}
+
+.zoeken-regeling .regeling-lijst {
+  order: -1;
+}
+.zoeken-thema .thema-lijst {
+  order: -1;
+}
