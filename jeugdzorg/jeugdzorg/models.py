@@ -826,6 +826,12 @@ class Instelling(models.Model):
         max_length=30,
         default='0 0 1 */6 *',
     )
+    create_crontabs_frequentie = models.CharField(
+        verbose_name=_('Vernieuw crontabs frequentie'),
+        help_text=_("Crontab format 'MIN HOUR DOM MON DOW'"),
+        max_length=30,
+        default='*/5 * * * *',
+    )
 
     @staticmethod
     def track_field_names():
