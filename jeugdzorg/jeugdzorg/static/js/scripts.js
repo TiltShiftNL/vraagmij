@@ -318,7 +318,7 @@
     'search': function(){
       var q = [],
           cards = [],
-          zoekContainer = document.getElementById('zoeken').querySelector(':scope > .container'),
+          zoekContainer = document.querySelector('#zoeken > .container'),
           contains = function(selector, text) {
             var elements = document.querySelectorAll(selector),
                 results = [];
@@ -386,6 +386,8 @@
                 foundlements[i].parentNode.parentNode.parentNode.dataset.resultcount++;
                 
               }
+              zoekContainer.style.display='block';
+
           };
           
 

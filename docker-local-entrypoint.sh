@@ -19,6 +19,8 @@ python manage.py crontab add
 echo "Apply database migrations"
 python manage.py migrate
 
+python manage.py createcachetable
+
 python manage.py createsuperuser_pw  --username ${ADMIN_USERNAME} --password ${ADMIN_PASSWORD} --noinput --email 'admin@host.com'
 
 if [ "${RUNSERVER}" == "no" ];

@@ -119,9 +119,8 @@
   
   
   {% endblock %}
-
   <main class="main">
-      
+      {% block messages %}
       {% if messages %}
           <div class="container">
               <ul class="systeem-berichten{% for message in messages %} {{ message.tags }}{% endfor %}">
@@ -131,7 +130,8 @@
               </ul>
           </div>
       {% endif %}
-      
+      {% endblock %}
+
       {% block main %}{% endblock %}
   </main>
 
