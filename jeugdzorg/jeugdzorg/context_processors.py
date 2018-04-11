@@ -19,4 +19,5 @@ def app_settings(request=None):
         'PROFIEL_COUNT': Profiel.is_zichtbaar.all().count(),
         'THEMA_COUNT': Thema.objects.all().count(),
         'SITE_INSTELLINGEN': instelling,
+        'PAGINAS': Pagina.is_actief.all(),
     }

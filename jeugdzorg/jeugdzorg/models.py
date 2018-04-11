@@ -555,7 +555,7 @@ class Profiel(PrintableModel, models.Model):
     )
     hou_me_op_de_hoogte_mail = models.BooleanField(
         verbose_name=_('Hou me op de hoogte via e-mail'),
-        default=False,
+        default=True,
     )
     gebruiker_email_verificatie = models.CharField(
         verbose_name=_('Gebruiker email verificatie'),
@@ -750,6 +750,46 @@ class EventItem(models.Model):
     class Meta:
         verbose_name = _('Gebruikers gedrag')
         verbose_name_plural = _("Gebruikers gedragingen")
+
+
+class PaginaIsActiefManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(actief=True)
+
+
+class Pagina(models.Model):
+    actief = models.BooleanField(
+        verbose_name=_('Actief'),
+        default=False,
+    )
+    titel = models.CharField(
+        verbose_name=_('Titel'),
+        max_length=50
+    )
+    slug = models.SlugField(
+        verbose_name=_('Slug'),
+    )
+    inhoud = models.TextField(
+        verbose_name=_('Inhoud'),
+        help_text=_('Tekstopmaak kan verkregen worden door de Textile syntax te gebruiken. Zie: https://txstyle.org/'),
+        null=True,
+        blank=True,
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        editable=False,
+        db_index=True
+    )
+    objects = models.Manager()
+    is_actief = PaginaIsActiefManager()
+
+    class Meta:
+        verbose_name = 'Pagina'
+        verbose_name_plural = "Pagina's"
+        ordering = ['order']
+
+    def __unicode__(self):
+        return self.titel
 
 
 class Instelling(models.Model):

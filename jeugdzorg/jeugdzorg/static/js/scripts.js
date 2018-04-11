@@ -355,13 +355,13 @@
           cleanQ = function (qRaw) {
               var i;
               if (qRaw === '') return [];
-              // qRaw = qRaw.trim().replace(/\*|\\|\[|\]|\+|\(|\)/g, '');
 
               var _q = (qRaw.split(' ').length > 0) ? qRaw.split(' ') : [qRaw];
               for (i = 0; i < _q.length; i++){
                 _q[i] = _q[i].trim();
               }
               _q = _q.filter(function(item, pos) {
+                  if (item === '') return false;
                   return _q.indexOf(item) === pos;
               });
               _q = Array.prototype.filter.call(_q, function(qu, index){

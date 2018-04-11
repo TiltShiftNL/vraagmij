@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'jeugdzorg',
 
     'adminsortable',
+    'adminsortable2',
     'sortedm2m',
     'requests',
     'django_crontab',
@@ -71,6 +72,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'easy_thumbnails',
+    'django_markup',
 
     'django.contrib.admin',
     'django.contrib.auth',

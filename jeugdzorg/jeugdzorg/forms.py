@@ -204,11 +204,6 @@ class ProfielModelForm(forms.ModelForm):
 
 
 class UserCreationForm(DefaultUserCreationForm):
-    email = forms.EmailField(
-        widget=forms.EmailInput,
-        validators=[user_email_validation],
-        error_messages={'unique': "Er bestaat al gebruiker met dit e-mailadres."},
-    )
     voornaam = forms.CharField(
         label='Voornaam',
         required=False,
@@ -221,6 +216,16 @@ class UserCreationForm(DefaultUserCreationForm):
         label='Tussenvoegsel',
         required=False,
     )
+    email = forms.EmailField(
+        widget=forms.EmailInput,
+        validators=[user_email_validation],
+        error_messages={'unique': "Er bestaat al gebruiker met dit e-mailadres."},
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['voornaam'].widget.attrs.update({'autofocus': True})
+        self.fields['email'].widget.attrs.pop('autofocus')
 
     class Meta:
         model = User

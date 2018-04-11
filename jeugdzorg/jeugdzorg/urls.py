@@ -90,6 +90,8 @@ urlpatterns = [
     path('zoek/', SearchView.as_view(), name='zoek'),
     # path('error/', error_view, name='error'),
 
+    path('pagina/<slug:slug>', PaginaDetail.as_view(), name='pagina'),
+
 
     url(r'^herstel-wachtwoord/$',
         password_reset_new_user,
