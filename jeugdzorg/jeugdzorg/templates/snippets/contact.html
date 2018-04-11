@@ -49,20 +49,20 @@
       {% if item.thema_lijst.all %}
         <dt class="contact-thema">thema's</dt>
         {% for thema in item.thema_lijst.all %}
-          <dd><a href="{% url 'detail_thema' thema.slug %}" class="zb">{{ thema.titel }}</a></dd>
+          <dd><a href="{% url 'detail_thema' thema.slug %}" {% if search %}data-zb="{{ thema.titel|escape }}"{% endif %}>{% if not search %}{{ thema.titel }}{% endif %}</a></dd>
         {% endfor %}
       {% endif %}
       
       {% if item.vaardigheden %}
         <dt class="contact-vaardigheden">Bijzonderheden</dt>
-        <dd class="zb">{{ item.vaardigheden|escape }}</dd>
+        <dd {% if search %}data-zb="{{ item.vaardigheden|escape }}"{% endif %}>{% if not search %}{{ item.vaardigheden }}{% endif %}</dd>
       {% endif %}
 
       {% with alle_gebieden=item.alle_gebieden %}
         {% if alle_gebieden.stadsdeel_lijst or alle_gebieden.gebied_lijst %}
           <dt class="contact-gebied">gebieden</dt>
           {% for v in alle_gebieden.stadsdeel_lijst %}
-            <dd class="zb">{{ v.naam }}</dd>
+            <dd {% if search %}data-zb="{{ v.naam|escape }}"{% endif %}>{% if not search %}{{ v.naam }}{% endif %}</dd>
           {% endfor %}
         {% endif %}
         {% for v in alle_gebieden.gebied_lijst %}
@@ -73,7 +73,7 @@
       {% if item.regeling_lijst.all %}
         <dt class="contact-regeling">regelingen</dt>
         {% for regeling in item.regeling_lijst.all %}
-          <dd><a href="{% url 'detail_regeling' regeling.id %}" class="zb">{{ regeling.titel }}</a></dd>
+          <dd><a href="{% url 'detail_regeling' regeling.id %}" {% if search %}data-zb="{{ regeling.titel|escape }}"{% endif %}>{% if not search %}{{ regeling.titel }}{% endif %}</a></dd>
         {% endfor %}
       {% endif %}
       

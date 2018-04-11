@@ -19,3 +19,4 @@ django-filter
 easy-thumbnails
 lxml
 croniter
+django-axes

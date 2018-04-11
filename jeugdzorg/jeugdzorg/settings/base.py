@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -157,6 +159,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME': 'jeugdzorg.validators.CustomPasswordValidator',
+    },
 ]
 
 AUTH_USER_MODEL = 'jeugdzorg.User'
@@ -187,6 +192,9 @@ LANGUAGES = (
 DEFAULT_LANGUAGE = 0
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -234,9 +242,22 @@ THUMBNAIL_ALIASES = {
     },
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'jeugdzorg_cache_table',
+    }
+}
+
+# login lockout after 3 attempts
+AXES_COOLOFF_TIME = timedelta(minutes=20)
+AXES_LOCKOUT_TEMPLATE = 'snippets/login_lockout.html'
+
+
 SEARCH_MODELS = [
     'Profiel',
     'Thema',
     'Regeling',
 ]
+
 

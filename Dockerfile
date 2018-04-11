@@ -10,7 +10,9 @@ ENV POSTGRES_PASSWORD=notset
 ENV STATIC_ROOT '/opt/static_root/'
 ENV PYTHONHASHSEED 0
 ENV ENV=production
+ENV TZ=Europe/Amsterdam
 
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get dist-upgrade -y

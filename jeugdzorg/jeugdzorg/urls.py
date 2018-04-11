@@ -91,7 +91,6 @@ urlpatterns = [
     # path('error/', error_view, name='error'),
 
 
-
     url(r'^herstel-wachtwoord/$',
         password_reset_new_user,
         {'flow': 'default', },

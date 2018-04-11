@@ -29,64 +29,9 @@ from django.contrib.auth.forms import SetPasswordForm as SetPasswordFormDefault
 from django.contrib.auth import models as auth_models
 from croniter import croniter
 from django.utils import timezone
+from .validators import *
 
 UserModel = get_user_model()
-
-
-def crontab_format_validator(value):
-    base = timezone.now()
-    try:
-        croniter(value, base)
-    except:
-        raise ValidationError('Dit crontab format is niet correct', code='error_code')
-    return True
-
-
-def file_size(value):
-    limit = 5 * 1024 * 1024
-    if value and value.size > limit:
-        print('max')
-        raise ValidationError('De bestandsgrootte van de pasfoto is meer dan 5MB.', code='error_code')
-
-
-def file_type(value):
-    file_types = [
-        'image/jpeg',
-        'image/jpg',
-        'image/png',
-        'image/gif',
-    ]
-    if value.content_type not in file_types:
-        raise ValidationError('Je mag voor de pasfoto alleen .jpg, .png en .gif bestanden gebruiken.', code='error_code')
-
-
-def user_email_validation(value):
-    instelling = None
-    try:
-        site = Site.objects.get_current()
-        instelling = Instelling.objects.get(site=site)
-    except:
-        pass
-
-    domeinen = list(set([dd for d in Organisatie.objects.all() for dd in d.email_domeinen_lijst()]))
-    validator = EmailValidator()
-    try:
-        validator(value)
-    except ValidationError:
-        pass
-
-    if value.rsplit('@', 1)[1] not in domeinen:
-        raise ValidationError(
-            mark_safe('Dit e-mailadres kan niet worden gebruikt. '
-            'Het lijkt erop dat deze bijbehorende organisatie nog niet is aangemeld. '
-            'Stuur een mail naar <a href="mailto:%s">%s</a>' % (
-                instelling.standaard_contact_email,
-                instelling.standaard_contact_naam,
-            )),
-            code='invalid'
-        )
-
-    return True
 
 
 class UploadJeugdzorgFixtureFileForm(forms.Form):
