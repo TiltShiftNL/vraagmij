@@ -79,8 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'axes',
-    # 'defender',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -251,8 +250,9 @@ CACHES = {
 }
 
 # login lockout after 3 attempts
-# AXES_COOLOFF_TIME = timedelta(minutes=20)
-# AXES_LOCKOUT_TEMPLATE = 'snippets/login_lockout.html'
+AXES_COOLOFF_TIME = timedelta(minutes=20)
+AXES_LOCKOUT_TEMPLATE = 'snippets/login_lockout.html'
+
 
 SEARCH_MODELS = [
     'Profiel',
