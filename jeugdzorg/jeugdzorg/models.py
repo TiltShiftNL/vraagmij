@@ -555,7 +555,7 @@ class Profiel(PrintableModel, models.Model):
     )
     hou_me_op_de_hoogte_mail = models.BooleanField(
         verbose_name=_('Hou me op de hoogte via e-mail'),
-        default=False,
+        default=True,
     )
     gebruiker_email_verificatie = models.CharField(
         verbose_name=_('Gebruiker email verificatie'),
