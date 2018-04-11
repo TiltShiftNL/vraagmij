@@ -355,12 +355,6 @@ class UserCreationView(CreateView):
         subject = 'VraagMij account activatie.'
         email = Mail(Email('noreply@%s' % current_site.domain), subject, Email(to_email), Content("text/plain", body))
         sg.client.mail.send.post(request_body=email.get())
-
-        messages.add_message(
-            self.request,
-            messages.INFO,
-            "Een link om je account te activeren is verstuurd naar het opgegeven e-mailadres."
-        )
         return super().form_valid(form)
 
 
