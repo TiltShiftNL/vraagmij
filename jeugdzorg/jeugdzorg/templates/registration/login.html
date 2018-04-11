@@ -14,13 +14,13 @@
                 {% for field in form %}
                     {% for error in field.errors %}
                         <li>
-                            <label for="{{ field.id }}">{{ error|escape }}</label>
+                            <label for="{{ field.id }}">{{ error|safe }}</label>
                         </li>
                     {% endfor %}
                 {% endfor %}
                 {% for error in form.non_field_errors %}
                     <li>
-                        {{ error|escape }}
+                        {{ error|safe }}
                     </li>
                 {% endfor %}
             </ul>

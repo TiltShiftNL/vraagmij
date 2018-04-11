@@ -281,9 +281,13 @@ VoorwaardeFormSet = forms.inlineformset_factory(
 
 class LoginForm(AuthenticationForm):
     error_messages = {
-        'invalid_login': 'Ongeldig e-mailadres of wachtwoord.',
+        'invalid_login': '',
         'inactive': "Dit account is niet actief.",
     }
+
+    def __init__(self, request=None, *args, **kwargs):
+        self.error_messages['invalid_login'] = 'Ongeldig e-mailadres of wachtwoord. Wachtwoord vergeten? <a href="%s">Vraag een nieuwe aan.</a>' % reverse('herstel_wachtwoord')
+        super().__init__(request, *args, **kwargs)
 
 
 class ThemaModelForm(forms.ModelForm):

@@ -254,6 +254,7 @@ CACHES = {
 # login lockout after 3 attempts
 AXES_COOLOFF_TIME = timedelta(minutes=20)
 AXES_LOCKOUT_TEMPLATE = 'snippets/login_lockout.html'
+AXES_FAILURE_LIMIT = 10
 
 
 SEARCH_MODELS = [
