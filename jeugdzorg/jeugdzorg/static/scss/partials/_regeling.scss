@@ -171,6 +171,19 @@
   margin-bottom: 2 * $lineHeight;
 }
 
+.regeling-bron {
+  font-size: $fontSmallSize;
+  color: rgba($textColor, .6);
+  a {
+    color: rgba($textColor, .6);
+    text-decoration: none;
+    &:hover {
+      color: rgba($textColor, 1);
+      text-decoration: underline;
+    }
+  }
+}
+
 .input-volgorde,
 .input-delete {  
   opacity: 0;
