@@ -230,6 +230,8 @@
     
     'search-close': function(e){
       e.preventDefault();
+      var q = d.querySelector('input[name="q"]');
+      if (q) q.value = '';
       d.classList.remove('search-mode');
     }
     
@@ -435,7 +437,8 @@
           }
         });
         
-        d.classList.add('search-mode')
+        d.classList.add('search-mode');
+        
       });
     },
     'profiel-connect': function () {
