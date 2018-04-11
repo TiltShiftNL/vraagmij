@@ -140,7 +140,9 @@
       <div>
         <h3 class="footer-title">Over {% if SITE_INSTELLINGEN.app_naam %}{{ SITE_INSTELLINGEN.app_naam }}{% else %}VraagMij{% endif %}</h3>
         <ul>
-          
+          {% for pagina in PAGINAS %}
+            <li><a href="{% url 'pagina' pagina.slug %}"><i class="icon-arrow-right"></i> {{ pagina.titel }}</a></li>
+          {% endfor %}
         </ul>
       </div>
       <div>
@@ -171,15 +173,6 @@
   <div class="version version-{{ ENV }}">
     <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>
-  <footer>
-      <ul>
-          {% for pagina in PAGINAS %}
-          <li>
-              <a href="{% url 'pagina' pagina.slug %}">{{ pagina.titel }}</a>
-          </li>
-          {% endfor %}
-      </ul>
-  </footer>
 
   <script type="text/javascript" src="{% static "js/scripts.js" %}?v={% if ENV == 'develop' %}{% now "U" %}_{% endif %}{{ SOURCE_COMMIT }}"></script>
   <script type="text/javascript" data-counter-token="{{ csrf_token }}" src="{% static "js/counters.js" %}?v={% if ENV == 'develop' %}{% now "U" %}_{% endif %}{{ SOURCE_COMMIT }}"></script>
