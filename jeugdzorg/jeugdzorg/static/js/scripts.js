@@ -69,7 +69,6 @@
         w.location = url;
       }
       
-      
     },
     
     'choices': function(e){
@@ -127,6 +126,7 @@
           }
         }
         
+        el.classList[el.querySelectorAll(':checked').length ? 'add' : 'remove']('has-items');
 
       };
       
@@ -145,6 +145,7 @@
           form.classList.add('changed');
           _change(e);
         }); _change(false);
+        
       }
     },
     
@@ -313,6 +314,17 @@
       this.addEventListener('keyup', function(){
         this.classList.add('changed');
       });
+    },
+    
+    'empty': function(){
+      var el = this;
+      
+      var _empty = function(){
+        el.classList[el.querySelectorAll(':checked').length ? 'add' : 'remove']('has-items');
+      };
+      
+      el.addEventListener('change', _empty); _empty();
+      
     },
     
     'search': function(){

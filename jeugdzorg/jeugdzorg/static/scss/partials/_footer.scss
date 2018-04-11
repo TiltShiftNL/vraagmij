@@ -1,5 +1,5 @@
 .page-footer {
-  background-color: $textColor;
+  background-color: #666;
   padding: $padding $padding $padding/2 $padding;
   margin-bottom: -$padding;
   &, * {
@@ -33,6 +33,7 @@
   
   a {
     text-decoration: none;
+    font-size: $fontSize;
     &:hover {
       text-decoration: underline;
       color: #fff;

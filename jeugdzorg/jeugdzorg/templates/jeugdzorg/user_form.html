@@ -166,13 +166,26 @@
         <legend>Thema's <small>Waar mensen mij vragen over kunnen stellen</small></legend>
         <div class="row">
             <div class="choices-modal">
-                <div id="user_themas">
+                <div id="user_themas" data-decorator="empty">
                     {{ profiel.forms.0.thema_lijst }}
+                    
+                    <div class="empty-message">
+                      <p>
+                        <strong>Waar kunnen collega's je vragen over stellen?</strong>
+                        Bijvoorbeeld over wonen, jeugd, schuldsanering, asielzoekers, etc.
+                      </p>
+                      <p>
+                        <a class="button primary" href="#user_themas" data-handler="choices">Instellen</a>
+                      </p>
+                    </div>
+                    
                 </div>
+                
                 <p class="buttons">
                     <a class="choices-nieuw" href="#user_themas" data-handler="choices">+ Nieuwe toevoegen</a>
                     <a class="button secondary choices-close" href="#sluiten" data-handler="modal-close">Sluiten</a>
                 </p>
+                
             </div>
         </div>
         <p class="systeem-berichten">

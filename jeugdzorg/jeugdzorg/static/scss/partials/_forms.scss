@@ -342,3 +342,23 @@ form {
   }
 }
 
+.empty-message {
+  padding: $padding / 2;
+  background-color: rgba($textColor, .1);
+  text-align: center;
+  margin-bottom: $lineHeight;
+  strong {
+    display: block;
+    font-size: 2rem;
+  }
+  > *:last-child {
+    margin-bottom: 0;
+  }
+  .has-items &{
+    display: none;
+  }
+  .modal & {
+    display: none;
+  }
+}
+

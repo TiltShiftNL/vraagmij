@@ -318,7 +318,7 @@ body {
   margin-bottom: 0; }
 
 .page-footer {
-  background-color: #333;
+  background-color: #666;
   padding: 3rem 3rem 1.5rem 3rem;
   margin-bottom: -3rem; }
 .page-footer, .page-footer * {
@@ -342,7 +342,8 @@ body {
   flex-basis: 25%;
   padding-right: 3rem; }
 .page-footer a {
-  text-decoration: none; }
+  text-decoration: none;
+  font-size: 1.6rem; }
 .page-footer a:hover {
   text-decoration: underline;
   color: #fff; }
@@ -1172,6 +1173,21 @@ form label strong, form .label strong {
   .form-aside.well {
     padding: 10px; } }
 
+.empty-message {
+  padding: 1.5rem;
+  background-color: rgba(51, 51, 51, 0.1);
+  text-align: center;
+  margin-bottom: 2.2rem; }
+.empty-message strong {
+  display: block;
+  font-size: 2rem; }
+.empty-message > *:last-child {
+  margin-bottom: 0; }
+.has-items .empty-message {
+  display: none; }
+.modal .empty-message {
+  display: none; }
+
 .choices {
   list-style: none;
   padding: 0;
@@ -1598,6 +1614,8 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
 .systeem-berichten.error, .systeem-berichten.info.error, .systeem-berichten.fout {
   background-color: rgba(255, 0, 0, 0.1);
   color: red; }
+.systeem-berichten.error a, .systeem-berichten.info.error a, .systeem-berichten.fout a {
+  color: red; }
 .systeem-berichten.letop {
   font-weight: 700;
   background-color: #d7effc; }
@@ -1607,6 +1625,8 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 1.5rem; }
 .systeem-berichten li.error {
+  color: red; }
+.systeem-berichten li.error a {
   color: red; }
 .systeem-berichten li.info {
   color: green; }

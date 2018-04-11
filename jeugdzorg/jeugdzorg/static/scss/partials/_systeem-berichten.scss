@@ -31,6 +31,9 @@
   &.fout {
     background-color: rgba(red, .1);
     color: red;
+    a {
+      color: red;
+    }
   }
   
   
@@ -51,6 +54,9 @@
   
   li.error {
     color: red;
+    a {
+      color: red;
+    }
   }
   li.info {
     color: green;
