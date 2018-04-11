@@ -41,6 +41,12 @@
                           {% endfor %}
                       </ol>
                   {% endif %}
+                  
+                  {% if regeling.bron_url %}
+                  <p class="regeling-bron">
+                    <a href="{{ regeling.bron_url }}" target="_blank">Bron: {{ regeling.bron_url }}</a>
+                  </p>
+                  {% endif %}
 
               </div>
 
@@ -50,7 +56,7 @@
             {% if regeling.aanvraag_url %}
   
               <p>
-                <a class="aside-block regeling-aanvraag" href="{{ regeling.aanvraag_url }}" target="_blank" {% if regeling.bron %}title="{{ regeling.bron }}"{% endif %}>Aanvraagformulier <i class="icon-external"></i></a>
+                <a class="aside-block regeling-aanvraag" href="{{ regeling.aanvraag_url }}" target="_blank" {% if regeling.bron %}title="{{ regeling.bron }}"{% endif %}>Aanvragen <i class="icon-external"></i></a>
               </p>
 
             {% endif %}
@@ -89,7 +95,7 @@
     
       {% if regeling.profielen_zichtbaar %}
 
-        <h2 id="contacten" class="shortcut">Contactpersonen</h2>
+        <h2 class="shortcut" id="contacten"><strong>{{ regeling.profielen_zichtbaar|length }}</strong> {% if regeling.profielen_zichtbaar|length != 1 %}contactpersonen{% else %}contactpersoon{% endif %}</h2>
         <p>
             Heb je een inhoudelijke vraag over "{{ regeling.titel }}"? 
             {% if request.user|has_group:"viewer" %}
