@@ -1787,6 +1787,8 @@ hr {
   display: none; }
 .search-mode .tabs, .search-mode .sort-container {
   display: none; }
+.search-mode .page-footer {
+  display: none; }
 .search-mode .zoeken {
   z-index: 202;
   background-color: #fff;
@@ -1976,6 +1978,16 @@ hr {
 
 .regeling-samenvatting {
   margin-bottom: 4.4rem; }
+
+.regeling-bron {
+  font-size: 1.4rem;
+  color: rgba(51, 51, 51, 0.6); }
+.regeling-bron a {
+  color: rgba(51, 51, 51, 0.6);
+  text-decoration: none; }
+.regeling-bron a:hover {
+  color: #333333;
+  text-decoration: underline; }
 
 .input-volgorde, .input-delete {
   opacity: 0;
