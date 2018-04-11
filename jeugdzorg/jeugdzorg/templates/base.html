@@ -2,7 +2,7 @@
 <html lang="nl" class="no-js no-touch" data-view="normaal">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 
     <meta name="robots" content="noindex">
 
@@ -24,7 +24,7 @@
     
     <script type="text/javascript">!function(a){a.className=a.className.replace(/\bno-js\b/g,'js'),'ontouchstart'in window&&(a.className=a.className.replace(/\bno-touch\b/g,'touch'))}(document.documentElement)</script>
 
-    <!-- TODO: USE FONTS FROM AMSTERDAM -->
+    {# TODO: USE FONTS FROM AMSTERDAM #}
     <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/0037f97b-b0f6-41de-8f33-75b12c9f76ea.css"/>
 
 
@@ -134,12 +134,41 @@
 
       {% block main %}{% endblock %}
   </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <h3 class="footer-title">Over {% if SITE_INSTELLINGEN.app_naam %}{{ SITE_INSTELLINGEN.app_naam }}{% else %}VraagMij{% endif %}</h3>
+        <ul>
+          
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Contact</h3>
+          <p>Heb je een vraag en kun je het antwoord niet vinden op onze website?</p>
+          <p><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}"><i class="icon-arrow-right"></i> E-mail {% if SITE_INSTELLINGEN.app_naam %}{{ SITE_INSTELLINGEN.app_naam }}{% else %}VraagMij{% endif %}</a></p>
+      </div>
+      <div>
+        <h3 class="footer-title">Overzichten</h3>
+        <ul>
+          <li><a href="{% url 'themas' %}" data-counter="click.nav.themas"><i class="icon-arrow-right"></i> Thema's</a></li>
+          <li><a href="{% url 'contacten' %}" data-counter="click.nav.contacten"><i class="icon-arrow-right"></i> Contacten</a></li>
+          <li><a href="{% url 'regelingen' %}" data-counter="click.nav.regelingen"><i class="icon-arrow-right"></i> Regelingen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Feedback</h3>
+        <p>Heb je een fout gevonden, of heb je suggesties voor verbeteringen?</p>
+        <p><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}"><i class="icon-arrow-right"></i> Stuur feedback</a></p>
+      </div>
+    </div>
+  </footer>
 
   <p class="nav-top">
     <a href="#top" data-handler="scroll" data-counter="click.nav.top"><i class="icon-arrow-up"></i></a>
   </p>
 
-  <div class="version version-{{ ENV }}" data-counter="mouseover.app.version">
+  <div class="version version-{{ ENV }}">
     <strong>{{ ENV }}</strong><span> {{ SOURCE_COMMIT }}</span>
   </div>
 
