@@ -74,7 +74,7 @@ body {
   z-index: 2;
   margin: 0 0 $lineHeight $padding;
   p, ul {
-    margin-bottom: 1rem;
+    margin-bottom: $lineHeight;
   }
   ul {
     list-style :none;

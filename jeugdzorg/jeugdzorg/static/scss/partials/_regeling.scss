@@ -322,3 +322,9 @@
     outline-color: #fde5e5;
   }
 }
+
+.regeling-detail {
+  > .cards:last-child {
+    margin-bottom: -1.1rem;
+  }
+}
