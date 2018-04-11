@@ -1,2 +1,61 @@
 .footer {
+  background-color: $textColor;
+  padding: $padding $padding $padding/2 $padding;
+  margin-bottom: -$padding;
+  &, * {
+    color: #fff;
+  }
+  p, ul {
+    margin-bottom: $padding / 2;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li + li {
+    margin-top: .2em;
+  }
+  p {
+    font-size: $fontSmallSize;
+  }
+  .footer-title {
+    margin-bottom: .5em;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    > div {
+      box-sizing: border-box;
+      flex-basis: 25%;
+      padding-right: $padding;
+    }
+  }
+  
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+  }
+  .icon-arrow-right {
+    border-color: #fff;
+    margin-right: .5em;
+  }
+  
+  @include medium {
+    margin-bottom: -10px;
+    padding: $padding/2 10px $padding/2 10px;
+    .container {
+      > div {
+        flex-basis: 50%;
+        margin-bottom: $padding / 2;
+      }
+    }
+  }
+  @include small {
+    .container {
+      display: block;
+    }
+  }
 }

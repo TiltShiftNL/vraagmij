@@ -285,7 +285,7 @@ body {
   z-index: 2;
   margin: 0 0 2.2rem 3rem; }
 .aside p, .aside ul {
-  margin-bottom: 1rem; }
+  margin-bottom: 2.2rem; }
 .aside ul {
   list-style: none;
   padding: 0;
@@ -316,6 +316,49 @@ body {
   text-decoration: none; }
 .aside-block > *:last-child {
   margin-bottom: 0; }
+
+.footer {
+  background-color: #333;
+  padding: 3rem 3rem 1.5rem 3rem;
+  margin-bottom: -3rem; }
+.footer, .footer * {
+  color: #fff; }
+.footer p, .footer ul {
+  margin-bottom: 1.5rem; }
+.footer ul {
+  list-style: none;
+  padding: 0; }
+.footer li + li {
+  margin-top: .2em; }
+.footer p {
+  font-size: 1.4rem; }
+.footer .footer-title {
+  margin-bottom: .5em; }
+.footer .container {
+  display: flex;
+  flex-wrap: wrap; }
+.footer .container > div {
+  box-sizing: border-box;
+  flex-basis: 25%;
+  padding-right: 3rem; }
+.footer a {
+  text-decoration: none; }
+.footer a:hover {
+  text-decoration: underline;
+  color: #fff; }
+.footer .icon-arrow-right {
+  border-color: #fff;
+  margin-right: .5em; }
+@media (max-width: 900px) {
+  .footer {
+    margin-bottom: -10px;
+    padding: 1.5rem 10px 1.5rem 10px; }
+  .footer .container > div {
+    flex-basis: 50%;
+    margin-bottom: 1.5rem; } }
+@media (max-width: 700px) {
+  .footer .container {
+    display: block; } }
 
 .icon-andreas {
   display: inline-block;
@@ -2017,6 +2060,9 @@ hr {
   margin-left: .5em; }
 .aside-block.regeling-aanvraag .icon-external::after {
   outline-color: #fde5e5; }
+
+.regeling-detail > .cards:last-child {
+  margin-bottom: -1.1rem; }
 
 .contacten {
   list-style: none;
