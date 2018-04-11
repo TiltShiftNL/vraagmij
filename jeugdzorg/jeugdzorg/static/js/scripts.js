@@ -332,11 +332,14 @@
               for (i = 0; i < searchables.length; i++){
                 var t = searchables[i].dataset.zb;
                 for(j = 0; j < text.length; j++){
-                  var r = RegExp(text[j] + '(?![^<>]*>)', 'gi'),
-                      index_search = searchables[i].dataset.zb.search(r);
-                  if (index_search >= 0) {
-                      elResults[j] = true;
-                      t = t.replace(RegExp(text[j], 'gi'), '<mark>' + text[j] + '</mark>');
+                  var q = text[j].replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'),
+                      r = RegExp(q + '(?![^<]*>|[^<>]*</)', 'gi'),
+                      match,
+                      l = text[j].length;
+                  while (match = r.exec(t)) {
+                    var m = t.substr(match.index, l);
+                    t = t.substr(0, match.index) + '<mark>' + m + '</mark>' + t.substr(match.index + l);
+                    elResults[j] = true;
                   }
                 }
                 searchables[i].innerHTML = t;
@@ -351,7 +354,9 @@
           },
           cleanQ = function (qRaw) {
               var i;
-              qRaw = qRaw.trim().replace(/\*|\.|\[|\]|\+|\(|\)/g, '');
+              if (qRaw === '') return [];
+              // qRaw = qRaw.trim().replace(/\*|\\|\[|\]|\+|\(|\)/g, '');
+
               var _q = (qRaw.split(' ').length > 0) ? qRaw.split(' ') : [qRaw];
               for (i = 0; i < _q.length; i++){
                 _q[i] = _q[i].trim();
@@ -370,18 +375,19 @@
               return _q;
           },
           zoek = function () {
-              var panes = zoekContainer.querySelectorAll('[data-resultcount]');
+              var panes = zoekContainer.querySelectorAll('[data-resultcount]'),
+                  i;
               
-              for (var i = 0; i < panes.length; i++) {
+              for (i = 0; i < panes.length; i++) {
                 panes[i].dataset.resultcount = 0;
               }
               
-              for (var i = 0; i < cards.length; i++){
+              for (i = 0; i < cards.length; i++){
                 cards[i].parentNode.classList.add('zoeken-verberg');
               }
               var foundlements = contains('.zr', q);
 
-              for (var i = 0; i < foundlements.length; i++){
+              for (i = 0; i < foundlements.length; i++){
                 foundlements[i].parentNode.classList.remove('zoeken-verberg');
                 foundlements[i].parentNode.parentNode.parentNode.dataset.resultcount++;
                 
