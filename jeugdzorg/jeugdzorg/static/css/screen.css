@@ -317,47 +317,47 @@ body {
 .aside-block > *:last-child {
   margin-bottom: 0; }
 
-.footer {
+.page-footer {
   background-color: #333;
   padding: 3rem 3rem 1.5rem 3rem;
   margin-bottom: -3rem; }
-.footer, .footer * {
+.page-footer, .page-footer * {
   color: #fff; }
-.footer p, .footer ul {
+.page-footer p, .page-footer ul {
   margin-bottom: 1.5rem; }
-.footer ul {
+.page-footer ul {
   list-style: none;
   padding: 0; }
-.footer li + li {
+.page-footer li + li {
   margin-top: .2em; }
-.footer p {
+.page-footer p {
   font-size: 1.4rem; }
-.footer .footer-title {
+.page-footer .footer-title {
   margin-bottom: .5em; }
-.footer .container {
+.page-footer .container {
   display: flex;
   flex-wrap: wrap; }
-.footer .container > div {
+.page-footer .container > div {
   box-sizing: border-box;
   flex-basis: 25%;
   padding-right: 3rem; }
-.footer a {
+.page-footer a {
   text-decoration: none; }
-.footer a:hover {
+.page-footer a:hover {
   text-decoration: underline;
   color: #fff; }
-.footer .icon-arrow-right {
+.page-footer .icon-arrow-right {
   border-color: #fff;
   margin-right: .5em; }
 @media (max-width: 900px) {
-  .footer {
+  .page-footer {
     margin-bottom: -10px;
     padding: 1.5rem 10px 1.5rem 10px; }
-  .footer .container > div {
+  .page-footer .container > div {
     flex-basis: 50%;
     margin-bottom: 1.5rem; } }
 @media (max-width: 700px) {
-  .footer .container {
+  .page-footer .container {
     display: block; } }
 
 .icon-andreas {
