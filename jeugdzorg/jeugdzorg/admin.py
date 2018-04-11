@@ -1,4 +1,5 @@
-from adminsortable.admin import SortableAdmin
+from adminsortable.admin import SortableAdmin, SortableMixin
+from adminsortable2.admin import SortableAdminMixin
 from adminsortable.admin import SortableStackedInline
 from django.contrib import admin
 # from django.contrib.auth.models import User, Group
@@ -54,6 +55,14 @@ class RegelingAdmin(SortableAdmin):
 @admin.register(Voorwaarde)
 class VoorwaardeAdmin(SortableAdmin):
     pass
+
+
+@admin.register(Pagina)
+class PaginaAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ['titel', 'slug', 'actief', ]
+    save_on_top = True
+    prepopulated_fields = {'slug': ('titel',), }
+    list_editable = ['actief', ]
 
 
 @admin.register(Organisatie)

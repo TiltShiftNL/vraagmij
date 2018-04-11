@@ -74,8 +74,8 @@ class ConfigView(UserPassesTestMixin, TemplateView):
         logs = [
             # ['hostfile', '/etc/hosts'],
             ['crontab', '/etc/cron.d/crontab'],
-            ['nginx error', '/var/log/nginx/error.log'],
-            ['nginx access', '/var/log/nginx/access.log'],
+            # ['nginx error', '/var/log/nginx/error.log'],
+            # ['nginx access', '/var/log/nginx/access.log'],
             ['cron log', '/var/log/cron.log'],
         ]
 
@@ -147,9 +147,14 @@ class ThemaDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data.update(self.kwargs);
+        data.update(self.kwargs)
 
         return data
+
+
+class PaginaDetail(DetailView):
+    model = Pagina
+    queryset = Pagina.is_actief.all()
 
 
 class GebiedList(ListView):

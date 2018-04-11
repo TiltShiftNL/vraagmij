@@ -20,3 +20,6 @@ easy-thumbnails
 lxml
 croniter
 django-axes
+django-admin-sortable2
+django-markup
+django-markup textile
