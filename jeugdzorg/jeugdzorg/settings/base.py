@@ -195,9 +195,6 @@ DEFAULT_LANGUAGE = 0
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
-
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
