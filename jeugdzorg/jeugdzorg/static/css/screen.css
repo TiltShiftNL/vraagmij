@@ -57,6 +57,8 @@ input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-s
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
 .well > *:last-child {
   margin-bottom: 0; }
+.well.well-small {
+  padding: 1.5rem; }
 @media (max-width: 900px) {
   .well {
     padding: 10px; } }
@@ -270,7 +272,8 @@ body {
     columns: 1; } }
 
 .article-container {
-  display: flex; }
+  display: flex;
+  align-items: flex-start; }
 .article-container article {
   flex-basis: 70%; }
 .article-container .aside {
@@ -1019,7 +1022,8 @@ form .group label, form .group .label {
 form .group label:last-child, form .group .label:last-child {
   margin-right: 0; }
 form .group .button {
-  margin: 0; }
+  margin: 0;
+  flex-shrink: 0; }
 form label, form .label {
   position: relative;
   display: block; }
@@ -1633,6 +1637,20 @@ fieldset .choices-modal b, fieldset .choices-modal .group-label {
 .systeem-berichten.has-icon.compact:before {
   left: 1.5rem;
   top: 1.5rem; }
+
+.article {
+  max-width: 45em;
+  font-size: 1.8rem; }
+.article h1 {
+  font-size: 2.9rem; }
+.article h2 {
+  font-size: 2rem; }
+.article h3 {
+  font-size: 1.6rem; }
+.article a {
+  color: #6db5d6; }
+.article a:hover {
+  color: #ec0000; }
 
 hr {
   height: 1px;

@@ -168,7 +168,7 @@
         card = document.getElementById(hash);
       if (!card) return;
       
-      e.preventDefault();
+      if (e) e.preventDefault();
       
       var _position = function(){
         
@@ -229,7 +229,7 @@
     },
     
     'search-close': function(e){
-      e.preventDefault();
+      e && e.preventDefault();
       var q = d.querySelector('input[name="q"]');
       if (q) q.value = '';
       d.classList.remove('search-mode');
@@ -578,6 +578,29 @@
       },1);
     }
   }
+  
+  d.addEventListener('keydown', function(e){
+    if (e.keyCode == 27) {
+      var el = d.querySelector('.modal.active');
+      if (el) {
+        handlers['modal-close'].call(el);
+        return;
+      }
+      
+
+      el = d.querySelector('.modal-contact.active .contact-meer-details');
+      if (el) {
+        handlers['contact'].call(el);
+        return;
+      }
+      
+      if (d.classList.contains('search-mode')) {
+        handlers['search-close'].call(false);
+      }
+
+      
+    }
+  });
   
   d.addEventListener('click',function(t){var k,e,a=t&&t.target;if(a=_closest(a,'[data-handler]')){var r=a.getAttribute('data-handler').split(/\s+/);if('A'==a.tagName&&(t.metaKey||t.shiftKey||t.ctrlKey||t.altKey))return;for(e=0;e<r.length;e++){k=r[e].split(/[\(\)]/);handlers[k[0]]&&handlers[k[0]].call(a,t,k[1])}}});
   

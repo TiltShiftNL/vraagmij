@@ -2,9 +2,20 @@
 {% load markup_tags %}
 
 {% block main %}
-    <div class="container">
-        <div class="container container-small well">
-            {{ inhoud|apply_markup:"textile" }}
-        </div>
-    </div>
+  <div class="article-container">
+    <article class="article">
+      {{ inhoud|apply_markup:"textile" }}
+    </article>
+    <aside class="aside well well-small">
+      
+      <h3 class="footer-title">Contact</h3>
+      <p>Heb je een vraag en kun je het antwoord niet vinden op onze website?</p>
+      <p><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}"><i class="icon-arrow-right"></i> E-mail {% if SITE_INSTELLINGEN.app_naam %}{{ SITE_INSTELLINGEN.app_naam }}{% else %}VraagMij{% endif %}</a></p>
+      
+      <h3 class="footer-title">Feedback</h3>
+      <p>Heb je een fout gevonden, of heb je suggesties voor verbeteringen?</p>
+      <p><a href="mailto:{{ SITE_INSTELLINGEN.standaard_contact_email }}"><i class="icon-arrow-right"></i> Stuur feedback</a></p>
+      
+    </aside>
+  </div>
 {% endblock %}

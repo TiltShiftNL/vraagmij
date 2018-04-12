@@ -57,6 +57,7 @@ body {
 }
 .article-container {
   display: flex;
+  align-items: flex-start;
   article {
     flex-basis: 70%;
   }

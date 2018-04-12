@@ -1,5 +1,21 @@
 .article {
-  
+  max-width: 45em;
+  font-size: 1.8rem;
+  h1 {
+    font-size: 2.9rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: $fontSize;
+  }
+  a {
+    color :$brandColor2;
+    &:hover {
+      color :$brandColor1;
+    }
+  }
 }
 
 hr {

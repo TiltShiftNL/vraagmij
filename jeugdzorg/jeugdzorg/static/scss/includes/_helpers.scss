@@ -30,6 +30,9 @@
   > *:last-child {
     margin-bottom: 0;
   }
+  &.well-small {
+    padding: $padding / 2;
+  }
   @include medium {
     padding: 10px;
   }
