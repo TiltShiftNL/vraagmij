@@ -56,7 +56,7 @@
         </p>
         {% if request.user|has_group:"viewer" %}
             <ul class="contacten cards">
-                {% for contact in object.profielen_zichtbaar %}
+                {% for contact in object.profielen_zichtbaar|dictsort:"seconden_niet_gebruikt" reversed %}
                     <li>
                         {% include "snippets/contact.html" with item=contact %}
                     </li>

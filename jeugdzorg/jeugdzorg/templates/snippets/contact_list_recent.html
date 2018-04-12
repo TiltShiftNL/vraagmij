@@ -16,13 +16,13 @@
     <ul class="overzicht compact-columns contacten cards">
     
         {% if ordening == 'aflopend' %}
-            {% for profiel in profiel_list|dictsort:"seconden_niet_gebruikt" reversed %}
+            {% for profiel in profiel_list|dictsort:"id" reversed %}
                 <li>
                     {% include 'snippets/contact.html' with item=profiel %}
                 </li>
             {% endfor %}
         {% else %}
-            {% for profiel in profiel_list|dictsort:"seconden_niet_gebruikt" %}
+            {% for profiel in profiel_list|dictsort:"id" %}
                 <li>
                     {% include 'snippets/contact.html' with item=profiel %}
                 </li>
