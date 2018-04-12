@@ -184,7 +184,6 @@ class ProfielModelForm(forms.ModelForm):
         old_save_m2m = self.save_m2m
 
         def save_m2m():
-            # todo normal m2m not saved
             old_save_m2m()
 
             for cm2m in self.custom_m2m:
