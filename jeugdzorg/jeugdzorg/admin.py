@@ -44,7 +44,11 @@ class ProfielInline(admin.TabularInline):
 @admin.register(Regeling)
 class RegelingAdmin(SortableAdmin):
     list_display = ['titel', 'bron_veranderd', 'datum_gecreeerd', 'datum_opgeslagen']
+    fieldsets = (
+        (None, {'fields': ('titel', 'samenvatting', 'bron', 'startdatum', 'einddatum', 'bron_url', 'aanvraag_url')}),
+        (_('Geavanceerd'), {'classes': ('collapse', 'open'), 'fields': ('bron_html_query', 'bron_veranderd', 'bron_resultaat')}),
 
+    )
     save_on_top = True
 
     inlines = [
@@ -122,10 +126,10 @@ class UserAdmin(UserAdmin):
     list_display = ['email', 'is_active', 'is_staff', 'is_superuser', 'wijzig_profiel', 'date_saved']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('voornaam', 'tussenvoegsel', 'achternaam')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+        (_('Personal info'), {'classes': ('collapse', 'open'), 'fields': ('voornaam', 'tussenvoegsel', 'achternaam')}),
+        (_('Permissions'), {'classes': ('collapse', 'open'), 'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Important dates'), {'classes': ('collapse', 'open'), 'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {
