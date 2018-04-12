@@ -68,6 +68,11 @@
         {% for v in alle_gebieden.gebied_lijst %}
           <dd {% if search %}data-zb="{{ v.naam|escape }}"{% endif %}>{% if not search %}{{ v.naam }}{% endif %}</dd>
         {% endfor %}
+        {% for v in item.gebied_lijst.all %}
+            {% if v not in alle_gebieden.gebied_lijst %}
+          <dd style="display: none" {% if search %}data-zb="{{ v.naam|escape }}"{% endif %}>{% if not search %}{{ v.naam }}{% endif %}</dd>
+            {% endif %}
+        {% endfor %}
       {% endwith %}
       
       {% if item.regeling_lijst.all %}

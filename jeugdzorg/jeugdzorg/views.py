@@ -30,6 +30,7 @@ from .utils import *
 from jeugdzorg.context_processors import app_settings
 from .auth import auth_test
 from .forms import *
+from django.template import engines
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
@@ -155,6 +156,17 @@ class ThemaDetail(DetailView):
 class PaginaDetail(DetailView):
     model = Pagina
     queryset = Pagina.is_actief.all()
+
+    def get_context_data(self, **kwargs):
+        from jeugdzorg.context_processors import app_settings
+        context = {}
+        context.update(app_settings())
+        data = super().get_context_data(**kwargs)
+        django_engine = engines['django']
+        template = django_engine.from_string(self.object.inhoud)
+        data['inhoud'] = template.render(context)
+
+        return data
 
 
 class GebiedList(ListView):
