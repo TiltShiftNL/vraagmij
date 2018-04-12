@@ -88,9 +88,6 @@ body {
     display: block;
     padding: .1em 0;
     line-height: 1.2;
-    i {
-      margin-right: .3em;
-    }
   }
   @include small {
     float: none;

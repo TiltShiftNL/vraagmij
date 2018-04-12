@@ -296,8 +296,6 @@ body {
   display: block;
   padding: .1em 0;
   line-height: 1.2; }
-.aside ul a i {
-  margin-right: .3em; }
 @media (max-width: 700px) {
   .aside {
     float: none;
@@ -320,7 +318,8 @@ body {
 .page-footer {
   background-color: #666;
   padding: 3rem 3rem 1.5rem 3rem;
-  margin-bottom: -3rem; }
+  margin-bottom: -3rem;
+  box-shadow: 0 100px 0 100px #666; }
 .page-footer, .page-footer * {
   color: #fff; }
 .page-footer p, .page-footer ul {
@@ -578,59 +577,24 @@ body {
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
-  top: -1px;
-  height: 10px;
-  width: 14px;
-  background-color: #f5f5f5;
-  border-radius: 2px;
-  border: 2px solid #333; }
-.icon-mail:before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: -13px;
-  right: -2px;
-  height: 0;
-  padding-top: 100%;
-  border-radius: 2px;
-  transform: rotate(45deg);
-  border: 2px solid #333;
-  background-color: #f5f5f5;
-  transition: all .3s; }
-.icon-mail:after {
-  display: none; }
+  width: 26px;
+  height: 15px;
+  background-image: url("../images/ico_mail.png");
+  background-repeat: no-repeat;
+  background-size: 22px auto;
+  background-position: 0 0; }
 
 .icon-phone {
   position: relative;
   top: -2px;
   display: inline-block;
   vertical-align: middle;
-  height: 8px;
-  width: 8px;
-  margin-left: 2px;
-  margin-right: 3px;
-  border: 2px solid #333;
-  border-top-width: 5px;
-  border-bottom-width: 5px;
-  background-color: #f5f5f5;
-  border-radius: 2px;
-  background-color: rgba(255, 255, 255, 0.2); }
-.icon-phone:before, .icon-phone:after {
-  content: '';
-  position: absolute;
-  background-color: #f5f5f5; }
-.icon-phone:after {
-  left: 2px;
-  right: 2px;
-  top: -3px;
-  height: 1px; }
-.icon-phone:before {
-  content: '';
-  left: 3px;
-  width: 2px;
-  height: 2px;
-  bottom: -3px;
-  border-radius: 50%; }
+  height: 22px;
+  width: 26px;
+  background-image: url("../images/ico_phone.png");
+  background-repeat: no-repeat;
+  background-size: 12px auto;
+  background-position: 3px 0; }
 
 .icon-ken-ik {
   font-style: normal;
@@ -2119,7 +2083,8 @@ hr {
   position: relative;
   width: 100%;
   margin: 0 auto 2.2rem;
-  padding: 0; }
+  padding: 0;
+  overflow: hidden; }
 .contact-avatar span {
   position: relative;
   width: 100%;
@@ -2311,6 +2276,9 @@ dl.contact-extended dt.contact-regeling ~ dd {
   left: -1.5rem;
   right: -1.5rem;
   padding: 1.5rem; }
+.contact-avatar-controls input[type*="file"] {
+  font-size: 300px;
+  top: 0; }
 .contact-avatar-controls .contact-avatar-upload {
   opacity: 1;
   text-align: center;

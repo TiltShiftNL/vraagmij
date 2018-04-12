@@ -1,7 +1,10 @@
 .page-footer {
+
   background-color: #666;
   padding: $padding $padding $padding/2 $padding;
   margin-bottom: -$padding;
+  
+  box-shadow: 0 100px 0 100px #666;
   &, * {
     color: #fff;
   }

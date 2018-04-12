@@ -35,10 +35,10 @@
           <dt class="contact-telefoon">telefoon</dt>
       {% endif %}
       {% if item.telefoonnummer %}
-          <dd><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.{{ item.id }}.tel mouseover.detail.contact.{{ item.id }}.tel"><i class="icon-phone"></i> <span {% if search %}data-zb="{{ item.telefoonnummer|escape }}"{% endif %}>{% if not search %}{{ item.telefoonnummer }}{% endif %}</span></a></dd>
+          <dd><a href="tel:{{ item.telefoonnummer }}" data-counter="click.detail.contact.{{ item.id }}.tel mouseover.detail.contact.{{ item.id }}.tel"><i class="icon-phone"></i><span {% if search %}data-zb="{{ item.telefoonnummer|escape }}"{% endif %}>{% if not search %}{{ item.telefoonnummer }}{% endif %}</span></a></dd>
       {% endif %}
       {% if item.telefoonnummer_2 %}
-          <dd><a href="tel:{{ item.telefoonnummer_2 }}" data-counter="click.detail.contact.{{ item.id }}.tel2 mouseover.detail.contact.{{ item.id }}.tel2"><i class="icon-phone"></i> <span {% if search %}data-zb="{{ item.telefoonnummer_2|escape }}"{% endif %}>{% if not search %}{{ item.telefoonnummer_2 }}{% endif %}</span></a></dd>
+          <dd><a href="tel:{{ item.telefoonnummer_2 }}" data-counter="click.detail.contact.{{ item.id }}.tel2 mouseover.detail.contact.{{ item.id }}.tel2"><i class="icon-phone"></i><span {% if search %}data-zb="{{ item.telefoonnummer_2|escape }}"{% endif %}>{% if not search %}{{ item.telefoonnummer_2 }}{% endif %}</span></a></dd>
       {% endif %}
       
       

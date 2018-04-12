@@ -36,6 +36,8 @@ dt.contact-naam + dd {
   margin: 0 auto $lineHeight;
   padding: 0;
   
+  overflow: hidden;
+  
   span {
     position: relative;
     
@@ -335,6 +337,12 @@ dl.contact-extended {
     left: -$padding / 2;
     right: -$padding / 2;
     padding: $padding / 2;
+    
+  }
+  
+  input[type*="file"] {
+    font-size: 300px;
+    top: 0;
     
   }
   
