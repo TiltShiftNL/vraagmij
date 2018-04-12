@@ -16,6 +16,7 @@ body {
 .main {
   position: relative;
   z-index: 2;
+  display: block;
   max-width: $maxWidth;
   box-sizing: border-box;
   margin-left: auto;

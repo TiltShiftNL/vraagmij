@@ -243,6 +243,7 @@ body {
 .main {
   position: relative;
   z-index: 2;
+  display: block;
   max-width: 1400px;
   box-sizing: border-box;
   margin-left: auto;
@@ -340,8 +341,7 @@ body {
   display: flex;
   flex-wrap: wrap; }
 .page-footer .container > div {
-  box-sizing: border-box;
-  flex-basis: 25%;
+  flex-basis: calc(25% - 3rem);
   padding-right: 3rem; }
 .page-footer a {
   text-decoration: none;
