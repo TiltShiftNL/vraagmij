@@ -6,7 +6,7 @@ Je ontvangt deze e-mail omdat je bij {{ SITE_INSTELLINGEN.app_naam }} ingeschrev
 
 Je bent bij {{ SITE_INSTELLINGEN.app_naam }} met de onderstaande gegevens bekend:
  - Voornaam: {% if profiel.voornaam %}{{ profiel.voornaam }}{% else %}-leeg-{% endif %}
- - Achternaam: {% if profiel.achternaam %}{{ profiel.achternaam }}{% else %}-leeg-{% end %}
+ - Achternaam: {% if profiel.achternaam %}{{ profiel.achternaam }}{% else %}-leeg-{% endif %}
  - Tussenvoegsel: {% if profiel.tussenvoegsel %}{{ profiel.tussenvoegsel }}{% else %}-leeg-{% endif %}
  - E-mailadres voor collega's: {% if profiel.email %}{{ profiel.email }}{% else %}-leeg-{% endif %}
  - Primair telefoonnummer:  {% if profiel.telefoonnummer %}{{ profiel.telefoonnummer }}{% else %}-leeg-{% endif %}
