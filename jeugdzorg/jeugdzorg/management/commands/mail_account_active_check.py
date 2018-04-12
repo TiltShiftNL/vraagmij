@@ -49,7 +49,7 @@ class Command(BaseCommand):
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
             now = timezone.now()
 
-            subject = 'VraagMij - groteschoonmaak'
+            subject = 'VraagMij - Is je profiel up-to-date?'
 
             for u in get_users():
                 if u.profiel.hou_me_op_de_hoogte_mail:

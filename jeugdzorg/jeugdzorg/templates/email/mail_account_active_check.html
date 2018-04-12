@@ -13,15 +13,36 @@
             <td align="left"
                 style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;"
                 class="padding-copy">
-                Om onze contactenlijst up-to-date te houden, sturen we ieder half jaar een mail om te checken of jij als contact nog actief wil zijn.
-                Je ontvangt deze e-mail omdat je bij het {{ SITE_INSTELLINGEN.app_naam }} ingeschreven staat.
+                Om onze contactenlijst up-to-date te houden, sturen we ieder half jaar een e-mail om te checken of je gegevens nog kloppen.
             </td>
         </tr>
         <tr>
             <td align="left"
                 style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;"
                 class="padding-copy">
-                Vriendelijke groet,<br>Het {{ SITE_INSTELLINGEN.app_naam }} team</td>
+                Je ontvangt deze e-mail omdat je bij {{ SITE_INSTELLINGEN.app_naam }} ingeschreven staat.
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">
+            Je bent bij {{ SITE_INSTELLINGEN.app_naam }} met de onderstaande gegevens bekend:<br>
+            <ul>
+                <li>Voornaam: {% if profiel.voornaam %}{{ profiel.voornaam }}{% else %}<i>leeg</i>{% endif %}</li>
+                <li>Achternaam: {% if profiel.achternaam %}{{ profiel.achternaam }}{% else %}<i>leeg</i>{% endif %}</li>
+                <li>Tussenvoegsel: {% if profiel.tussenvoegsel %}{{ profiel.tussenvoegsel }}{% else %}<i>leeg</i>{% endif %}</li>
+                <li>E-mailadres voor collega's: {% if profiel.email %}{{ profiel.email }}{% else %}<i>leeg</i>{% endif %}</li>
+                <li>Primair telefoonnummer:  {% if profiel.telefoonnummer %}{{ profiel.telefoonnummer }}{% else %}<i>leeg</i>{% endif %}</li>
+                <li>Secundair telefoonnummer:{% if profiel.telefoonnummer_2 %} {{ profiel.telefoonnummer_2 }}{% else %}<i>leeg</i>{% endif %}</li>
+                <li>Je profiel is zichtbaar voor collega's: {% if profiel.zichtbaar %}Ja{% else %}Nee{% endif %}</li>
+                <li>Je wil regelmatig op de hoogte gehouden worden: {% if profiel.hou_me_op_de_hoogte_mail %}Ja{% else %}Nee{% endif %}</li>
+            </ul>
+            </td>
+        </tr>
+        <tr>
+            <td align="left"
+                style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333;"
+                class="padding-copy">
+                Met vriendelijke groet,<br>Het {{ SITE_INSTELLINGEN.app_naam }} team<br></td>
             </td>
         </tr>
     </table>
