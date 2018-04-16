@@ -8,6 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.forms.models import BaseInlineFormSet
 import sendgrid
 import os
+from django.db import connection
 from sendgrid.helpers.mail import *
 from django.conf import settings
 from django.template import loader
@@ -40,10 +41,52 @@ class UploadJeugdzorgFixtureFileForm(forms.Form):
     )
 
 
+def my_custom_sql(query):
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        # print(cursor)
+        row = cursor.fetchall()
+
+    return [r[0] for r in row]
+
+
 def handle_uploaded_file(f):
     with open('/opt/file_upload/jeugdzorg.json', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+
+
+    tables = [
+        'django_admin_log',
+        'jeugdzorg_instelling',
+        'jeugdzorg_profielnaarorganisatie',
+        'jeugdzorg_profielnaarthema',
+        'jeugdzorg_regeling_themas',
+        'jeugdzorg_profielnaarregeling',
+        'jeugdzorg_taggedregeling',
+        'jeugdzorg_regelingtag',
+        'jeugdzorg_user_groups',
+        'jeugdzorg_user_user_permissions',
+        'jeugdzorg_eventitem',
+        'jeugdzorg_profiel_gebied_lijst',
+        'jeugdzorg_voorwaarde',
+        'jeugdzorg_thema',
+        'jeugdzorg_organisatie',
+        'jeugdzorg_cronjobstate',
+        'jeugdzorg_cache_table',
+        'jeugdzorg_pagina',
+        'jeugdzorg_profiel',
+        'jeugdzorg_user',
+        'jeugdzorg_gebied',
+        'jeugdzorg_stadsdeel',
+        'jeugdzorg_regeling',
+    ]
+    for t in tables:
+        with connection.cursor() as cursor:
+            q = "DELETE FROM %s;" % t
+            cursor.execute(q)
+
     call_command('loaddata', '/opt/file_upload/jeugdzorg.json', app_label='jeugdzorg')
 
 

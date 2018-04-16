@@ -238,7 +238,7 @@ class Regeling(PrintableModel, models.Model):
         return Voorwaarde.objects.all()
 
     def profielen_zichtbaar(self):
-        return self.regelingnaarprofiel.filter(profiel__zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True)
 
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''

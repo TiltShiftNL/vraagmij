@@ -109,7 +109,7 @@
             <ul class="contacten cards">
                 {% for contact in regeling.profielen_zichtbaar|dictsort:"seconden_niet_gebruikt" reversed %}
                     <li>
-                        {% include "snippets/contact.html" with item=contact.profiel %}
+                        {% include "snippets/contact.html" with item=contact %}
                     </li>
                 {% endfor %}
             </ul>
