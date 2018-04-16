@@ -165,7 +165,7 @@
     'contact': function(e) {
       var 
         hash = this.hash.substr(1),
-        card = document.getElementById(hash);
+        card = (d.classList.contains('search-mode') ? document.getElementById('zoeken') : document.getElementById('main')).querySelector('#' + hash);
       if (!card) return;
       
       if (e) e.preventDefault();
