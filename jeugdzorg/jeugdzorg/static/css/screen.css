@@ -276,9 +276,9 @@ body {
   display: flex;
   align-items: flex-start; }
 .article-container article {
-  flex-basis: 70%; }
+  flex-basis: 66.66%; }
 .article-container .aside {
-  flex-basis: 30%; }
+  flex-basis: 33.33%; }
 @media (max-width: 700px) {
   .article-container {
     display: block; } }
@@ -287,7 +287,7 @@ body {
   width: 250px;
   position: relative;
   z-index: 2;
-  margin: 0 0 2.2rem 3rem; }
+  margin: 0 0 2.2rem 2.2rem; }
 .aside p, .aside ul {
   margin-bottom: 2.2rem; }
 .aside ul {
@@ -1751,12 +1751,14 @@ hr {
     position: static; } }
 
 .zoeken-container {
-  display: none; }
+  display: none;
+  margin-top: 4.4rem; }
 .zoeken-container [data-model]:before {
   content: attr(data-model) " (" attr(data-resultcount) ")";
   display: block;
   padding-bottom: 1.5rem;
   margin-bottom: 3rem;
+  margin-top: 4.4rem;
   border-bottom: 1px solid #f5f5f5; }
 
 .zoeken-verberg {
@@ -1820,7 +1822,13 @@ hr {
   max-width: 400px;
   text-align: center;
   margin: 6rem auto;
-  padding: 1.5rem; }
+  padding: 1.5rem;
+  display: none; }
+
+[data-totalresultcount="0"] .search-empty {
+  display: block; }
+[data-totalresultcount="0"] .zoeken-panes {
+  display: none; }
 
 .zoeken-container .container {
   display: flex;
@@ -1831,6 +1839,24 @@ hr {
 
 .zoeken-thema .thema-lijst {
   order: -1; }
+
+.zoeken-panes {
+  list-style: none;
+  padding: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.2rem; }
+.zoeken-panes li {
+  display: inline; }
+.zoeken-panes a {
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 1em; }
+.zoeken-panes a:after {
+  content: attr(data-model) " (" attr(data-resultcount) ")"; }
+.zoeken-panes a[data-resultcount="0"] {
+  opacity: .5; }
 
 .regelingen {
   list-style: none;

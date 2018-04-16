@@ -231,7 +231,10 @@
     'search-close': function(e){
       e && e.preventDefault();
       var q = d.querySelector('input[name="q"]');
-      if (q) q.value = '';
+      if (q) {
+        q.value = '';
+        q.blur();
+      }
       d.classList.remove('search-mode');
     }
     
@@ -389,56 +392,65 @@
               return _q;
           },
           zoek = function () {
-              var panes = zoekContainer.querySelectorAll('[data-resultcount]'),
-                  i;
-              
-              for (i = 0; i < panes.length; i++) {
-                panes[i].dataset.resultcount = 0;
-              }
-              
-              for (i = 0; i < cards.length; i++){
-                cards[i].parentNode.classList.add('zoeken-verberg');
-              }
-              var foundlements = contains('.zr', q);
+            
+            
+            var panes = zoekContainer.querySelectorAll('[data-resultcount]'),
+                i;
+            
+            for (i = 0; i < panes.length; i++) {
+              panes[i].dataset.resultcount = 0;
+              document.getElementById('trigger-' + panes[i].id).dataset.resultcount = 0;
+            }
+            
+            for (i = 0; i < cards.length; i++){
+              cards[i].parentNode.classList.add('zoeken-verberg');
+            }
+            var foundElements = [];
+            if (q.join('').length > 1) {
+              foundElements = contains('.zr', q);
+            } 
 
-              for (i = 0; i < foundlements.length; i++){
-                foundlements[i].parentNode.classList.remove('zoeken-verberg');
-                foundlements[i].parentNode.parentNode.parentNode.dataset.resultcount++;
-                
-              }
-              zoekContainer.style.display='block';
+
+            for (i = 0; i < foundElements.length; i++){
+              foundElements[i].parentNode.classList.remove('zoeken-verberg');
+              foundElements[i].parentNode.parentNode.parentNode.dataset.resultcount++;
+              
+              document.getElementById('trigger-' + foundElements[i].parentNode.parentNode.parentNode.id).dataset.resultcount = foundElements[i].parentNode.parentNode.parentNode.dataset.resultcount;
+              
+            }
+            zoekContainer.style.display = 'block';
+            
+            zoekContainer.parentNode.dataset.totalresultcount = foundElements.length;
 
           };
           
-
-      this.addEventListener('focus', function(e){
-
-        var 
-          input = this,
-          hasData = false;
-
+      var input = this;
+    
+      setTimeout(function(){
+        
         helpers.ajax('/zoek/', function(response){
           if (response.status >= 200 && response.status < 400) {
             zoekContainer.innerHTML = response.responseText;
             cards = zoekContainer.querySelectorAll('.zr');
-            hasData = true;
-            if (q.length > 0) {
+            
+            input.addEventListener('keydown', function(e){
+              if (e.keyCode == 13) e.preventDefault();
+            });
+            input.addEventListener('keyup', function(e){
+              q = cleanQ(this.value);
+              zoek();
+            });
+            if (d.classList.contains('search-mode')) {
+              q = cleanQ(input.value);
               zoek();
             }
           }
         });
-        input.addEventListener('keydown', function(e){
-          if (e.keyCode == 13) e.preventDefault();
-        });
-        input.addEventListener('keyup', function(e){
-          if (hasData) {
-            q = cleanQ(this.value);
-            zoek();
-          }
-        });
         
+      }, 1000);
+      
+      this.addEventListener('focus', function(e){
         d.classList.add('search-mode');
-        
       });
     },
     'profiel-connect': function () {

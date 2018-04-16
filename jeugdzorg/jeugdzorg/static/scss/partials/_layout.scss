@@ -60,10 +60,10 @@ body {
   display: flex;
   align-items: flex-start;
   article {
-    flex-basis: 70%;
+    flex-basis: 66.66%;
   }
   .aside {
-    flex-basis: 30%;
+    flex-basis: 33.33%;
   }
   @include small {
     display: block;
@@ -74,7 +74,7 @@ body {
   width: 250px;
   position :relative;
   z-index: 2;
-  margin: 0 0 $lineHeight $padding;
+  margin: 0 0 $lineHeight $lineHeight;
   p, ul {
     margin-bottom: $lineHeight;
   }

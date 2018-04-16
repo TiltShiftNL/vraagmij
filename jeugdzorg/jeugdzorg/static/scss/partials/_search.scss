@@ -102,6 +102,7 @@
 .zoeken-container {
 
   display: none;
+  margin-top: 2 * $lineHeight;
   
   [data-model]:before {
     content: attr(data-model) ' (' attr(data-resultcount) ')';
@@ -112,6 +113,7 @@
     
     padding-bottom: $padding / 2;
     margin-bottom: $padding;
+    margin-top: 2 * $lineHeight;
     border-bottom: 1px solid $lightColor;
   }
   
@@ -216,7 +218,16 @@
   text-align: center;
   margin: 2 * $padding auto;
   padding: $padding / 2;
+  display: none;
+}
 
+[data-totalresultcount="0"] {
+  .search-empty {
+    display: block;
+  }
+  .zoeken-panes {
+    display: none;
+  } 
 }
 
 .zoeken-container .container {
@@ -229,4 +240,27 @@
 }
 .zoeken-thema .thema-lijst {
   order: -1;
+}
+
+.zoeken-panes {
+  list-style: none;
+  padding: 0;
+  max-width: $maxContentWidth;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: $lineHeight;
+  li {
+    display: inline;
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 1em;
+    &:after {
+      content: attr(data-model) ' (' attr(data-resultcount) ')';
+    }
+    &[data-resultcount="0"] {
+      opacity: .5;
+    }
+  }
 }
