@@ -107,7 +107,7 @@
   
   {% if user.is_authenticated %}
   
-    <div id="zoeken" class="zoeken-container zoeken-{{ sub_view }}">
+    <div id="zoeken" class="zoeken-container zoeken-{{ sub_view }}" data-totalresultcount="0">
       <ul class="zoeken-panes">
         <li><a href="#thema-lijst" id="trigger-thema-lijst" data-resultcount="0" data-handler="scroll">Thema's</a></li>
         <li><a href="#profiel-lijst" id="trigger-profiel-lijst" data-resultcount="0" data-handler="scroll">Contactpersonen</a></li>
