@@ -1711,7 +1711,10 @@ hr {
   margin: 0; }
 .zoeken input {
   padding: 0 1em;
-  min-height: 4rem; }
+  min-height: 4rem;
+  margin: 0;
+  -webkit-appearance: none;
+  outline: none; }
 .zoeken input:focus {
   border-color: #333; }
 .zoeken input::-ms-clear {
@@ -1746,8 +1749,12 @@ hr {
     max-width: 140px; } }
 @media (max-width: 700px) {
   .zoeken {
-    margin-top: -1.5rem;
     max-width: none;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 10px;
+    margin-top: 0;
+    margin-bottom: -10px;
     position: static; } }
 
 .zoeken-container {
@@ -1781,8 +1788,8 @@ hr {
 .search-mode .zoeken:before {
   content: '';
   position: absolute;
-  left: -100vw;
-  right: -100vw;
+  left: -10px;
+  right: -10px;
   bottom: 0;
   top: 0;
   background-color: #fff;
@@ -1794,6 +1801,9 @@ hr {
   position: sticky;
   z-index: 4;
   top: 3rem; }
+@media (max-width: 700px) {
+  .search-mode .tabs-container {
+    top: 0; } }
 .search-mode input {
   padding-left: 5rem; }
 .search-mode .zoeken-container {
