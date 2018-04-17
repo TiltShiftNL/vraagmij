@@ -47,6 +47,9 @@
   input {
     padding: 0 1em;
     min-height: 4rem;
+    margin: 0;
+    -webkit-appearance: none;
+    outline: none;
     &:focus {
       border-color: $textColor;
     }
@@ -92,8 +95,13 @@
     max-width: 140px;
   }
   @include small {
-    margin-top: -$padding/ 2;
+//    margin-top: -$padding/ 2;
     max-width: none;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 10px;
+    margin-top: 0;
+    margin-bottom: -10px;
     position: static;
   }
 
@@ -147,10 +155,11 @@
     background-color: #fff;
     
     &:before {
+//      display: none;
       content: '';
       position: absolute;
-      left: -100vw;
-      right: -100vw;
+      left: -10px;
+      right: -10px;
       bottom: 0;
       top: 0;
       
@@ -166,10 +175,16 @@
   }
   
   .tabs-container {
+    
+    
     position: -webkit-sticky;
     position: sticky;
+    
     z-index: 4;
     top: $padding;
+    @include small {
+      top: 0;
+    }
   }
   input {
     padding-left: 5rem;
