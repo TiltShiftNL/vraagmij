@@ -2,7 +2,7 @@
 {% load version_tags %}
 
 {% block main %}
-    <h1>{{ int_id }}</h1>
+    <h1>{{ int_id }} is worker: {{ is_cronjob_worker }}</h1>
 {#    <ul>#}
 {#        {% for var in envvars %}#}
 {#            <li>{{ var }}</li>#}

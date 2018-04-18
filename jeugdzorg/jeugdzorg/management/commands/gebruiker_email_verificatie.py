@@ -1,18 +1,14 @@
-from django.contrib.auth.management.commands import createsuperuser
-from django.core.management import CommandError
-from django.db import connection
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
-from django.core.management.base import BaseCommand
-from jeugdzorg.models import EventItem
-UserModel = get_user_model()
+from django.contrib.auth import (get_user_model, )
+from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
-from django.contrib.sites.models import Site
-from jeugdzorg.models import Instelling
 from django.conf import settings
 import sendgrid
 import json
+from jeugdzorg.utils import *
+from django.core.cache import cache
+import sys
+
+UserModel = get_user_model()
 
 
 def get_users():
@@ -32,18 +28,24 @@ class Command(BaseCommand):
     help = 'gebruiker email verificatie'
 
     def handle(self, *args, **options):
-        if not cronjob_container_check(self.__module__.split('.')[-1]):
-            return
+        # if not cronjob_container_check(self.__module__.split('.')[-1]):
+        #     return
+        if get_conatainer_id() != cache.get(get_cronjob_worker_cache_key()):
+            raise CommandError("You're not the worker!")
 
 
         start_time = 1514764800
         end_time = int(timezone.now().timestamp())
         sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
         bounces_base_url = 'suppression/bounces'
+        blocks_base_url = 'suppression/blocks'
         invalid_emails_base_url = 'suppression/invalid_emails'
         spam_reports_base_url = 'suppression/spam_reports'
 
         bounces = sg.client._(bounces_base_url.format(**{
+            'start_time': start_time,
+        })).get()
+        blocks = sg.client._(blocks_base_url.format(**{
             'start_time': start_time,
         })).get()
         invalid_emails = sg.client._(invalid_emails_base_url.format(**{
@@ -55,9 +57,11 @@ class Command(BaseCommand):
 
         results = {
             'bounces': json.loads(bounces.body),
+            'blocks': json.loads(blocks.body),
             'invalid_emails': json.loads(invalid_emails.body),
             'spam_reports': json.loads(spam_reports.body),
         }
+        print(results)
         for u in get_users():
             for k, v in results.items():
                 if u.email in [r.get('email') for r in v]:

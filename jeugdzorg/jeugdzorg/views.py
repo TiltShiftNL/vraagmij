@@ -1,14 +1,11 @@
-import json
 import sys
-
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import login
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
-from django.http import JsonResponse, response
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -18,14 +15,8 @@ from django.views.generic import *
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
-from django.contrib.auth import models as auth_models
-from bs4 import BeautifulSoup
 from django.http import HttpResponse
-import re
-import time
-from lxml import etree, html
-import lxml
-import socket
+from django.core.cache import cache
 from .utils import *
 from jeugdzorg.context_processors import app_settings
 from .auth import auth_test
@@ -91,7 +82,8 @@ class ConfigView(UserPassesTestMixin, TemplateView):
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
 
-        data['int_id'] = get_container_int()
+        data['int_id'] = get_container_id()
+        data['is_cronjob_worker'] = (data['int_id'] == cache.get(get_cronjob_worker_cache_key()))
 
         return data
 
