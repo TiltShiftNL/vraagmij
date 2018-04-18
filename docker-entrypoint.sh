@@ -36,6 +36,8 @@ python manage.py collectstatic --noinput
 
 python manage.py createcachetable
 
+python manage.py set_cronjob_worker
+
 python manage.py create_crontabs
 
 echo "Add cron jobs"
