@@ -1,26 +1,18 @@
-from django.contrib.auth.management.commands import createsuperuser
 from django.core.management import CommandError
-from django.db import connection
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
-from django.urls import reverse
+from django.contrib.auth import (get_user_model, )
 from django.core.management.base import BaseCommand
-from jeugdzorg.models import EventItem
-UserModel = get_user_model()
 from django.utils import timezone
 from django.contrib.sites.models import Site
-from jeugdzorg.models import Instelling
 from django.conf import settings
 from sendgrid.helpers.mail import *
 import sendgrid
-import json
 from jeugdzorg.statics import *
 from jeugdzorg.utils import *
-import dateutil.relativedelta
 from jeugdzorg.context_processors import app_settings
 from django.template.loader import render_to_string
-from django.template import engines
+from django.core.cache import cache
+
+UserModel = get_user_model()
 
 
 def get_users():

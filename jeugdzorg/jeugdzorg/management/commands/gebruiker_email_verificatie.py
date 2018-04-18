@@ -6,7 +6,6 @@ import sendgrid
 import json
 from jeugdzorg.utils import *
 from django.core.cache import cache
-import sys
 
 UserModel = get_user_model()
 

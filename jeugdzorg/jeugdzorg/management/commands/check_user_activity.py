@@ -1,14 +1,12 @@
-from django.contrib.auth.management.commands import createsuperuser
 from django.core.management import CommandError
-from django.db import connection
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
+from django.contrib.auth import (get_user_model, )
 from django.core.management.base import BaseCommand
 from jeugdzorg.models import EventItem
 UserModel = get_user_model()
 from django.utils import timezone
 from jeugdzorg.utils import *
+from django.core.cache import cache
+
 
 def get_users():
     """Given an email, return matching user(s) who should receive a reset.
