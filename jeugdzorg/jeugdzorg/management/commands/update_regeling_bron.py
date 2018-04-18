@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        if not cronjob_container_check(self.name):
-            return
+        if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
+            raise CommandError("You're not the worker!")
 
         update_regeling_bron_job()

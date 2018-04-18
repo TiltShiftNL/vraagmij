@@ -41,8 +41,8 @@ class Command(BaseCommand):
     name = 'mail_account_active_check'
 
     def handle(self, *args, **options):
-        if not cronjob_container_check(self.__module__.split('.')[-1]):
-            return
+        if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
+            raise CommandError("You're not the worker!")
 
         site = Site.objects.get_current()
         if site.instelling:
