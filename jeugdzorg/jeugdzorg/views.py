@@ -83,7 +83,7 @@ class ConfigView(UserPassesTestMixin, TemplateView):
         data['envvars'] = envvars
 
         data['int_id'] = get_container_id()
-        data['is_cronjob_worker'] = (data['int_id'] == cache.get(get_cronjob_worker_cache_key()))
+        data['cronjob_worker_id'] = cache.get(get_cronjob_worker_cache_key())
 
         return data
 
