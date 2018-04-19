@@ -362,4 +362,21 @@ form {
     display: none;
   }
 }
-
+.form-phone-helper {
+  &, i {
+    font-style: normal;
+  }
+  
+  color: rgba($textColor, .5);
+  font-size: $fontSmallSize;
+  
+  position: absolute;
+  left: 100%;
+  margin-left: 2rem;
+  margin-top: 1.6rem;
+  
+  transition: opacity 1s;
+  [data-input-status="valid"] & {
+    color: green;
+  }
+}

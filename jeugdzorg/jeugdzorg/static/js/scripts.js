@@ -487,6 +487,78 @@
             };
         this.addEventListener('click', handler);
     },
+    
+    'phone': function(){
+      
+      var 
+        input = this,
+        help = input.parentNode.querySelector('em');
+      
+
+      var _phone = function(){
+
+        var val = input.value.trim();
+    
+        val = val.replace(/^\+/, '00');
+        val = val.replace(/[^0-9]/ig, '');
+    
+        if (val.indexOf('00') !== 0) {
+          val = '00' + '31' + val;
+        }
+        val = val.replace(/(^0{2})(31|32)0?/, '+$2');
+        val = val.replace(/(^\+)(31|32)0?(\d.*)/, '+$2$3');
+    
+
+        var pads = 12; // NL
+        if (val.indexOf('+32') === 0) {
+          if (val.indexOf('+324') === 0) {
+            if (val.indexOf('+3242') === 0 || val.indexOf('+3243') === 0) { // in 04 zone enkel gevolgd door 2 of 3 anders mobiel nummer
+              pads = 11;
+            } else {
+              pads = 12;
+            }
+          } else {
+            pads = 11;
+          }
+        }
+    
+        val = val.substr(0, pads);
+    
+        if (val.length == pads) {
+          input.parentNode.dataset.inputStatus = 'valid';
+          input.owner.value = val;
+        } else {
+          input.parentNode.dataset.inputStatus = 'not-valid';
+          input.owner.value = '';
+        }
+    
+    
+        if (val.length > 3) {
+          help.innerHTML = '<i>' + val.padEnd(pads ,'•').split('').join('</i><i>') + '</i>';
+        } else {
+          help.innerHTML = '';
+        }
+        
+    
+      };
+      
+      input.owner = document.getElementById(this.dataset.ownerId);
+      
+      if (!input.owner) return;
+      
+      input.addEventListener('keyup', _phone);
+      input.addEventListener('change', _phone);
+      
+      
+      input.value = input.owner.value != 'false' ? input.owner.value : '';
+      
+      input.owner.type = 'hidden';
+      input.placeholder = input.owner.placeholder;
+      input.classList.remove('visually-hidden')
+      
+      _phone();
+
+    },
 
     // Dit is niet een paasei
     'vraag-mij-maar-amsterdam': function(){

@@ -123,12 +123,16 @@
               <label{% if profiel.forms.0.telefoonnummer.errors %} class="errors"{% endif %}>
                   <strong>Telefoonnummer <small>(dit wordt getoond)</small></strong>
                   {{ profiel.forms.0.telefoonnummer }}
+                  <em class="form-phone-helper"></em>
+                  <input type="text" class="visually-hidden" data-decorator="phone" data-owner-id="id_profiel-0-telefoonnummer">
               </label>
           </p>
           <p class="row">
               <label{% if profiel.forms.0.telefoonnummer_2.errors %} class="errors"{% endif %}>
                   <strong>Telefoonnummer alternatief <small>(dit wordt getoond)</small></strong>
                   {{ profiel.forms.0.telefoonnummer_2 }}
+                  <em class="form-phone-helper"></em>
+                  <input type="text" class="visually-hidden" data-decorator="phone" data-owner-id="id_profiel-0-telefoonnummer_2">
               </label>
           </p>
         </div>
