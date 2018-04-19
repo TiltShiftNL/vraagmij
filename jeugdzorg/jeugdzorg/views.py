@@ -1,14 +1,11 @@
-import json
-import sys
-
+import sys, os
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import login
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
-from django.http import JsonResponse, response
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -18,19 +15,14 @@ from django.views.generic import *
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
-from django.contrib.auth import models as auth_models
-from bs4 import BeautifulSoup
 from django.http import HttpResponse
-import re
-import time
-from lxml import etree, html
-import lxml
-import socket
+from django.core.cache import cache
 from .utils import *
 from jeugdzorg.context_processors import app_settings
 from .auth import auth_test
 from .forms import *
 from django.template import engines
+from django.urls import reverse_lazy
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
@@ -75,9 +67,9 @@ class ConfigView(UserPassesTestMixin, TemplateView):
         logs = [
             # ['hostfile', '/etc/hosts'],
             ['crontab', '/etc/cron.d/crontab'],
-            # ['nginx error', '/var/log/nginx/error.log'],
-            # ['nginx access', '/var/log/nginx/access.log'],
             ['cron log', '/var/log/cron.log'],
+            ['nginx error', '/var/log/nginx/error.log'],
+            ['nginx access', '/var/log/nginx/access.log'],
         ]
 
         envvars = ['%s: %s' % (k, v) for k, v in os.environ.items()]
@@ -91,7 +83,8 @@ class ConfigView(UserPassesTestMixin, TemplateView):
         data['logs'] = [[log[0], log[1], [line.rstrip('\n') for line in log[2]]] for log in logs]
         data['envvars'] = envvars
 
-        data['int_id'] = get_container_int()
+        data['int_id'] = get_container_id()
+        data['cronjob_worker_id'] = cache.get(get_cronjob_worker_cache_key())
 
         return data
 
@@ -347,8 +340,6 @@ class UserCreationView(CreateView):
     success_url = '.?aangemaakt=1'
 
     def form_valid(self, form):
-        context = self.get_context_data()
-
         user = form.save(commit=False)
         user.is_active = False
         user.save()
@@ -431,7 +422,6 @@ class SearchIndexView(UserPassesTestMixin, TemplateView):
         return auth_test(self.request.user, 'viewer')
 
     def get(self, request, *args, **kwargs):
-        data = self.get_context_data(**kwargs)
 
         filename = '/opt/app/jeugdzorg/search_files/search.html'
         if os.path.exists(filename):
@@ -463,14 +453,6 @@ class ProfielUpdateView(UserPassesTestMixin, UpdateView):
         post = self.request.POST
         if post:
             profiel_formset = UserFormSet(self.request.POST, self.request.FILES, instance=self.object)
-
-            #print(profiel_formset.errors)
-            # for subform in profiel_formset.forms:
-            #     subform.initial = {
-            #         'email': self.object.email,
-            #         'achternaam': self.object.last_name,
-            #         'voornaam': self.object.first_name,
-            #     }
             data['profiel'] = profiel_formset
         else:
             profiel_formset = UserFormSet(instance=self.object)
@@ -535,8 +517,6 @@ class GebruikersToevoegenView(UserPassesTestMixin, FormView):
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        # print(self.form_valid(self.f))
-
         return super().post(request, *args, **kwargs)
 
 

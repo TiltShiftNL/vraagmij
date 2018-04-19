@@ -1,16 +1,19 @@
-from django.contrib.auth.management.commands import createsuperuser
-from django.core.management.base import BaseCommand, CommandError
-from django.core.management import CommandError
-from jeugdzorg.cron import print_variables, update_regeling_bron_job
 from jeugdzorg.models import CronjobState
 from jeugdzorg.utils import *
 import time
 from django.utils import timezone
-from datetime import datetime
 
 
 def get_container_int():
     return round(int('0x%s' % [l.strip() for l in open('/etc/hosts', 'r')][-1].split('\t')[1], 0) / 1000000000)
+
+
+def get_container_id():
+    return [l.strip() for l in open('/etc/hosts', 'r')][-1].split('\t')[1]
+
+
+def get_cronjob_worker_cache_key():
+    return 'cronjob_worker_id'
 
 
 def cronjob_container_check(name):

@@ -1,13 +1,8 @@
-from django.contrib.auth.management.commands import createsuperuser
 from django.core.management.base import BaseCommand, CommandError
-from django.core.management import CommandError
 from django.contrib.sites.models import Site
 from jeugdzorg.models import *
-from django.shortcuts import render
-from django.template.loader import render_to_string
 from django.template import engines
 from django.utils import timezone
-from datetime import timedelta
 import dateutil.relativedelta
 from django.urls import reverse
 from sendgrid.helpers.mail import *
@@ -18,6 +13,9 @@ import sys, os
 import base64
 from jeugdzorg.utils import *
 from jeugdzorg.statics import *
+from django.core.cache import cache
+import datetime
+from dateutil.tz import tzlocal
 
 
 def build_logo():
@@ -55,14 +53,13 @@ class Command(BaseCommand):
     help = 'Send update mail'
 
     def handle(self, *args, **options):
-        if not cronjob_container_check(self.__module__.split('.')[-1]):
-            return
-
+        now = datetime.datetime.now(tzlocal())
+        if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
+            raise CommandError("You're not the worker!")
+        print('%s: %s' % (now.strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
         site = Site.objects.get_current()
         if site.instelling:
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            now = timezone.now()
-            print(now.timestamp())
             now = now + dateutil.relativedelta.relativedelta(months=-1)
             regeling_nieuw = Regeling.objects.filter(**{
                 'datum_gecreeerd__gt': now
@@ -120,7 +117,7 @@ class Command(BaseCommand):
 
                     if settings.ENV != 'develop':
                         sg.client.mail.send.post(request_body=mail.get())
+                        # print('Send mail to: %s' % u.email)
                     else:
                         print(body_html)
-                    print('Send mail to: %s' % u.email)
 

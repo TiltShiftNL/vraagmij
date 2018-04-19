@@ -24,6 +24,8 @@ export ADMIN_USERNAME=${ADMIN_USERNAME}
 export ADMIN_PASSWORD=${ADMIN_PASSWORD}
 export SENDGRID_API_KEY=${SENDGRID_API_KEY}
 export GIT_REV=${GIT_REV}
+export TZ="Europe/Amsterdam"
+export CRON_TZ="Europe/Amsterdam"
 EOF
 
 
@@ -35,6 +37,8 @@ echo "Collect static files"
 python manage.py collectstatic --noinput
 
 python manage.py createcachetable
+
+python manage.py set_cronjob_worker
 
 python manage.py create_crontabs
 

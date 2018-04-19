@@ -26,7 +26,12 @@ class RestrictedFileField(forms.FileField):
         try:
             if data.content_type in self.content_types:
                 if data.size > self.max_upload_size:
-                    raise forms.ValidationError(_('File size must be under %s. Current file size is %s.') % (filesizeformat(self.max_upload_size), filesizeformat(data.size)))
+                    raise forms.ValidationError(
+                        _('File size must be under %s. Current file size is %s.') % (
+                            filesizeformat(self.max_upload_size),
+                            filesizeformat(data.size)
+                        )
+                    )
             else:
                 raise forms.ValidationError(_('File type (%s) is not supported.') % data.content_type)
         except AttributeError:
@@ -46,7 +51,12 @@ class RestrictedImageField(forms.ImageField):
         data = super(RestrictedImageField, self).clean(*args, **kwargs)
         try:
             if data.size > self.max_upload_size:
-                raise forms.ValidationError(_('File size must be under %s. Current file size is %s.') % (filesizeformat(self.max_upload_size), filesizeformat(data.size)))
+                raise forms.ValidationError(
+                    _('File size must be under %s. Current file size is %s.') % (
+                        filesizeformat(self.max_upload_size),
+                        filesizeformat(data.size)
+                    )
+                )
         except AttributeError:
             pass
 

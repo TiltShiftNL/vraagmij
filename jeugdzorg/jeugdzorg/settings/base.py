@@ -200,16 +200,6 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# CRONTAB_EXECUTABLE = '/usr/bin/crontab -e'
-
-#CRONTAB_PYTHON_EXECUTABLE = '/usr/local/bin/python'
-
-# CRONTAB_DJANGO_SETTINGS_MODULE = 'jeugdzorg.settings.production'
-#
-# CRONJOBS = [
-#     ('*/1 * * * *', 'jeugdzorg.cron.print_variables', '>> /var/log/cron.log 2>&1')
-# ]
-
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),

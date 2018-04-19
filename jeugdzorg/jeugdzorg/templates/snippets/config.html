@@ -2,7 +2,8 @@
 {% load version_tags %}
 
 {% block main %}
-    <h1>{{ int_id }}</h1>
+    <h1>Container id: {{ int_id }}</h1>
+    <h2>Cronjob worker container: {{ cronjob_worker_id }}</h2>
 {#    <ul>#}
 {#        {% for var in envvars %}#}
 {#            <li>{{ var }}</li>#}

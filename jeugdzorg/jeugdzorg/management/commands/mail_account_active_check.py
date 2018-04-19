@@ -1,26 +1,20 @@
-from django.contrib.auth.management.commands import createsuperuser
 from django.core.management import CommandError
-from django.db import connection
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
-from django.urls import reverse
+from django.contrib.auth import (get_user_model, )
 from django.core.management.base import BaseCommand
-from jeugdzorg.models import EventItem
-UserModel = get_user_model()
 from django.utils import timezone
 from django.contrib.sites.models import Site
-from jeugdzorg.models import Instelling
 from django.conf import settings
 from sendgrid.helpers.mail import *
 import sendgrid
-import json
 from jeugdzorg.statics import *
 from jeugdzorg.utils import *
-import dateutil.relativedelta
 from jeugdzorg.context_processors import app_settings
 from django.template.loader import render_to_string
-from django.template import engines
+from django.core.cache import cache
+import datetime
+from dateutil.tz import tzlocal
+
+UserModel = get_user_model()
 
 
 def get_users():
@@ -41,13 +35,13 @@ class Command(BaseCommand):
     name = 'mail_account_active_check'
 
     def handle(self, *args, **options):
-        if not cronjob_container_check(self.__module__.split('.')[-1]):
-            return
-
+        now = datetime.datetime.now(tzlocal())
+        if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
+            raise CommandError("You're not the worker!")
+        print('%s: %s' % (now.strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
         site = Site.objects.get_current()
         if site.instelling:
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            now = timezone.now()
 
             subject = 'VraagMij - Is je profiel up-to-date?'
 
@@ -72,8 +66,8 @@ class Command(BaseCommand):
 
                     if settings.ENV != 'develop':
                         sg.client.mail.send.post(request_body=mail.get())
+                        print('Send mail to: %s' % u.email)
                     else:
                         print(body)
-                    print('Send mail to: %s' % u.email)
 
 
