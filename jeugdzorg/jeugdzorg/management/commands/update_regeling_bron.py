@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from jeugdzorg.cron import print_variables, update_regeling_bron_job
 from jeugdzorg.utils import *
 from django.core.cache import cache
+from django.utils import timezone
 
 
 class Command(BaseCommand):

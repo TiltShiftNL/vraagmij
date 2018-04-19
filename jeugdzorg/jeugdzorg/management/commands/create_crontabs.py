@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.sites.models import Site
 from jeugdzorg.models import Instelling
+from django.utils import timezone
 
 
 class Command(BaseCommand):
