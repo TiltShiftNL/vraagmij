@@ -23,7 +23,8 @@ class Command(BaseCommand):
             site = Site.objects.get_current()
             instelling = Instelling.objects.get(site=site)
             with open('/etc/cron.d/crontab', 'w') as crontabfile:
-                crontabfile.write('TZ=Europe/Amsterdam\n')
+                crontabfile.write('TZ="Europe/Amsterdam"\n')
+                crontabfile.write('CRON_TZ="Europe/Amsterdam"\n')
             with open('/etc/cron.d/crontab', 'a') as crontabfile:
                 for j in jobs:
                     f = getattr(instelling, '%s_frequentie' % j[0], j[1])

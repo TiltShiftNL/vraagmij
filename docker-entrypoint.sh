@@ -24,8 +24,8 @@ export ADMIN_USERNAME=${ADMIN_USERNAME}
 export ADMIN_PASSWORD=${ADMIN_PASSWORD}
 export SENDGRID_API_KEY=${SENDGRID_API_KEY}
 export GIT_REV=${GIT_REV}
-export TZ=Europe/Amsterdam
-export CRON_TZ=Europe/Amsterdam
+export TZ="Europe/Amsterdam"
+export CRON_TZ="Europe/Amsterdam"
 EOF
 
 
