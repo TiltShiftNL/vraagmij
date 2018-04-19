@@ -6,6 +6,8 @@ UserModel = get_user_model()
 from django.utils import timezone
 from jeugdzorg.utils import *
 from django.core.cache import cache
+import datetime
+from dateutil.tz import tzlocal
 
 
 def get_users():
@@ -25,9 +27,11 @@ class Command(BaseCommand):
     help = 'check user activity'
 
     def handle(self, *args, **options):
+        now = datetime.datetime.now(tzlocal())
+
         if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
             raise CommandError("You're not the worker!")
-        print('%s: %s' % (timezone.now().strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
+        print('%s: %s' % (now.strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
         for u in get_users():
             exist = EventItem.objects.filter(**{
                 'user': u,
@@ -35,7 +39,7 @@ class Command(BaseCommand):
                 # 'name': 'load.page',
             }).order_by('-timestamp')
             if exist:
-                div = int(timezone.now().timestamp()) - int(exist[0].timestamp)/1000
+                div = int(now.timestamp()) - int(exist[0].timestamp)/1000
                 div = round(div)
                 u.profiel.seconden_niet_gebruikt = div
                 u.profiel.save()

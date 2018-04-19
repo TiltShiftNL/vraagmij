@@ -14,6 +14,8 @@ import base64
 from jeugdzorg.utils import *
 from jeugdzorg.statics import *
 from django.core.cache import cache
+import datetime
+from dateutil.tz import tzlocal
 
 
 def build_logo():
@@ -51,13 +53,13 @@ class Command(BaseCommand):
     help = 'Send update mail'
 
     def handle(self, *args, **options):
+        now = datetime.datetime.now(tzlocal())
         if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
             raise CommandError("You're not the worker!")
-        print('%s: %s' % (timezone.now().strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
+        print('%s: %s' % (now.strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
         site = Site.objects.get_current()
         if site.instelling:
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
-            now = timezone.now()
             now = now + dateutil.relativedelta.relativedelta(months=-1)
             regeling_nieuw = Regeling.objects.filter(**{
                 'datum_gecreeerd__gt': now
@@ -115,7 +117,7 @@ class Command(BaseCommand):
 
                     if settings.ENV != 'develop':
                         sg.client.mail.send.post(request_body=mail.get())
+                        # print('Send mail to: %s' % u.email)
                     else:
                         print(body_html)
-                    # print('Send mail to: %s' % u.email)
 

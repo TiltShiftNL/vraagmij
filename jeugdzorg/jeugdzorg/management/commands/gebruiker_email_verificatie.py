@@ -6,6 +6,8 @@ import sendgrid
 import json
 from jeugdzorg.utils import *
 from django.core.cache import cache
+import datetime
+from dateutil.tz import tzlocal
 
 UserModel = get_user_model()
 
@@ -27,15 +29,14 @@ class Command(BaseCommand):
     help = 'gebruiker email verificatie'
 
     def handle(self, *args, **options):
-        # if not cronjob_container_check(self.__module__.split('.')[-1]):
-        #     return
+        now = datetime.datetime.now(tzlocal())
         if get_container_id() != cache.get(get_cronjob_worker_cache_key()):
             raise CommandError("You're not the worker!")
 
-        print('%s: %s' % (timezone.now().strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
+        print('%s: %s' % (now.strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
 
         start_time = 1514764800
-        end_time = int(timezone.now().timestamp())
+        end_time = int(now.timestamp())
         sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
         bounces_base_url = 'suppression/bounces'
         blocks_base_url = 'suppression/blocks'
