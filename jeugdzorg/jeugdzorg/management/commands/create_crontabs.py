@@ -32,6 +32,6 @@ class Command(BaseCommand):
                             job_base_2,
                         ))
                 crontabfile.write('\n')
-            print('new crontabs created')
+            print('%s: %s' % (timezone.now().strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
         except Exception as e:
             print('create crontabs: %s (%s)' % (e.message, type(e)))

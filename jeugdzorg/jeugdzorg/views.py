@@ -66,9 +66,9 @@ class ConfigView(UserPassesTestMixin, TemplateView):
         logs = [
             # ['hostfile', '/etc/hosts'],
             ['crontab', '/etc/cron.d/crontab'],
-            # ['nginx error', '/var/log/nginx/error.log'],
-            # ['nginx access', '/var/log/nginx/access.log'],
             ['cron log', '/var/log/cron.log'],
+            ['nginx error', '/var/log/nginx/error.log'],
+            ['nginx access', '/var/log/nginx/access.log'],
         ]
 
         envvars = ['%s: %s' % (k, v) for k, v in os.environ.items()]
