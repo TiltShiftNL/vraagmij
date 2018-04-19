@@ -3,6 +3,7 @@ from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
 from django.db.models import ManyToManyField
 from django.db.models.fields.files import ImageField
+from django.db.models.signals import pre_save
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 from sortedm2m.fields import SortedManyToManyField
@@ -922,6 +923,11 @@ def rebuild_index_check(sender, update_fields, instance, **kwargs):
     call_command('rebuild_index')
 
 
+def pre_save_profiel(sender, instance, *args, **kwargs):
+    if instance.id:
+        instance.seconden_niet_gebruikt = 0
+
+
 # post_save.connect(save_profile, sender=User)
 # post_save.connect(save_instelling, sender=Instelling)
 # pre_save.connect(pre_save_instance, sender=Instelling)
@@ -930,3 +936,4 @@ def rebuild_index_check(sender, update_fields, instance, **kwargs):
 # post_save.connect(rebuild_index_check, sender=Regeling)
 # post_save.connect(rebuild_index_check, sender=Profiel)
 
+pre_save.connect(pre_save_profiel, sender=Profiel)

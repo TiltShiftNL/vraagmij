@@ -96,7 +96,7 @@ class EventItemAdmin(admin.ModelAdmin):
 
 @admin.register(Profiel)
 class ProfielAdmin(admin.ModelAdmin):
-    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'gebruiker_email_verificatie', 'telefoonnummer', 'gebruik_email', 'gebruik_telefoonnummer', 'seconden_niet_gebruikt']
+    list_display = ['gebruiker', 'voornaam', 'achternaam', 'email', 'gebruiker_email_verificatie', 'telefoonnummer', 'zichtbaar', 'hou_me_op_de_hoogte_mail', 'seconden_niet_gebruikt']
     list_filter = ['gebruiker_email_verificatie', ]
     inlines = [
         ProfielNaarRegelingInline,
@@ -105,10 +105,10 @@ class ProfielAdmin(admin.ModelAdmin):
     ]
 
 
-@admin.register(CronjobState)
-class CronjobStateAdmin(admin.ModelAdmin):
-    list_display = ['naam_command', 'datumtijd_string', ]
-    list_filter = ['naam_command', 'datumtijd_string', ]
+# @admin.register(CronjobState)
+# class CronjobStateAdmin(admin.ModelAdmin):
+#     list_display = ['naam_command', 'datumtijd_string', ]
+#     list_filter = ['naam_command', 'datumtijd_string', ]
 
 
 @admin.register(Instelling)
