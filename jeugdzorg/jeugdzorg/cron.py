@@ -16,7 +16,6 @@ def print_variables():
 
 
 def update_regeling_bron_job():
-    print('START JOB update_regelingen')
     for regeling in Regeling.objects.all():
         if regeling.bron_url:
             query = regeling.bron_html_query
@@ -29,7 +28,7 @@ def update_regeling_bron_job():
                 soup_result.append(link.text)
             h = json.dumps(soup_result)
             #h = hashlib.sha1(json.dumps(soup_result).encode('utf-8')).hexdigest()
-            print('regeling id:%s' % regeling.id)
+            # print('regeling id:%s' % regeling.id)
             if h != regeling.bron_resultaat and not regeling.bron_veranderd:
                 print(h)
                 regeling.bron_resultaat = h

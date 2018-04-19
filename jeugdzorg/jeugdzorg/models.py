@@ -2,33 +2,23 @@ from django.db import models
 from adminsortable.models import SortableMixin
 from adminsortable.fields import SortableForeignKey
 from django.db.models import ManyToManyField
-from django.db.models.fields.files import ImageFieldFile, ImageField
-from django.forms import model_to_dict
+from django.db.models.fields.files import ImageField
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 from sortedm2m.fields import SortedManyToManyField
 from adminsortable.models import Sortable
-from django.core.files.storage import default_storage
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from phonenumber_field.modelfields import PhoneNumberField
-from django.db.models.signals import post_save, pre_save
 from .fields import EmailToLowerField
 from django.conf import settings
 from itertools import groupby
 from django.contrib.sites.models import Site
 from django.core.management import call_command
 import json
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
-
-# fs = default_storage
-# fs.container_name = 'jeugdzorg_protected'
 
 
 class PrintableModel(models.Model):
@@ -341,8 +331,6 @@ class Thema(PrintableModel, Sortable):
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''
 
-    def contacten(self):
-        return self.contact.through.objects.filter(thema=self)
 
     def __str__(self):
         return self.titel
@@ -910,18 +898,12 @@ class CronjobState(models.Model):
         verbose_name_plural = _("Cronjob statussen")
 
 
-# def save_profile(sender, instance, **kwargs):
-#     if kwargs.get('created') and not Profiel.objects.filter(gebruiker=instance):
-#         p = Profiel(gebruiker=instance)
-#         p.email = instance.email
-#         p.voornaam = instance.first_name
-#         p.achternaam = instance.last_name
-#         p.save()
-
-
 def save_instelling(sender, update_fields, instance, **kwargs):
     if hasattr(sender, 'track_field_names'):
-        call_create_crontabs = [field_name for field_name in sender.track_field_names() if getattr(instance, '__%s' % field_name) != getattr(instance, '%s' % field_name)]
+        call_create_crontabs = [
+            field_name for field_name in sender.track_field_names()
+            if getattr(instance, '__%s' % field_name) != getattr(instance, '%s' % field_name)
+        ]
         if call_create_crontabs:
             call_command('create_crontabs')
 
@@ -930,7 +912,10 @@ def pre_save_instance(sender, instance, *args, **kwargs):
     if instance.id:
         if hasattr(sender, 'track_field_names'):
             for field_name in sender.track_field_names():
-                setattr(instance, '__%s' % field_name, getattr(instance.__class__.objects.get(id=instance.id), field_name))
+                setattr(instance, '__%s' % field_name, getattr(
+                    instance.__class__.objects.get(id=instance.id),
+                    field_name
+                ))
 
 
 def rebuild_index_check(sender, update_fields, instance, **kwargs):

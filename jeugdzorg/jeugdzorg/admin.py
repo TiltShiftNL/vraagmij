@@ -1,13 +1,9 @@
-from adminsortable.admin import SortableAdmin, SortableMixin
+from adminsortable.admin import SortableAdmin
 from adminsortable2.admin import SortableAdminMixin
 from adminsortable.admin import SortableStackedInline
 from django.contrib import admin
-# from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin
-from django.urls import reverse
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-
 from .forms import *
 
 
@@ -46,7 +42,8 @@ class RegelingAdmin(SortableAdmin):
     list_display = ['titel', 'bron_veranderd', 'datum_gecreeerd', 'datum_opgeslagen']
     fieldsets = (
         (None, {'fields': ('titel', 'samenvatting', 'bron', 'startdatum', 'einddatum', 'bron_url', 'aanvraag_url')}),
-        (_('Geavanceerd'), {'classes': ('collapse', 'open'), 'fields': ('bron_html_query', 'bron_veranderd', 'bron_resultaat')}),
+        (_('Geavanceerd'),
+         {'classes': ('collapse', 'open'), 'fields': ('bron_html_query', 'bron_veranderd', 'bron_resultaat')}),
 
     )
     save_on_top = True
@@ -140,21 +137,13 @@ class UserAdmin(UserAdmin):
 
     def wijzig_profiel(self, obj):
         url = reverse('admin:%s_%s_change' % (obj._meta.app_label,  'profiel'),  args=[obj.profiel.id])
-        return mark_safe("""<a id="edit_related" class="button related-widget-wrapper-link add-related" href="%s?_popup=1">Profiel</a>""" % url)
+        return mark_safe(
+            """<a id="edit_related" class="button related-widget-wrapper-link add-related" href="%s?_popup=1">
+            Profiel
+            </a>""" % url
+        )
 
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
     ordering = []
-
-
-
-
-# admin.site.unregister(Group)
-# @admin.register(Group)
-# class CustomGroupAdmin(GroupAdmin):
-#     pass
-
-# @admin.register(User)
-# class UserAdmin(admin.ModelAdmin):
-#     pass

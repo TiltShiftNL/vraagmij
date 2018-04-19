@@ -1,36 +1,21 @@
-from django import forms
 from django.forms import widgets
-from .models import *
-from django.core.management import call_command
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm as DefaultUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.forms.models import BaseInlineFormSet
 import sendgrid
-import os
 from django.db import connection
 from sendgrid.helpers.mail import *
-from django.conf import settings
 from django.template import loader
 from itertools import chain
 from .widgets import *
 from .fields import *
 from django.forms.utils import ErrorList
-from django.utils.safestring import mark_safe
-from itertools import groupby
-from django.contrib.sites.models import Site
-from django.urls import reverse, reverse_lazy
-from django.core.validators import validate_email, EmailValidator
-from django.template import RequestContext
-from django.contrib.auth import (
-    authenticate, get_user_model, password_validation,
-)
-from django.core.exceptions import ValidationError
+from django.urls import reverse
 from django.contrib.auth.forms import SetPasswordForm as SetPasswordFormDefault
 from django.contrib.auth import models as auth_models
-from croniter import croniter
-from django.utils import timezone
 from .validators import *
+from django.contrib.auth import (get_user_model, )
 
 UserModel = get_user_model()
 
@@ -54,8 +39,6 @@ def handle_uploaded_file(f):
     with open('/opt/file_upload/jeugdzorg.json', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
-
-
 
     tables = [
         'django_admin_log',
@@ -198,7 +181,6 @@ class ProfielModelForm(forms.ModelForm):
         self.fields['telefoonnummer'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
         self.fields['telefoonnummer_2'].widget = widgets.TextInput(attrs={'placeholder': '+31612345678'})
 
-
     def _save_m2m(self):
         """
         Save the many-to-many fields and generic relations for this form.
@@ -207,9 +189,6 @@ class ProfielModelForm(forms.ModelForm):
         exclude = self._meta.exclude
         fields = self._meta.fields
         opts = self.instance._meta
-        # Note that for historical reasons we want to include also
-        # private_fields here. (GenericRelation was previously a fake
-        # m2m field).
         for f in chain(opts.many_to_many, opts.private_fields):
             if not hasattr(f, 'save_form_data'):
                 continue
@@ -296,14 +275,13 @@ class UserModelForm(forms.ModelForm):
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
-        model = User  # non-swappable User model here.
-        #exclude = ("username", )
+        model = User
         fields = ("email",)
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
-        model = User  # non-swappable User model here.
+        model = User
         exclude = []
 
 
@@ -328,7 +306,9 @@ class LoginForm(AuthenticationForm):
     }
 
     def __init__(self, request=None, *args, **kwargs):
-        self.error_messages['invalid_login'] = 'Ongeldig e-mailadres of wachtwoord. Wachtwoord vergeten? <a href="%s">Vraag een nieuwe aan.</a>' % reverse('herstel_wachtwoord')
+        self.error_messages['invalid_login'] = 'Ongeldig e-mailadres of wachtwoord. Wachtwoord vergeten? ' \
+                                               '<a href="%s">Vraag een nieuwe aan.</a>' % \
+                                               reverse('herstel_wachtwoord')
         super().__init__(request, *args, **kwargs)
 
 
@@ -371,48 +351,6 @@ ProfielThemaFormSet = forms.inlineformset_factory(
 
 class BaseChildrenFormset(BaseInlineFormSet):
     pass
-    # def add_fields(self, form, index):
-    #     super().add_fields(form, index)
-    #
-    #     form.themas = ProfielThemaFormSet(
-    #         instance=form.instance,
-    #         data=form.data if form.is_bound else None,
-    #         files=form.files if form.is_bound else None,
-    #         prefix='thema-%s-%s' % (
-    #             form.prefix,
-    #             ProfielThemaFormSet.get_default_prefix()
-    #         ),
-    #     )
-    #     qs = self.model._default_manager.get_queryset()
-    #     print(form.instance)
-    #     print(ProfielNaarThema.objects.filter(profiel=form.instance))
-    #     print(self.fk)
-    #     print(self.get_queryset())
-    #     print(qs)
-    #     print(qs.using(form.instance._state.db))
-    #     count = Thema.objects.all().count()
-    #     form.themas.max_num = count
-    #     form.themas.min_num = count
-
-    # def is_valid(self):
-    #
-    #     result = super().is_valid()
-    #
-    #     if self.is_bound:
-    #         # look at any nested formsets, as well
-    #         for form in self.forms:
-    #             result = result and form.thema.is_valid()
-    #
-    #     return result
-    #
-    # def save(self, commit=True):
-    #
-    #     result = super().save(commit=commit)
-    #
-    #     for form in self:
-    #         form.themas.save(commit=commit)
-    #
-    #     return result
 
 
 UserFormSet = forms.inlineformset_factory(
@@ -435,7 +373,6 @@ UserFormSet = forms.inlineformset_factory(
         'thema_lijst',
         'gebied_lijst',
     ),
-    #formset=BaseChildrenFormset,
     widgets={
         'regeling_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices choices-full'}),
         'organisatie_lijst': ProfielCheckboxSelectMultiple(attrs={'class': 'choices'}),

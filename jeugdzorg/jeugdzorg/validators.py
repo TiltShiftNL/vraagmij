@@ -1,9 +1,8 @@
 from django.core.exceptions import ValidationError
-from django.utils import timezone
 from croniter import croniter
 from .models import *
 from django.utils.safestring import mark_safe
-from django.core.validators import validate_email, EmailValidator
+from django.core.validators import EmailValidator
 
 
 class CustomPasswordValidator(object):

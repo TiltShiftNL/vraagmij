@@ -1,6 +1,5 @@
-from django.conf.urls import url, include
-from .models import Regeling, Voorwaarde
-from rest_framework import routers, serializers, viewsets
+from .models import Regeling
+from rest_framework import serializers
 
 
 class RegelingSerializer(serializers.HyperlinkedModelSerializer):
