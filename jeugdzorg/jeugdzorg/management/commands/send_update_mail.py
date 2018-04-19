@@ -58,7 +58,6 @@ class Command(BaseCommand):
         if site.instelling:
             sg = sendgrid.SendGridAPIClient(apikey=settings.SENDGRID_API_KEY)
             now = timezone.now()
-            print(now.timestamp())
             now = now + dateutil.relativedelta.relativedelta(months=-1)
             regeling_nieuw = Regeling.objects.filter(**{
                 'datum_gecreeerd__gt': now
@@ -118,5 +117,5 @@ class Command(BaseCommand):
                         sg.client.mail.send.post(request_body=mail.get())
                     else:
                         print(body_html)
-                    print('Send mail to: %s' % u.email)
+                    # print('Send mail to: %s' % u.email)
 
