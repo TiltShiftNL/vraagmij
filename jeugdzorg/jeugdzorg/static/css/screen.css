@@ -738,11 +738,8 @@ body {
 .nav-login .button {
   font-size: 1.2rem;
   font-weight: 700;
-  background-color: #333;
-  border-color: #333;
   padding: 1em 1em;
-  margin: 0 0 0 1em;
-  color: #fff; }
+  margin: 0 0 0 1em; }
 .nav-login .icon-avatar {
   top: -.2em;
   margin: 0 .2em; }
