@@ -111,7 +111,9 @@
 
   display: none;
   margin-top: 2 * $lineHeight;
-  
+  [data-model] {
+    margin-bottom: 2 * $lineHeight;
+  }
   [data-model]:before {
     content: attr(data-model) ' (' attr(data-resultcount) ')';
     display: block;
@@ -121,8 +123,19 @@
     
     padding-bottom: $padding / 2;
     margin-bottom: $padding;
-    margin-top: 2 * $lineHeight;
     border-bottom: 1px solid $lightColor;
+    padding-top: 12rem;
+    margin-top: -11rem;
+    @include medium {
+      padding-top: 12rem;
+      margin-top: -11rem;
+      
+    }
+    @include small {
+      padding-top: 8rem;
+      margin-top: -7rem;
+    }
+    
   }
   
 }
@@ -196,11 +209,16 @@
     margin-left: auto;
     margin-right: auto;
     
-    margin-top: 6rem;
+    margin-top: 5rem;
+    
 
     padding: $padding;
     @include medium {
+      margin-top: 6rem;
       padding: 10px 10px (44px + 10px) 10px;
+    }
+    @include small {
+      margin-top: 1rem;
     }
     
   }
