@@ -14,10 +14,29 @@ Deze repository bevat een "as-is" kopie van het project op moment van publiceren
 
 ## Wat mag ik met deze code
 
-De Gemeente Amsterdam heeft deze code gepubliceerd onder de Mozilla Public License v2. Een kopie van de volledige licentie tekst is opgenomen in het bestand LICENSE.
+De Gemeente Amsterdam heeft deze code gepubliceerd onder de Mozilla Public License v2.
+Een kopie van de volledige licentie tekst is opgenomen in het bestand LICENSE.
 
-## Installeren
+Het FIXXX-team heeft de verdere doorontwikkeling van deze software overgedragen
+aan de probleemeigenaar. De code in deze repository zal dan ook niet actief worden
+bijgehouden door het FIXXX-team.
 
-* installeer [docker](https://www.docker.com)
-* run `docker-compose up --build
-* navigeer naar http://localhost:8000/
+## Installeren (development)
+```
+### Installatie Docker
+https://www.docker.com
+
+### Start project
+git clone git@github.com:amsterdam/jeugdzorg.git
+cd jeugdzorg
+docker-compose up
+navigeer naar http://localhost:8000/
+
+### Applicatie beheer
+http://localhost:8000/admin/
+gebruikersnaam: dj_username / wachtwoord: dj_password
+
+### Postgres beheer
+navigeer naar http://localhost:5050/
+gebruikersnaam: postgres / wachtwoord: postgres
+```
