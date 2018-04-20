@@ -23,20 +23,20 @@ bijgehouden door het FIXXX-team.
 
 ## Installeren (development)
 ```
-__Installatie Docker__
+`**`Installatie Docker`**`
 https://www.docker.com
 
-__Start project__
+`**`Start project`**`
 git clone git@github.com:amsterdam/jeugdzorg.git
 cd jeugdzorg
 docker-compose up
 navigeer naar http://localhost:8000/
 
-__Applicatie beheer__
+`**`Applicatie beheer`**`
 http://localhost:8000/admin/
 gebruikersnaam: dj_username / wachtwoord: dj_password
 
-__Postgres beheer__
+`**`Postgres beheer`**`
 navigeer naar http://localhost:5050/
 gebruikersnaam: postgres / wachtwoord: postgres
 ```
