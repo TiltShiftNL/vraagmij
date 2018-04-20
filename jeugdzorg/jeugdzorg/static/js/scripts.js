@@ -466,6 +466,13 @@
         d.classList.add('search-mode');
       });
     },
+    
+    'clear-search': function(){
+      if (w.sessionStorage) {
+        w.sessionStorage.removeItem('vraagmij-zoek');
+      }
+    },
+    
     'profiel-connect': function () {
         var el = this,
             handler = function(e){
