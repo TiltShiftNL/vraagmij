@@ -59,7 +59,8 @@
             </nav>
           {% else %}
           <p class="nav-login">
-            <a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Wachtwoord vergeten</a> 
+            <a href="{% url 'herstel_wachtwoord' %}" data-counter="click.nav.login">Wachtwoord vergeten</a>
+            <a href="{% url 'gebruiker_registreren' %}" class="button primary">registreren</a>
             <a href="{% url 'login' %}" class="button">Inloggen</a>
           </p>
           {% endif %}
@@ -70,9 +71,12 @@
   </header>
   
   {% block tabs %}
-  
+
   <nav class="tabs-container">
       <div class="container">
+          {% if not user.is_authenticated %}
+          <p>VraagMij is een website waarmee zorgprofessionals in Amsterdam, direct met elkaar in contact kunnen komen op basis van inhoudelijke vragen over thema’s en regelingen die onder het Sociaal Domein vallen. Om contactpersonen te kunnen raadplegen, moet je je eerst <a href="{% url 'gebruiker_registreren' %}">registreren</a>.</p>
+          {% endif %}
           <ul class="tabs">
               <li><a{% if sub_view == 'thema' %} class="active"{% endif %} data-counter="click.homepage.tab.themas" href="{% url 'themas' %}" data-count="{{ THEMA_COUNT }}">Thema's</a></li>
               <li><a{% if sub_view == 'contact' %} class="active"{% endif %} data-counter="click.homepage.tab.contacten" href="{% url 'contacten' %}" data-count="{{ PROFIEL_COUNT }}">Contacten</a></li>
