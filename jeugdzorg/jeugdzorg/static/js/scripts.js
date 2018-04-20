@@ -546,8 +546,14 @@
       
       if (!input.owner) return;
       
-      input.addEventListener('keyup', _phone);
-      input.addEventListener('change', _phone);
+      input.addEventListener('keyup', function(){
+        input.parentNode.dataset.inputTouched = 'touched';
+        _phone();
+      });
+      input.addEventListener('change', function(){
+        input.parentNode.dataset.inputTouched = 'touched';
+        _phone();
+      });
       
       
       input.value = input.owner.value != 'false' ? input.owner.value : '';

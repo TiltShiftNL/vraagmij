@@ -1161,9 +1161,12 @@ form label strong, form .label strong {
   left: 100%;
   margin-left: 2rem;
   bottom: 1.6rem;
-  transition: opacity 1s; }
+  transition: opacity 1s;
+  opacity: 0; }
 .form-phone-helper, .form-phone-helper i {
   font-style: normal; }
+[data-input-touched="touched"] .form-phone-helper {
+  opacity: 1; }
 [data-input-status="valid"] .form-phone-helper {
   color: green; }
 @media (max-width: 900px) {

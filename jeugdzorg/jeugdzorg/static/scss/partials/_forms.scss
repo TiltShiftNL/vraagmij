@@ -377,6 +377,10 @@ form {
   bottom: 1.6rem;
   
   transition: opacity 1s;
+  opacity: 0;
+  [data-input-touched="touched"] & {
+    opacity: 1;
+  }
   [data-input-status="valid"] & {
     color: green;
   }
