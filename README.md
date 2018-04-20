@@ -22,21 +22,24 @@ aan de probleemeigenaar. De code in deze repository zal dan ook niet actief word
 bijgehouden door het FIXXX-team.
 
 ## Installeren (development)
+Installeer Docker
 ```
-Installatie Docker
-https://www.docker.com
-
-Start project
+https://store.docker.com/search?type=edition&offering=community
+```
+### Start project
+```
 git clone git@github.com:amsterdam/jeugdzorg.git
 cd jeugdzorg
 docker-compose up
 navigeer naar http://localhost:8000/
-
-Applicatie beheer
+```
+### Applicatie beheer
+```
 http://localhost:8000/admin/
 gebruikersnaam: dj_username / wachtwoord: dj_password
-
-Postgres beheer
+```
+### Postgres beheer
+```
 navigeer naar http://localhost:5050/
 gebruikersnaam: postgres / wachtwoord: postgres
 ```
