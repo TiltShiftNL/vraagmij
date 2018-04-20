@@ -229,7 +229,7 @@ class Regeling(PrintableModel, models.Model):
         return Voorwaarde.objects.all()
 
     def profielen_zichtbaar(self):
-        return self.profiel_set.filter(zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True).exclude(gebruiker=None)
 
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''
@@ -327,7 +327,7 @@ class Thema(PrintableModel, Sortable):
     ]
 
     def profielen_zichtbaar(self):
-        return self.profiel_set.filter(zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True).exclude(gebruiker=None)
 
     def first_letter(self):
         return self.titel and self.titel[0].upper() or ''
@@ -362,7 +362,7 @@ class Organisatie(models.Model):
         return self.naam
 
     def profielen_zichtbaar(self):
-        return self.profiel_set.filter(zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True).exclude(gebruiker=None)
 
     class Meta:
         verbose_name = _('Organisatie')
@@ -464,7 +464,9 @@ class ProfielNaarRegeling(models.Model):
 
 class ProfielIsZichtbaarManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(zichtbaar=True)
+        return super().get_queryset().filter(
+            zichtbaar=True,
+        ).exclude(gebruiker=None)
 
 
 class Profiel(PrintableModel, models.Model):
@@ -686,7 +688,7 @@ class Gebied(models.Model):
         return self.naam
 
     def profielen_zichtbaar(self):
-        return self.profiel_set.filter(zichtbaar=True)
+        return self.profiel_set.filter(zichtbaar=True).exclude(gebruiker=None)
 
     def first_letter(self):
         return self.naam and self.naam[0].upper() or ''
