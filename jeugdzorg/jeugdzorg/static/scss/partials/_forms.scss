@@ -369,6 +369,7 @@ form {
   
   color: rgba($textColor, .5);
   font-size: $fontSmallSize;
+  line-height: 1;
   
   position: absolute;
   left: 100%;
@@ -378,5 +379,12 @@ form {
   transition: opacity 1s;
   [data-input-status="valid"] & {
     color: green;
+  }
+  @include medium {
+    display: block;
+    position: static;
+    min-height: $fontSmallSize;
+    text-align: right;
+//    padding: .2em 0;
   }
 }
