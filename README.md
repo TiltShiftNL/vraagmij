@@ -22,7 +22,7 @@ aan de probleemeigenaar. De code in deze repository zal dan ook niet actief word
 bijgehouden door het FIXXX-team.
 
 ## Installeren (development)
-```
+
 > ### Installatie Docker
 > https://www.docker.com
 >
@@ -39,4 +39,4 @@ bijgehouden door het FIXXX-team.
 > ### Postgres beheer
 > navigeer naar http://localhost:5050/
 > gebruikersnaam: postgres / wachtwoord: postgres
-```
+
