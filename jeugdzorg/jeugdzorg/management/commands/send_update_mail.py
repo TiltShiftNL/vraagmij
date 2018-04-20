@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.sites.models import Site
+from django.template.loader import render_to_string
 from jeugdzorg.models import *
 from django.template import engines
 from django.utils import timezone
@@ -96,8 +97,10 @@ class Command(BaseCommand):
                     o.update(app_settings())
                     template = django_engine.from_string(site.instelling.update_mail_content)
                     template_html = django_engine.from_string(site.instelling.update_mail_content_html)
-
-                    body_html = template_html.render(o)
+                    o.update({
+                        'content': template_html.render(o),
+                    })
+                    body_html = render_to_string('email/update_mail.html', o)
                     body = template.render(o)
 
                     mail_settings = MailSettings()
