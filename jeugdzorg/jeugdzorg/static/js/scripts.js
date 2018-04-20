@@ -425,29 +425,42 @@
           };
           
       var input = this;
-    
-      setTimeout(function(){
+      
+      var _get = function(data){
+        zoekContainer.innerHTML = data;
+        cards = zoekContainer.querySelectorAll('.zr');
         
-        helpers.ajax('/zoek/', function(response){
-          if (response.status >= 200 && response.status < 400) {
-            zoekContainer.innerHTML = response.responseText;
-            cards = zoekContainer.querySelectorAll('.zr');
-            
-            input.addEventListener('keydown', function(e){
-              if (e.keyCode == 13) e.preventDefault();
-            });
-            input.addEventListener('keyup', function(e){
-              q = cleanQ(this.value);
-              zoek();
-            });
-            if (d.classList.contains('search-mode')) {
-              q = cleanQ(input.value);
-              zoek();
-            }
-          }
+        input.addEventListener('keydown', function(e){
+          if (e.keyCode == 13) e.preventDefault();
         });
+        input.addEventListener('keyup', function(e){
+          q = cleanQ(this.value);
+          zoek();
+        });
+        if (d.classList.contains('search-mode')) {
+          q = cleanQ(input.value);
+          zoek();
+        }
+      };
+      
+      if (w.sessionStorage && w.sessionStorage.getItem('vraagmij-zoek')) {
+        _get(w.sessionStorage.getItem('vraagmij-zoek'));
+      } else {
+        setTimeout(function(){
         
-      }, 1000);
+          helpers.ajax('/zoek/', function(response){
+            if (response.status >= 200 && response.status < 400) {
+              if (w.sessionStorage) {
+                w.sessionStorage.setItem('vraagmij-zoek', response.responseText);
+              }
+              _get(response.responseText);
+            }
+          });
+        
+        }, 1000);
+        
+      }
+    
       
       this.addEventListener('focus', function(e){
         d.classList.add('search-mode');
