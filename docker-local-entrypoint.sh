@@ -10,13 +10,14 @@ echo "Add cron jobs"
 /etc/init.d/cron start
 # python manage.py crontab add
 
-# echo "START Create initial migrations"
-# python manage.py clear_db_migrations
-# python manage.py migrate --fake
+echo "START Create initial migrations"
+python manage.py clear_db_migrations
+python manage.py migrate --fake
 # python manage.py migrate --fake-initial
-# echo "END Create initial migrations"
+echo "END Create initial migrations"
 
 echo "Apply database migrations"
+
 python manage.py migrate
 
 python manage.py createcachetable
