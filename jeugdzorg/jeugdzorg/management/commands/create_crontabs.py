@@ -2,12 +2,15 @@ from django.core.management.base import BaseCommand
 from django.contrib.sites.models import Site
 from jeugdzorg.models import Instelling
 from django.utils import timezone
+import datetime
+from dateutil.tz import tzlocal
 
 
 class Command(BaseCommand):
     help = 'Create crontabs from code'
 
     def handle(self, *args, **options):
+        now = datetime.datetime.now(tzlocal())
         job_base_1 = 'root . /root/project_env.sh; /usr/local/bin/'
         job_base_2 = '.sh >> /var/log/cron.log 2>&1\n'
         jobs = [
@@ -36,6 +39,6 @@ class Command(BaseCommand):
                             job_base_2,
                         ))
                 crontabfile.write('\n')
-            print('%s: %s' % (timezone.now().strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
+            print('%s: %s' % (now.strftime('%Y-%m-%d %H:%M'), self.__module__.split('.')[-1]))
         except Exception as e:
             print('create crontabs: %s (%s)' % (e.message, type(e)))
