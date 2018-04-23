@@ -300,6 +300,16 @@ VoorwaardeFormSet = forms.inlineformset_factory(
 
 
 class LoginForm(AuthenticationForm):
+
+    def clean(self):
+        clean_data = super().clean()
+
+        if hasattr(self.get_user(), 'profiel'):
+            profiel = getattr(self.get_user(), 'profiel')
+            profiel.seconden_niet_gebruikt = 0
+            profiel.save()
+        return clean_data
+
     error_messages = {
         'invalid_login': '',
         'inactive': "Dit account is niet actief.",
