@@ -74,7 +74,7 @@
   <nav class="tabs-container">
       <div class="container">
           {% if not user.is_authenticated %}
-          <p>VraagMij is een website waarmee zorgprofessionals in Amsterdam, direct met elkaar in contact kunnen komen op basis van inhoudelijke vragen over thema’s en regelingen die onder het Sociaal Domein vallen. Om contactpersonen te kunnen raadplegen, moet je je eerst <a href="{% url 'gebruiker_registreren' %}">registreren</a>.</p>
+          <p>Via VraagMij kunnen zorgprofessionals in Amsterdam direct met elkaar in contact komen op basis van vragen die binnen het Sociaal Domein en Wonen vallen. Heb je als zorgprofessional een inhoudelijke vraag over onderstaande regelingen of thema's? <a href="{% url 'gebruiker_registreren' %}">Registreer je dan nu</a> om de juiste contactpersoon te vinden.</p>
           {% endif %}
           <ul class="tabs">
               <li><a{% if sub_view == 'thema' %} class="active"{% endif %} data-counter="click.homepage.tab.themas" href="{% url 'themas' %}" data-count="{{ THEMA_COUNT }}">Thema's</a></li>
