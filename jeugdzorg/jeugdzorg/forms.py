@@ -219,6 +219,7 @@ class ProfielModelForm(forms.ModelForm):
                     profielrel.save()
         self.save_m2m = save_m2m
         if commit:
+            instance.seconden_niet_gebruikt = 0
             instance.save()
             self.save_m2m()
         return instance
@@ -378,6 +379,7 @@ UserFormSet = forms.inlineformset_factory(
         'telefoonnummer',
         'telefoonnummer_2',
         'hou_me_op_de_hoogte_mail',
+        'seconden_niet_gebruikt',
         'organisatie_lijst',
         'regeling_lijst',
         'thema_lijst',

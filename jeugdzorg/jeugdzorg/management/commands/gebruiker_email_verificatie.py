@@ -43,18 +43,10 @@ class Command(BaseCommand):
         invalid_emails_base_url = 'suppression/invalid_emails'
         spam_reports_base_url = 'suppression/spam_reports'
 
-        bounces = sg.client._(bounces_base_url.format(**{
-            'start_time': start_time,
-        })).get()
-        blocks = sg.client._(blocks_base_url.format(**{
-            'start_time': start_time,
-        })).get()
-        invalid_emails = sg.client._(invalid_emails_base_url.format(**{
-            'start_time': start_time,
-        })).get()
-        spam_reports = sg.client._(spam_reports_base_url.format(**{
-            'start_time': start_time,
-        })).get()
+        bounces = sg.client._(bounces_base_url.format()).get()
+        blocks = sg.client._(blocks_base_url.format()).get()
+        invalid_emails = sg.client._(invalid_emails_base_url.format()).get()
+        spam_reports = sg.client._(spam_reports_base_url.format()).get()
 
         results = {
             'bounces': json.loads(bounces.body),

@@ -555,9 +555,8 @@ class Profiel(PrintableModel, models.Model):
         null=True,
         blank=True,
     )
-    gebruiker_email_verificatie_details = models.CharField(
+    gebruiker_email_verificatie_details = models.TextField(
         verbose_name=_('Gebruiker email verificatie details'),
-        max_length=100,
         default='valid',
         null=True,
         blank=True,
@@ -938,4 +937,4 @@ def pre_save_profiel(sender, instance, *args, **kwargs):
 # post_save.connect(rebuild_index_check, sender=Regeling)
 # post_save.connect(rebuild_index_check, sender=Profiel)
 
-pre_save.connect(pre_save_profiel, sender=Profiel)
+# pre_save.connect(pre_save_profiel, sender=Profiel)
