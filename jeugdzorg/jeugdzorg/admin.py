@@ -41,9 +41,28 @@ class ProfielInline(admin.TabularInline):
 class RegelingAdmin(SortableAdmin):
     list_display = ['titel', 'bron_veranderd', 'datum_gecreeerd', 'datum_opgeslagen']
     fieldsets = (
-        (None, {'fields': ('titel', 'samenvatting', 'bron', 'startdatum', 'einddatum', 'bron_url', 'aanvraag_url')}),
+        (None, {
+            'fields':
+                (
+                    'titel',
+                    'samenvatting',
+                    'bron',
+                    'startdatum',
+                    'einddatum',
+                    'bron_url',
+                    'aanvraag_url',
+                    'themas',
+                )
+        }),
         (_('Geavanceerd'),
-         {'classes': ('collapse', 'open'), 'fields': ('bron_html_query', 'bron_veranderd', 'bron_resultaat')}),
+         {
+             'classes': ('collapse', 'open'),
+             'fields': (
+                 'bron_html_query',
+                 'bron_veranderd',
+                 'bron_resultaat'
+             )
+         }),
 
     )
     save_on_top = True

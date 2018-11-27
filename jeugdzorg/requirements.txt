@@ -12,6 +12,7 @@ django-storages
 django-storage-swift
 django-import-export
 django-phonenumber-field
+phonenumbers
 sendgrid
 djangorestframework
 markdown
