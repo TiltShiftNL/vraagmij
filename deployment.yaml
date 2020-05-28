@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: vraagmij-service
+spec:
+  selector:
+    app: vraagmij-service
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vraagmij
+  labels:
+    app: vraagmij-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vraagmij-service
+  template:
+    metadata:
+      labels:
+        app: vraagmij-service
+    spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+      containers:
+      - name: vraagmij-service
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        ports:
+        - containerPort: 8080
