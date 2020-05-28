@@ -7,10 +7,12 @@
 *.log
 *.db
 *.pid
+*.sqlite3
 db/
 *.DS_Store
 .idea
 .idea/*
+venv/
 pip-log.txt
 local_settings.py
 */settings/local.py
