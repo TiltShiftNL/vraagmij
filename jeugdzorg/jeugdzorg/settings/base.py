@@ -46,9 +46,7 @@ DEBUG = SECRET_KEY == 'default-secret'
 
 # DEBUG = ENV != 'production'
 
-#f = open('/opt/git_rev', 'r')
-#SOURCE_COMMIT = f.read()
-SOURCE_COMMIT = 1
+SOURCE_COMMIT = '1.0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -85,6 +83,11 @@ INSTALLED_APPS = [
     'axes',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,6 +97,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'jeugdzorg.middleware.CreateSessionKeyMiddleware',
+    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
+    # It only formats user lockout messages and renders Axes lockout responses
+    # on failed user authentication attempts from login views.
+    # If you do not want Axes to override the authentication response
+    # you can skip installing the middleware and use your own views.
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'jeugdzorg.urls'
