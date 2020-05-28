@@ -20,8 +20,6 @@ COPY .git /opt/git
 COPY jeugdzorg /opt/app
 COPY docker-local-entrypoint.sh /usr/local/bin/docker-local-entrypoint.sh
 
-
-RUN htpasswd -b -c /opt/.htpasswd $POSTGRES_USER $POSTGRES_PASSWORD
 RUN chmod 777 /usr/local/bin/docker-local-entrypoint.sh
 
 WORKDIR /opt/app
