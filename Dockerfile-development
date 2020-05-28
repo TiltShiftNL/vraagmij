@@ -12,17 +12,6 @@ ENV ENV=production
 ENV PYTHONHASHSEED 0
 ENV TZ=Europe/Amsterdam
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get dist-upgrade -y
-RUN apt-get install -y --no-install-recommends apt-utils
-RUN apt-get install -y --no-install-recommends apache2-utils
-RUN apt-get install -y --no-install-recommends cron
-RUN apt-get install -y --no-install-recommends vim
-RUN apt-get install -y --no-install-recommends supervisor && \
-    pip3 install uwsgi
-
 RUN mkdir /opt/file_upload/
 RUN mkdir /opt/git/
 
@@ -37,8 +26,7 @@ RUN chmod 777 /usr/local/bin/docker-local-entrypoint.sh
 
 WORKDIR /opt/app
 
-RUN pip install --upgrade pip
-RUN pip3 install -r ./requirements.txt
+RUN pip install -r ./requirements.txt
 
 EXPOSE 8000
 
