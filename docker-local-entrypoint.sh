@@ -24,7 +24,8 @@ python manage.py createcachetable
 
 python manage.py set_cronjob_worker
 
-python manage.py createsuperuser_pw  --username ${ADMIN_USERNAME} --password ${ADMIN_PASSWORD} --noinput --email 'admin@host.com'
+# python manage.py createsuperuser_pw  --username ${ADMIN_USERNAME} --password ${ADMIN_PASSWORD} --noinput --email 'admin@host.com'
+# python manage.py shell -c "import jeugdzorg; jeugdzorg.models.UserManager.create_superuser(self, '${ADMIN_USERNAME}', '${ADMIN_PASSWORD}')"
 
 if [ "${RUNSERVER}" == "no" ];
 then

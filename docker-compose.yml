@@ -2,26 +2,20 @@ version: '3'
 
 services:
   db:
-    #image: postgres:9.6
-    build:
-      context: .
-      dockerfile: Dockerfile-db
+    image: postgres:13
 
     volumes:
       - pg_data:/var/lib/postgresql/data
       - pg_backups:/pg_backups
     environment:
       - POSTGRES_DB=jeugdzorg
-      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - DB_NAME=jeugdzorg
 
   dbadmin:
-    image: fenglc/pgadmin4
+    image: fenglc/pgadmin4:2-python3.6-alpine
     environment:
-      - POSTGRES_DB=jeugdzorg
-      - DEFAULT_USER=postgres
-      - DEFAULT_PASSWORD=postgres
+      - DEFAULT_USER=admin
+      - DEFAULT_PASSWORD=admin
     ports:
       - "5050:5050"
     depends_on:
@@ -43,9 +37,9 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - ADMIN_USERNAME=dj_username
-      - ADMIN_PASSWORD=dj_password
-      - ADMIN_EMAIL=username@host.nl
+      - ADMIN_USERNAME=user_vraagmij
+      - ADMIN_PASSWORD=password_vraagmij
+      - ADMIN_EMAIL=user@example.com
     ports:
       - "8000:8000"
     depends_on:

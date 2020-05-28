@@ -12,7 +12,7 @@ from .api import RegelingViewSet
 from django.urls import reverse_lazy
 
 router = routers.DefaultRouter()
-router.register(r'regelingen', RegelingViewSet, base_name='regeling')
+router.register(r'regelingen', RegelingViewSet) #, base_name='regeling')
 
 testdata = {
         'site': {'hostname': 'hostdus'},
